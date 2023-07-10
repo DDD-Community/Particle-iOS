@@ -7,24 +7,78 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF0F775C2A4E8EDC0079179D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0F775B2A4E8EDC0079179D /* ViewController.swift */; };
+		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
+		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
+		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
+		AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C92A5BE9B600157758 /* RootBuilder.swift */; };
+		AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71CA2A5BE9B600157758 /* RootInteractor.swift */; };
+		AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71D12A5BEA8A00157758 /* LoggedOutRouter.swift */; };
+		AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71D22A5BEA8A00157758 /* LoggedOutViewController.swift */; };
+		AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71D32A5BEA8A00157758 /* LoggedOutBuilder.swift */; };
+		AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71D42A5BEA8A00157758 /* LoggedOutInteractor.swift */; };
+		AF0D71DA2A5BEEAD00157758 /* RootComponent+LoggedOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71D92A5BEEAD00157758 /* RootComponent+LoggedOut.swift */; };
+		AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71DB2A5BEF7B00157758 /* LoggedInRouter.swift */; };
+		AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71DC2A5BEF7B00157758 /* LoggedInBuilder.swift */; };
+		AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71DD2A5BEF7B00157758 /* LoggedInInteractor.swift */; };
+		AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71E22A5BEFB800157758 /* MainRouter.swift */; };
+		AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71E42A5BEFB800157758 /* MainBuilder.swift */; };
+		AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71E52A5BEFB800157758 /* MainInteractor.swift */; };
+		AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */; };
+		AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1945162A5C407500B9FFA1 /* Constant.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
 		AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */; };
 		AFB4BDD12A4093DD008BA9E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCF2A4093DD008BA9E0 /* LaunchScreen.storyboard */; };
+		AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */; };
+		AFCAB6C92A5C521800E2310D /* AddArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */; };
+		AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */; };
+		AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */; };
+		AFE885ED2A5C2642001EF2C0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885EC2A5C2642001EF2C0 /* HomeViewController.swift */; };
+		AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885EE2A5C264A001EF2C0 /* SearchViewController.swift */; };
+		AFE885F12A5C2656001EF2C0 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F02A5C2656001EF2C0 /* ExploreViewController.swift */; };
+		AFE885F32A5C2662001EF2C0 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F22A5C2662001EF2C0 /* MyPageViewController.swift */; };
+		AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */; };
+		AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F72A5C29F7001EF2C0 /* Color+.swift */; };
 		B1CF9FD70DAD1AF6216BEB95 /* Pods_Particle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FAF13101BAEDC5C9A046BE /* Pods_Particle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20FAF13101BAEDC5C9A046BE /* Pods_Particle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Particle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C51D4FA6C13FD019C43C14F /* Pods-Particle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Particle.release.xcconfig"; path = "Target Support Files/Pods-Particle/Pods-Particle.release.xcconfig"; sourceTree = "<group>"; };
-		AF0F775B2A4E8EDC0079179D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
+		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
+		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		AF0D71C92A5BE9B600157758 /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBuilder.swift; sourceTree = "<group>"; };
+		AF0D71CA2A5BE9B600157758 /* RootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootInteractor.swift; sourceTree = "<group>"; };
+		AF0D71D12A5BEA8A00157758 /* LoggedOutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutRouter.swift; sourceTree = "<group>"; };
+		AF0D71D22A5BEA8A00157758 /* LoggedOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutViewController.swift; sourceTree = "<group>"; };
+		AF0D71D32A5BEA8A00157758 /* LoggedOutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutBuilder.swift; sourceTree = "<group>"; };
+		AF0D71D42A5BEA8A00157758 /* LoggedOutInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutInteractor.swift; sourceTree = "<group>"; };
+		AF0D71D92A5BEEAD00157758 /* RootComponent+LoggedOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedOut.swift"; sourceTree = "<group>"; };
+		AF0D71DB2A5BEF7B00157758 /* LoggedInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInRouter.swift; sourceTree = "<group>"; };
+		AF0D71DC2A5BEF7B00157758 /* LoggedInBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInBuilder.swift; sourceTree = "<group>"; };
+		AF0D71DD2A5BEF7B00157758 /* LoggedInInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInInteractor.swift; sourceTree = "<group>"; };
+		AF0D71E22A5BEFB800157758 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		AF0D71E42A5BEFB800157758 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
+		AF0D71E52A5BEFB800157758 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedIn.swift"; sourceTree = "<group>"; };
+		AF1945162A5C407500B9FFA1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFB4BDD02A4093DD008BA9E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFB4BDD22A4093DD008BA9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleRouter.swift; sourceTree = "<group>"; };
+		AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleViewController.swift; sourceTree = "<group>"; };
+		AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
+		AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleInteractor.swift; sourceTree = "<group>"; };
+		AFE885EC2A5C2642001EF2C0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AFE885EE2A5C264A001EF2C0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		AFE885F02A5C2656001EF2C0 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		AFE885F22A5C2662001EF2C0 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		AFE885F72A5C29F7001EF2C0 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B85199DB8EE46F1BAC5B9045 /* Pods-Particle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Particle.debug.xcconfig"; path = "Target Support Files/Pods-Particle/Pods-Particle.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,10 +111,77 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AF0D71C62A5BE9AC00157758 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				AF0D71C72A5BE9B600157758 /* RootRouter.swift */,
+				AF0D71C82A5BE9B600157758 /* RootViewController.swift */,
+				AF0D71C92A5BE9B600157758 /* RootBuilder.swift */,
+				AF0D71CA2A5BE9B600157758 /* RootInteractor.swift */,
+				AF0D71D92A5BEEAD00157758 /* RootComponent+LoggedOut.swift */,
+				AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		AF0D71CF2A5BEA6C00157758 /* LoggedOut */ = {
+			isa = PBXGroup;
+			children = (
+				AF0D71D12A5BEA8A00157758 /* LoggedOutRouter.swift */,
+				AF0D71D22A5BEA8A00157758 /* LoggedOutViewController.swift */,
+				AF0D71D32A5BEA8A00157758 /* LoggedOutBuilder.swift */,
+				AF0D71D42A5BEA8A00157758 /* LoggedOutInteractor.swift */,
+			);
+			path = LoggedOut;
+			sourceTree = "<group>";
+		};
+		AF0D71D02A5BEA7200157758 /* LoggedIn */ = {
+			isa = PBXGroup;
+			children = (
+				AF0D71DB2A5BEF7B00157758 /* LoggedInRouter.swift */,
+				AF0D71DC2A5BEF7B00157758 /* LoggedInBuilder.swift */,
+				AF0D71DD2A5BEF7B00157758 /* LoggedInInteractor.swift */,
+			);
+			path = LoggedIn;
+			sourceTree = "<group>";
+		};
+		AF0D71E12A5BEF8900157758 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
+				AFE885EB2A5C2628001EF2C0 /* Tabs */,
+				AF0D71E22A5BEFB800157758 /* MainRouter.swift */,
+				AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */,
+				AF0D71E42A5BEFB800157758 /* MainBuilder.swift */,
+				AF0D71E52A5BEFB800157758 /* MainInteractor.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		AF1945152A5C406B00B9FFA1 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				AF1945162A5C407500B9FFA1 /* Constant.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		AF19451B2A5C50F300B9FFA1 /* AddArticle */ = {
+			isa = PBXGroup;
+			children = (
+				AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */,
+				AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */,
+				AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */,
+				AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */,
+			);
+			path = AddArticle;
+			sourceTree = "<group>";
+		};
 		AF86D82C2A4E6030009F1E9D /* Entry */ = {
 			isa = PBXGroup;
 			children = (
 				AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */,
+				AF0D71C42A5BE6A200157758 /* AppComponent.swift */,
 				AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */,
 			);
 			path = Entry;
@@ -97,11 +218,35 @@
 		AFB4BDC32A4093DC008BA9E0 /* Particle */ = {
 			isa = PBXGroup;
 			children = (
-				AF0F775B2A4E8EDC0079179D /* ViewController.swift */,
+				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
+				AFE885F62A5C29E5001EF2C0 /* Extension */,
 				AF86D82C2A4E6030009F1E9D /* Entry */,
+				AF0D71C62A5BE9AC00157758 /* Root */,
+				AF0D71CF2A5BEA6C00157758 /* LoggedOut */,
+				AF0D71D02A5BEA7200157758 /* LoggedIn */,
+				AF0D71E12A5BEF8900157758 /* Main */,
 				AF86D82D2A4E6044009F1E9D /* Resources */,
 			);
 			path = Particle;
+			sourceTree = "<group>";
+		};
+		AFE885EB2A5C2628001EF2C0 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				AFE885EC2A5C2642001EF2C0 /* HomeViewController.swift */,
+				AFE885F02A5C2656001EF2C0 /* ExploreViewController.swift */,
+				AFE885EE2A5C264A001EF2C0 /* SearchViewController.swift */,
+				AFE885F22A5C2662001EF2C0 /* MyPageViewController.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		AFE885F62A5C29E5001EF2C0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AFE885F72A5C29F7001EF2C0 /* Color+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,8 +363,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */,
+				AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */,
+				AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */,
+				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
+				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
+				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
+				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
+				AFE885ED2A5C2642001EF2C0 /* HomeViewController.swift in Sources */,
+				AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */,
+				AFE885F32A5C2662001EF2C0 /* MyPageViewController.swift in Sources */,
+				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
+				AF0D71DA2A5BEEAD00157758 /* RootComponent+LoggedOut.swift in Sources */,
+				AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */,
+				AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */,
+				AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */,
+				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
+				AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */,
+				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
+				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
-				AF0F775C2A4E8EDC0079179D /* ViewController.swift in Sources */,
+				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
+				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
+				AFE885F12A5C2656001EF2C0 /* ExploreViewController.swift in Sources */,
+				AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */,
+				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
+				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
+				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
+				AFCAB6C92A5C521800E2310D /* AddArticleViewController.swift in Sources */,
+				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
