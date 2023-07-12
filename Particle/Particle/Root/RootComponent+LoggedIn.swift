@@ -16,4 +16,8 @@ extension RootComponent: LoggedInDependency {
     var LoggedInViewController: LoggedInViewControllable {
         return rootViewController
     }
+    
+    var organizingSentenceRepository: OrganizingSentenceRepository {
+        return OrganizingSentenceRepositoryImp()
+    }
 }

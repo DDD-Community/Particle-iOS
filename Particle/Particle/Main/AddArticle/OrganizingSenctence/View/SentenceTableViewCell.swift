@@ -55,8 +55,8 @@ final class SentenceTableViewCell: UITableViewCell {
         sentenceLabel.preferredMaxLayoutWidth = sentenceLabel.frame.width
     }
     
-    func setCellData(_ data: String) {
-        sentenceLabel.text = data
+    func setCellData(_ data: OrganizingSentenceViewModel) {
+        sentenceLabel.text = data.sentence
         layoutSubviews()
     }
 }

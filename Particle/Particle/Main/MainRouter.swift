@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol MainInteractable: Interactable {
+protocol MainInteractable: Interactable, OrganizingSentenceListener {
     var router: MainRouting? { get set }
     var listener: MainListener? { get set }
 }

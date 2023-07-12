@@ -8,13 +8,13 @@
 import RIBs
 
 protocol MainDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var organizingSentenceRepository: OrganizingSentenceRepository { get }
 }
 
-final class MainComponent: Component<MainDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+final class MainComponent: Component<MainDependency>, OrganizingSentenceDependency {
+    var organizingSentenceRepository: OrganizingSentenceRepository {
+        dependency.organizingSentenceRepository
+    }
 }
 
 // MARK: - Builder
@@ -34,6 +34,7 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         let viewController = MainTabBarController()
         let interactor = MainInteractor(presenter: viewController)
         interactor.listener = listener
-        return MainRouter(interactor: interactor, viewController: viewController)
+        let organizingSentenceBuilder = OrganizingSentenceBuilder(dependency: component)
+        return MainRouter(interactor: interactor, viewController: viewController, organizingSentenceBuilder: organizingSentenceBuilder)
     }
 }

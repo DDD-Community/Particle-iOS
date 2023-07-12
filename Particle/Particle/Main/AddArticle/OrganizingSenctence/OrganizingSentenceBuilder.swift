@@ -8,13 +8,13 @@
 import RIBs
 
 protocol OrganizingSentenceDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var organizingSentenceRepository: OrganizingSentenceRepository { get }
 }
 
-final class OrganizingSentenceComponent: Component<OrganizingSentenceDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+final class OrganizingSentenceComponent: Component<OrganizingSentenceDependency>, OrganizingSentenceInteractorDependency {
+    var organizingSentenceRepository: OrganizingSentenceRepository {
+        dependency.organizingSentenceRepository
+    }
 }
 
 // MARK: - Builder
@@ -24,15 +24,18 @@ protocol OrganizingSentenceBuildable: Buildable {
 }
 
 final class OrganizingSentenceBuilder: Builder<OrganizingSentenceDependency>, OrganizingSentenceBuildable {
-
+    
     override init(dependency: OrganizingSentenceDependency) {
         super.init(dependency: dependency)
     }
-
+    
     func build(withListener listener: OrganizingSentenceListener) -> OrganizingSentenceRouting {
         let component = OrganizingSentenceComponent(dependency: dependency)
         let viewController = OrganizingSentenceViewController()
-        let interactor = OrganizingSentenceInteractor(presenter: viewController)
+        let interactor = OrganizingSentenceInteractor(
+            presenter: viewController,
+            dependency: component
+        )
         interactor.listener = listener
         return OrganizingSentenceRouter(interactor: interactor, viewController: viewController)
     }
