@@ -34,6 +34,12 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
             static let topMargin = 23
             static let horizontalMargin = 20
         }
+        
+        enum NavigationBar {
+            static let height = 44
+            static let backButtonLeftMargin = 8
+            static let nextButtonRightMargin = 8
+        }
     }
     
     private let titleLabel: UILabel = {
@@ -52,6 +58,23 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
         table.rowHeight = UITableView.automaticDimension
         table.estimatedRowHeight = 50
         return table
+    }()
+    
+    private let navigationBar: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.particleImage.backButton, for: .normal)
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("다음", for: .normal)
+        return button
     }()
     
     init() {
@@ -82,8 +105,16 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
     
     // MARK: - Add Subviews
     private func addSubviews() {
-        [titleLabel,
-         sentenceTableView]
+        [backButton, nextButton]
+            .forEach {
+                navigationBar.addSubview($0)
+            }
+        
+        [
+            navigationBar,
+            titleLabel,
+            sentenceTableView
+        ]
             .forEach {
                 self.view.addSubview($0)
             }
@@ -91,8 +122,23 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
     
     // MARK: - Layout
     private func layout() {
+        navigationBar.snp.makeConstraints { make in
+            make.top.left.right.equalTo(self.view.safeAreaLayoutGuide)
+            make.height.equalTo(Metric.NavigationBar.height)
+        }
+        
+        backButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().inset(Metric.NavigationBar.backButtonLeftMargin)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().inset(Metric.NavigationBar.nextButtonRightMargin)
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).inset(Metric.Title.topMargin)
+            make.top.equalTo(navigationBar.snp.bottom).offset(Metric.Title.topMargin)
             make.left.equalTo(self.view.safeAreaLayoutGuide).inset(Metric.Title.leftMargin)
         }
         

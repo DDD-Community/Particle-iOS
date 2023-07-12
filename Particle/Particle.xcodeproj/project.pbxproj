@@ -16,6 +16,7 @@
 		3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEFD2A5E623D00A53B34 /* PaddingLabel.swift */; };
 		3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF002A5E697000A53B34 /* OrganizingSentenceViewModel.swift */; };
 		3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */; };
+		3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -63,6 +64,7 @@
 		3520EEFD2A5E623D00A53B34 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		3520EF002A5E697000A53B34 /* OrganizingSentenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceViewModel.swift; sourceTree = "<group>"; };
 		3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceRepository.swift; sourceTree = "<group>"; };
+		3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ParticleImage.swift"; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				AF1945162A5C407500B9FFA1 /* Constant.swift */,
+				3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
+				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
 				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
