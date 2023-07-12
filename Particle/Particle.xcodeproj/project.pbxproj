@@ -17,6 +17,10 @@
 		3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF002A5E697000A53B34 /* OrganizingSentenceViewModel.swift */; };
 		3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */; };
 		3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */; };
+		3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF122A5E91A900A53B34 /* SetAdditionalInformationRouter.swift */; };
+		3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */; };
+		3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */; };
+		3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -65,6 +69,10 @@
 		3520EF002A5E697000A53B34 /* OrganizingSentenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceViewModel.swift; sourceTree = "<group>"; };
 		3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceRepository.swift; sourceTree = "<group>"; };
 		3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ParticleImage.swift"; sourceTree = "<group>"; };
+		3520EF122A5E91A900A53B34 /* SetAdditionalInformationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationRouter.swift; sourceTree = "<group>"; };
+		3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationViewController.swift; sourceTree = "<group>"; };
+		3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationBuilder.swift; sourceTree = "<group>"; };
+		3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationInteractor.swift; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +150,17 @@
 				3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */,
 			);
 			path = AddAriticleRepository;
+			sourceTree = "<group>";
+		};
+		3520EF092A5E90C500A53B34 /* SetAdditionalInformation */ = {
+			isa = PBXGroup;
+			children = (
+				3520EF122A5E91A900A53B34 /* SetAdditionalInformationRouter.swift */,
+				3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */,
+				3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */,
+				3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */,
+			);
+			path = SetAdditionalInformation;
 			sourceTree = "<group>";
 		};
 		9968BF91A03407F5B3382E7B /* Pods */ = {
@@ -225,6 +244,7 @@
 				AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */,
 				AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */,
 				3520EEF72A5CD3CE00A53B34 /* OrganizingSenctence */,
+				3520EF092A5E90C500A53B34 /* SetAdditionalInformation */,
 				3520EF022A5E6F7E00A53B34 /* AddAriticleRepository */,
 			);
 			path = AddArticle;
@@ -430,10 +450,12 @@
 				AFE885ED2A5C2642001EF2C0 /* HomeViewController.swift in Sources */,
 				AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */,
 				AFE885F32A5C2662001EF2C0 /* MyPageViewController.swift in Sources */,
+				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
 				AF0D71DA2A5BEEAD00157758 /* RootComponent+LoggedOut.swift in Sources */,
 				AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */,
 				3520EEF32A5CD3C000A53B34 /* OrganizingSentenceViewController.swift in Sources */,
+				3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */,
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
 				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
 				AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */,
@@ -441,6 +463,7 @@
 				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
 				AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
+				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
@@ -457,6 +480,7 @@
 				AFCAB6C92A5C521800E2310D /* AddArticleViewController.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
+				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
