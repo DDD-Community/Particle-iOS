@@ -13,14 +13,29 @@ protocol MainInteractable: Interactable, OrganizingSentenceListener {
 }
 
 protocol MainViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+    func present(viewController: ViewControllable)
 }
 
 final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, MainRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: MainInteractable, viewController: MainViewControllable) {
+    private let organizingSentenceBuilder: OrganizingSentenceBuildable
+    private var organizingSentence: ViewableRouting?
+    
+    init(
+        interactor: MainInteractable,
+        viewController: MainViewControllable,
+    // 이건 add article로 바꿔야함
+        organizingSentenceBuilder: OrganizingSentenceBuildable
+    ) {
+        self.organizingSentenceBuilder = organizingSentenceBuilder
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
+    }
+    
+    func routeToAddArticle() {
+        let organizingSentence = organizingSentenceBuilder.build(withListener: interactor)
+        self.organizingSentence = organizingSentence
+        attachChild(organizingSentence)
+        viewController.present(viewController: organizingSentence.viewControllable)
     }
 }
