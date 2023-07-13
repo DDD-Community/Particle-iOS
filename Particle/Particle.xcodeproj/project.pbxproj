@@ -21,6 +21,9 @@
 		3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */; };
 		3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */; };
 		3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */; };
+		3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */; };
+		3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -73,6 +76,9 @@
 		3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationViewController.swift; sourceTree = "<group>"; };
 		3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationBuilder.swift; sourceTree = "<group>"; };
 		3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationInteractor.swift; sourceTree = "<group>"; };
+		3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
+		3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewCell.swift; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -155,12 +161,23 @@
 		3520EF092A5E90C500A53B34 /* SetAdditionalInformation */ = {
 			isa = PBXGroup;
 			children = (
+				3520EF1A2A5FA5D600A53B34 /* View */,
 				3520EF122A5E91A900A53B34 /* SetAdditionalInformationRouter.swift */,
 				3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */,
 				3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */,
 				3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */,
 			);
 			path = SetAdditionalInformation;
+			sourceTree = "<group>";
+		};
+		3520EF1A2A5FA5D600A53B34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */,
+				3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */,
+				3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9968BF91A03407F5B3382E7B /* Pods */ = {
@@ -445,7 +462,9 @@
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
+				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
+				3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */,
 				3520EEFC2A5D5F7D00A53B34 /* ReusableCell.swift in Sources */,
 				AFE885ED2A5C2642001EF2C0 /* HomeViewController.swift in Sources */,
 				AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */,
@@ -461,6 +480,7 @@
 				AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */,
 				AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */,
 				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
+				3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */,
 				AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
 				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
