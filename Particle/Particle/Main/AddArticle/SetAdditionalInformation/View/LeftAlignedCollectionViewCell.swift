@@ -10,6 +10,11 @@ import SnapKit
 
 class LeftAlignedCollectionViewCell: UICollectionViewCell {
     
+    enum Metric {
+        static let horizontalMargin = 24
+        static let verticalMargin = 12
+    }
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -57,8 +62,8 @@ class LeftAlignedCollectionViewCell: UICollectionViewCell {
     private func layout() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(9)
-            make.left.right.equalToSuperview().inset(14)
+            make.top.bottom.equalToSuperview().inset(Metric.verticalMargin)
+            make.left.right.equalToSuperview().inset(Metric.horizontalMargin)
         }
     }
     

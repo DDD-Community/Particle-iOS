@@ -36,11 +36,13 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         enum URLTextField {
             static let topMargin = 32
             static let horizontalMargin = 20
+            static let underLineTopMargin = 5
         }
         
         enum TitleTextField {
             static let topMargin: CGFloat = 80
             static let horizontalMargin: CGFloat = 20
+            static let underLineTopMargin = 5
         }
         
         enum RecommendTagTitle {
@@ -166,7 +168,7 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         Observable.of([
         "#UXUI", "#브랜딩", "#마케팅", "#자기계발",
         "#UXUI", "#브랜딩", "#마케팅", "#자기계발",
-        "#UXUI", "#브랜딩", "#마케팅", "#자기계발",
+        "#UXUI", "#브랜딩"
         ])
         .bind(to: recommendTagCollectionView.rx.items(
             cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
@@ -227,7 +229,7 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         }
         
         urlTextFieldUnderLine.snp.makeConstraints { make in
-            make.top.equalTo(urlTextField.snp.bottom)
+            make.top.equalTo(urlTextField.snp.bottom).offset(Metric.URLTextField.underLineTopMargin)
             make.left.right.equalTo(urlTextField)
             make.height.equalTo(1)
         }
@@ -238,7 +240,7 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         }
         
         titleTextFieldUnderLine.snp.makeConstraints { make in
-            make.top.equalTo(titleTextField.snp.bottom)
+            make.top.equalTo(titleTextField.snp.bottom).offset(Metric.TitleTextField.underLineTopMargin)
             make.left.right.equalTo(titleTextField)
             make.height.equalTo(1)
         }
@@ -251,7 +253,6 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         recommendTagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(recommendTagTitleLabel.snp.bottom).offset(Metric.Tags.topMagin)
             make.left.right.equalToSuperview().inset(Metric.Tags.horizontalMargin)
-            make.bottom.equalToSuperview()
         }
     }
 }
