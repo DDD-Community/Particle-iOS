@@ -24,6 +24,8 @@
 		3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */; };
 		3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */; };
+		3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF222A5FB18A00A53B34 /* RibsUtil.swift */; };
+		3520EF262A5FC40800A53B34 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -79,6 +81,8 @@
 		3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
 		3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewCell.swift; sourceTree = "<group>"; };
+		3520EF222A5FB18A00A53B34 /* RibsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RibsUtil.swift; sourceTree = "<group>"; };
+		3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+.swift"; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +184,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		3520EF212A5FB17800A53B34 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3520EF222A5FB18A00A53B34 /* RibsUtil.swift */,
+				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3520EF242A5FB7E400A53B34 /* AddArticleNavigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddArticleNavigation;
+			sourceTree = "<group>";
+		};
 		9968BF91A03407F5B3382E7B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +276,7 @@
 		AF19451B2A5C50F300B9FFA1 /* AddArticle */ = {
 			isa = PBXGroup;
 			children = (
+				3520EF242A5FB7E400A53B34 /* AddArticleNavigation */,
 				AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */,
 				AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */,
 				AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */,
@@ -308,6 +329,7 @@
 		AFB4BDC32A4093DC008BA9E0 /* Particle */ = {
 			isa = PBXGroup;
 			children = (
+				3520EF212A5FB17800A53B34 /* Utils */,
 				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
 				AFE885F62A5C29E5001EF2C0 /* Extension */,
 				AF86D82C2A4E6030009F1E9D /* Entry */,
@@ -335,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				AFE885F72A5C29F7001EF2C0 /* Color+.swift */,
-				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
+				3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -477,6 +499,8 @@
 				3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */,
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
 				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
+				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
+				3520EF262A5FC40800A53B34 /* NSMutableAttributedString+.swift in Sources */,
 				AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */,
 				AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */,
 				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
