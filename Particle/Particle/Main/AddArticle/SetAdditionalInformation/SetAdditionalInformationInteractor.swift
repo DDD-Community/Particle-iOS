@@ -9,7 +9,7 @@ import RIBs
 import RxSwift
 
 protocol SetAdditionalInformationRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    
 }
 
 protocol SetAdditionalInformationPresentable: Presentable {
@@ -18,7 +18,7 @@ protocol SetAdditionalInformationPresentable: Presentable {
 }
 
 protocol SetAdditionalInformationListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func setAdditionalInfoBackButtonTapped()
 }
 
 final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditionalInformationPresentable>, SetAdditionalInformationInteractable, SetAdditionalInformationPresentableListener {
@@ -41,5 +41,9 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func setAdditionalInfoBackButtonTapped() {
+        listener?.setAdditionalInfoBackButtonTapped()
     }
 }

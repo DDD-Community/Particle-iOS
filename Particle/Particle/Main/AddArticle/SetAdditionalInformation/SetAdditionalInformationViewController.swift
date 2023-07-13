@@ -11,9 +11,7 @@ import UIKit
 import RxCocoa
 
 protocol SetAdditionalInformationPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    func setAdditionalInfoBackButtonTapped()
 }
 
 final class SetAdditionalInformationViewController: UIViewController, SetAdditionalInformationPresentable, SetAdditionalInformationViewControllable {
@@ -177,6 +175,12 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
             cell.titleLabel.text = item
         }
         .disposed(by: disposeBag)
+        
+        backButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.setAdditionalInfoBackButtonTapped()
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Add Subviews

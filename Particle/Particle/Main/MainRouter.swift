@@ -47,6 +47,22 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
         presentInsideNavigation(organizingSentenceRouter.viewControllable)
     }
     
+    func popToAddArticle() {
+        guard let router = organizingSentence else {
+            return
+        }
+        
+        guard let navigationControllable = navigationControllable else {
+            return
+        }
+        
+        navigationControllable.dismiss(completion: nil)
+        
+        detachChild(router)
+        organizingSentence = nil
+        self.navigationControllable = nil 
+    }
+    
     func routeToSetAdditionalInfo() {
         let router = setAdditionalInfoBuilder.build(withListener: interactor)
         self.setAdditionalInfo = router
@@ -58,6 +74,21 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
         }
         
         navigationControllable.pushViewController(router.viewControllable, animated: true)
+    }
+    
+    func popSetAdditionalInfo() {
+        guard let router = setAdditionalInfo else {
+            return
+        }
+        
+        guard let navigationControllable = navigationControllable else {
+            return
+        }
+        
+        navigationControllable.popViewController(animated: true)
+        
+        detachChild(router)
+        setAdditionalInfo = nil
     }
     
     private func presentInsideNavigation(_ viewControllable: ViewControllable) {

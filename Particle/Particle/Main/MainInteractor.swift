@@ -10,7 +10,9 @@ import RxSwift
 
 protocol MainRouting: ViewableRouting {
     func routeToAddArticle()
+    func popToAddArticle()
     func routeToSetAdditionalInfo()
+    func popSetAdditionalInfo()
 }
 
 protocol MainPresentable: Presentable {
@@ -48,7 +50,15 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
         router?.routeToAddArticle()
     }
     
-    func setAdditionalInfoNextButtonTapped() {
+    func organizingSentenceNextButtonTapped() {
         router?.routeToSetAdditionalInfo()
+    }
+    
+    func organizingSentenceBackButtonTapped() {
+        router?.popToAddArticle()
+    }
+    
+    func setAdditionalInfoBackButtonTapped() {
+        router?.popSetAdditionalInfo()
     }
 }

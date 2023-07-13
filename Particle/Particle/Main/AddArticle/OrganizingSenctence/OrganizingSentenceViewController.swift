@@ -13,6 +13,7 @@ import RxCocoa
 
 protocol OrganizingSentencePresentableListener: AnyObject {
     func nextButtonTapped()
+    func backButtonTapped()
 }
 
 final class OrganizingSentenceViewController: UIViewController, OrganizingSentencePresentable, OrganizingSentenceViewControllable {
@@ -103,6 +104,12 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
         nextButton.rx.tap
             .bind { [weak self] in
                 self?.listener?.nextButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        backButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.backButtonTapped()
             }
             .disposed(by: disposeBag)
     }

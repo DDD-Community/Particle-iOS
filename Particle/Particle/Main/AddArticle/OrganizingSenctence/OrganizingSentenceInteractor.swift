@@ -23,7 +23,8 @@ protocol OrganizingSentenceInteractorDependency {
 }
 
 protocol OrganizingSentenceListener: AnyObject {
-    func setAdditionalInfoNextButtonTapped()
+    func organizingSentenceNextButtonTapped()
+    func organizingSentenceBackButtonTapped()
 }
 
 final class OrganizingSentenceInteractor: PresentableInteractor<OrganizingSentencePresentable>, OrganizingSentenceInteractable, OrganizingSentencePresentableListener {
@@ -65,6 +66,10 @@ final class OrganizingSentenceInteractor: PresentableInteractor<OrganizingSenten
     }
     
     func nextButtonTapped() {
-        listener?.setAdditionalInfoNextButtonTapped()
+        listener?.organizingSentenceNextButtonTapped()
+    }
+    
+    func backButtonTapped() {
+        listener?.organizingSentenceBackButtonTapped()
     }
 }
