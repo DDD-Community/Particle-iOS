@@ -84,8 +84,14 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
     
     private let urlTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "url"
+        textField.attributedPlaceholder = NSMutableAttributedString()
+            .attributeString(
+                string: "url",
+                font: .systemFont(ofSize: 14),
+                textColor: .init(red: 105, green: 105, blue: 105)
+            )
         textField.font = .systemFont(ofSize: 14)
+        textField.textColor = .white
         return textField
     }()
     
@@ -97,8 +103,14 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
     
     private let titleTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "제목"
+        textField.attributedPlaceholder = NSMutableAttributedString()
+            .attributeString(
+                string: "제목",
+                font: .systemFont(ofSize: 14),
+                textColor: .init(red: 105, green: 105, blue: 105)
+            )
         textField.font = .systemFont(ofSize: 14)
+        textField.textColor = .white
         return textField
     }()
     
