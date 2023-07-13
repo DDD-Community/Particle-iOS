@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol OrganizingSentenceInteractable: Interactable {
+protocol OrganizingSentenceInteractable: Interactable, SetAdditionalInformationListener {
     var router: OrganizingSentenceRouting? { get set }
     var listener: OrganizingSentenceListener? { get set }
 }
@@ -17,9 +17,11 @@ protocol OrganizingSentenceViewControllable: ViewControllable {
 }
 
 final class OrganizingSentenceRouter: ViewableRouter<OrganizingSentenceInteractable, OrganizingSentenceViewControllable>, OrganizingSentenceRouting {
-
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: OrganizingSentenceInteractable, viewController: OrganizingSentenceViewControllable) {
+    
+    override init(
+        interactor: OrganizingSentenceInteractable,
+        viewController: OrganizingSentenceViewControllable
+    ) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }

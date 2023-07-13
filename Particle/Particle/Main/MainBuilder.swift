@@ -11,7 +11,7 @@ protocol MainDependency: Dependency {
     var organizingSentenceRepository: OrganizingSentenceRepository { get }
 }
 
-final class MainComponent: Component<MainDependency>, OrganizingSentenceDependency {
+final class MainComponent: Component<MainDependency>, OrganizingSentenceDependency, SetAdditionalInformationDependency {
     var organizingSentenceRepository: OrganizingSentenceRepository {
         dependency.organizingSentenceRepository
     }
@@ -35,6 +35,11 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         let interactor = MainInteractor(presenter: viewController)
         interactor.listener = listener
         let organizingSentenceBuilder = OrganizingSentenceBuilder(dependency: component)
-        return MainRouter(interactor: interactor, viewController: viewController, organizingSentenceBuilder: organizingSentenceBuilder)
+        let setAdditionalInfoBuilder = SetAdditionalInformationBuilder(dependency: component)
+        return MainRouter(
+            interactor: interactor,
+            viewController: viewController,
+            organizingSentenceBuilder: organizingSentenceBuilder,
+            setAdditionalInfoBuilder: setAdditionalInfoBuilder)
     }
 }

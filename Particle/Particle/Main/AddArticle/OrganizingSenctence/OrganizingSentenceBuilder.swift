@@ -37,6 +37,9 @@ final class OrganizingSentenceBuilder: Builder<OrganizingSentenceDependency>, Or
             dependency: component
         )
         interactor.listener = listener
-        return OrganizingSentenceRouter(interactor: interactor, viewController: viewController)
+        return OrganizingSentenceRouter(
+            interactor: interactor,
+            viewController: viewController
+        )
     }
 }

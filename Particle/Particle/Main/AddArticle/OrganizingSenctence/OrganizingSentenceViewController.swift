@@ -12,9 +12,7 @@ import SnapKit
 import RxCocoa
 
 protocol OrganizingSentencePresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    func nextButtonTapped()
 }
 
 final class OrganizingSentenceViewController: UIViewController, OrganizingSentencePresentable, OrganizingSentenceViewControllable {
@@ -99,6 +97,12 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
         organizingViewModels
             .bind(to: sentenceTableView.rx.items(cellIdentifier: SentenceTableViewCell.defaultReuseIdentifier, cellType: SentenceTableViewCell.self)) { index, item, cell in
                 cell.setCellData(item)
+            }
+            .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.nextButtonTapped()
             }
             .disposed(by: disposeBag)
     }

@@ -9,7 +9,7 @@ import RIBs
 import RxSwift
 
 protocol OrganizingSentenceRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    
 }
 
 protocol OrganizingSentencePresentable: Presentable {
@@ -23,7 +23,7 @@ protocol OrganizingSentenceInteractorDependency {
 }
 
 protocol OrganizingSentenceListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func setAdditionalInfoNextButtonTapped()
 }
 
 final class OrganizingSentenceInteractor: PresentableInteractor<OrganizingSentencePresentable>, OrganizingSentenceInteractable, OrganizingSentencePresentableListener {
@@ -62,5 +62,9 @@ final class OrganizingSentenceInteractor: PresentableInteractor<OrganizingSenten
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+    
+    func nextButtonTapped() {
+        listener?.setAdditionalInfoNextButtonTapped()
     }
 }
