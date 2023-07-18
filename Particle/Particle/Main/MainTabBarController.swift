@@ -8,11 +8,11 @@
 import RIBs
 import RxSwift
 import UIKit
+import RxCocoa
+import SnapKit
 
 protocol MainPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    func addArticleButtonTapped()
 }
 
 final class MainTabBarController: UITabBarController, MainPresentable, MainViewControllable {
@@ -22,6 +22,13 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
     }
     
     weak var listener: MainPresentableListener?
+    private var disposeBag = DisposeBag()
+    
+    private let button: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .blue
+        return button
+    }()
     
     // MARK: - Initializers
     init() {
@@ -38,6 +45,20 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
+        
+        self.view.addSubview(button)
+        
+        button.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(40)
+            make.height.equalTo(20)
+        }
+        
+        button.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.addArticleButtonTapped()
+            }
+            .disposed(by: disposeBag)
     }
     
     override func viewDidLayoutSubviews() {
@@ -76,4 +97,9 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
         tabBar.backgroundColor = .init(hex: 0x1A1A1A)
         tabBar.tintColor = .init(particleColor: .main)
     }
+    
+    func present(viewController: RIBs.ViewControllable) {
+        present(viewController.uiviewController, animated: true)
+    }
+    
 }

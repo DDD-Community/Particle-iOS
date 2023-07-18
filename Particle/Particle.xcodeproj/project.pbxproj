@@ -7,6 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEEE2A5CD3C000A53B34 /* OrganizingSentenceRouter.swift */; };
+		3520EEF32A5CD3C000A53B34 /* OrganizingSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEEF2A5CD3C000A53B34 /* OrganizingSentenceViewController.swift */; };
+		3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEF02A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift */; };
+		3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEF12A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift */; };
+		3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEF92A5CD57800A53B34 /* SentenceTableViewCell.swift */; };
+		3520EEFC2A5D5F7D00A53B34 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */; };
+		3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EEFD2A5E623D00A53B34 /* PaddingLabel.swift */; };
+		3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF002A5E697000A53B34 /* OrganizingSentenceViewModel.swift */; };
+		3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */; };
+		3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */; };
+		3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF122A5E91A900A53B34 /* SetAdditionalInformationRouter.swift */; };
+		3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */; };
+		3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */; };
+		3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */; };
+		3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */; };
+		3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */; };
+		3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF222A5FB18A00A53B34 /* RibsUtil.swift */; };
+		3520EF262A5FC40800A53B34 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -45,6 +64,25 @@
 /* Begin PBXFileReference section */
 		20FAF13101BAEDC5C9A046BE /* Pods_Particle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Particle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C51D4FA6C13FD019C43C14F /* Pods-Particle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Particle.release.xcconfig"; path = "Target Support Files/Pods-Particle/Pods-Particle.release.xcconfig"; sourceTree = "<group>"; };
+		3520EEEE2A5CD3C000A53B34 /* OrganizingSentenceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceRouter.swift; sourceTree = "<group>"; };
+		3520EEEF2A5CD3C000A53B34 /* OrganizingSentenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceViewController.swift; sourceTree = "<group>"; };
+		3520EEF02A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceBuilder.swift; sourceTree = "<group>"; };
+		3520EEF12A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceInteractor.swift; sourceTree = "<group>"; };
+		3520EEF92A5CD57800A53B34 /* SentenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceTableViewCell.swift; sourceTree = "<group>"; };
+		3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
+		3520EEFD2A5E623D00A53B34 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		3520EF002A5E697000A53B34 /* OrganizingSentenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceViewModel.swift; sourceTree = "<group>"; };
+		3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizingSentenceRepository.swift; sourceTree = "<group>"; };
+		3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ParticleImage.swift"; sourceTree = "<group>"; };
+		3520EF122A5E91A900A53B34 /* SetAdditionalInformationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationRouter.swift; sourceTree = "<group>"; };
+		3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationViewController.swift; sourceTree = "<group>"; };
+		3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationBuilder.swift; sourceTree = "<group>"; };
+		3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAdditionalInformationInteractor.swift; sourceTree = "<group>"; };
+		3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
+		3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewCell.swift; sourceTree = "<group>"; };
+		3520EF222A5FB18A00A53B34 /* RibsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RibsUtil.swift; sourceTree = "<group>"; };
+		3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+.swift"; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +132,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3520EEF72A5CD3CE00A53B34 /* OrganizingSenctence */ = {
+			isa = PBXGroup;
+			children = (
+				3520EEF82A5CD56600A53B34 /* View */,
+				3520EEEE2A5CD3C000A53B34 /* OrganizingSentenceRouter.swift */,
+				3520EEEF2A5CD3C000A53B34 /* OrganizingSentenceViewController.swift */,
+				3520EEF02A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift */,
+				3520EEF12A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift */,
+				3520EF002A5E697000A53B34 /* OrganizingSentenceViewModel.swift */,
+			);
+			path = OrganizingSenctence;
+			sourceTree = "<group>";
+		};
+		3520EEF82A5CD56600A53B34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3520EEF92A5CD57800A53B34 /* SentenceTableViewCell.swift */,
+				3520EEFD2A5E623D00A53B34 /* PaddingLabel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3520EF022A5E6F7E00A53B34 /* AddAriticleRepository */ = {
+			isa = PBXGroup;
+			children = (
+				3520EF032A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift */,
+			);
+			path = AddAriticleRepository;
+			sourceTree = "<group>";
+		};
+		3520EF092A5E90C500A53B34 /* SetAdditionalInformation */ = {
+			isa = PBXGroup;
+			children = (
+				3520EF1A2A5FA5D600A53B34 /* View */,
+				3520EF122A5E91A900A53B34 /* SetAdditionalInformationRouter.swift */,
+				3520EF132A5E91A900A53B34 /* SetAdditionalInformationViewController.swift */,
+				3520EF142A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift */,
+				3520EF152A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift */,
+			);
+			path = SetAdditionalInformation;
+			sourceTree = "<group>";
+		};
+		3520EF1A2A5FA5D600A53B34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3520EF1B2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift */,
+				3520EF1D2A5FA83600A53B34 /* DynamicHeightCollectionView.swift */,
+				3520EF1F2A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3520EF212A5FB17800A53B34 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3520EF222A5FB18A00A53B34 /* RibsUtil.swift */,
+				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		3520EF242A5FB7E400A53B34 /* AddArticleNavigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddArticleNavigation;
+			sourceTree = "<group>";
+		};
 		9968BF91A03407F5B3382E7B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				AF1945162A5C407500B9FFA1 /* Constant.swift */,
+				3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -169,10 +276,14 @@
 		AF19451B2A5C50F300B9FFA1 /* AddArticle */ = {
 			isa = PBXGroup;
 			children = (
+				3520EF242A5FB7E400A53B34 /* AddArticleNavigation */,
 				AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */,
 				AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */,
 				AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */,
 				AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */,
+				3520EEF72A5CD3CE00A53B34 /* OrganizingSenctence */,
+				3520EF092A5E90C500A53B34 /* SetAdditionalInformation */,
+				3520EF022A5E6F7E00A53B34 /* AddAriticleRepository */,
 			);
 			path = AddArticle;
 			sourceTree = "<group>";
@@ -218,6 +329,7 @@
 		AFB4BDC32A4093DC008BA9E0 /* Particle */ = {
 			isa = PBXGroup;
 			children = (
+				3520EF212A5FB17800A53B34 /* Utils */,
 				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
 				AFE885F62A5C29E5001EF2C0 /* Extension */,
 				AF86D82C2A4E6030009F1E9D /* Entry */,
@@ -245,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				AFE885F72A5C29F7001EF2C0 /* Color+.swift */,
+				3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -367,32 +480,51 @@
 				AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */,
 				AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */,
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
+				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
+				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
+				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
+				3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */,
+				3520EEFC2A5D5F7D00A53B34 /* ReusableCell.swift in Sources */,
 				AFE885ED2A5C2642001EF2C0 /* HomeViewController.swift in Sources */,
 				AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */,
 				AFE885F32A5C2662001EF2C0 /* MyPageViewController.swift in Sources */,
+				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
 				AF0D71DA2A5BEEAD00157758 /* RootComponent+LoggedOut.swift in Sources */,
 				AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */,
+				3520EEF32A5CD3C000A53B34 /* OrganizingSentenceViewController.swift in Sources */,
+				3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */,
+				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
+				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
+				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
+				3520EF262A5FC40800A53B34 /* NSMutableAttributedString+.swift in Sources */,
 				AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */,
 				AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */,
 				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
+				3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */,
 				AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
+				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
+				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
+				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
+				3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */,
 				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
 				AFE885F12A5C2656001EF2C0 /* ExploreViewController.swift in Sources */,
 				AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */,
 				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
+				3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
 				AFCAB6C92A5C521800E2310D /* AddArticleViewController.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
+				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
