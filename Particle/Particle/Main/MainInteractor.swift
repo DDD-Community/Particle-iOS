@@ -9,10 +9,11 @@ import RIBs
 import RxSwift
 
 protocol MainRouting: ViewableRouting {
-    func routeToAddArticle()
-    func popToAddArticle()
-    func routeToSetAdditionalInfo()
-    func popSetAdditionalInfo()
+    func attachTabs()
+//    func routeToAddArticle()
+//    func popToAddArticle()
+//    func routeToSetAdditionalInfo()
+//    func popSetAdditionalInfo()
 }
 
 protocol MainPresentable: Presentable {
@@ -39,6 +40,7 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
     override func didBecomeActive() {
         super.didBecomeActive()
         // TODO: Implement business logic here.
+        router?.attachTabs()
     }
 
     override func willResignActive() {
@@ -46,19 +48,19 @@ final class MainInteractor: PresentableInteractor<MainPresentable>, MainInteract
         // TODO: Pause any business logic.
     }
     
-    func addArticleButtonTapped() {
-        router?.routeToAddArticle()
-    }
-    
-    func organizingSentenceNextButtonTapped() {
-        router?.routeToSetAdditionalInfo()
-    }
-    
-    func organizingSentenceBackButtonTapped() {
-        router?.popToAddArticle()
-    }
-    
-    func setAdditionalInfoBackButtonTapped() {
-        router?.popSetAdditionalInfo()
-    }
+//    func addArticleButtonTapped() {
+//        router?.routeToAddArticle()
+//    }
+//
+//    func organizingSentenceNextButtonTapped() {
+//        router?.routeToSetAdditionalInfo()
+//    }
+//
+//    func organizingSentenceBackButtonTapped() {
+//        router?.popToAddArticle()
+//    }
+//
+//    func setAdditionalInfoBackButtonTapped() {
+//        router?.popSetAdditionalInfo()
+//    }
 }
