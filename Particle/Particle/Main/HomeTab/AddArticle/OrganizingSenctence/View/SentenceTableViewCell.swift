@@ -27,7 +27,8 @@ final class SentenceTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.textColor = .white
-        label.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.1)
+//        label.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.1)
+        label.backgroundColor = .init(hex: 0xFFFFFF, alpha: 0.1)
         label.layer.cornerRadius = Metric.labelCornerRadius
         label.clipsToBounds = true
         return label

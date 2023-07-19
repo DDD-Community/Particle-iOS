@@ -61,6 +61,7 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
     
     private let navigationBar: UIView = {
         let view = UIView()
+        view.backgroundColor = .init(hex: 0x1f1f1f)
         return view
     }()
     
@@ -80,7 +81,7 @@ final class OrganizingSentenceViewController: UIViewController, OrganizingSenten
         super.init(nibName: nil, bundle: nil)
         
         self.modalPresentationStyle = .fullScreen
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .init(hex: 0x1f1f1f)
         addSubviews()
         layout()
         bind()
