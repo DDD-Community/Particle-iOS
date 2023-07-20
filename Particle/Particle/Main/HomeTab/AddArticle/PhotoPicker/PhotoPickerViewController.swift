@@ -29,6 +29,7 @@ final class PhotoPickerViewController: UIViewController, PhotoPickerPresentable,
         let phpicker = PHPickerViewController(configuration: config)
         phpicker.overrideUserInterfaceStyle = .dark
         return phpicker
+        button.setImage(.particleImage.xmarkButton, for: .normal)
     }()
     
     init() {

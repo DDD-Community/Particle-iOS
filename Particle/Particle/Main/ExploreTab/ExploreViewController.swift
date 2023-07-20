@@ -22,7 +22,7 @@ final class ExploreViewController: UIViewController, ExplorePresentable, Explore
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "탐색"
-        tabBarItem.image = UIImage(named: "book-open")
+        tabBarItem.image = .particleImage.exploreTabIcon
     }
     
     required init?(coder: NSCoder) {
