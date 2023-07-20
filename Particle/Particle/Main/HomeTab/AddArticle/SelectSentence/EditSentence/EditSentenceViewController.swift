@@ -10,15 +10,13 @@ import RxSwift
 import UIKit
 
 protocol EditSentencePresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
-    func pushToNextVC()
+    func nextButtonTapped()
 }
 
 final class EditSentenceViewController: UIViewController, EditSentencePresentable, EditSentenceViewControllable {
 
     weak var listener: EditSentencePresentableListener?
+    private let customTransitioningDelegate = EditSentenceTransitioningDelegate()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -82,7 +80,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        
+        setupModalStyle()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,14 +89,21 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupKeyboardNotification()
         setupInitialView()
+        configureButton()
+    }
+    
+    private func setupModalStyle() {
+        modalPresentationStyle = .custom
+        modalTransitionStyle = .coverVertical
+        transitioningDelegate = customTransitioningDelegate
     }
     
     private func setupInitialView() {
         view.backgroundColor = .init(hex: 0x1F1F1F)
         addSubviews()
         setConstraints()
-        configureButton()
     }
     
     private func configureButton() {
@@ -114,13 +119,58 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         )
     }
     
+    private func setupKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillAppear(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillDisappear(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
     @objc private func refreshButtonTapped() {
         // TODO: 원래의 Text 상태로 되돌리기
     }
     
     @objc private func nextButtonTapped() {
-        // TODO: OrganizingSentence RIB 로 Route
-        listener?.pushToNextVC()
+        listener?.nextButtonTapped()
+    }
+    
+    @objc private func keyboardWillAppear(_ sender: Notification) {
+        guard let userInfo = sender.userInfo,
+              let keyboarFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        
+        let contentInset = UIEdgeInsets(
+            top: 0.0,
+            left: 0.0,
+            bottom: keyboarFrame.size.height,
+            right: 0.0
+        )
+        
+        // TODO: 키보드 높이 전달해서 modalview origin 변경하기.
+        Console.log("키보드 높이: \(keyboarFrame.size.height)")
+        
+        UIView.animate(withDuration: 0.3) {
+            self.mainStackView.layoutMargins = contentInset
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func keyboardWillDisappear(_ sender: Notification) {
+        let contentInset = UIEdgeInsets.zero
+        
+        UIView.animate(withDuration: 0.3) {
+            self.mainStackView.layoutMargins = contentInset
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
