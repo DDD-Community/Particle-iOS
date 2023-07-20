@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol SelectSentenceInteractable: Interactable, EditSentenceListener, OrganizingSentenceListener {
+protocol SelectSentenceInteractable: Interactable, EditSentenceListener {
     var router: SelectSentenceRouting? { get set }
     var listener: SelectSentenceListener? { get set }
 }
@@ -16,7 +16,6 @@ protocol SelectSentenceViewControllable: ViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
     func present(viewController: ViewControllable)
     func dismiss(viewController: ViewControllable)
-    func pushViewController(_ viewController: ViewControllable)
 }
 
 final class SelectSentenceRouter: ViewableRouter<SelectSentenceInteractable,
@@ -27,35 +26,21 @@ final class SelectSentenceRouter: ViewableRouter<SelectSentenceInteractable,
     init(
         interactor: SelectSentenceInteractable,
         viewController: SelectSentenceViewControllable,
-        editSentenceBuilder: EditSentenceBuildable,
-        organizingSentenceBuilder: OrganizingSentenceBuildable
+        editSentenceBuilder: EditSentenceBuildable
     ) {
         self.editSentenceBuilder = editSentenceBuilder
-        self.organizingSentenceBuilder = organizingSentenceBuilder
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
     
-    func routeToEditSentence() {
+    func attachEditSentence() {
         let editSentence = editSentenceBuilder.build(withListener: interactor)
         self.currentChild = editSentence
         attachChild(editSentence)
         viewController.present(viewController: editSentence.viewControllable)
     }
     
-
-    func routeToOrganizingSentence() {
-        detachEditSentence()
-        attachOrganizingSentence()
-    }
-    
-    // MARK: - Private
-    
-    private let editSentenceBuilder: EditSentenceBuildable
-    private let organizingSentenceBuilder: OrganizingSentenceBuildable
-    private var currentChild: ViewableRouting?
-    
-    private func detachEditSentence() { // ?
+    func detachEditSentence() {
         
         if let editSentence = currentChild {
             detachChild(editSentence)
@@ -64,11 +49,9 @@ final class SelectSentenceRouter: ViewableRouter<SelectSentenceInteractable,
         }
     }
     
-    private func attachOrganizingSentence() {
-        let organizingSentence = organizingSentenceBuilder.build(withListener: interactor)
-        self.currentChild = organizingSentence
-        attachChild(organizingSentence)
-        viewController.pushViewController(organizingSentence.viewControllable)
-    }
+    // MARK: - Private
+    
+    private let editSentenceBuilder: EditSentenceBuildable
+    private var currentChild: ViewableRouting?
     
 }

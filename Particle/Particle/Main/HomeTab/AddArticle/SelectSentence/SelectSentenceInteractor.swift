@@ -10,8 +10,8 @@ import RxSwift
 
 protocol SelectSentenceRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-    func routeToEditSentence()
-    func routeToOrganizingSentence()
+    func attachEditSentence()
+    func detachEditSentence()
 }
 
 protocol SelectSentencePresentable: Presentable {
@@ -22,6 +22,7 @@ protocol SelectSentencePresentable: Presentable {
 protocol SelectSentenceListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func popSelectSentence()
+    func pushToOrganizingSentence()
 }
 
 final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresentable>,
@@ -48,24 +49,19 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
         // TODO: Pause any business logic.
     }
     
+    
+    // MARK: - SelectSentencePresentableListener
+    
     func showEditSentenceModal() {
-        router?.routeToEditSentence()
+        router?.attachEditSentence()
     }
     
-    func pushToNextVC() {
-        router?.routeToOrganizingSentence()
-    }
-    
-    func organizingSentenceNextButtonTapped() {
-        //
-    }
-    
-    func organizingSentenceBackButtonTapped() {
-        //
+    func dismissEditSentence() {
+        router?.detachEditSentence()
+        listener?.pushToOrganizingSentence()
     }
     
     func backButtonTapped() {
-        // addarticle로 돌아가기
         listener?.popSelectSentence()
     }
 }

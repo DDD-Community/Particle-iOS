@@ -13,9 +13,7 @@ import VisionKit
 import Vision
 
 protocol SelectSentencePresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    
     func showEditSentenceModal()
     func backButtonTapped()
 }
@@ -127,7 +125,6 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         navigationController?.isNavigationBarHidden = true
         backButton.rx.tap
             .bind { [weak self] in
-//                self?.popViewController(animated: true)
                 self?.listener?.backButtonTapped()
             }
             .disposed(by: disposeBag)
@@ -205,10 +202,6 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
             dismiss(animated: true)
         }
     }
-    
-    func pushViewController(_ viewController: RIBs.ViewControllable) {
-        navigationController?.pushViewController(viewController.uiviewController, animated: true)
-    }
 }
 
 // MARK: - UITextViewDelegate
@@ -285,18 +278,3 @@ struct SelectSentenceViewController_Preview: PreviewProvider {
     }
 }
 #endif
-
-// MARK: - Utils
-struct Console {
-    static func log(_ message: String) {
-        print("[LOG] \(message)")
-    }
-    
-    static func debug(_ message: String) {
-        print("[DEBUG] \(message)")
-    }
-    
-    static func error(_ message: String) {
-        print("[ERROR] \(message)")
-    }
-}

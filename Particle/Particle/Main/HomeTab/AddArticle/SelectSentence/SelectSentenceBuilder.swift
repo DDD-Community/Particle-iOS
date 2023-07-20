@@ -36,13 +36,11 @@ final class SelectSentenceBuilder: Builder<SelectSentenceDependency>, SelectSent
         interactor.listener = listener
         
         let editSentenceBuilder = EditSentenceBuilder(dependency: component)
-        let organizingSentenceBuilder = OrganizingSentenceBuilder(dependency: component)
         
         return SelectSentenceRouter(
             interactor: interactor,
             viewController: viewController,
-            editSentenceBuilder: editSentenceBuilder,
-            organizingSentenceBuilder: organizingSentenceBuilder
+            editSentenceBuilder: editSentenceBuilder
         )
     }
 }
