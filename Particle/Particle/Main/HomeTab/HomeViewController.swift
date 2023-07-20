@@ -86,14 +86,12 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     }
     
     @objc private func buttonTapped() {
-        print("버튼눌림! ")
         UIView.animate(withDuration: 0.1) { [self] in
             plusButton.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         } completion: { [self] _ in
             UIView.animate(withDuration: 0.1) { [self] in
                 plusButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             }
-            // TODO: - Route To AddArticle RIB !!
             listener?.showPHPickerViewController()
         }
     }
