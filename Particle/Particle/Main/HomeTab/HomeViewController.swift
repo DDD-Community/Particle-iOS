@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     private let plusButton: UIView = {
         let plusIcon: UIImageView = {
             let imageView = UIImageView()
-            imageView.image = UIImage(named: "plus")
+            imageView.image = .particleImage.plusButton
             return imageView
         }()
         
@@ -45,7 +45,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "홈"
-        tabBarItem.image = UIImage(named: "home")
+        tabBarItem.image = .particleImage.homeTabIcon?.withTintColor(.init(hex: 0x696969))
     }
     
     required init?(coder: NSCoder) {

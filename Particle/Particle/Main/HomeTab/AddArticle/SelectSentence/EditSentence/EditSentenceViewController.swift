@@ -62,7 +62,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     
     private let refreshButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "refresh"), for: .normal)
+        button.setImage(.particleImage.refreshButton, for: .normal)
         button.backgroundColor = .init(hex: 0x2E2E2E)
         button.snp.makeConstraints {
             $0.width.height.equalTo(44)

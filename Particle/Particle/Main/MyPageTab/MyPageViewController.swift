@@ -22,7 +22,7 @@ final class MyPageViewController: UIViewController, MyPagePresentable, MyPageVie
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "마이"
-        tabBarItem.image = UIImage(named: "user")
+        tabBarItem.image = .particleImage.mypageTabIcon
     }
     
     required init?(coder: NSCoder) {

@@ -22,7 +22,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "검색"
-        tabBarItem.image = UIImage(named: "search")
+        tabBarItem.image = .particleImage.searchTabIcon
     }
     
     required init?(coder: NSCoder) {
