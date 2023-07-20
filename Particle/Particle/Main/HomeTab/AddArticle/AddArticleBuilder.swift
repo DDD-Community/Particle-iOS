@@ -43,18 +43,26 @@ final class AddArticleBuilder: Builder<AddArticleDependency>, AddArticleBuildabl
         
         let photoPickerBuilder = PhotoPickerBuilder(dependency: component)
         let selectSentenceBuilder = SelectSentenceBuilder(dependency: component)
-        let editSentenceBuilder = EditSentenceBuilder(dependency: component)
+        let organizingSentenceBuilder = OrganizingSentenceBuilder(dependency: component)
+        let setAdditionalInformationBuilder = SetAdditionalInformationBuilder(dependency: component)
         
         return AddArticleRouter(
             interactor: interactor,
             viewController: component.addArticleViewController,
             photoPickerBuildable: photoPickerBuilder,
             selectSentenceBuildable: selectSentenceBuilder,
-            editSentenceBuildable: editSentenceBuilder
+            organizingSentenceBuildable: organizingSentenceBuilder,
+            setAdditionalInformationBuildable: setAdditionalInformationBuilder
         )
     }
 }
 
 extension AddArticleComponent: PhotoPickerDependency,
                                SelectSentenceDependency,
-                               EditSentenceDependency { }
+                               OrganizingSentenceDependency,
+                               SetAdditionalInformationDependency {
+    
+    var organizingSentenceRepository: OrganizingSentenceRepository {
+        return OrganizingSentenceRepositoryImp() //FIXME: ??
+    }
+}

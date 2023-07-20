@@ -9,7 +9,9 @@ import RIBs
 
 protocol AddArticleInteractable: Interactable,
                                  PhotoPickerListener,
-                                 SelectSentenceListener {
+                                 SelectSentenceListener,
+                                 OrganizingSentenceListener,
+                                 SetAdditionalInformationListener {
     
     var router: AddArticleRouting? { get set }
     var listener: AddArticleListener? { get set }
@@ -32,24 +34,30 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
     private let selectSentenceBuildable: SelectSentenceBuildable
     private var selectSentenceRouting: SelectSentenceRouting?
     
-    private let editSentenceBuildable: EditSentenceBuildable
-    private var editSentenceRouting: EditSentenceRouting?
+    private let organizingSentenceBuildable: OrganizingSentenceBuildable
+    private var organizingSentenceRouting: OrganizingSentenceRouting?
     
+    private let setAdditionalInformationBuildable: SetAdditionalInformationBuildable
+    private var setAdditionalInformationRouting: SetAdditionalInformationRouting?
     
     init(
         interactor: AddArticleInteractable,
         viewController: ViewControllable,
         photoPickerBuildable: PhotoPickerBuildable,
         selectSentenceBuildable: SelectSentenceBuildable,
-        editSentenceBuildable: EditSentenceBuildable
+        organizingSentenceBuildable: OrganizingSentenceBuildable,
+        setAdditionalInformationBuildable: SetAdditionalInformationBuildable
     ) {
         self.viewController = viewController
         self.selectSentenceBuildable = selectSentenceBuildable
         self.photoPickerBuildable = photoPickerBuildable
-        self.editSentenceBuildable = editSentenceBuildable
+        self.organizingSentenceBuildable = organizingSentenceBuildable
+        self.setAdditionalInformationBuildable = setAdditionalInformationBuildable
         super.init(interactor: interactor)
         interactor.router = self
     }
+    
+    // MARK: - PhotoPicker RIB
     
     func attachPhotoPicker() {
         if photoPickerRouting != nil {
@@ -57,20 +65,10 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
         }
         let router = photoPickerBuildable.build(withListener: interactor)
         
-//        if let navigation = navigationControllable {
-//          navigation.setViewControllers([router.viewControllable])
-//          resetChildRouting()
-//        } else {
-//            presentInsideNavigation(router.viewControllable)
-//        }
-        
         presentInsideNavigation(router.viewControllable)
         
         attachChild(router)
         photoPickerRouting = router
-        
-        
-        // TODO: - 레퍼런스 참고해서 네비게이션 연계하기.
     }
     
     func detachPhotoPicker() {
@@ -82,6 +80,8 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
         photoPickerRouting = nil
         
     }
+    
+    // MARK: - SelectSentence RIB
     
     func attachSelectSentence(with images: [NSItemProvider]) {
         if selectSentenceRouting != nil {
@@ -96,6 +96,56 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
         attachChild(router)
     }
     
+    func detachSelectSentence() {
+        guard let router = selectSentenceRouting else {
+            return
+        }
+        navigationControllable?.popViewController(animated: true)
+        detachChild(router)
+        selectSentenceRouting = nil
+    }
+    
+    // MARK: - OrganizingSentence RIB
+    
+    func attachOrganizingSentence() {
+        if organizingSentenceRouting != nil {
+            return
+        }
+        let router = organizingSentenceBuildable.build(withListener: interactor)
+        navigationControllable?.pushViewController(router.viewControllable, animated: true)
+        organizingSentenceRouting = router
+        attachChild(router)
+    }
+    
+    func detachOrganizingSentence() {
+        guard let router = organizingSentenceRouting else {
+            return
+        }
+        navigationControllable?.popViewController(animated: true)
+        detachChild(router)
+        organizingSentenceRouting = nil
+    }
+    
+    // MARK: - SetAdditionalInformation RIB
+    
+    func attachSetAdditionalInformation() {
+        if setAdditionalInformationRouting != nil {
+            return
+        }
+        let router = setAdditionalInformationBuildable.build(withListener: interactor)
+        navigationControllable?.pushViewController(router.viewControllable, animated: true)
+        setAdditionalInformationRouting = router
+        attachChild(router)
+    }
+    
+    func detachSetAdditionalInformation() {
+        guard let router = setAdditionalInformationRouting else {
+            return
+        }
+        navigationControllable?.popViewController(animated: true)
+        detachChild(router)
+        setAdditionalInformationRouting = nil
+    }
     
     func cleanupViews() {
         if viewController.uiviewController.presentedViewController != nil, navigationControllable != nil {
@@ -107,19 +157,20 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
     private let viewController: ViewControllable
     
     private func presentInsideNavigation(_ viewControllable: ViewControllable) {
-      let navigation = NavigationControllerable(root: viewControllable)
-      navigation.navigationController.presentationController?.delegate = interactor.presentationDelegateProxy
-      self.navigationControllable = navigation
-      viewController.present(navigation, animated: true, completion: nil)
+        let navigation = NavigationControllerable(root: viewControllable)
+        navigation.navigationController.modalPresentationStyle = .fullScreen
+        //      navigation.navigationController.presentationController?.delegate = interactor.presentationDelegateProxy
+        self.navigationControllable = navigation
+        viewController.present(navigation, animated: true, completion: nil)
     }
     
     private func dismissPresentedNavigation(completion: (() -> Void)?) {
-      if self.navigationControllable == nil {
-        return
-      }
-      
-      viewController.dismiss(completion: nil)
-      self.navigationControllable = nil
+        if self.navigationControllable == nil {
+            return
+        }
+        
+        viewController.dismiss(completion: nil)
+        self.navigationControllable = nil
     }
 }
 
@@ -128,14 +179,14 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
 import UIKit
 
 public protocol AdaptivePresentationControllerDelegate: AnyObject {
-  func presentationControllerDidDismiss()
+    func presentationControllerDidDismiss()
 }
 
 public final class AdaptivePresentationControllerDelegateProxy: NSObject, UIAdaptivePresentationControllerDelegate {
-  
-  public weak var delegate: AdaptivePresentationControllerDelegate?
-  
-  public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-    delegate?.presentationControllerDidDismiss()
-  }
+    
+    public weak var delegate: AdaptivePresentationControllerDelegate?
+    
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        delegate?.presentationControllerDidDismiss()
+    }
 }

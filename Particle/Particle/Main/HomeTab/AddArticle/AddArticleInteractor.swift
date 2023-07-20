@@ -15,13 +15,21 @@ protocol AddArticleRouting: Routing {
     func detachPhotoPicker()
     
     func attachSelectSentence(with images: [NSItemProvider])
+    func detachSelectSentence()
+    
+    func attachOrganizingSentence()
+    func detachOrganizingSentence()
+    
+    func attachSetAdditionalInformation()
+    func detachSetAdditionalInformation()
 }
 
 protocol AddArticleListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class AddArticleInteractor: Interactor, AddArticleInteractable {
+final class AddArticleInteractor: Interactor, AddArticleInteractable, AdaptivePresentationControllerDelegate {
+    
     var presentationDelegateProxy: AdaptivePresentationControllerDelegateProxy
     
 
@@ -46,6 +54,13 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable {
         // TODO: Pause any business logic.
     }
     
+    // MARK: - AdaptivePresentationControllerDelegate
+    
+    func presentationControllerDidDismiss() {
+        //
+    }
+    
+    
     // MARK: - PhotoPickerListener
     
     func cancelButtonTapped() {
@@ -59,8 +74,29 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable {
     // MARK: - SelectSentenceListener
     
     func popSelectSentence() {
-        // TODO:
+        router?.detachSelectSentence()
     }
     
-
+    func pushToOrganizingSentence() {
+        router?.attachOrganizingSentence()
+    }
+    
+    
+    // MARK: - OrganizingSentenceListener
+    
+    func organizingSentenceNextButtonTapped() {
+        router?.attachSetAdditionalInformation()
+    }
+    
+    func organizingSentenceBackButtonTapped() {
+        router?.detachOrganizingSentence()
+    }
+    
+    // MARK: - SetAdditionalInformationListener
+    
+    func setAdditionalInfoBackButtonTapped() {
+        router?.detachSetAdditionalInformation()
+    }
+    
+    
 }
