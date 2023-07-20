@@ -43,6 +43,9 @@
 		AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71E42A5BEFB800157758 /* MainBuilder.swift */; };
 		AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71E52A5BEFB800157758 /* MainInteractor.swift */; };
 		AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */; };
+		AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2DE2A68EEB100C54490 /* Console.swift */; };
+		AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */; };
+		AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */; };
 		AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1945162A5C407500B9FFA1 /* Constant.swift */; };
 		AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */; };
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
@@ -124,6 +127,9 @@
 		AF0D71E42A5BEFB800157758 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		AF0D71E52A5BEFB800157758 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedIn.swift"; sourceTree = "<group>"; };
+		AF18E2DE2A68EEB100C54490 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceTransitioningDelegate.swift; sourceTree = "<group>"; };
+		AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentencePresentationController.swift; sourceTree = "<group>"; };
 		AF1945162A5C407500B9FFA1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerRouter.swift; sourceTree = "<group>"; };
 		AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +243,7 @@
 			children = (
 				3520EF222A5FB18A00A53B34 /* RibsUtil.swift */,
 				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
+				AF18E2DE2A68EEB100C54490 /* Console.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -307,6 +314,15 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		AF18E2E02A68FE6A00C54490 /* ModalStyle */ = {
+			isa = PBXGroup;
+			children = (
+				AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */,
+				AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */,
+			);
+			path = ModalStyle;
+			sourceTree = "<group>";
+		};
 		AF1945152A5C406B00B9FFA1 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,7 +340,6 @@
 				AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */,
 				AF1D32A82A680CB200980F14 /* PhotoPicker */,
 				AFBB5F6E2A66B60D002416DA /* SelectSentence */,
-				AFBB5F6F2A66B616002416DA /* EditSentence */,
 				3520EEF72A5CD3CE00A53B34 /* OrganizingSenctence */,
 				3520EF092A5E90C500A53B34 /* SetAdditionalInformation */,
 				3520EF022A5E6F7E00A53B34 /* AddAriticleRepository */,
@@ -449,6 +464,7 @@
 				AFBB5F712A66B65D002416DA /* SelectSentenceViewController.swift */,
 				AFBB5F722A66B65D002416DA /* SelectSentenceBuilder.swift */,
 				AFBB5F732A66B65D002416DA /* SelectSentenceInteractor.swift */,
+				AFBB5F6F2A66B616002416DA /* EditSentence */,
 			);
 			path = SelectSentence;
 			sourceTree = "<group>";
@@ -456,6 +472,7 @@
 		AFBB5F6F2A66B616002416DA /* EditSentence */ = {
 			isa = PBXGroup;
 			children = (
+				AF18E2E02A68FE6A00C54490 /* ModalStyle */,
 				AFBB5F782A66B66B002416DA /* EditSentenceRouter.swift */,
 				AFBB5F792A66B66B002416DA /* EditSentenceViewController.swift */,
 				AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */,
@@ -594,7 +611,9 @@
 				AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */,
 				AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */,
 				AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */,
+				AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */,
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
+				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
 				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
 				AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */,
@@ -659,6 +678,7 @@
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
 				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
+				AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
 				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
 			);
