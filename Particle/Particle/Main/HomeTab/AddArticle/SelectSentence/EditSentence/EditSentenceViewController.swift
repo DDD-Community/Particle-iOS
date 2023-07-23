@@ -14,9 +14,12 @@ protocol EditSentencePresentableListener: AnyObject {
 }
 
 final class EditSentenceViewController: UIViewController, EditSentencePresentable, EditSentenceViewControllable {
-
+    
     weak var listener: EditSentencePresentableListener?
+    private let disposeBag = DisposeBag()
     private let customTransitioningDelegate = EditSentenceTransitioningDelegate()
+    private var originalCenterY: CGFloat = 0.0
+    private let originalText: String
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -49,9 +52,9 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         return stackView
     }()
     
-    private let selectedTextView: UITextView = {
+    private let textView: UITextView = {
         let textView = UITextView()
-        textView.text = "디자인은 사실 숫자와는 거리가 먼 영역이다. 그래서 언뜻 생각했을 때 데이터 기반으로 디자인한다는 게 뭔지 잘 와닿지 않았다."
+        textView.text = "선택된 문장이 없습니다."
         textView.textColor = .init(hex: 0xF3F3F3)
         textView.font = .systemFont(ofSize: 14)
         textView.backgroundColor = .init(hex: 0x1F1F1F)
@@ -78,9 +81,35 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         return button
     }()
     
-    init() {
+    private let accessoryView: UIView = {
+        let uiview = UIView(
+            frame: CGRect(
+                x: 0.0,
+                y: 0.0,
+                width: UIScreen.main.bounds.width,
+                height: 50
+            )
+        )
+        uiview.layer.borderWidth = 1
+        uiview.layer.borderColor = UIColor.systemGray6.cgColor
+        uiview.layer.backgroundColor = UIColor.systemBackground.cgColor
+        return uiview
+    }()
+    
+    private let keyboardDownButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "keyboard.chevron.compact.down"), for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.tintColor = .init(particleColor: .main)
+        return button
+    }()
+    
+    init(with text: String) {
+        self.originalText = text
         super.init(nibName: nil, bundle: nil)
         setupModalStyle()
+        textView.text = text
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -92,6 +121,11 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         setupKeyboardNotification()
         setupInitialView()
         configureButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        originalCenterY = self.view.center.y
     }
     
     private func setupModalStyle() {
@@ -107,19 +141,27 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     }
     
     private func configureButton() {
-        refreshButton.addTarget(
-            self,
-            action: #selector(refreshButtonTapped),
-            for: .touchUpInside
-        )
-        nextButton.addTarget(
-            self,
-            action: #selector(nextButtonTapped),
-            for: .touchUpInside
-        )
+        refreshButton.rx.tap
+            .bind { [weak self] in
+                self?.textView.text = self?.originalText
+            }
+            .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.nextButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        keyboardDownButton.rx.tap
+            .bind { [weak self] in
+                self?.view.endEditing(true)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func setupKeyboardNotification() {
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillAppear(_:)),
@@ -134,41 +176,24 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         )
     }
     
-    @objc private func refreshButtonTapped() {
-        // TODO: 원래의 Text 상태로 되돌리기
-    }
-    
-    @objc private func nextButtonTapped() {
-        listener?.nextButtonTapped()
-    }
-    
     @objc private func keyboardWillAppear(_ sender: Notification) {
         guard let userInfo = sender.userInfo,
               let keyboarFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
             return
         }
         
-        let contentInset = UIEdgeInsets(
-            top: 0.0,
-            left: 0.0,
-            bottom: keyboarFrame.size.height,
-            right: 0.0
-        )
-        
-        // TODO: 키보드 높이 전달해서 modalview origin 변경하기.
-        Console.log("키보드 높이: \(keyboarFrame.size.height)")
-        
-        UIView.animate(withDuration: 0.3) {
-            self.mainStackView.layoutMargins = contentInset
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.view.center.y = self.originalCenterY - keyboarFrame.size.height
             self.view.layoutIfNeeded()
         }
     }
     
     @objc private func keyboardWillDisappear(_ sender: Notification) {
-        let contentInset = UIEdgeInsets.zero
         
-        UIView.animate(withDuration: 0.3) {
-            self.mainStackView.layoutMargins = contentInset
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.view.center.y = self.originalCenterY
             self.view.layoutIfNeeded()
         }
     }
@@ -187,9 +212,11 @@ private extension EditSentenceViewController {
             buttonStackView.addArrangedSubview($0)
         }
         
-        [selectedTextView, buttonStackView].forEach {
+        [textView, buttonStackView].forEach {
             mainStackView.addArrangedSubview($0)
         }
+        
+        accessoryView.addSubview(keyboardDownButton)
     }
     
     func setConstraints() {
@@ -209,6 +236,13 @@ private extension EditSentenceViewController {
             $0.top.equalTo(divider.snp.bottom).offset(19)
             $0.bottom.leading.trailing.equalTo(view)
         }
+        
+        keyboardDownButton.snp.makeConstraints {
+            $0.centerY.equalTo(accessoryView.snp.centerY)
+            $0.trailing.equalTo(accessoryView).offset(-10)
+        }
+        
+        textView.inputAccessoryView = accessoryView
     }
 }
 
@@ -219,7 +253,7 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct EditSentenceViewController_Preview: PreviewProvider {
     static var previews: some View {
-        EditSentenceViewController().showPreview()
+        EditSentenceViewController(with: "테스트 문구").showPreview()
     }
 }
 #endif

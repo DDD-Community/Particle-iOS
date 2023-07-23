@@ -20,7 +20,7 @@ final class EditSentenceComponent: Component<EditSentenceDependency> {
 // MARK: - Builder
 
 protocol EditSentenceBuildable: Buildable {
-    func build(withListener listener: EditSentenceListener) -> EditSentenceRouting
+    func build(withListener listener: EditSentenceListener, text: String) -> EditSentenceRouting
 }
 
 final class EditSentenceBuilder: Builder<EditSentenceDependency>, EditSentenceBuildable {
@@ -29,9 +29,9 @@ final class EditSentenceBuilder: Builder<EditSentenceDependency>, EditSentenceBu
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: EditSentenceListener) -> EditSentenceRouting {
-        let component = EditSentenceComponent(dependency: dependency)
-        let viewController = EditSentenceViewController()
+    func build(withListener listener: EditSentenceListener, text: String) -> EditSentenceRouting {
+        _ = EditSentenceComponent(dependency: dependency)
+        let viewController = EditSentenceViewController(with: text) // FIXME: text 데이터 전달과정 리뷰요청. component 활용방법 연구
         let interactor = EditSentenceInteractor(presenter: viewController)
         interactor.listener = listener
         return EditSentenceRouter(interactor: interactor, viewController: viewController)
