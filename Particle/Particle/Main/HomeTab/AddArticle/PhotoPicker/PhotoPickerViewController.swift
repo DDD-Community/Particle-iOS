@@ -7,13 +7,13 @@
 
 import RIBs
 import RxSwift
+import Photos
 import UIKit
-import PhotosUI
 
 protocol PhotoPickerPresentableListener: AnyObject {
     
     func cancelButtonTapped()
-    func nextButtonTapped(with images: [NSItemProvider])
+    func nextButtonTapped(with images: [PHAsset])
 }
 
 final class PhotoPickerViewController: UIViewController, PhotoPickerPresentable, PhotoPickerViewControllable {
@@ -24,11 +24,14 @@ final class PhotoPickerViewController: UIViewController, PhotoPickerPresentable,
             static let backButtonLeftMargin = 20
             static let nextButtonRightMargin = 20
         }
+        enum CollectionViewCell {
+            static let width = (DeviceSize.width-4)/3
+        }
     }
     
     weak var listener: PhotoPickerPresentableListener?
     private var disposeBag: DisposeBag = .init()
-    private var selectedItems: [NSItemProvider] = []
+    private var selectedItems: [PHAsset] = []
     
     private let navigationBar: UIView = {
         let view = UIView()
@@ -53,19 +56,23 @@ final class PhotoPickerViewController: UIViewController, PhotoPickerPresentable,
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.init(particleColor: .main), for: .normal)
         return button
     }()
     
-//    private let imagePickerVC: PHPickerViewController = {
-//        var config = PHPickerConfiguration()
-//        config.filter = .images
-//        config.selectionLimit = 5
-//        let phpicker = PHPickerViewController(configuration: config)
-//        phpicker.overrideUserInterfaceStyle = .dark
-//        phpicker.modalPresentationStyle = .formSheet
-//        return phpicker
-//    }()
+    private let photoCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(
+            width: Metric.CollectionViewCell.width,
+            height: Metric.CollectionViewCell.width
+        )
+        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 0
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(PhotoCell.self)
+        collectionView.backgroundColor = .init(hex: 0x1f1f1f)
+        return collectionView
+    }()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -80,13 +87,8 @@ final class PhotoPickerViewController: UIViewController, PhotoPickerPresentable,
         super.viewDidLoad()
         setupInitialView()
         configureButton()
-//        imagePickerVC.delegate = self
+        bind()
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        self.present(imagePickerVC, animated: true, completion: nil)
-//    }
     
     override func viewWillLayoutSubviews() {
         setupStatusBar()
@@ -122,34 +124,52 @@ final class PhotoPickerViewController: UIViewController, PhotoPickerPresentable,
             }
             .disposed(by: disposeBag)
     }
+    
+    private func bind() {
+        Observable.of(Array(0...(photoCount - 1)))
+            .bind(to: photoCollectionView.rx.items(
+                cellIdentifier: PhotoCell.defaultReuseIdentifier,
+                cellType: PhotoCell.self)
+            ) { index, item, cell in
+                
+                guard let allPhotos = allPhotos else {
+                    Console.error("allPhotos 값이 존재하지 않습니다.")
+                    return
+                }
+                cell.setImage(with: allPhotos.object(at: item))
+            }
+            .disposed(by: disposeBag)
+        
+        photoCollectionView
+            .rx
+            .itemSelected
+            .subscribe { [weak self] indexPath in
+                guard let self = self else { return }
+                
+                guard let allPhotos = allPhotos else {
+                    Console.error("allPhotos 값이 존재하지 않습니다.")
+                    return
+                }
+                let selectedPhoto = allPhotos.object(at: indexPath.element?.row ?? 0)
+                if self.selectedItems.contains(selectedPhoto) {
+                    self.selectedItems.remove(at: self.selectedItems.firstIndex(of: selectedPhoto) ?? .zero)
+                } else {
+                    self.selectedItems.append(selectedPhoto)
+                }
+                guard let cell = self.photoCollectionView.cellForItem(at: indexPath.element ?? .init(item: 0, section: 0)) as? PhotoCell else {
+                    return
+                }
+                cell.check(number: self.selectedItems.count)
+            }
+            .disposed(by: disposeBag)
+    }
 }
-
-// MARK: - PHPickerViewControllerDelegate
-//extension PhotoPickerViewController: PHPickerViewControllerDelegate {
-
-//    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-//
-//        if results.count == 0 {
-//
-//            self.dismiss(animated: true)
-//        } else {
-//
-//            let providers = results.filter {
-//                $0.itemProvider.canLoadObject(ofClass: UIImage.self)
-//            }.map {
-//                $0.itemProvider
-//            }
-//            selectedItems = providers
-//            self.dismiss(animated: true)
-//        }
-//    }
-//}
 
 // MARK: - Layout Settting
 
 private extension PhotoPickerViewController {
     func addSubviews() {
-        [navigationBar].forEach {
+        [navigationBar, photoCollectionView].forEach {
             view.addSubview($0)
         }
         
@@ -179,22 +199,9 @@ private extension PhotoPickerViewController {
             $0.right.equalToSuperview().inset(Metric.NavigationBar.nextButtonRightMargin)
         }
         
-//        imagePickerVC.view.snp.makeConstraints {
-//            $0.top.equalTo(navigationBar.snp.bottom)
-//            $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-//        }
+        photoCollectionView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
-
-// MARK: - Preview
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct PhotoPickerViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        PhotoPickerViewController().showPreview()
-    }
-}
-#endif
-

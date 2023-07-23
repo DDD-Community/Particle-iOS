@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import Photos
 
 protocol PhotoPickerRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
@@ -20,7 +21,7 @@ protocol PhotoPickerPresentable: Presentable {
 protocol PhotoPickerListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func cancelButtonTapped()
-    func nextButtonTapped(with images: [NSItemProvider])
+    func nextButtonTapped(with images: [PHAsset])
 }
 
 final class PhotoPickerInteractor: PresentableInteractor<PhotoPickerPresentable>,
@@ -53,7 +54,7 @@ final class PhotoPickerInteractor: PresentableInteractor<PhotoPickerPresentable>
         listener?.cancelButtonTapped()
     }
     
-    func nextButtonTapped(with images: [NSItemProvider]) {
+    func nextButtonTapped(with images: [PHAsset]) {
         listener?.nextButtonTapped(with: images)
     }
 }

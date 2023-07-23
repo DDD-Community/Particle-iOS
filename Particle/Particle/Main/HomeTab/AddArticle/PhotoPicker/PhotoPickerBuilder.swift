@@ -30,7 +30,7 @@ final class PhotoPickerBuilder: Builder<PhotoPickerDependency>, PhotoPickerBuild
     }
 
     func build(withListener listener: PhotoPickerListener) -> PhotoPickerRouting {
-        let component = PhotoPickerComponent(dependency: dependency)
+        let _ = PhotoPickerComponent(dependency: dependency)
         let viewController = PhotoPickerViewController()
         let interactor = PhotoPickerInteractor(presenter: viewController)
         interactor.listener = listener

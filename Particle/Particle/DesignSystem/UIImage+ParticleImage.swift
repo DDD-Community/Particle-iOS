@@ -26,4 +26,9 @@ struct ParticleImage {
     let searchTabIcon = UIImage(named: "search")
     let exploreTabIcon = UIImage(named: "book-open")
     let mypageTabIcon = UIImage(named: "user")
+    
+    // MARK: - Etc
+    
+    let checkBox = UIImage(named: "checkbox")
+    let checkBox_checked = UIImage(named: "checkbox_checked")
 }
