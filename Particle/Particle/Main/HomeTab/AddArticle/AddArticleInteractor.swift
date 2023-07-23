@@ -7,6 +7,7 @@
 
 import RIBs
 import RxSwift
+import Photos
 
 protocol AddArticleRouting: Routing {
     func cleanupViews()
@@ -14,7 +15,7 @@ protocol AddArticleRouting: Routing {
     func attachPhotoPicker()
     func detachPhotoPicker()
     
-    func attachSelectSentence(with images: [NSItemProvider])
+    func attachSelectSentence(with images: [PHAsset])
     func detachSelectSentence()
     
     func attachOrganizingSentence()
@@ -28,10 +29,7 @@ protocol AddArticleListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class AddArticleInteractor: Interactor, AddArticleInteractable, AdaptivePresentationControllerDelegate {
-    
-    var presentationDelegateProxy: AdaptivePresentationControllerDelegateProxy
-    
+final class AddArticleInteractor: Interactor, AddArticleInteractable {
 
     weak var router: AddArticleRouting?
     weak var listener: AddArticleListener?
@@ -39,7 +37,6 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable, AdaptivePr
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
     override init() {
-        self.presentationDelegateProxy = AdaptivePresentationControllerDelegateProxy()
     }
 
     override func didBecomeActive() {
@@ -54,20 +51,13 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable, AdaptivePr
         // TODO: Pause any business logic.
     }
     
-    // MARK: - AdaptivePresentationControllerDelegate
-    
-    func presentationControllerDidDismiss() {
-        //
-    }
-    
-    
     // MARK: - PhotoPickerListener
     
     func cancelButtonTapped() {
         router?.detachPhotoPicker()
     }
     
-    func nextButtonTapped(with images: [NSItemProvider]) {
+    func nextButtonTapped(with images: [PHAsset]) {
         router?.attachSelectSentence(with: images)
     }
     
@@ -97,6 +87,4 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable, AdaptivePr
     func setAdditionalInfoBackButtonTapped() {
         router?.detachSetAdditionalInformation()
     }
-    
-    
 }

@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import Photos
 
 protocol AddArticleInteractable: Interactable,
                                  PhotoPickerListener,
@@ -15,7 +16,6 @@ protocol AddArticleInteractable: Interactable,
     
     var router: AddArticleRouting? { get set }
     var listener: AddArticleListener? { get set }
-    var presentationDelegateProxy: AdaptivePresentationControllerDelegateProxy { get }
 }
 
 protocol AddArticleViewControllable: ViewControllable {
@@ -83,7 +83,7 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
     
     // MARK: - SelectSentence RIB
     
-    func attachSelectSentence(with images: [NSItemProvider]) {
+    func attachSelectSentence(with images: [PHAsset]) {
         if selectSentenceRouting != nil {
             return
         }
@@ -159,7 +159,6 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
     private func presentInsideNavigation(_ viewControllable: ViewControllable) {
         let navigation = NavigationControllerable(root: viewControllable)
         navigation.navigationController.modalPresentationStyle = .fullScreen
-        //      navigation.navigationController.presentationController?.delegate = interactor.presentationDelegateProxy
         self.navigationControllable = navigation
         viewController.present(navigation, animated: true, completion: nil)
     }
@@ -171,22 +170,5 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
         
         viewController.dismiss(completion: nil)
         self.navigationControllable = nil
-    }
-}
-
-// MARK: - AdaptivePresentationControllerDelegateProxy
-
-import UIKit
-
-public protocol AdaptivePresentationControllerDelegate: AnyObject {
-    func presentationControllerDidDismiss()
-}
-
-public final class AdaptivePresentationControllerDelegateProxy: NSObject, UIAdaptivePresentationControllerDelegate {
-    
-    public weak var delegate: AdaptivePresentationControllerDelegate?
-    
-    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        delegate?.presentationControllerDidDismiss()
     }
 }

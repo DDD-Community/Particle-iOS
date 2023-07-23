@@ -30,7 +30,7 @@ final class ExploreBuilder: Builder<ExploreDependency>, ExploreBuildable {
     }
 
     func build(withListener listener: ExploreListener) -> ExploreRouting {
-        let component = ExploreComponent(dependency: dependency)
+        let _ = ExploreComponent(dependency: dependency)
         let viewController = ExploreViewController()
         let interactor = ExploreInteractor(presenter: viewController)
         interactor.listener = listener

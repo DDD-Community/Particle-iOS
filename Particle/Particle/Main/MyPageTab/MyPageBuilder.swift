@@ -30,7 +30,7 @@ final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
     }
 
     func build(withListener listener: MyPageListener) -> MyPageRouting {
-        let component = MyPageComponent(dependency: dependency)
+        let _ = MyPageComponent(dependency: dependency)
         let viewController = MyPageViewController()
         let interactor = MyPageInteractor(presenter: viewController)
         interactor.listener = listener

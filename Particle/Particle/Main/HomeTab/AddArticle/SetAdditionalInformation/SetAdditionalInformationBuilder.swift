@@ -30,7 +30,7 @@ final class SetAdditionalInformationBuilder: Builder<SetAdditionalInformationDep
     }
 
     func build(withListener listener: SetAdditionalInformationListener) -> SetAdditionalInformationRouting {
-        let component = SetAdditionalInformationComponent(dependency: dependency)
+        let _ = SetAdditionalInformationComponent(dependency: dependency)
         let viewController = SetAdditionalInformationViewController()
         let interactor = SetAdditionalInformationInteractor(presenter: viewController)
         interactor.listener = listener
