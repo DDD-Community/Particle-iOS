@@ -51,6 +51,8 @@
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
 		AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */; };
 		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
+		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
+		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
 		AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */; };
@@ -135,6 +137,8 @@
 		AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerBuilder.swift; sourceTree = "<group>"; };
 		AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerInteractor.swift; sourceTree = "<group>"; };
+		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -350,12 +354,21 @@
 		AF1D32A82A680CB200980F14 /* PhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
+				AF4A190F2A6A1E4100932372 /* View */,
 				AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */,
 				AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */,
 				AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */,
 				AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */,
 			);
 			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
+		AF4A190F2A6A1E4100932372 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF4A19102A6A1E4B00932372 /* PhotoCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AF86D82C2A4E6030009F1E9D /* Entry */ = {
@@ -417,8 +430,8 @@
 			children = (
 				AFBB5F412A66AA99002416DA /* HomeRouter.swift */,
 				AFBB5F422A66AA99002416DA /* HomeViewController.swift */,
-				AFBB5F432A66AA99002416DA /* HomeBuilder.swift */,
 				AFBB5F442A66AA99002416DA /* HomeInteractor.swift */,
+				AFBB5F432A66AA99002416DA /* HomeBuilder.swift */,
 				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
 			);
 			path = HomeTab;
@@ -487,6 +500,7 @@
 				AFE885F72A5C29F7001EF2C0 /* Color+.swift */,
 				3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */,
 				AFBB5F6C2A66B5C1002416DA /* UIViewController+.swift */,
+				AF4A19122A6A59BA00932372 /* UIImageView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -614,6 +628,7 @@
 				AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */,
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
 				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
+				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
 				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
 				AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */,
@@ -634,6 +649,7 @@
 				AFBB5F772A66B65D002416DA /* SelectSentenceInteractor.swift in Sources */,
 				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
+				AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */,
 				AF0D71DA2A5BEEAD00157758 /* RootComponent+LoggedOut.swift in Sources */,
 				AFBB5F752A66B65D002416DA /* SelectSentenceViewController.swift in Sources */,
 				AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */,
