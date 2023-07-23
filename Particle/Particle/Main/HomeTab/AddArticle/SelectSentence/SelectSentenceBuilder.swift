@@ -6,6 +6,7 @@
 //
 
 import RIBs
+import Photos
 
 protocol SelectSentenceDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
@@ -20,7 +21,7 @@ final class SelectSentenceComponent: Component<SelectSentenceDependency> {
 // MARK: - Builder
 
 protocol SelectSentenceBuildable: Buildable {
-    func build(withListener listener: SelectSentenceListener, images: [NSItemProvider]) -> SelectSentenceRouting
+    func build(withListener listener: SelectSentenceListener, images: [PHAsset]) -> SelectSentenceRouting
 }
 
 final class SelectSentenceBuilder: Builder<SelectSentenceDependency>, SelectSentenceBuildable {
@@ -29,7 +30,7 @@ final class SelectSentenceBuilder: Builder<SelectSentenceDependency>, SelectSent
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: SelectSentenceListener, images: [NSItemProvider]) -> SelectSentenceRouting {
+    func build(withListener listener: SelectSentenceListener, images: [PHAsset]) -> SelectSentenceRouting {
         let component = SelectSentenceComponent(dependency: dependency)
         let viewController = SelectSentenceViewController(selectedImages: images)
         let interactor = SelectSentenceInteractor(presenter: viewController)

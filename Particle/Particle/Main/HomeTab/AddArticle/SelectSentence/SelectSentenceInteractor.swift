@@ -10,7 +10,7 @@ import RxSwift
 
 protocol SelectSentenceRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-    func attachEditSentence()
+    func attachEditSentence(with text: String)
     func detachEditSentence()
 }
 
@@ -52,8 +52,8 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
     
     // MARK: - SelectSentencePresentableListener
     
-    func showEditSentenceModal() {
-        router?.attachEditSentence()
+    func showEditSentenceModal(with text: String) {
+        router?.attachEditSentence(with: text)
     }
     
     func dismissEditSentence() {

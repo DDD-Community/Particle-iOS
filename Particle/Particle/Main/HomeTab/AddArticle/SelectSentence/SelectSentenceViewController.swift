@@ -11,10 +11,11 @@ import UIKit
 import SnapKit
 import VisionKit
 import Vision
+import Photos
 
 protocol SelectSentencePresentableListener: AnyObject {
     
-    func showEditSentenceModal()
+    func showEditSentenceModal(with text: String)
     func backButtonTapped()
 }
 
@@ -86,15 +87,15 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         return textView
     }()
     
-    init(selectedImages: [NSItemProvider]) {
+    init(selectedImages: [PHAsset]) {
         super.init(nibName: nil, bundle: nil)
-        selectedImages.forEach { $0.loadObject(ofClass: UIImage.self) { image, error in
-            DispatchQueue.main.async {
-                guard let image = image as? UIImage else { return }
-                self.textImage.image = image
-                // TODO: 선택된 사진 속에서 글자를 뽑아 TextView로 나타내주기.
+        
+        selectedImages.forEach {
+            $0.toImage(contentMode: .default, targetSize: textImage.frame.size) { [weak self] image in
+                guard let image = image else { return }
+                self?.recognizeTextImage(image)
             }
-        }}
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -104,13 +105,6 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        DispatchQueue.main.async {
-            self.recognizeTextImage(self.textImage.image)
-        }
     }
     
     private func setupInitialView() {
@@ -142,10 +136,8 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     
     @objc private func textSelected(_ sender: UIMenuController) {
         if let selectedRange = textView.selectedTextRange {
-            let selectedText = textView.text(in: selectedRange)
-            Console.debug("드래그된 텍스트 \(selectedText!)")
-            // TODO: EditSentenceRIB 띄우기
-            listener?.showEditSentenceModal()
+            let selectedText = textView.text(in: selectedRange) ?? "선택된 문장이 없습니다."
+            listener?.showEditSentenceModal(with: selectedText)
         }
     }
     
@@ -155,7 +147,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         }
         let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
         
-        let request = VNRecognizeTextRequest(completionHandler: { (request, error) in
+        let request = VNRecognizeTextRequest { [weak self] (request, error) in
             guard error == nil else {
                 Console.error(error?.localizedDescription ?? "VNRecognizeTextRequestError")
                 return
@@ -172,15 +164,15 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
 
                 let recognizedText = topCandidate.string
 
-                DispatchQueue.main.async {
-                    self.textView.text += recognizedText
+                DispatchQueue.main.async { [weak self] in
+                    self?.textView.text += recognizedText
                 }
             }
             
-            DispatchQueue.main.async {
-                self.textView.text += "\n\n\n"
+            DispatchQueue.main.async { [weak self] in
+                self?.textView.text += "\n\n\n"
             }
-        })
+        }
         request.recognitionLevel = .accurate
         request.recognitionLanguages = ["ko-KR"]
         request.usesLanguageCorrection = true
