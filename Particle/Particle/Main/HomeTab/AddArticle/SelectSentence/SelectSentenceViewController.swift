@@ -77,7 +77,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     }()
     
     private let textView: UITextView = {
-        let textView = UITextView()
+        let textView = CustomTextView()
         textView.isEditable = false
         textView.font = .preferredFont(forTextStyle: .title3)
         textView.textColor = .init(UIColor(hex: 0xededed))
@@ -129,7 +129,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     }
     
     private func addCustomMenuItem() {
-        let menuItem1 = UIMenuItem(title: "뽑기", action: #selector(textSelected(_:)))
+        let menuItem1 = UIMenuItem(title: "문장뽑기", action: #selector(textSelected(_:)))
         UIMenuController.shared.menuItems = nil
         UIMenuController.shared.menuItems = [menuItem1]
     }
@@ -270,3 +270,15 @@ struct SelectSentenceViewController_Preview: PreviewProvider {
     }
 }
 #endif
+
+
+final class CustomTextView: UITextView {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+    }
+    
+    override func buildMenu(with builder: UIMenuBuilder) {
+        builder.remove(menu: .lookup)
+        super.buildMenu(with: builder)
+    }
+}
