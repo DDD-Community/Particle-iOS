@@ -31,6 +31,6 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .init(particleColor: .main)
+        view.backgroundColor = .particleColor.main
     }
 }

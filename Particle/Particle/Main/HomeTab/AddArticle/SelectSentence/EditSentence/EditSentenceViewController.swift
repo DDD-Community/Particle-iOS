@@ -76,7 +76,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         let button = UIButton()
         button.setTitle("다음", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = UIColor(particleColor: .main)
+        button.backgroundColor = .particleColor.main
         button.layer.cornerRadius = 8
         return button
     }()
@@ -99,9 +99,9 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     private let keyboardDownButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "keyboard.chevron.compact.down"), for: .normal)
+        button.setImage(.particleImage.keyboardDownButton, for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
-        button.tintColor = .init(particleColor: .main)
+        button.tintColor = .white
         return button
     }()
     

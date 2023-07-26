@@ -56,7 +56,7 @@ final class PhotoPickerViewController: UIViewController, PhotoPickerPresentable,
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.init(particleColor: .main), for: .normal)
+        button.setTitleColor(.particleColor.main, for: .normal)
         return button
     }()
     

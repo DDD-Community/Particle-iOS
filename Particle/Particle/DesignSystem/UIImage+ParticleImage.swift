@@ -20,6 +20,12 @@ struct ParticleImage {
     let plusButton = UIImage(named: "plus")
     let refreshButton = UIImage(named: "refresh")
     
+    let keyboardDownButton = UIImage(
+        systemName: "keyboard.chevron.compact.down"
+    )?.applyingSymbolConfiguration(
+        .init(weight: .semibold)
+    )
+    
     // MARK: - Tab Icon
     
     let homeTabIcon = UIImage(named: "home")

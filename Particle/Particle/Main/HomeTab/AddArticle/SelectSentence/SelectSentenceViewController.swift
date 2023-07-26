@@ -82,7 +82,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         textView.font = .preferredFont(forTextStyle: .title3)
         textView.textColor = .init(UIColor(hex: 0xededed))
         textView.backgroundColor = .black
-        textView.tintColor = .init(UIColor(particleColor: .main))
+        textView.tintColor = .particleColor.main
         textView.text = "default Text"
         return textView
     }()

@@ -50,7 +50,7 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
     
     private func configureTabBar() {
         tabBar.backgroundColor = .init(hex: 0x1A1A1A)
-        tabBar.tintColor = .init(particleColor: .main)
+        tabBar.tintColor = .particleColor.main
     }
     
     func present(viewController: RIBs.ViewControllable) {

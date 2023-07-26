@@ -82,6 +82,7 @@
 		AFBB5F7D2A66B66B002416DA /* EditSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F792A66B66B002416DA /* EditSentenceViewController.swift */; };
 		AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */; };
 		AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */; };
+		AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */; };
 		AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */; };
 		AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */; };
 		AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */; };
@@ -170,6 +171,7 @@
 		AFBB5F792A66B66B002416DA /* EditSentenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceViewController.swift; sourceTree = "<group>"; };
 		AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceBuilder.swift; sourceTree = "<group>"; };
 		AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceInteractor.swift; sourceTree = "<group>"; };
+		AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ParticleColor.swift"; sourceTree = "<group>"; };
 		AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleRouter.swift; sourceTree = "<group>"; };
 		AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
 		AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleInteractor.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			children = (
 				AF1945162A5C407500B9FFA1 /* Constant.swift */,
 				3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */,
+				AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
+				AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
 				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
