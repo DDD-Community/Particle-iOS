@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Pretendard-Black</string>
+		<string>Pretendard-Bold</string>
+		<string>Pretendard-SemiBold</string>
+		<string>Pretendard-Medium</string>
+		<string>Pretendard-ExtraLight</string>
+		<string>Pretendard-Light</string>
+		<string>Pretendard-ExtraBold</string>
+		<string>Pretendard-Regular</string>
+		<string>Pretendard-Thin</string>
+		<string>YdestreetB</string>
+		<string>YdestreetL</string>
+	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>사진앨범 접근 권한을 허용 해주세용 🥰</string>
 	<key>UIApplicationSceneManifest</key>
