@@ -16,6 +16,8 @@
 		<string>YdestreetB</string>
 		<string>YdestreetL</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진앨범 접근 권한을 허용 해주세용 🥰</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -33,5 +35,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

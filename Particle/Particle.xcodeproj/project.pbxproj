@@ -55,19 +55,49 @@
 		AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71E42A5BEFB800157758 /* MainBuilder.swift */; };
 		AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71E52A5BEFB800157758 /* MainInteractor.swift */; };
 		AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */; };
+		AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2DE2A68EEB100C54490 /* Console.swift */; };
+		AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */; };
+		AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */; };
 		AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1945162A5C407500B9FFA1 /* Constant.swift */; };
+		AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */; };
+		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
+		AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */; };
+		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
+		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
+		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
 		AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */; };
 		AFB4BDD12A4093DD008BA9E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCF2A4093DD008BA9E0 /* LaunchScreen.storyboard */; };
+		AFBB5F452A66AA99002416DA /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F412A66AA99002416DA /* HomeRouter.swift */; };
+		AFBB5F462A66AA99002416DA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F422A66AA99002416DA /* HomeViewController.swift */; };
+		AFBB5F472A66AA99002416DA /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F432A66AA99002416DA /* HomeBuilder.swift */; };
+		AFBB5F482A66AA99002416DA /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F442A66AA99002416DA /* HomeInteractor.swift */; };
+		AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F4A2A66AAB0002416DA /* ExploreRouter.swift */; };
+		AFBB5F4F2A66AAB0002416DA /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F4B2A66AAB0002416DA /* ExploreViewController.swift */; };
+		AFBB5F502A66AAB0002416DA /* ExploreBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F4C2A66AAB0002416DA /* ExploreBuilder.swift */; };
+		AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F4D2A66AAB0002416DA /* ExploreInteractor.swift */; };
+		AFBB5F602A66AAD7002416DA /* MyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F5C2A66AAD7002416DA /* MyPageRouter.swift */; };
+		AFBB5F612A66AAD7002416DA /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F5D2A66AAD7002416DA /* MyPageViewController.swift */; };
+		AFBB5F622A66AAD7002416DA /* MyPageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F5E2A66AAD7002416DA /* MyPageBuilder.swift */; };
+		AFBB5F632A66AAD7002416DA /* MyPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F5F2A66AAD7002416DA /* MyPageInteractor.swift */; };
+		AFBB5F682A66ABBF002416DA /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F642A66ABBF002416DA /* SearchRouter.swift */; };
+		AFBB5F692A66ABBF002416DA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F652A66ABBF002416DA /* SearchViewController.swift */; };
+		AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */; };
+		AFBB5F6B2A66ABBF002416DA /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F672A66ABBF002416DA /* SearchInteractor.swift */; };
+		AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F6C2A66B5C1002416DA /* UIViewController+.swift */; };
+		AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F702A66B65D002416DA /* SelectSentenceRouter.swift */; };
+		AFBB5F752A66B65D002416DA /* SelectSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F712A66B65D002416DA /* SelectSentenceViewController.swift */; };
+		AFBB5F762A66B65D002416DA /* SelectSentenceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F722A66B65D002416DA /* SelectSentenceBuilder.swift */; };
+		AFBB5F772A66B65D002416DA /* SelectSentenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F732A66B65D002416DA /* SelectSentenceInteractor.swift */; };
+		AFBB5F7C2A66B66B002416DA /* EditSentenceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F782A66B66B002416DA /* EditSentenceRouter.swift */; };
+		AFBB5F7D2A66B66B002416DA /* EditSentenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F792A66B66B002416DA /* EditSentenceViewController.swift */; };
+		AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */; };
+		AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */; };
+		AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */; };
 		AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */; };
-		AFCAB6C92A5C521800E2310D /* AddArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */; };
 		AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */; };
 		AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */; };
-		AFE885ED2A5C2642001EF2C0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885EC2A5C2642001EF2C0 /* HomeViewController.swift */; };
-		AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885EE2A5C264A001EF2C0 /* SearchViewController.swift */; };
-		AFE885F12A5C2656001EF2C0 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F02A5C2656001EF2C0 /* ExploreViewController.swift */; };
-		AFE885F32A5C2662001EF2C0 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F22A5C2662001EF2C0 /* MyPageViewController.swift */; };
 		AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */; };
 		AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F72A5C29F7001EF2C0 /* Color+.swift */; };
 		B1CF9FD70DAD1AF6216BEB95 /* Pods_Particle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FAF13101BAEDC5C9A046BE /* Pods_Particle.framework */; };
@@ -124,21 +154,51 @@
 		AF0D71E42A5BEFB800157758 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		AF0D71E52A5BEFB800157758 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedIn.swift"; sourceTree = "<group>"; };
+		AF18E2DE2A68EEB100C54490 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceTransitioningDelegate.swift; sourceTree = "<group>"; };
+		AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentencePresentationController.swift; sourceTree = "<group>"; };
 		AF1945162A5C407500B9FFA1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerRouter.swift; sourceTree = "<group>"; };
+		AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
+		AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerBuilder.swift; sourceTree = "<group>"; };
+		AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerInteractor.swift; sourceTree = "<group>"; };
+		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFB4BDD02A4093DD008BA9E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFB4BDD22A4093DD008BA9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFBB5F412A66AA99002416DA /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		AFBB5F422A66AA99002416DA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AFBB5F432A66AA99002416DA /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
+		AFBB5F442A66AA99002416DA /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		AFBB5F4A2A66AAB0002416DA /* ExploreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreRouter.swift; sourceTree = "<group>"; };
+		AFBB5F4B2A66AAB0002416DA /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		AFBB5F4C2A66AAB0002416DA /* ExploreBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreBuilder.swift; sourceTree = "<group>"; };
+		AFBB5F4D2A66AAB0002416DA /* ExploreInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreInteractor.swift; sourceTree = "<group>"; };
+		AFBB5F5C2A66AAD7002416DA /* MyPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRouter.swift; sourceTree = "<group>"; };
+		AFBB5F5D2A66AAD7002416DA /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		AFBB5F5E2A66AAD7002416DA /* MyPageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageBuilder.swift; sourceTree = "<group>"; };
+		AFBB5F5F2A66AAD7002416DA /* MyPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInteractor.swift; sourceTree = "<group>"; };
+		AFBB5F642A66ABBF002416DA /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		AFBB5F652A66ABBF002416DA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
+		AFBB5F672A66ABBF002416DA /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
+		AFBB5F6C2A66B5C1002416DA /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		AFBB5F702A66B65D002416DA /* SelectSentenceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSentenceRouter.swift; sourceTree = "<group>"; };
+		AFBB5F712A66B65D002416DA /* SelectSentenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSentenceViewController.swift; sourceTree = "<group>"; };
+		AFBB5F722A66B65D002416DA /* SelectSentenceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSentenceBuilder.swift; sourceTree = "<group>"; };
+		AFBB5F732A66B65D002416DA /* SelectSentenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSentenceInteractor.swift; sourceTree = "<group>"; };
+		AFBB5F782A66B66B002416DA /* EditSentenceRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceRouter.swift; sourceTree = "<group>"; };
+		AFBB5F792A66B66B002416DA /* EditSentenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceViewController.swift; sourceTree = "<group>"; };
+		AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceBuilder.swift; sourceTree = "<group>"; };
+		AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceInteractor.swift; sourceTree = "<group>"; };
+		AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ParticleColor.swift"; sourceTree = "<group>"; };
 		AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleRouter.swift; sourceTree = "<group>"; };
-		AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleViewController.swift; sourceTree = "<group>"; };
 		AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
 		AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleInteractor.swift; sourceTree = "<group>"; };
-		AFE885EC2A5C2642001EF2C0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		AFE885EE2A5C264A001EF2C0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		AFE885F02A5C2656001EF2C0 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
-		AFE885F22A5C2662001EF2C0 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AFE885F72A5C29F7001EF2C0 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B85199DB8EE46F1BAC5B9045 /* Pods-Particle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Particle.debug.xcconfig"; path = "Target Support Files/Pods-Particle/Pods-Particle.debug.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +273,7 @@
 			children = (
 				3520EF222A5FB18A00A53B34 /* RibsUtil.swift */,
 				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
+				AF18E2DE2A68EEB100C54490 /* Console.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -296,14 +357,25 @@
 		AF0D71E12A5BEF8900157758 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
-				AFE885EB2A5C2628001EF2C0 /* Tabs */,
 				AF0D71E22A5BEFB800157758 /* MainRouter.swift */,
 				AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */,
 				AF0D71E42A5BEFB800157758 /* MainBuilder.swift */,
 				AF0D71E52A5BEFB800157758 /* MainInteractor.swift */,
+				AFBB5F402A66AA82002416DA /* HomeTab */,
+				AFBB5F492A66AA9C002416DA /* ExploreTab */,
+				AFBB5F522A66AAB3002416DA /* SearchTab */,
+				AFBB5F5B2A66AAC3002416DA /* MyPageTab */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		AF18E2E02A68FE6A00C54490 /* ModalStyle */ = {
+			isa = PBXGroup;
+			children = (
+				AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */,
+				AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */,
+			);
+			path = ModalStyle;
 			sourceTree = "<group>";
 		};
 		AF1945152A5C406B00B9FFA1 /* DesignSystem */ = {
@@ -311,6 +383,7 @@
 			children = (
 				AF1945162A5C407500B9FFA1 /* Constant.swift */,
 				3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */,
+				AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -318,16 +391,36 @@
 		AF19451B2A5C50F300B9FFA1 /* AddArticle */ = {
 			isa = PBXGroup;
 			children = (
-				3520EF242A5FB7E400A53B34 /* AddArticleNavigation */,
 				AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */,
-				AFCAB6C52A5C521800E2310D /* AddArticleViewController.swift */,
 				AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */,
 				AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */,
+				AF1D32A82A680CB200980F14 /* PhotoPicker */,
+				AFBB5F6E2A66B60D002416DA /* SelectSentence */,
 				3520EEF72A5CD3CE00A53B34 /* OrganizingSenctence */,
 				3520EF092A5E90C500A53B34 /* SetAdditionalInformation */,
 				3520EF022A5E6F7E00A53B34 /* AddAriticleRepository */,
 			);
 			path = AddArticle;
+			sourceTree = "<group>";
+		};
+		AF1D32A82A680CB200980F14 /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				AF4A190F2A6A1E4100932372 /* View */,
+				AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */,
+				AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */,
+				AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */,
+				AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */,
+			);
+			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
+		AF4A190F2A6A1E4100932372 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF4A19102A6A1E4B00932372 /* PhotoCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AF86D82C2A4E6030009F1E9D /* Entry */ = {
@@ -385,15 +478,73 @@
 			path = Particle;
 			sourceTree = "<group>";
 		};
-		AFE885EB2A5C2628001EF2C0 /* Tabs */ = {
+		AFBB5F402A66AA82002416DA /* HomeTab */ = {
 			isa = PBXGroup;
 			children = (
-				AFE885EC2A5C2642001EF2C0 /* HomeViewController.swift */,
-				AFE885F02A5C2656001EF2C0 /* ExploreViewController.swift */,
-				AFE885EE2A5C264A001EF2C0 /* SearchViewController.swift */,
-				AFE885F22A5C2662001EF2C0 /* MyPageViewController.swift */,
+				AFBB5F412A66AA99002416DA /* HomeRouter.swift */,
+				AFBB5F422A66AA99002416DA /* HomeViewController.swift */,
+				AFBB5F442A66AA99002416DA /* HomeInteractor.swift */,
+				AFBB5F432A66AA99002416DA /* HomeBuilder.swift */,
+				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
 			);
-			path = Tabs;
+			path = HomeTab;
+			sourceTree = "<group>";
+		};
+		AFBB5F492A66AA9C002416DA /* ExploreTab */ = {
+			isa = PBXGroup;
+			children = (
+				AFBB5F4A2A66AAB0002416DA /* ExploreRouter.swift */,
+				AFBB5F4B2A66AAB0002416DA /* ExploreViewController.swift */,
+				AFBB5F4C2A66AAB0002416DA /* ExploreBuilder.swift */,
+				AFBB5F4D2A66AAB0002416DA /* ExploreInteractor.swift */,
+			);
+			path = ExploreTab;
+			sourceTree = "<group>";
+		};
+		AFBB5F522A66AAB3002416DA /* SearchTab */ = {
+			isa = PBXGroup;
+			children = (
+				AFBB5F642A66ABBF002416DA /* SearchRouter.swift */,
+				AFBB5F652A66ABBF002416DA /* SearchViewController.swift */,
+				AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */,
+				AFBB5F672A66ABBF002416DA /* SearchInteractor.swift */,
+			);
+			path = SearchTab;
+			sourceTree = "<group>";
+		};
+		AFBB5F5B2A66AAC3002416DA /* MyPageTab */ = {
+			isa = PBXGroup;
+			children = (
+				AFBB5F5C2A66AAD7002416DA /* MyPageRouter.swift */,
+				AFBB5F5D2A66AAD7002416DA /* MyPageViewController.swift */,
+				AFBB5F5E2A66AAD7002416DA /* MyPageBuilder.swift */,
+				AFBB5F5F2A66AAD7002416DA /* MyPageInteractor.swift */,
+			);
+			path = MyPageTab;
+			sourceTree = "<group>";
+		};
+		AFBB5F6E2A66B60D002416DA /* SelectSentence */ = {
+			isa = PBXGroup;
+			children = (
+				AFBB5F702A66B65D002416DA /* SelectSentenceRouter.swift */,
+				AFBB5F712A66B65D002416DA /* SelectSentenceViewController.swift */,
+				AFBB5F722A66B65D002416DA /* SelectSentenceBuilder.swift */,
+				AFBB5F732A66B65D002416DA /* SelectSentenceInteractor.swift */,
+				AFBB5F6F2A66B616002416DA /* EditSentence */,
+			);
+			path = SelectSentence;
+			sourceTree = "<group>";
+		};
+		AFBB5F6F2A66B616002416DA /* EditSentence */ = {
+			isa = PBXGroup;
+			children = (
+				AF18E2E02A68FE6A00C54490 /* ModalStyle */,
+				AFBB5F782A66B66B002416DA /* EditSentenceRouter.swift */,
+				AFBB5F792A66B66B002416DA /* EditSentenceViewController.swift */,
+				AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */,
+				AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */,
+			);
+			path = EditSentence;
 			sourceTree = "<group>";
 		};
 		AFE885F62A5C29E5001EF2C0 /* Extension */ = {
@@ -402,6 +553,8 @@
 				AFE885F72A5C29F7001EF2C0 /* Color+.swift */,
 				3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */,
 				3520EF462A74DFBD00A53B34 /* UIFont+.swift */,
+				AFBB5F6C2A66B5C1002416DA /* UIViewController+.swift */,
+				AF4A19122A6A59BA00932372 /* UIImageView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -532,53 +685,83 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */,
+				AFBB5F762A66B65D002416DA /* SelectSentenceBuilder.swift in Sources */,
+				AFBB5F602A66AAD7002416DA /* MyPageRouter.swift in Sources */,
+				AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */,
 				AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */,
 				AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */,
+				AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */,
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
+				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
+				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
+				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
+				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
+				AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */,
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
+				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
+				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
+				AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */,
+				AFBB5F7D2A66B66B002416DA /* EditSentenceViewController.swift in Sources */,
 				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
 				3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */,
+				AFBB5F482A66AA99002416DA /* HomeInteractor.swift in Sources */,
 				3520EEFC2A5D5F7D00A53B34 /* ReusableCell.swift in Sources */,
-				AFE885ED2A5C2642001EF2C0 /* HomeViewController.swift in Sources */,
 				AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */,
-				AFE885F32A5C2662001EF2C0 /* MyPageViewController.swift in Sources */,
+				AFBB5F772A66B65D002416DA /* SelectSentenceInteractor.swift in Sources */,
 				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
+				AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */,
 				AF0D71DA2A5BEEAD00157758 /* RootComponent+LoggedOut.swift in Sources */,
+				AFBB5F752A66B65D002416DA /* SelectSentenceViewController.swift in Sources */,
 				AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */,
 				3520EEF32A5CD3C000A53B34 /* OrganizingSentenceViewController.swift in Sources */,
+				AFBB5F462A66AA99002416DA /* HomeViewController.swift in Sources */,
+				AFBB5F7C2A66B66B002416DA /* EditSentenceRouter.swift in Sources */,
 				3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */,
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
 				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
+				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
+				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
+				AFBB5F6B2A66ABBF002416DA /* SearchInteractor.swift in Sources */,
 				3520EF262A5FC40800A53B34 /* NSMutableAttributedString+.swift in Sources */,
 				AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */,
+				AFBB5F502A66AAB0002416DA /* ExploreBuilder.swift in Sources */,
 				AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */,
 				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
 				3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */,
-				AFE885EF2A5C264A001EF2C0 /* SearchViewController.swift in Sources */,
+				AFBB5F632A66AAD7002416DA /* MyPageInteractor.swift in Sources */,
+				AFBB5F612A66AAD7002416DA /* MyPageViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
 				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
 				3520EF472A74DFBD00A53B34 /* UIFont+.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
+				AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
 				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
 				3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */,
 				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
-				AFE885F12A5C2656001EF2C0 /* ExploreViewController.swift in Sources */,
+				AFBB5F4F2A66AAB0002416DA /* ExploreViewController.swift in Sources */,
+				AFBB5F472A66AA99002416DA /* HomeBuilder.swift in Sources */,
+				AFBB5F452A66AA99002416DA /* HomeRouter.swift in Sources */,
+				AFBB5F682A66ABBF002416DA /* SearchRouter.swift in Sources */,
 				AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */,
 				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
+				AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */,
+				AFBB5F622A66AAD7002416DA /* MyPageBuilder.swift in Sources */,
 				3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
+				AFBB5F692A66ABBF002416DA /* SearchViewController.swift in Sources */,
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
-				AFCAB6C92A5C521800E2310D /* AddArticleViewController.swift in Sources */,
+				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
+				AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
 				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
 			);
@@ -725,6 +908,7 @@
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -754,6 +938,7 @@
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

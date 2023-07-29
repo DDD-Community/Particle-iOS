@@ -25,14 +25,4 @@ extension UIColor {
             a: alpha
         )
     }
-    
-    convenience init(particleColor: ParticleColor, alpha: CGFloat = 1.0) {
-        let hex = particleColor.rawValue
-        self.init(
-            red: (hex >> 16) & 0xFF,
-            green: (hex >> 8) & 0xFF,
-            blue: hex & 0xFF,
-            a: alpha
-        )
-    }
 }
