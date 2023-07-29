@@ -7,95 +7,132 @@
 
 import RIBs
 
-protocol MainInteractable: Interactable, OrganizingSentenceListener, SetAdditionalInformationListener {
+protocol MainInteractable: Interactable,
+                           HomeListener,
+                           ExploreListener,
+                           SearchListener,
+                           MyPageListener {
     var router: MainRouting? { get set }
     var listener: MainListener? { get set }
 }
 
 protocol MainViewControllable: ViewControllable {
     func present(viewController: ViewControllable)
+    func setViewControllers(_ viewControllers: [ViewControllable])
 }
 
 final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, MainRouting {
     
+    
     private var navigationControllable: NavigationControllerable?
     
-    private let organizingSentenceBuilder: OrganizingSentenceBuildable
-    private var organizingSentence: ViewableRouting?
+    private let home: HomeBuildable
+    private let explore: ExploreBuildable
+    private let search: SearchBuildable
+    private let mypage: MyPageBuildable
     
-    private let setAdditionalInfoBuilder: SetAdditionalInformationBuildable
-    private var setAdditionalInfo: ViewableRouting?
+    private var homeRouting: ViewableRouting?
+    private var exploreRouting: ViewableRouting?
+    private var searchRouting: ViewableRouting?
+    private var mypageRouting: ViewableRouting?
     
     init(
         interactor: MainInteractable,
         viewController: MainViewControllable,
-        // 이건 add article로 바꿔야함
-        organizingSentenceBuilder: OrganizingSentenceBuildable,
-        setAdditionalInfoBuilder: SetAdditionalInformationBuildable
+        home: HomeBuildable,
+        explore: ExploreBuildable,
+        search: SearchBuildable,
+        mypage: MyPageBuildable
+        
     ) {
-        self.organizingSentenceBuilder = organizingSentenceBuilder
-        self.setAdditionalInfoBuilder = setAdditionalInfoBuilder
+        self.home = home
+        self.explore = explore
+        self.search = search
+        self.mypage = mypage
+        
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
     
-    func routeToAddArticle() {
-        let organizingSentenceRouter = organizingSentenceBuilder.build(withListener: interactor)
-        self.organizingSentence = organizingSentenceRouter
-        attachChild(organizingSentenceRouter)
+    //    func routeToAddArticle() {
+    //        let organizingSentenceRouter = organizingSentenceBuilder.build(withListener: interactor)
+    //        self.organizingSentence = organizingSentenceRouter
+    //        attachChild(organizingSentenceRouter)
+    //
+    //        presentInsideNavigation(organizingSentenceRouter.viewControllable)
+    //    }
+    //
+    //    func popToAddArticle() {
+    //        guard let router = organizingSentence else {
+    //            return
+    //        }
+    //
+    //        guard let navigationControllable = navigationControllable else {
+    //            return
+    //        }
+    //
+    //        navigationControllable.dismiss(completion: nil)
+    //
+    //        detachChild(router)
+    //        organizingSentence = nil
+    //        self.navigationControllable = nil
+    //    }
+    //
+    //    func routeToSetAdditionalInfo() {
+    //        let router = setAdditionalInfoBuilder.build(withListener: interactor)
+    //        self.setAdditionalInfo = router
+    //        attachChild(router)
+    //
+    //        guard let navigationControllable = navigationControllable else {
+    //            presentInsideNavigation(router.viewControllable)
+    //            return
+    //        }
+    //
+    //        navigationControllable.pushViewController(router.viewControllable, animated: true)
+    //    }
+    //
+    //    func popSetAdditionalInfo() {
+    //        guard let router = setAdditionalInfo else {
+    //            return
+    //        }
+    //
+    //        guard let navigationControllable = navigationControllable else {
+    //            return
+    //        }
+    //
+    //        navigationControllable.popViewController(animated: true)
+    //
+    //        detachChild(router)
+    //        setAdditionalInfo = nil
+    //    }
+    //
+    //    private func presentInsideNavigation(_ viewControllable: ViewControllable) {
+    //        let navigation = NavigationControllerable(root: viewControllable)
+    //        self.navigationControllable = navigation
+    //        navigation.navigationController.navigationBar.isHidden = true
+    //        navigation.navigationController.modalPresentationStyle  = .fullScreen
+    //        viewController.present(navigation, animated: true, completion: nil)
+    //    }
+    
+    func attachTabs() {
+        let home = home.build(withListener: interactor)
+        let explore = explore.build(withListener: interactor)
+        let search = search.build(withListener: interactor)
+        let mypage = mypage.build(withListener: interactor)
         
-        presentInsideNavigation(organizingSentenceRouter.viewControllable)
+        attachChild(home)
+        attachChild(explore)
+        attachChild(search)
+        attachChild(mypage)
+        
+        let viewControllers = [
+            NavigationControllerable(root: home.viewControllable),
+            NavigationControllerable(root: explore.viewControllable),
+            NavigationControllerable(root: search.viewControllable),
+            NavigationControllerable(root: mypage.viewControllable)
+        ]
+        
+        viewController.setViewControllers(viewControllers)
     }
     
-    func popToAddArticle() {
-        guard let router = organizingSentence else {
-            return
-        }
-        
-        guard let navigationControllable = navigationControllable else {
-            return
-        }
-        
-        navigationControllable.dismiss(completion: nil)
-        
-        detachChild(router)
-        organizingSentence = nil
-        self.navigationControllable = nil 
-    }
-    
-    func routeToSetAdditionalInfo() {
-        let router = setAdditionalInfoBuilder.build(withListener: interactor)
-        self.setAdditionalInfo = router
-        attachChild(router)
-        
-        guard let navigationControllable = navigationControllable else {
-            presentInsideNavigation(router.viewControllable)
-            return
-        }
-        
-        navigationControllable.pushViewController(router.viewControllable, animated: true)
-    }
-    
-    func popSetAdditionalInfo() {
-        guard let router = setAdditionalInfo else {
-            return
-        }
-        
-        guard let navigationControllable = navigationControllable else {
-            return
-        }
-        
-        navigationControllable.popViewController(animated: true)
-        
-        detachChild(router)
-        setAdditionalInfo = nil
-    }
-    
-    private func presentInsideNavigation(_ viewControllable: ViewControllable) {
-        let navigation = NavigationControllerable(root: viewControllable)
-        self.navigationControllable = navigation
-        navigation.navigationController.navigationBar.isHidden = true
-        navigation.navigationController.modalPresentationStyle  = .fullScreen
-        viewController.present(navigation, animated: true, completion: nil)
-    }
 }

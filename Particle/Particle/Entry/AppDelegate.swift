@@ -6,16 +6,39 @@
 //
 
 import UIKit
+import Photos
+
+var allPhotos: PHFetchResult<PHAsset>? = nil
+var photoCount = Int()
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(
         _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            switch status {
+            case .authorized:
+                let fetchOptions = PHFetchOptions()
+                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false, selector: nil)]
+                allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+                photoCount = allPhotos?.count ?? 0
+                Console.log("PHPhotoLibrary Success Authrization")
+            case .denied, .limited:
+                Console.error("PHPhotoLibrary not allowed")
+            case .notDetermined:
+                Console.error("PHPhotoLibrary notDetermined")
+            case .restricted:
+                Console.error("PHPhotoLibrary restricted")
+            @unknown default:
+                Console.error("PHPhotoLibrary Error")
+                return
+            }
+        }
+            
         return true
     }
 

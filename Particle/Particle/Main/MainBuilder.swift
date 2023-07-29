@@ -34,12 +34,23 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         let viewController = MainTabBarController()
         let interactor = MainInteractor(presenter: viewController)
         interactor.listener = listener
-        let organizingSentenceBuilder = OrganizingSentenceBuilder(dependency: component)
-        let setAdditionalInfoBuilder = SetAdditionalInformationBuilder(dependency: component)
+        
+        let home = HomeBuilder(dependency: component)
+        let explore = ExploreBuilder(dependency: component)
+        let search = SearchBuilder(dependency: component)
+        let mypage = MyPageBuilder(dependency: component)
+        
         return MainRouter(
             interactor: interactor,
             viewController: viewController,
-            organizingSentenceBuilder: organizingSentenceBuilder,
-            setAdditionalInfoBuilder: setAdditionalInfoBuilder)
+            home: home,
+            explore: explore,
+            search: search,
+            mypage: mypage)
     }
 }
+
+extension MainComponent: HomeDependency,
+                         ExploreDependency,
+                         SearchDependency,
+                         MyPageDependency {}
