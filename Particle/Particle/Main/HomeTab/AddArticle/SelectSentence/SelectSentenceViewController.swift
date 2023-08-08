@@ -90,10 +90,6 @@ final class SelectSentenceViewController: UIViewController,
         return label
     }()
     
-    private let textImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
     private let selectedPhotoCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
@@ -111,28 +107,11 @@ final class SelectSentenceViewController: UIViewController,
         return collectionView
     }()
     
-    private let textView: UITextView = {
-        let textView = CustomTextView()
-        textView.isEditable = false
-        textView.font = .preferredFont(forTextStyle: .title3)
-        textView.textColor = .init(UIColor(hex: 0xededed))
-        textView.backgroundColor = .black
-        textView.tintColor = .particleColor.main
-        textView.text = "default Text"
-        return textView
-    }()
     
     // MARK: - Initializers
     
     init(selectedImages: [PHAsset]) {
         super.init(nibName: nil, bundle: nil)
-        
-        selectedImages.forEach {
-            $0.toImage(contentMode: .default, targetSize: textImage.frame.size) { [weak self] image in
-                guard let image = image else { return }
-                self?.recognizeTextImage(image)
-            }
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -160,7 +139,6 @@ final class SelectSentenceViewController: UIViewController,
         addSubviews()
         setConstraints()
         setupNavigationBar()
-        configureTextView()
         bind()
     }
     
@@ -183,18 +161,12 @@ final class SelectSentenceViewController: UIViewController,
 //        nextButton.isEnabled = false
     }
     
-    private func configureTextView() {
-        textView.delegate = self
     private func bind() {
         
         bindCollectionViewCell()
         bindPageIndex()
     }
     
-    private func addCustomMenuItem() {
-        let menuItem1 = UIMenuItem(title: "문장뽑기", action: #selector(textSelected(_:)))
-        UIMenuController.shared.menuItems = nil
-        UIMenuController.shared.menuItems = [menuItem1]
     private func bindCollectionViewCell() {
         Observable.of(selectedImages)
             .bind(to: selectedPhotoCollectionView.rx.items(
@@ -207,11 +179,6 @@ final class SelectSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
     }
     
-    @objc private func textSelected(_ sender: UIMenuController) {
-        if let selectedRange = textView.selectedTextRange {
-            let selectedText = textView.text(in: selectedRange) ?? "선택된 문장이 없습니다."
-            listener?.showEditSentenceModal(with: selectedText)
-        }
     private func bindPageIndex() {
         selectedPhotoCollectionView
             .rx
@@ -236,52 +203,15 @@ final class SelectSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
     }
     
-    func recognizeTextImage(_ image: UIImage?) {
-        guard let image = image, let ciImage = CIImage(image: image) else {
-            return
-        }
-        let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
     private func showSwipeGuide() {
         
-        let request = VNRecognizeTextRequest { [weak self] (request, error) in
-            guard error == nil else {
-                Console.error(error?.localizedDescription ?? "VNRecognizeTextRequestError")
-                return
-            }
         UIView.animate(withDuration: 0.8, delay: 0.0, options: [.curveEaseOut]) { [weak self] in
             self?.selectedPhotoCollectionView.contentOffset.x = 70
         } completion: { _ in
             
-            guard let observations = request.results as? [VNRecognizedTextObservation] else {
-                return
             UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut]) { [weak self] in
                 self?.selectedPhotoCollectionView.contentOffset.x = 1
             }
-            for observation in observations {
-                
-                guard let topCandidate = observation.topCandidates(1).first else {
-                    continue
-                }
-
-                let recognizedText = topCandidate.string
-
-                DispatchQueue.main.async { [weak self] in
-                    self?.textView.text += recognizedText
-                }
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.textView.text += "\n\n\n"
-            }
-        }
-        request.recognitionLevel = .accurate
-        request.recognitionLanguages = ["ko-KR"]
-        request.usesLanguageCorrection = true
-        
-        do {
-            try imageRequestHandler.perform([request])
-        } catch let error {
-            Console.error(error.localizedDescription)
         }
         UserDefaults.standard.set(true, forKey: "ShowSwipeGuide")
     }
@@ -299,18 +229,8 @@ final class SelectSentenceViewController: UIViewController,
     }
 }
 
-// MARK: - UITextViewDelegate
-extension SelectSentenceViewController: UITextViewDelegate {
 extension SelectSentenceViewController: SelectedPhotoCellListener {
     
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        let selectedRange = textView.selectedRange
-        
-        if selectedRange.length > 0 {
-            addCustomMenuItem()
-        } else {
-            UIMenuController.shared.menuItems = nil
-        }
     }
 }
 
@@ -361,7 +281,6 @@ private extension SelectSentenceViewController {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        textView.snp.makeConstraints {
         selectedPhotoCollectionView.snp.makeConstraints {
             $0.top.equalTo(infoBox.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -381,15 +300,3 @@ struct SelectSentenceViewController_Preview: PreviewProvider {
     }
 }
 #endif
-
-
-final class CustomTextView: UITextView {
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return false
-    }
-    
-    override func buildMenu(with builder: UIMenuBuilder) {
-        builder.remove(menu: .lookup)
-        super.buildMenu(with: builder)
-    }
-}
