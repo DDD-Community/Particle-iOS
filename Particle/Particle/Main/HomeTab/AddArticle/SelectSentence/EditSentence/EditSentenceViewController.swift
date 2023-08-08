@@ -90,9 +90,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
                 height: 50
             )
         )
-        uiview.layer.borderWidth = 1
-        uiview.layer.borderColor = UIColor.systemGray6.cgColor
-        uiview.layer.backgroundColor = UIColor.systemBackground.cgColor
+        uiview.layer.backgroundColor = UIColor.darkGray.cgColor
         return uiview
     }()
     
@@ -105,6 +103,8 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         return button
     }()
     
+    // MARK: - Initializers
+    
     init(with text: String) {
         self.originalText = text
         super.init(nibName: nil, bundle: nil)
@@ -115,6 +115,8 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View LifeCycles
     
     override func viewDidLoad() {
         super.viewDidLoad()

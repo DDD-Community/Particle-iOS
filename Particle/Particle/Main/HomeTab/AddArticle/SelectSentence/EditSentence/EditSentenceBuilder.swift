@@ -7,15 +7,9 @@
 
 import RIBs
 
-protocol EditSentenceDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
-}
+protocol EditSentenceDependency: Dependency { }
 
-final class EditSentenceComponent: Component<EditSentenceDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-}
+final class EditSentenceComponent: Component<EditSentenceDependency> { }
 
 // MARK: - Builder
 
@@ -31,7 +25,7 @@ final class EditSentenceBuilder: Builder<EditSentenceDependency>, EditSentenceBu
 
     func build(withListener listener: EditSentenceListener, text: String) -> EditSentenceRouting {
         _ = EditSentenceComponent(dependency: dependency)
-        let viewController = EditSentenceViewController(with: text) // FIXME: text 데이터 전달과정 리뷰요청. component 활용방법 연구
+        let viewController = EditSentenceViewController(with: text)
         let interactor = EditSentenceInteractor(presenter: viewController)
         interactor.listener = listener
         return EditSentenceRouter(interactor: interactor, viewController: viewController)

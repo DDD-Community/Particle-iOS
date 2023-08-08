@@ -37,7 +37,7 @@ final class LoggedInBuilder: Builder<LoggedInDependency>, LoggedInBuildable {
         let mainBuilder = MainBuilder(dependency: component)
         return LoggedInRouter(
             interactor: interactor,
-            viewController: component.LoggedInViewController,
+            viewController: component.loggedInViewController,
             mainBuilder: mainBuilder
         )
     }

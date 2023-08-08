@@ -20,7 +20,9 @@ protocol SelectSentencePresentableListener: AnyObject {
     func nextButtonTapped()
 }
 
-final class SelectSentenceViewController: UIViewController, SelectSentencePresentable, SelectSentenceViewControllable {
+final class SelectSentenceViewController: UIViewController,
+                                          SelectSentencePresentable,
+                                          SelectSentenceViewControllable {
     
     enum Metric {
         enum Title {
@@ -29,15 +31,21 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         }
         
         enum NavigationBar {
-            static let height = 44
-            static let backButtonLeftMargin = 8
-            static let nextButtonRightMargin = 8
+            static let height: CGFloat = 44
+            static let backButtonLeftMargin: CGFloat = 8
+            static let nextButtonRightMargin: CGFloat = 8
+        }
+        
+        enum InfoBox {
+            static let height: CGFloat = 53
+        }
+        
         enum CollectionViewCell {
             static let width = DeviceSize.width
             static let height = DeviceSize.height - Metric.NavigationBar.height - InfoBox.height - 100
         }
     }
-
+    
     weak var listener: SelectSentencePresentableListener?
     private var disposeBag: DisposeBag = .init()
     
@@ -114,6 +122,8 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         return textView
     }()
     
+    // MARK: - Initializers
+    
     init(selectedImages: [PHAsset]) {
         super.init(nibName: nil, bundle: nil)
         
@@ -128,6 +138,8 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View LifeCycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,6 +166,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     
     private func setupNavigationBar() {
         navigationController?.isNavigationBarHidden = true
+        
         backButton.rx.tap
             .bind { [weak self] in
                 self?.listener?.backButtonTapped()
@@ -274,6 +287,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     }
     
     // MARK: - SelectSentenceViewControllable
+    
     func present(viewController: ViewControllable) {
         present(viewController.uiviewController, animated: true)
     }
@@ -339,7 +353,7 @@ private extension SelectSentenceViewController {
         infoBox.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(53)
+            $0.height.equalTo(Metric.InfoBox.height)
         }
         
         infoLabel.snp.makeConstraints {
@@ -361,6 +375,7 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 struct SelectSentenceViewController_Preview: PreviewProvider {
+    
     static var previews: some View {
         SelectSentenceViewController(selectedImages: []).showPreview()
     }

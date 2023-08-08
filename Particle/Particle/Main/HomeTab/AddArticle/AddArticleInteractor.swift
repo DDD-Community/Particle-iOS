@@ -25,19 +25,14 @@ protocol AddArticleRouting: Routing {
     func detachSetAdditionalInformation()
 }
 
-protocol AddArticleListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-}
+protocol AddArticleListener: AnyObject { }
 
 final class AddArticleInteractor: Interactor, AddArticleInteractable {
 
     weak var router: AddArticleRouting?
     weak var listener: AddArticleListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    override init() {
-    }
+    override init() { }
 
     override func didBecomeActive() {
         super.didBecomeActive()
@@ -48,7 +43,6 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable {
         super.willResignActive()
         
         router?.cleanupViews()
-        // TODO: Pause any business logic.
     }
     
     // MARK: - PhotoPickerListener
@@ -70,7 +64,6 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable {
     func pushToOrganizingSentence() {
         router?.attachOrganizingSentence()
     }
-    
     
     // MARK: - OrganizingSentenceListener
     
