@@ -19,7 +19,7 @@ protocol EditSentencePresentable: Presentable {
 
 protocol EditSentenceListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func dismissEditSentence()
+    func dismissEditSentence(with text: String)
 }
 
 final class EditSentenceInteractor: PresentableInteractor<EditSentencePresentable>,
@@ -48,7 +48,7 @@ final class EditSentenceInteractor: PresentableInteractor<EditSentencePresentabl
     
     // MARK: - EditSentencePresentableListener
     
-    func nextButtonTapped() {
-        listener?.dismissEditSentence()
+    func saveButtonTapped(with text: String) {
+        listener?.dismissEditSentence(with: text)
     }
 }

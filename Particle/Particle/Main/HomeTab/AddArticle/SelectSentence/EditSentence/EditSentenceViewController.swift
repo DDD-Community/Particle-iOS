@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 
 protocol EditSentencePresentableListener: AnyObject {
-    func nextButtonTapped()
+    func saveButtonTapped(with text: String)
 }
 
 final class EditSentenceViewController: UIViewController, EditSentencePresentable, EditSentenceViewControllable {
@@ -72,9 +72,9 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         return button
     }()
     
-    private let nextButton: UIButton = {
+    private let saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다음", for: .normal)
+        button.setTitle("저장", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .particleColor.main
         button.layer.cornerRadius = 8
@@ -149,9 +149,10 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
             }
             .disposed(by: disposeBag)
         
-        nextButton.rx.tap
+        saveButton.rx.tap
             .bind { [weak self] in
-                self?.listener?.nextButtonTapped()
+                guard let self = self else { return }
+                self.listener?.saveButtonTapped(with: self.textView.text)
             }
             .disposed(by: disposeBag)
         
@@ -210,7 +211,7 @@ private extension EditSentenceViewController {
             view.addSubview($0)
         }
         
-        [refreshButton, nextButton].forEach {
+        [refreshButton, saveButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
         
