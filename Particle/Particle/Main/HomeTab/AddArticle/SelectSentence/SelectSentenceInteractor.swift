@@ -72,4 +72,8 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
     func backButtonTapped() {
         listener?.popSelectSentence()
     }
+    
+    func nextButtonTapped() {
+        listener?.pushToOrganizingSentence()
+    }
 }
