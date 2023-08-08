@@ -17,6 +17,7 @@ protocol SelectSentencePresentableListener: AnyObject {
     
     func showEditSentenceModal(with text: String)
     func backButtonTapped()
+    func nextButtonTapped()
 }
 
 final class SelectSentenceViewController: UIViewController, SelectSentencePresentable, SelectSentenceViewControllable {
@@ -31,6 +32,9 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
             static let height = 44
             static let backButtonLeftMargin = 8
             static let nextButtonRightMargin = 8
+        enum CollectionViewCell {
+            static let width = DeviceSize.width
+            static let height = DeviceSize.height - Metric.NavigationBar.height - InfoBox.height - 100
         }
     }
 
@@ -46,6 +50,14 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
     private let backButton: UIButton = {
         let button = UIButton()
         button.setImage(.particleImage.backButton, for: .normal)
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("다음", for: .normal)
+        button.setTitleColor(.systemGray, for: .disabled)
+        button.setTitleColor(.particleColor.main, for: .normal)
         return button
     }()
     
@@ -74,6 +86,21 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
+    private let selectedPhotoCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(
+            width: Metric.CollectionViewCell.width,
+            height: Metric.CollectionViewCell.height
+        )
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(SelectedPhotoCell.self)
+        collectionView.backgroundColor = .init(hex: 0x1f1f1f)
+        return collectionView
     }()
     
     private let textView: UITextView = {
@@ -122,6 +149,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         setConstraints()
         setupNavigationBar()
         configureTextView()
+        bind()
     }
     
     private func setupNavigationBar() {
@@ -131,16 +159,39 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
                 self?.listener?.backButtonTapped()
             }
             .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.nextButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        // TODO: 각 사진에서 문장추출이 모두 완료되었을 때 nextButton 활성화
+//        nextButton.isEnabled = false
     }
     
     private func configureTextView() {
         textView.delegate = self
+    private func bind() {
+        
+        bindCollectionViewCell()
+        bindPageIndex()
     }
     
     private func addCustomMenuItem() {
         let menuItem1 = UIMenuItem(title: "문장뽑기", action: #selector(textSelected(_:)))
         UIMenuController.shared.menuItems = nil
         UIMenuController.shared.menuItems = [menuItem1]
+    private func bindCollectionViewCell() {
+        Observable.of(selectedImages)
+            .bind(to: selectedPhotoCollectionView.rx.items(
+                cellIdentifier: SelectedPhotoCell.defaultReuseIdentifier,
+                cellType: SelectedPhotoCell.self)
+            ) { [weak self] index, item, cell in
+                cell.setImage(with: item)
+                cell.listener = self
+            }
+            .disposed(by: disposeBag)
     }
     
     @objc private func textSelected(_ sender: UIMenuController) {
@@ -148,6 +199,28 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
             let selectedText = textView.text(in: selectedRange) ?? "선택된 문장이 없습니다."
             listener?.showEditSentenceModal(with: selectedText)
         }
+    private func bindPageIndex() {
+        selectedPhotoCollectionView
+            .rx
+            .contentOffset
+            .subscribe { [weak self] point in
+                guard let self = self, let positionX = point.element?.x else { return }
+                switch positionX {
+                case (0..<DeviceSize.width/2):
+                    self.navigationTitle.text = "문장 선택 1/\(self.selectedImages.count)"
+                case (DeviceSize.width/2..<DeviceSize.width*(3/2)):
+                    self.navigationTitle.text = "문장 선택 2/\(self.selectedImages.count)"
+                case (DeviceSize.width*(3/2)..<DeviceSize.width*(5/2)):
+                    self.navigationTitle.text = "문장 선택 3/\(self.selectedImages.count)"
+                case (DeviceSize.width*(5/2)..<DeviceSize.width*(7/2)):
+                    self.navigationTitle.text = "문장 선택 4/\(self.selectedImages.count)"
+                case (DeviceSize.width*(7/2)..<DeviceSize.width*(9/2)):
+                    self.navigationTitle.text = "문장 선택 5/\(self.selectedImages.count)"
+                default:
+                    return
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     func recognizeTextImage(_ image: UIImage?) {
@@ -214,6 +287,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
 
 // MARK: - UITextViewDelegate
 extension SelectSentenceViewController: UITextViewDelegate {
+extension SelectSentenceViewController: SelectedPhotoCellListener {
     
     func textViewDidChangeSelection(_ textView: UITextView) {
         let selectedRange = textView.selectedRange
@@ -231,11 +305,11 @@ extension SelectSentenceViewController: UITextViewDelegate {
 private extension SelectSentenceViewController {
     
     func addSubviews() {
-        [backButton, navigationTitle].forEach {
+        [backButton, navigationTitle, nextButton].forEach {
             navigationBar.addSubview($0)
         }
         
-        [navigationBar, infoBox, textView].forEach {
+        [navigationBar, infoBox, selectedPhotoCollectionView].forEach {
             view.addSubview($0)
         }
         
@@ -251,6 +325,11 @@ private extension SelectSentenceViewController {
         backButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().inset(Metric.NavigationBar.backButtonLeftMargin)
+        }
+        
+        nextButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.right.equalToSuperview().inset(Metric.NavigationBar.nextButtonRightMargin)
         }
         
         navigationTitle.snp.makeConstraints {
@@ -269,6 +348,7 @@ private extension SelectSentenceViewController {
         }
         
         textView.snp.makeConstraints {
+        selectedPhotoCollectionView.snp.makeConstraints {
             $0.top.equalTo(infoBox.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
