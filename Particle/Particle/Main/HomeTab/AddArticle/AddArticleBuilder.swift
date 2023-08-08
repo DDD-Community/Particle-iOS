@@ -16,6 +16,7 @@ protocol AddArticleDependency: Dependency {
 
 final class AddArticleComponent: Component<AddArticleDependency> {
 
+    var repository = OrganizingSentenceRepositoryImp()
     // TODO: Make sure to convert the variable into lower-camelcase.
     fileprivate var addArticleViewController: ViewControllable {
         return dependency.addArticleViewController
@@ -63,6 +64,6 @@ extension AddArticleComponent: PhotoPickerDependency,
                                SetAdditionalInformationDependency {
     
     var organizingSentenceRepository: OrganizingSentenceRepository {
-        return OrganizingSentenceRepositoryImp() //FIXME: ??
+        return repository
     }
 }

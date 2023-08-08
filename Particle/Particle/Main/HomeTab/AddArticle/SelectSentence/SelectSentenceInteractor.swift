@@ -28,13 +28,16 @@ protocol SelectSentenceListener: AnyObject {
 final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresentable>,
                                       SelectSentenceInteractable,
                                       SelectSentencePresentableListener {
-
+    
     weak var router: SelectSentenceRouting?
     weak var listener: SelectSentenceListener?
     
+    private var organizingSentenceRepository: OrganizingSentenceRepository
+    
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: SelectSentencePresentable) {
+    init(presenter: SelectSentencePresentable, repository: OrganizingSentenceRepository) {
+        self.organizingSentenceRepository = repository
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -56,9 +59,14 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
         router?.attachEditSentence(with: text)
     }
     
-    func dismissEditSentence() {
+    func dismissEditSentence(with text: String) {
+        guard var list = try? organizingSentenceRepository.sentenceFile.value() else {
+            Console.error("\(#function) value 를 가져올 수 없습니다.")
+            return
+        }
+        list.append(text)
+        organizingSentenceRepository.sentenceFile.onNext(list)
         router?.detachEditSentence()
-        listener?.pushToOrganizingSentence()
     }
     
     func backButtonTapped() {

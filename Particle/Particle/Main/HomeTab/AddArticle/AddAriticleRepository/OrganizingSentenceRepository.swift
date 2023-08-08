@@ -14,9 +14,8 @@ public protocol OrganizingSentenceRepository {
 }
 
 public final class OrganizingSentenceRepositoryImp: OrganizingSentenceRepository {
-    public var sentenceFile: RxSwift.BehaviorSubject<[String]> {
-        sentenceSubject
-    }
+
+    public var sentenceFile: BehaviorSubject<[String]> = .init(value: [])
     
     private let sentenceSubject = BehaviorSubject<[String]>(value: [
         "그렇게 쓴 글은 매일 사회관계망서비스(SNS)에 남기기도 하고, 모아서 책으로 내기도 한다.",

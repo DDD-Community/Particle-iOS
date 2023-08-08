@@ -8,19 +8,13 @@
 import RIBs
 
 protocol LoggedInDependency: Dependency {
-    // TODO: Make sure to convert the variable into lower-camelcase.
-    var LoggedInViewController: LoggedInViewControllable { get }
-    var organizingSentenceRepository: OrganizingSentenceRepository { get }
+    var loggedInViewController: LoggedInViewControllable { get }
 }
 
 final class LoggedInComponent: Component<LoggedInDependency>, MainDependency {
 
-    // TODO: Make sure to convert the variable into lower-camelcase.
-    fileprivate var LoggedInViewController: LoggedInViewControllable {
-        return dependency.LoggedInViewController
-    }
-    var organizingSentenceRepository: OrganizingSentenceRepository {
-        return dependency.organizingSentenceRepository
+    fileprivate var loggedInViewController: LoggedInViewControllable {
+        return dependency.loggedInViewController
     }
 }
 

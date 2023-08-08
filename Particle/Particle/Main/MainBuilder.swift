@@ -7,15 +7,9 @@
 
 import RIBs
 
-protocol MainDependency: Dependency {
-    var organizingSentenceRepository: OrganizingSentenceRepository { get }
-}
+protocol MainDependency: Dependency { }
 
-final class MainComponent: Component<MainDependency>, OrganizingSentenceDependency, SetAdditionalInformationDependency {
-    var organizingSentenceRepository: OrganizingSentenceRepository {
-        dependency.organizingSentenceRepository
-    }
-}
+final class MainComponent: Component<MainDependency> { }
 
 // MARK: - Builder
 
