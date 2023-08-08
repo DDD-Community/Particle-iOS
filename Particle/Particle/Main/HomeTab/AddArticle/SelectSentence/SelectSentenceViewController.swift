@@ -231,6 +231,8 @@ final class SelectSentenceViewController: UIViewController,
 
 extension SelectSentenceViewController: SelectedPhotoCellListener {
     
+    func copyButtonTapped(with text: String) {
+        listener?.showEditSentenceModal(with: text)
     }
 }
 
