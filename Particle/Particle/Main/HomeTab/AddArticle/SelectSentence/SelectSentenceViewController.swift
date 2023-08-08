@@ -107,6 +107,15 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         setupInitialView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let alreadyShow = UserDefaults.standard.object(forKey: "ShowSwipeGuide") as? Bool,
+              alreadyShow == false else {
+            return
+        }
+        showSwipeGuide()
+    }
+    
     private func setupInitialView() {
         view.backgroundColor = .black
         addSubviews()
@@ -146,15 +155,21 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
             return
         }
         let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+    private func showSwipeGuide() {
         
         let request = VNRecognizeTextRequest { [weak self] (request, error) in
             guard error == nil else {
                 Console.error(error?.localizedDescription ?? "VNRecognizeTextRequestError")
                 return
             }
+        UIView.animate(withDuration: 0.8, delay: 0.0, options: [.curveEaseOut]) { [weak self] in
+            self?.selectedPhotoCollectionView.contentOffset.x = 70
+        } completion: { _ in
             
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
                 return
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut]) { [weak self] in
+                self?.selectedPhotoCollectionView.contentOffset.x = 1
             }
             for observation in observations {
                 
@@ -182,6 +197,7 @@ final class SelectSentenceViewController: UIViewController, SelectSentencePresen
         } catch let error {
             Console.error(error.localizedDescription)
         }
+        UserDefaults.standard.set(true, forKey: "ShowSwipeGuide")
     }
     
     // MARK: - SelectSentenceViewControllable

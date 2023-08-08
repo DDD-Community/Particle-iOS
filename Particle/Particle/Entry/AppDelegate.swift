@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
         }
+        
+        UserDefaults.standard.set(false, forKey: "ShowSwipeGuide")
             
         return true
     }
