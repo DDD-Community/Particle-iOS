@@ -107,10 +107,12 @@ final class SelectSentenceViewController: UIViewController,
         return collectionView
     }()
     
+    private let selectedImages: [PHAsset]
     
     // MARK: - Initializers
     
     init(selectedImages: [PHAsset]) {
+        self.selectedImages = selectedImages
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -138,6 +138,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     
     private func setupInitialView() {
         view.backgroundColor = .init(hex: 0x1F1F1F)
+        view.addRoundedCorner(corners: [.topLeft, .topRight], radius: 24)
         addSubviews()
         setConstraints()
     }
@@ -256,7 +257,10 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct EditSentenceViewController_Preview: PreviewProvider {
     static var previews: some View {
-        EditSentenceViewController(with: "테스트 문구").showPreview()
+        EditSentenceViewController(
+            with: "테스트 문구"
+        )
+        .showPreview()
     }
 }
 #endif
