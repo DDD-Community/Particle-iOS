@@ -11,9 +11,6 @@ import SnapKit
 import UIKit
 
 protocol LoggedOutPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
     func login()
 }
 
@@ -23,10 +20,63 @@ final class LoggedOutViewController: UIViewController,
     
     weak var listener: LoggedOutPresentableListener?
     
+    // MARK: - UIComponents
+    
+    private let titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 14
+        return stackView
+    }()
+    
+    private let mainTitle: UILabel = {
+        let label = UILabel()
+        label.text = "나만의 문장을\n잘라 모아 보아요!"
+        label.numberOfLines = 0
         label.font = .particleFont.generate(style: .ydeStreedB, size: 25)
         label.textColor = .particleColor.white
+        return label
+    }()
+    
+    private let subTitle: UILabel = {
+        let label = UILabel()
+        label.text = "3초 가입으로 바로 시작해 보세요"
         label.font = .particleFont.generate(style: .pretendard_Medium, size: 16)
         label.textColor = .particleColor.white
+        return label
+    }()
+    
+    private let buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        return stackView
+    }()
+    
+    private let loginButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.layer.cornerRadius = 8
+        button.layer.masksToBounds = true
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("로그인", for: .normal)
+        
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        
+        return button
+    }()
+    
+    private let backgroundImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .particleImage.loginBackground
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    // MARK: - Initializers
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
@@ -37,36 +87,26 @@ final class LoggedOutViewController: UIViewController,
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - ViewLifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupInitialView()
+        addSubviews()
+        setConstraints()
+        configureButton()
+    }
+    
+    private func setupInitialView() {
         view.backgroundColor = .particleColor.black
-        
-        view.backgroundColor = .systemBackground
-        
-        let label = UILabel()
-        label.text = "LoggedOut RIB"
-        label.textColor = .label
-        
-        let button = UIButton(type: .custom)
-        button.layer.cornerRadius = 8
-        button.layer.masksToBounds = true
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.setTitle("로그인", for: .normal)
-        
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        
-        
-        view.addSubview(label)
-        view.addSubview(button)
-        label.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        button.snp.makeConstraints {
-            $0.width.equalTo(100)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(100)
-        }
+    }
+    
+    private func configureButton() {
+        loginButton.addTarget(
+            self,
+            action: #selector(buttonTapped),
+            for: .touchUpInside
+        )
     }
     
     @objc private func buttonTapped() {
@@ -74,3 +114,54 @@ final class LoggedOutViewController: UIViewController,
         listener?.login()
     }
 }
+
+// MARK: - Layout Settting
+
+private extension LoggedOutViewController {
+    
+    func addSubviews() {
+        [backgroundImage, titleStackView, buttonStackView].forEach {
+            view.addSubview($0)
+        }
+        
+        [mainTitle, subTitle].forEach {
+            titleStackView.addArrangedSubview($0)
+        }
+        
+        [loginButton].forEach {
+            buttonStackView.addArrangedSubview($0)
+        }
+    }
+    
+    func setConstraints() {
+        backgroundImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(136)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(186)
+        }
+        
+        titleStackView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(56)
+            $0.horizontalEdges.equalToSuperview().offset(20)
+        }
+        
+        buttonStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(90)
+        }
+    }
+}
+
+// MARK: - Preview
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct LoggedOutViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        LoggedOutViewController().showPreview()
+    }
+}
+#endif

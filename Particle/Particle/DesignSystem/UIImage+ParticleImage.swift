@@ -37,4 +37,5 @@ struct ParticleImage {
     
     let checkBox = UIImage(named: "checkbox")
     let checkBox_checked = UIImage(named: "checkbox_checked")
+    let loginBackground = UIImage(named: "loginBackground")
 }
