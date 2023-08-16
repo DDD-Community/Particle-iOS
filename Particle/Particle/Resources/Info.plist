@@ -4,17 +4,17 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Pretendard-Black</string>
-		<string>Pretendard-Bold</string>
-		<string>Pretendard-SemiBold</string>
-		<string>Pretendard-Medium</string>
-		<string>Pretendard-ExtraLight</string>
-		<string>Pretendard-Light</string>
-		<string>Pretendard-ExtraBold</string>
-		<string>Pretendard-Regular</string>
-		<string>Pretendard-Thin</string>
-		<string>YdestreetB</string>
-		<string>YdestreetL</string>
+		<string>Pretendard-Black.otf</string>
+		<string>Pretendard-Bold.otf</string>
+		<string>Pretendard-SemiBold.otf</string>
+		<string>Pretendard-Medium.otf</string>
+		<string>Pretendard-ExtraLight.otf</string>
+		<string>Pretendard-Light.otf</string>
+		<string>Pretendard-ExtraBold.otf</string>
+		<string>Pretendard-Regular.otf</string>
+		<string>Pretendard-Thin.otf</string>
+		<string>YdestreetB.otf</string>
+		<string>YdestreetL.otf</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>사진앨범 접근 권한을 허용 해주세용 🥰</string>

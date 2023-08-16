@@ -23,7 +23,9 @@ final class LoggedOutViewController: UIViewController,
     
     weak var listener: LoggedOutPresentableListener?
     
+        label.font = .particleFont.generate(style: .ydeStreedB, size: 25)
         label.textColor = .particleColor.white
+        label.font = .particleFont.generate(style: .pretendard_Medium, size: 16)
         label.textColor = .particleColor.white
     init() {
         super.init(nibName: nil, bundle: nil)

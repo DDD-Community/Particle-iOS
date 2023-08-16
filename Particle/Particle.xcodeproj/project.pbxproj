@@ -37,7 +37,6 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
-		3520EF472A74DFBD00A53B34 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3520EF462A74DFBD00A53B34 /* UIFont+.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -100,6 +99,7 @@
 		AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */; };
 		AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */; };
 		AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F72A5C29F7001EF2C0 /* Color+.swift */; };
+		AFFAEBE62A8CFBBA009EC03B /* UIFont+ParticleFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFAEBE52A8CFBBA009EC03B /* UIFont+ParticleFont.swift */; };
 		B1CF9FD70DAD1AF6216BEB95 /* Pods_Particle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20FAF13101BAEDC5C9A046BE /* Pods_Particle.framework */; };
 /* End PBXBuildFile section */
 
@@ -136,7 +136,6 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
-		3520EF462A74DFBD00A53B34 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +200,7 @@
 		AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleInteractor.swift; sourceTree = "<group>"; };
 		AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AFE885F72A5C29F7001EF2C0 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		AFFAEBE52A8CFBBA009EC03B /* UIFont+ParticleFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+ParticleFont.swift"; sourceTree = "<group>"; };
 		B85199DB8EE46F1BAC5B9045 /* Pods-Particle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Particle.debug.xcconfig"; path = "Target Support Files/Pods-Particle/Pods-Particle.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -276,13 +276,6 @@
 				AF18E2DE2A68EEB100C54490 /* Console.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		3520EF242A5FB7E400A53B34 /* AddArticleNavigation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AddArticleNavigation;
 			sourceTree = "<group>";
 		};
 		3520EF272A74DADE00A53B34 /* Fonts */ = {
@@ -383,6 +376,7 @@
 			children = (
 				AF1945162A5C407500B9FFA1 /* Constant.swift */,
 				3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */,
+				AFFAEBE52A8CFBBA009EC03B /* UIFont+ParticleFont.swift */,
 				AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */,
 			);
 			path = DesignSystem;
@@ -552,7 +546,6 @@
 			children = (
 				AFE885F72A5C29F7001EF2C0 /* Color+.swift */,
 				3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */,
-				3520EF462A74DFBD00A53B34 /* UIFont+.swift */,
 				AFBB5F6C2A66B5C1002416DA /* UIViewController+.swift */,
 				AF4A19122A6A59BA00932372 /* UIImageView+.swift */,
 			);
@@ -738,10 +731,10 @@
 				AFBB5F612A66AAD7002416DA /* MyPageViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
 				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
-				3520EF472A74DFBD00A53B34 /* UIFont+.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
 				AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */,
+				AFFAEBE62A8CFBBA009EC03B /* UIFont+ParticleFont.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
 				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
