@@ -45,7 +45,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "홈"
-        tabBarItem.image = .particleImage.homeTabIcon?.withTintColor(.init(hex: 0x696969))
+        tabBarItem.image = .particleImage.homeTabIcon?.withTintColor(.particleColor.gray03)
     }
     
     required init?(coder: NSCoder) {
@@ -59,18 +59,14 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     }
     
     private func setupInitialView() {
-        view.backgroundColor = .init(hex: 0x1f1f1f)
-//        let navigationBarAppearance = UINavigationBarAppearance()
-//        navigationBarAppearance.backgroundColor = .init(hex: 0x1f1f1f)
-//        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        view.backgroundColor = .particleColor.black
         navigationController?.isNavigationBarHidden = true
         
         let window = UIApplication.shared.windows.first
         let statusBarManager = window?.windowScene?.statusBarManager
         
         let statusBarView = UIView(frame: statusBarManager?.statusBarFrame ?? .zero)
-        statusBarView.backgroundColor = .init(hex: 0x1f1f1f)
+        statusBarView.backgroundColor = .particleColor.black
         window?.addSubview(statusBarView)
         
         addSubviews()

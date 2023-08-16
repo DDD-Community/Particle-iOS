@@ -31,6 +31,6 @@ final class ExploreViewController: UIViewController, ExplorePresentable, Explore
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .particleColor.main
+        view.backgroundColor = .particleColor.main100
     }
 }

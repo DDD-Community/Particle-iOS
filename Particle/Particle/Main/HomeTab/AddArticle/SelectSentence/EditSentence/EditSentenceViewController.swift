@@ -24,7 +24,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "선택한 문장"
-        label.textColor = .init(hex: 0xF3F3F3)
+        label.textColor = .particleColor.gray05
         return label
     }()
     
@@ -39,7 +39,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     
     private let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = .init(hex: 0x2E2E2E)
+        view.backgroundColor = .particleColor.gray01
         return view
     }()
     
@@ -55,16 +55,16 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     private let textView: UITextView = {
         let textView = UITextView()
         textView.text = "선택된 문장이 없습니다."
-        textView.textColor = .init(hex: 0xF3F3F3)
+        textView.textColor = .particleColor.gray05
         textView.font = .systemFont(ofSize: 14)
-        textView.backgroundColor = .init(hex: 0x1F1F1F)
+        textView.backgroundColor = .particleColor.black
         return textView
     }()
     
     private let refreshButton: UIButton = {
         let button = UIButton()
         button.setImage(.particleImage.refreshButton, for: .normal)
-        button.backgroundColor = .init(hex: 0x2E2E2E)
+        button.backgroundColor = .particleColor.gray01
         button.snp.makeConstraints {
             $0.width.height.equalTo(44)
         }
@@ -76,7 +76,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         let button = UIButton()
         button.setTitle("다음", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .particleColor.main
+        button.backgroundColor = .particleColor.main100
         button.layer.cornerRadius = 8
         return button
     }()

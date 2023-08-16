@@ -23,6 +23,8 @@ final class LoggedOutViewController: UIViewController,
     
     weak var listener: LoggedOutPresentableListener?
     
+        label.textColor = .particleColor.white
+        label.textColor = .particleColor.white
     init() {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
@@ -35,6 +37,7 @@ final class LoggedOutViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .particleColor.black
         
         view.backgroundColor = .systemBackground
         
