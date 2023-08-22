@@ -17,6 +17,7 @@ protocol SelectSentenceRouting: ViewableRouting {
 protocol SelectSentencePresentable: Presentable {
     var listener: SelectSentencePresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func showSwipeAnimation()
 }
 
 protocol SelectSentenceListener: AnyObject {
@@ -59,6 +60,16 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
         router?.attachEditSentence(with: text)
     }
     
+    func backButtonTapped() {
+        listener?.popSelectSentence()
+    }
+    
+    func nextButtonTapped() {
+        listener?.pushToOrganizingSentence()
+    }
+    
+    // MARK: - SelectSentenceInteractable
+    
     func dismissEditSentence(with text: String) {
         guard var list = try? organizingSentenceRepository.sentenceFile.value() else {
             Console.error("\(#function) value 를 가져올 수 없습니다.")
@@ -69,11 +80,9 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
         router?.detachEditSentence()
     }
     
-    func backButtonTapped() {
-        listener?.popSelectSentence()
+    func swipeToNextPhoto() {
+        // TODO: 다음 사진으로 자동 스와이프 처리
+        presenter.showSwipeAnimation()
     }
     
-    func nextButtonTapped() {
-        listener?.pushToOrganizingSentence()
-    }
 }

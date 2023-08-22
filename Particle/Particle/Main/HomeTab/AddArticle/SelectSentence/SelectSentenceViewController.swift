@@ -160,7 +160,7 @@ final class SelectSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
         
         // TODO: 각 사진에서 문장추출이 모두 완료되었을 때 nextButton 활성화
-//        nextButton.isEnabled = false
+        nextButton.isEnabled = false
     }
     
     private func bind() {
@@ -227,6 +227,21 @@ final class SelectSentenceViewController: UIViewController,
     func dismiss(viewController: ViewControllable) {
         if presentedViewController === viewController.uiviewController {
             dismiss(animated: true)
+        }
+    }
+    
+    // MARK: - SelectSentencePresentable
+    
+    func showSwipeAnimation() {
+        
+        let contentOffset = selectedPhotoCollectionView.contentOffset.x
+        let contentOffsetOnLastPage = DeviceSize.width * CGFloat(selectedImages.count-1)
+        guard contentOffset != contentOffsetOnLastPage else {
+            nextButton.isEnabled = true
+            return
+        }
+        UIView.animate(withDuration: 0.5, delay: 0) {
+            self.selectedPhotoCollectionView.contentOffset.x += DeviceSize.width
         }
     }
 }

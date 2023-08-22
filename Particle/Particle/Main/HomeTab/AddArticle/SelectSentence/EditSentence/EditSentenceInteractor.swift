@@ -18,8 +18,8 @@ protocol EditSentencePresentable: Presentable {
 }
 
 protocol EditSentenceListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func dismissEditSentence(with text: String)
+    func swipeToNextPhoto()
 }
 
 final class EditSentenceInteractor: PresentableInteractor<EditSentencePresentable>,
@@ -50,5 +50,6 @@ final class EditSentenceInteractor: PresentableInteractor<EditSentencePresentabl
     
     func saveButtonTapped(with text: String) {
         listener?.dismissEditSentence(with: text)
+        listener?.swipeToNextPhoto()
     }
 }
