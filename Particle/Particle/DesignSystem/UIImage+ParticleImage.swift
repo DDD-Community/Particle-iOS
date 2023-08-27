@@ -19,6 +19,8 @@ struct ParticleImage {
     let xmarkButton = UIImage(named: "xmark")
     let plusButton = UIImage(named: "plus")
     let refreshButton = UIImage(named: "refresh")
+    let arrowUp = UIImage(named: "chevron-up")
+    let arrowUp_main = UIImage(named: "chevron-up-main")
     
     let keyboardDownButton = UIImage(
         systemName: "keyboard.chevron.compact.down"

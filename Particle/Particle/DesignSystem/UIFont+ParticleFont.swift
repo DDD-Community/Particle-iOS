@@ -28,6 +28,6 @@ enum FontStyle: String {
     case pretendard_Regular = "Pretendard-Regular"
     case pretendard_SemiBold = "Pretendard-SemiBold"
     case pretendard_Thin = "Pretendard-Thin"
-    case ydeStreedB = "YdestreetB"
+    case ydeStreetB = "YdestreetB"
     case ydeStreetL = "YdestreetL"
 }

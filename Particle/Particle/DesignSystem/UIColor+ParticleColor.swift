@@ -11,6 +11,10 @@ extension UIColor {
     static let particleColor = ParticleColor()
 }
 
+extension CGColor {
+    static let particleColor = ParticleColor()
+}
+
 struct ParticleColor {
     let main100 = UIColor(hex: 0xA9ACFF)
     let main30 = UIColor(hex: 0x33344C)

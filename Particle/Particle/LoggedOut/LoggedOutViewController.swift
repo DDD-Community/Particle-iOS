@@ -33,7 +33,7 @@ final class LoggedOutViewController: UIViewController,
         let label = UILabel()
         label.text = "나만의 문장을\n잘라 모아 보아요!"
         label.numberOfLines = 0
-        label.font = .particleFont.generate(style: .ydeStreedB, size: 25)
+        label.font = .particleFont.generate(style: .ydeStreetB, size: 25)
         label.textColor = .particleColor.white
         return label
     }()
