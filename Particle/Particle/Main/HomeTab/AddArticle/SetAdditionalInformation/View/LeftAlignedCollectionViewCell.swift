@@ -17,14 +17,14 @@ class LeftAlignedCollectionViewCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
-        label.clipsToBounds = true
-        label.font = .systemFont(ofSize: 13)
+        label.font = .particleFont.generate(style: .pretendard_Regular, size: 13)
         label.textAlignment = .center
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
-        label.textColor = .white
+        label.textColor = .particleColor.gray04
         return label
     }()
+    
+    private var isTapped = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,10 +42,10 @@ class LeftAlignedCollectionViewCell: UICollectionViewCell {
         
         attribute()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         attribute()
     }
     
@@ -54,9 +54,11 @@ class LeftAlignedCollectionViewCell: UICollectionViewCell {
     }
     
     private func attribute() {
-        self.backgroundColor = .init(red: 22, green: 22, blue: 22)
+        self.backgroundColor = .clear
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.height / 2
+        self.layer.borderWidth = 1
+        self.layer.borderColor = isTapped ? .particleColor.main100.cgColor : .particleColor.gray03.cgColor
     }
     
     private func layout() {
@@ -67,15 +69,13 @@ class LeftAlignedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setSelected(_ selected: Bool) {
-//        if selected {
-//            self.backgroundColor = .bgPacificBlue
-//            self.titleLabel.textColor = .white
-//        } else {
-//            self.backgroundColor = .bgGrey2
-//            self.titleLabel.textColor = .bgSubGrey2
-//        }
+    func setSelected() {
+        isTapped.toggle()
+        
+        if isTapped {
+            self.titleLabel.textColor = .particleColor.main100
+        } else {
+            self.titleLabel.textColor = .particleColor.gray04
+        }
     }
-    
 }
-
