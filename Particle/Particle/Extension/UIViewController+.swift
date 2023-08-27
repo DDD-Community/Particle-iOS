@@ -22,8 +22,28 @@ extension UIViewController {
                                     context: Context) { }
         
     }
+    
     func showPreview(_ deviceType: DeviceType = .iPhone12ProMax) -> some View {
         Preview(viewController: self)
+            .previewDevice(PreviewDevice(rawValue: deviceType.name()))
+    }
+}
+
+extension UIView {
+    
+    private struct Preview<Content: UIView>: UIViewRepresentable {
+        typealias UIViewType = Content
+        let view: Content
+        
+        func makeUIView(context: Context) -> Content {
+            return view
+        }
+        
+        func updateUIView(_ uiView: Content, context: Context) { }
+    }
+    
+    func showPreview(_ deviceType: DeviceType = .iPhone12ProMax) -> some View {
+        Preview(view: self)
             .previewDevice(PreviewDevice(rawValue: deviceType.name()))
     }
 }
