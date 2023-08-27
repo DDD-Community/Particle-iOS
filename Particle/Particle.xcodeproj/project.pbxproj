@@ -62,6 +62,11 @@
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
 		AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */; };
 		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
+		AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122732A977BEA00262088 /* SelectTagRouter.swift */; };
+		AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122742A977BEA00262088 /* SelectTagViewController.swift */; };
+		AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122752A977BEA00262088 /* SelectTagBuilder.swift */; };
+		AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122762A977BEA00262088 /* SelectTagInteractor.swift */; };
+		AF31227D2A9780E900262088 /* Accordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF31227C2A9780E900262088 /* Accordion.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
@@ -161,6 +166,11 @@
 		AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerBuilder.swift; sourceTree = "<group>"; };
 		AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerInteractor.swift; sourceTree = "<group>"; };
+		AF3122732A977BEA00262088 /* SelectTagRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagRouter.swift; sourceTree = "<group>"; };
+		AF3122742A977BEA00262088 /* SelectTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagViewController.swift; sourceTree = "<group>"; };
+		AF3122752A977BEA00262088 /* SelectTagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagBuilder.swift; sourceTree = "<group>"; };
+		AF3122762A977BEA00262088 /* SelectTagInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagInteractor.swift; sourceTree = "<group>"; };
+		AF31227C2A9780E900262088 /* Accordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accordion.swift; sourceTree = "<group>"; };
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,6 +343,7 @@
 				AF0D71D22A5BEA8A00157758 /* LoggedOutViewController.swift */,
 				AF0D71D32A5BEA8A00157758 /* LoggedOutBuilder.swift */,
 				AF0D71D42A5BEA8A00157758 /* LoggedOutInteractor.swift */,
+				AF3122722A977B4D00262088 /* SelectTag */,
 			);
 			path = LoggedOut;
 			sourceTree = "<group>";
@@ -407,6 +418,26 @@
 				AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */,
 			);
 			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
+		AF3122722A977B4D00262088 /* SelectTag */ = {
+			isa = PBXGroup;
+			children = (
+				AF31227B2A9780BD00262088 /* View */,
+				AF3122732A977BEA00262088 /* SelectTagRouter.swift */,
+				AF3122742A977BEA00262088 /* SelectTagViewController.swift */,
+				AF3122752A977BEA00262088 /* SelectTagBuilder.swift */,
+				AF3122762A977BEA00262088 /* SelectTagInteractor.swift */,
+			);
+			path = SelectTag;
+			sourceTree = "<group>";
+		};
+		AF31227B2A9780BD00262088 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF31227C2A9780E900262088 /* Accordion.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AF4A190F2A6A1E4100932372 /* View */ = {
@@ -678,6 +709,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */,
+				AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */,
+				AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */,
 				AFBB5F762A66B65D002416DA /* SelectSentenceBuilder.swift in Sources */,
 				AFBB5F602A66AAD7002416DA /* MyPageRouter.swift in Sources */,
 				AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */,
@@ -690,6 +723,7 @@
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
 				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
 				AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */,
+				AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */,
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
@@ -731,6 +765,7 @@
 				AFBB5F612A66AAD7002416DA /* MyPageViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
 				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
+				AF31227D2A9780E900262088 /* Accordion.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
 				AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */,
@@ -749,6 +784,7 @@
 				AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */,
 				AFBB5F622A66AAD7002416DA /* MyPageBuilder.swift in Sources */,
 				3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */,
+				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
 				AFBB5F692A66ABBF002416DA /* SearchViewController.swift in Sources */,
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
