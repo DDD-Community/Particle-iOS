@@ -113,6 +113,8 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
     
     init() {
         super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .fullScreen
+        modalTransitionStyle = .coverVertical
     }
     
     required init?(coder: NSCoder) {
@@ -127,6 +129,7 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
         addSubviews()
         setConstraints()
         setupNavigationBar()
+        configureButton()
         bind()
     }
     
@@ -141,6 +144,18 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
                 self?.listener?.backButtonTapped()
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func configureButton() {
+        startButton.addTarget(
+            self,
+            action: #selector(startButtonTapped),
+            for: .touchUpInside
+        )
+    }
+    
+    @objc private func startButtonTapped() {
+        listener?.startButtonTapped()
     }
     
     private func bind() {

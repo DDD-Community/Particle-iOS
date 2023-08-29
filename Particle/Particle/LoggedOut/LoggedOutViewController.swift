@@ -8,15 +8,15 @@
 import RIBs
 import RxSwift
 import SnapKit
+import KakaoSDKUser
+
 import UIKit
 
 protocol LoggedOutPresentableListener: AnyObject {
-    func login()
+    func successLogin()
 }
 
-final class LoggedOutViewController: UIViewController,
-                                     LoggedOutPresentable,
-                                     LoggedOutViewControllable {
+final class LoggedOutViewController: UIViewController, LoggedOutPresentable, LoggedOutViewControllable{
     
     weak var listener: LoggedOutPresentableListener?
     
@@ -53,16 +53,71 @@ final class LoggedOutViewController: UIViewController,
         return stackView
     }()
     
-    private let loginButton: UIButton = {
-        let button = UIButton(type: .custom)
+    private let kakaoLoginButton: UIView = {
+        let button = UIView()
+        button.backgroundColor = .init(hex: 0xFEE500)
         button.layer.cornerRadius = 8
-        button.layer.masksToBounds = true
-        button.backgroundColor = .systemBlue
-        button.setTitleColor(.white, for: .normal)
-        button.setTitle("로그인", for: .normal)
         
         button.snp.makeConstraints {
             $0.height.equalTo(44)
+        }
+        
+        let imageView = UIImageView()
+        imageView.image = .particleImage.kakaoLogo
+        imageView.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
+        
+        let title = UILabel()
+        title.text = "카카오 로그인"
+        title.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
+        title.textColor = .init(hex: 0x191919)
+        
+        let stack = UIStackView(arrangedSubviews: [imageView, title])
+        stack.axis = .horizontal
+        stack.spacing = 6
+        
+        [stack].forEach {
+            button.addSubview($0)
+        }
+        
+        stack.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        return button
+    }()
+    
+    private let appleLoginButton: UIView = {
+        let button = UIView()
+        button.backgroundColor = .init(hex: 0x000000)
+        button.layer.cornerRadius = 8
+        
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        
+        let imageView = UIImageView()
+        imageView.image = .particleImage.appleLogo
+        imageView.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
+        
+        let title = UILabel()
+        title.text = "Apple 로그인"
+        title.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
+        title.textColor = .init(hex:0xFFFFFF)
+        
+        let stack = UIStackView(arrangedSubviews: [imageView, title])
+        stack.axis = .horizontal
+        stack.spacing = 6
+        
+        [stack].forEach {
+            button.addSubview($0)
+        }
+        
+        stack.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
         return button
@@ -97,21 +152,112 @@ final class LoggedOutViewController: UIViewController,
         configureButton()
     }
     
+    func present(viewController: ViewControllable) {
+        present(viewController, animated: true, completion: nil)
+    }
+    
     private func setupInitialView() {
         view.backgroundColor = .particleColor.black
     }
     
     private func configureButton() {
-        loginButton.addTarget(
-            self,
-            action: #selector(buttonTapped),
-            for: .touchUpInside
+        let kakaoLoginButtonTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(kakaoLoginButtonTapped)
         )
+        
+        kakaoLoginButton.addGestureRecognizer(kakaoLoginButtonTapGesture)
+        
+        let appleLoginButtonTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(appleLoginButtonTapped)
+        )
+        appleLoginButton.addGestureRecognizer(appleLoginButtonTapGesture)
     }
     
-    @objc private func buttonTapped() {
-        // TODO: LoggedInRIB 로 Routing
-        listener?.login()
+    @objc
+    private func appleLoginButtonTapped() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    @objc
+    private func kakaoLoginButtonTapped() {
+        Console.debug(#function)
+        
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
+                if let error = error {
+                    Console.error(error.localizedDescription)
+                } else {
+                    Console.log("loginWithKakaoTalk() success")
+                    _ = oauthToken?.accessToken
+                    self?.listener?.successLogin()
+                    // TODO: accessToken 을 Particle 가입 Identifier로 사용?
+                }
+            }
+        } else {
+            Console.error("카카오톡이 설치되어있지 않습니다.")
+            loginKakaoAccount()
+        }
+    }
+    
+    private func loginKakaoAccount() {
+        Console.log(#function)
+        
+        UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+            if let error = error {
+                Console.error(error.localizedDescription)
+            } else {
+                Console.log("\(#function) success.")
+                _ = oauthToken?.accessToken
+                self?.listener?.successLogin()
+            }
+        }
+    }
+}
+
+// MARK: - Apple Login
+
+extension LoggedOutViewController: ASAuthorizationControllerDelegate,
+                                   ASAuthorizationControllerPresentationContextProviding  {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return .init(frame: .init(x: 0, y: 0, width: 300, height: 300)) // FIXME: ??
+    }
+    
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+            
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userIdentifier = appleIDCredential.user
+            let _ = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            Console.log("userIdentifier: \(userIdentifier), email: \(email ?? "")")
+            listener?.successLogin()
+            
+        case let passwordCredential as ASPasswordCredential:
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            Console.log("username: \(username), password: \(password)")
+            listener?.successLogin()
+            
+        default:
+            break
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithError error: Error) {
+        // TODO: Handle Error
+        Console.error(error.localizedDescription)
     }
 }
 
@@ -128,7 +274,7 @@ private extension LoggedOutViewController {
             titleStackView.addArrangedSubview($0)
         }
         
-        [loginButton].forEach {
+        [kakaoLoginButton, appleLoginButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
     }
@@ -148,7 +294,7 @@ private extension LoggedOutViewController {
         buttonStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(90)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(91)
         }
     }
 }
@@ -157,6 +303,7 @@ private extension LoggedOutViewController {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
+import AuthenticationServices
 
 @available(iOS 13.0, *)
 struct LoggedOutViewController_Preview: PreviewProvider {

@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import KakaoSDKCommon
 
 var allPhotos: PHFetchResult<PHAsset>? = nil
 var photoCount = Int()
@@ -38,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
         }
+        
+        KakaoSDK.initSDK(appKey: "082e213b8e9609caba039a0e66b54690")
             
         return true
     }

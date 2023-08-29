@@ -2,6 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao082e213b8e9609caba039a0e66b54690</string>
+			</array>
+		</dict>
+	</array>
+    <key>LSApplicationQueriesSchemes</key>
+      <array>
+          <!-- 카카오톡으로 로그인 -->
+          <string>kakaokompassauth</string>
+          <!-- 카카오링크 -->
+          <string>kakaolink</string>
+      </array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Black.otf</string>
@@ -16,8 +34,6 @@
 		<string>YdestreetB.otf</string>
 		<string>YdestreetL.otf</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사진앨범 접근 권한을 허용 해주세용 🥰</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

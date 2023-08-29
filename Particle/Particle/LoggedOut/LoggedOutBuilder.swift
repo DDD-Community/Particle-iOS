@@ -6,13 +6,14 @@
 //
 
 import RIBs
+import Alamofire
 
 protocol LoggedOutDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
 }
 
-final class LoggedOutComponent: Component<LoggedOutDependency> {
+final class LoggedOutComponent: Component<LoggedOutDependency>, SelectTagDependency {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -30,10 +31,17 @@ final class LoggedOutBuilder: Builder<LoggedOutDependency>, LoggedOutBuildable {
     }
 
     func build(withListener listener: LoggedOutListener) -> LoggedOutRouting {
-        let _ = LoggedOutComponent(dependency: dependency)
+        let component = LoggedOutComponent(dependency: dependency)
         let viewController = LoggedOutViewController()
         let interactor = LoggedOutInteractor(presenter: viewController)
         interactor.listener = listener
-        return LoggedOutRouter(interactor: interactor, viewController: viewController)
+        
+        let selectTagBuilder = SelectTagBuilder(dependency: component)
+        
+        return LoggedOutRouter(
+            interactor: interactor,
+            viewController: viewController,
+            selecTagBuilder: selectTagBuilder
+        )
     }
 }

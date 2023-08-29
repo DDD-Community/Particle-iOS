@@ -21,6 +21,8 @@ struct ParticleColor {
     let mainW = UIColor(hex: 0x6A6AD8)
     
     let black = UIColor(hex: 0x1F1F1F)
+    let black50 = UIColor(hex: 0x1F1F1F).withAlphaComponent(0.5)
+    
     let gray01 = UIColor(hex: 0x2E2E2E)
     let gray02 = UIColor(hex: 0x323232)
     let gray03 = UIColor(hex: 0x696969)
@@ -32,4 +34,5 @@ struct ParticleColor {
     let bk03 = UIColor(hex: 0x1A1A1A)
     
     let white = UIColor(hex: 0xF6F6F6)
+    let white10 = UIColor(hex: 0xF6F6F6).withAlphaComponent(0.06)
 }
