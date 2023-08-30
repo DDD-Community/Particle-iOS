@@ -70,16 +70,16 @@ final class PhotoCell: UICollectionViewCell {
     }
     
     func check(number: Int) {
-        if checkBox_checked.alpha == 0 {
-            dimmingView.alpha = 0.3
-            checkBox_checked.alpha = 1
-            numberLabel.alpha = 1
-            numberLabel.text = "\(number)"
-        } else {
-            dimmingView.alpha = 0
-            checkBox_checked.alpha = 0
-            numberLabel.alpha = 0
-        }
+        dimmingView.alpha = 0.3
+        checkBox_checked.alpha = 1
+        numberLabel.alpha = 1
+        numberLabel.text = "\(number)"
+    }
+    
+    func uncheck() {
+        dimmingView.alpha = 0
+        checkBox_checked.alpha = 0
+        numberLabel.alpha = 0
     }
 }
 

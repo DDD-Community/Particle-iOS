@@ -10,7 +10,7 @@ import Photos
 
 extension UIImageView {
     
-    func fetchImage(asset: PHAsset, contentMode: PHImageContentMode, targetSize: CGSize) {
+    func fetchImage(asset: PHAsset, contentMode: PHImageContentMode, targetSize: CGSize, _ completion: ((CGFloat) -> Void)? = nil) {
         let options = PHImageRequestOptions()
         options.version = .original
         options.deliveryMode = .opportunistic
@@ -21,11 +21,12 @@ extension UIImageView {
             targetSize: targetSize,
             contentMode: contentMode,
             options: options) { image, info in
-                if image == nil {
-                    Console.error(#function)
-                    print(info ?? #function)
-                } else {
+                
+                if let image = image {
                     self.image = image
+                    completion?(image.size.height / image.size.width)
+                } else {
+                    Console.error("\(#function) image 가 존재하지 않습니다.")
                 }
             }
     }

@@ -34,6 +34,9 @@ final class SelectSentenceRouter: ViewableRouter<SelectSentenceInteractable,
     }
     
     func attachEditSentence(with text: String) {
+        if currentChild != nil {
+            return
+        }
         let editSentence = editSentenceBuilder.build(withListener: interactor, text: text)
         self.currentChild = editSentence
         attachChild(editSentence)

@@ -9,13 +9,13 @@ import RIBs
 import Photos
 
 protocol SelectSentenceDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var organizingSentenceRepository: OrganizingSentenceRepository { get }
 }
 
 final class SelectSentenceComponent: Component<SelectSentenceDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    fileprivate var organizingSentenceRepository: OrganizingSentenceRepository {
+        return dependency.organizingSentenceRepository
+    }
 }
 
 // MARK: - Builder
@@ -33,7 +33,7 @@ final class SelectSentenceBuilder: Builder<SelectSentenceDependency>, SelectSent
     func build(withListener listener: SelectSentenceListener, images: [PHAsset]) -> SelectSentenceRouting {
         let component = SelectSentenceComponent(dependency: dependency)
         let viewController = SelectSentenceViewController(selectedImages: images)
-        let interactor = SelectSentenceInteractor(presenter: viewController)
+        let interactor = SelectSentenceInteractor(presenter: viewController, repository: component.organizingSentenceRepository)
         interactor.listener = listener
         
         let editSentenceBuilder = EditSentenceBuilder(dependency: component)
@@ -46,8 +46,4 @@ final class SelectSentenceBuilder: Builder<SelectSentenceDependency>, SelectSent
     }
 }
 
-extension SelectSentenceComponent: EditSentenceDependency, OrganizingSentenceDependency {
-    var organizingSentenceRepository: OrganizingSentenceRepository {
-        OrganizingSentenceRepositoryImp()
-    }
-}
+extension SelectSentenceComponent: EditSentenceDependency { }

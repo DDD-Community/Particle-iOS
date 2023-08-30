@@ -8,20 +8,15 @@
 import RIBs
 
 protocol AddArticleDependency: Dependency {
-    // TODO: Make sure to convert the variable into lower-camelcase.
     var addArticleViewController: ViewControllable { get }
-    // TODO: Declare the set of dependencies required by this RIB, but won't be
-    // created by this RIB.
 }
 
 final class AddArticleComponent: Component<AddArticleDependency> {
-
-    // TODO: Make sure to convert the variable into lower-camelcase.
+    var repository = OrganizingSentenceRepositoryImp()
+    
     fileprivate var addArticleViewController: ViewControllable {
         return dependency.addArticleViewController
     }
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
@@ -31,6 +26,7 @@ protocol AddArticleBuildable: Buildable {
 }
 
 final class AddArticleBuilder: Builder<AddArticleDependency>, AddArticleBuildable {
+    
 
     override init(dependency: AddArticleDependency) {
         super.init(dependency: dependency)
@@ -38,6 +34,7 @@ final class AddArticleBuilder: Builder<AddArticleDependency>, AddArticleBuildabl
 
     func build(withListener listener: AddArticleListener) -> AddArticleRouting {
         let component = AddArticleComponent(dependency: dependency)
+        
         let interactor = AddArticleInteractor()
         interactor.listener = listener
         
@@ -63,6 +60,6 @@ extension AddArticleComponent: PhotoPickerDependency,
                                SetAdditionalInformationDependency {
     
     var organizingSentenceRepository: OrganizingSentenceRepository {
-        return OrganizingSentenceRepositoryImp() //FIXME: ??
+        return repository
     }
 }

@@ -58,7 +58,6 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     private let loggedInBuilder: LoggedInBuildable
     
     private var loggedOut: ViewableRouting?
-//    private var loggedIn: Routing?
     
     private func routeToLoggedOut() {
         let loggedOut = loggedOutBuilder.build(withListener: interactor)

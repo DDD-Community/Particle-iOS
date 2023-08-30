@@ -13,11 +13,7 @@ protocol RootDependencyLoggedIn: Dependency {
 
 extension RootComponent: LoggedInDependency {
     
-    var LoggedInViewController: LoggedInViewControllable {
+    var loggedInViewController: LoggedInViewControllable {
         return rootViewController
-    }
-    
-    var organizingSentenceRepository: OrganizingSentenceRepository {
-        return OrganizingSentenceRepositoryImp()
     }
 }
