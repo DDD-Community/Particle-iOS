@@ -19,7 +19,7 @@ protocol SelectTagPresentable: Presentable {
 
 protocol SelectTagListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func selectTagStartButtonTapped()
+    func selectTagStartButtonTapped(with selectedTags: [String])
 }
 
 final class SelectTagInteractor: PresentableInteractor<SelectTagPresentable>, SelectTagInteractable, SelectTagPresentableListener {
@@ -50,8 +50,7 @@ final class SelectTagInteractor: PresentableInteractor<SelectTagPresentable>, Se
         // TODO: LoggedOut RIB로 돌아가기
     }
     
-    func startButtonTapped() {
-        // TODO: LoggedIn RIB로 넘어가기
-        listener?.selectTagStartButtonTapped()
+    func startButtonTapped(with selectedTags: [String]) {
+        listener?.selectTagStartButtonTapped(with: selectedTags)
     }
 }

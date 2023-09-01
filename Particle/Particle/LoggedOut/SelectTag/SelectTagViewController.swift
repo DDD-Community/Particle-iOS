@@ -13,7 +13,7 @@ import SnapKit
 
 protocol SelectTagPresentableListener: AnyObject {
     func backButtonTapped()
-    func startButtonTapped()
+    func startButtonTapped(with selectedTags: [String])
 }
 
 final class SelectTagViewController: UIViewController, SelectTagPresentable, SelectTagViewControllable {
@@ -30,7 +30,7 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
     weak var listener: SelectTagPresentableListener?
     private var disposeBag: DisposeBag = .init()
     
-    private var selectedTags: BehaviorRelay<[[String]]> = .init(value: Array(repeating: [], count: 4))
+    private var selectedTags: BehaviorRelay<[[String]]> = .init(value: Array(repeating: [], count: 5))
     
     // MARK: - UIComponents
     
@@ -76,11 +76,11 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
     }()
     
     private let accordion1: Accordion = {
-        let accordion = Accordion(title: "디자인", tags: ["#브랜딩", "#UIUX", "#그래픽 디자인", "#산업 디자인"])
+        let accordion = Accordion(title: "디자인", tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"])
         return accordion
     }()
     private let accordion2: Accordion = {
-        let accordion = Accordion(title: "개발", tags: ["#iOS", "#Android", "#Web", "#서버"])
+        let accordion = Accordion(title: "마케팅", tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"])
         return accordion
     }()
     private let accordion3: Accordion = {
@@ -88,7 +88,11 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
         return accordion
     }()
     private let accordion4: Accordion = {
-        let accordion = Accordion(title: "스타트업", tags: ["#조직문화", "#트랜드", "#CX", "#리더쉽"])
+        let accordion = Accordion(title: "개발", tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"])
+        return accordion
+    }()
+    private let accordion5: Accordion = {
+        let accordion = Accordion(title: "스타트업", tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"])
         return accordion
     }()
     
@@ -96,6 +100,7 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
     private var accordion2HeightConstraint: Constraint?
     private var accordion3HeightConstraint: Constraint?
     private var accordion4HeightConstraint: Constraint?
+    private var accordion5HeightConstraint: Constraint?
     
     private let startButton: UIButton = {
         let button = UIButton()
@@ -155,7 +160,8 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
     }
     
     @objc private func startButtonTapped() {
-        listener?.startButtonTapped()
+        let tags = selectedTags.value.flatMap { $0 }
+        listener?.startButtonTapped(with: tags.map { Tag(rawValue: $0)?.value ?? "UXUI" })
     }
     
     private func bind() {
@@ -164,7 +170,8 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
             (accordion1, accordion1HeightConstraint),
             (accordion2, accordion2HeightConstraint),
             (accordion3, accordion3HeightConstraint),
-            (accordion4, accordion4HeightConstraint)
+            (accordion4, accordion4HeightConstraint),
+            (accordion5, accordion5HeightConstraint)
         ]
         
         accordions.enumerated().forEach { (i, accordion) in
@@ -218,7 +225,7 @@ private extension SelectTagViewController {
             mainScrollView.addSubview($0)
         }
         
-        [accordion1, accordion2, accordion3, accordion4].forEach {
+        [accordion1, accordion2, accordion3, accordion4, accordion5].forEach {
             mainStackView.addArrangedSubview($0)
         }
     }
@@ -268,6 +275,9 @@ private extension SelectTagViewController {
         }
         accordion4.snp.makeConstraints {
             accordion4HeightConstraint = $0.height.equalTo(52).constraint
+        }
+        accordion5.snp.makeConstraints {
+            accordion5HeightConstraint = $0.height.equalTo(52).constraint
         }
         
         startButton.snp.makeConstraints {

@@ -13,7 +13,7 @@ import KakaoSDKUser
 import UIKit
 
 protocol LoggedOutPresentableListener: AnyObject {
-    func successLogin()
+    func successLogin(with provider: String, identifier: String)
 }
 
 final class LoggedOutViewController: UIViewController, LoggedOutPresentable, LoggedOutViewControllable{
@@ -196,10 +196,15 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
                 if let error = error {
                     Console.error(error.localizedDescription)
                 } else {
-                    Console.log("loginWithKakaoTalk() success")
-                    _ = oauthToken?.accessToken
-                    self?.listener?.successLogin()
-                    // TODO: accessToken 을 Particle 가입 Identifier로 사용?
+                    Console.log("\(#function) success")
+                    
+                    UserApi.shared.me { (user, error) in
+                        guard let identifier = user?.id else {
+                            Console.error("kakaoLogin user.id 가 존재하지 않습니다.")
+                            return
+                        }
+                        self?.listener?.successLogin(with: "kakao", identifier: "\(identifier)")
+                    }
                 }
             }
         } else {
@@ -216,8 +221,14 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
                 Console.error(error.localizedDescription)
             } else {
                 Console.log("\(#function) success.")
-                _ = oauthToken?.accessToken
-                self?.listener?.successLogin()
+
+                UserApi.shared.me { (user, error) in
+                    guard let identifier = user?.id else {
+                        Console.error("kakaoLogin user.id 가 존재하지 않습니다.")
+                        return
+                    }
+                    self?.listener?.successLogin(with: "kakao", identifier: "\(identifier)")
+                }
             }
         }
     }
@@ -240,14 +251,14 @@ extension LoggedOutViewController: ASAuthorizationControllerDelegate,
             let userIdentifier = appleIDCredential.user
             let _ = appleIDCredential.fullName
             let email = appleIDCredential.email
-            Console.log("userIdentifier: \(userIdentifier), email: \(email ?? "")")
-            listener?.successLogin()
+            Console.log("\(#function) success")
+            listener?.successLogin(with: "apple", identifier: "\(userIdentifier)")
             
         case let passwordCredential as ASPasswordCredential:
             let username = passwordCredential.user
             let password = passwordCredential.password
-            Console.log("username: \(username), password: \(password)")
-            listener?.successLogin()
+            Console.log("\(#function) success")
+            listener?.successLogin(with: "apple", identifier: "\(username)")
             
         default:
             break

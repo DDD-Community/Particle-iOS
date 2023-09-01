@@ -29,6 +29,8 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     weak var router: LoggedOutRouting?
     weak var listener: LoggedOutListener?
     
+    private let disposeBag = DisposeBag()
+    
     override init(presenter: LoggedOutPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -44,24 +46,44 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     
     // MARK: - LoggedOutPresentableListener
     
-    func successLogin() {
-        // TODO: 첫번째 가입이면, SelectTag RIB 로 이동. 아니면 LoggedIn RIB로 이동.
-//        guard let isFirstLogin = UserDefaults.standard.object(forKey: "isFirstLogin") as? Bool else {
-//            UserDefaults.standard.set(false, forKey: "isFirstLogin")
-//            router?.routeToSelectTag()
-//            return
-//        }
-//        if isFirstLogin {
-//
-//        } else {
-//            listener?.login()
-//        }
-        router?.routeToSelectTag()
+    func successLogin(with provider: String, identifier: String) {
+        let service = AuthService()
+        let request = LoginRequest(provider: provider, identifier: identifier)
+        
+        service.login(with: request).subscribe { [weak self] result in
+            
+            switch result {
+            case .success(let response):
+                if response.isNew {
+                    UserDefaults.standard.set("\(response.tokens.accessToken)", forKey: "ACCESSTOKEN")
+                    UserDefaults.standard.set("\(response.tokens.refreshToken)", forKey: "REFRESHTOKEN")
+                    self?.router?.routeToSelectTag()
+                } else {
+                    self?.listener?.login()
+                }
+            case .failure(let error):
+                Console.error(error.localizedDescription)
+            }
+        }
+        .disposed(by: disposeBag)
     }
     
     // MARK: - SelectTagListener
     
-    func selectTagStartButtonTapped() {
-        listener?.login()
+    func selectTagStartButtonTapped(with selectedTags: [String]) {
+        let repository = UserRepository()
+        
+        repository.setTags(items: selectedTags).subscribe { [weak self] result in
+            if let result = result.element {
+                switch result {
+                case .success(let response):
+                    Console.log("\(response)")
+                    self?.listener?.login()
+                case .failure(let error):
+                    Console.log(error.localizedDescription)
+                }
+            }
+        }
+        .disposed(by: disposeBag)
     }
 }
