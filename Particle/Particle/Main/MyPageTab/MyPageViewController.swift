@@ -31,6 +31,6 @@ final class MyPageViewController: UIViewController, MyPagePresentable, MyPageVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .particleColor.main
+        view.backgroundColor = .particleColor.main100
     }
 }

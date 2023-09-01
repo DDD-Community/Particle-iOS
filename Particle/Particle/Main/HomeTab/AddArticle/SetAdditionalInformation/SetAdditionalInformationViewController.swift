@@ -148,7 +148,7 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         super.init(nibName: nil, bundle: nil)
         
         self.modalPresentationStyle = .fullScreen
-        self.view.backgroundColor = .init(hex: 0x1f1f1f)
+        self.view.backgroundColor = .particleColor.black
         addSubviews()
         layout()
         bind()

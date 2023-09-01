@@ -37,7 +37,7 @@ final class PhotoPickerViewController: UIViewController,
     
     private let navigationBar: UIView = {
         let view = UIView()
-        view.backgroundColor = .init(hex: 0x1f1f1f)
+        view.backgroundColor = .particleColor.black
         return view
     }()
     
@@ -58,7 +58,7 @@ final class PhotoPickerViewController: UIViewController,
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.particleColor.main, for: .normal)
+        button.setTitleColor(.particleColor.main100, for: .normal)
         return button
     }()
     
@@ -72,7 +72,7 @@ final class PhotoPickerViewController: UIViewController,
         layout.minimumInteritemSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PhotoCell.self)
-        collectionView.backgroundColor = .init(hex: 0x1f1f1f)
+        collectionView.backgroundColor = .particleColor.black
         return collectionView
     }()
     
@@ -99,7 +99,7 @@ final class PhotoPickerViewController: UIViewController,
     }
     
     private func setupInitialView() {
-        view.backgroundColor = .init(hex: 0x1f1f1f)
+        view.backgroundColor = .particleColor.black
         navigationController?.isNavigationBarHidden = true
         addSubviews()
         setConstraints()
@@ -110,7 +110,7 @@ final class PhotoPickerViewController: UIViewController,
         let statusBarManager = window?.windowScene?.statusBarManager
         
         let statusBarView = UIView(frame: statusBarManager?.statusBarFrame ?? .zero)
-        statusBarView.backgroundColor = .init(hex: 0x1f1f1f)
+        statusBarView.backgroundColor = .particleColor.black
         window?.addSubview(statusBarView)
     }
     

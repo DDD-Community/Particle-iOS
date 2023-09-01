@@ -7,21 +7,44 @@
 
 import RIBs
 
-protocol LoggedOutInteractable: Interactable {
+protocol LoggedOutInteractable: Interactable, SelectTagListener {
     var router: LoggedOutRouting? { get set }
     var listener: LoggedOutListener? { get set }
 }
 
 protocol LoggedOutViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+    func present(viewController: ViewControllable)
 }
 
 final class LoggedOutRouter: ViewableRouter<LoggedOutInteractable,LoggedOutViewControllable>,
                              LoggedOutRouting {
     
     // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: LoggedOutInteractable, viewController: LoggedOutViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
+    init(
+        interactor: LoggedOutInteractable,
+        viewController: LoggedOutViewControllable,
+        selecTagBuilder: SelectTagBuildable
+    ) {
+        self.selectTagBuilder = selecTagBuilder
+        super.init(
+            interactor: interactor,
+            viewController: viewController
+        )
         interactor.router = self
     }
+    
+    func routeToSelectTag() {
+        if selectTagRouting != nil {
+            return
+        }
+        let router = selectTagBuilder.build(withListener: interactor)
+        self.selectTagRouting = router
+        attachChild(router)
+        viewController.present(viewController: router.viewControllable)
+    }
+    
+    // MARK: - Private
+    
+    private let selectTagBuilder: SelectTagBuildable
+    private var selectTagRouting: ViewableRouting?
 }

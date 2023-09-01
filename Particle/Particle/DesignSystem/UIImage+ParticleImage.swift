@@ -19,6 +19,11 @@ struct ParticleImage {
     let xmarkButton = UIImage(named: "xmark")
     let plusButton = UIImage(named: "plus")
     let refreshButton = UIImage(named: "refresh")
+    let arrowUp = UIImage(named: "chevron-up")
+    let arrowUp_main = UIImage(named: "chevron-up-main")
+
+    let kakaoLogo = UIImage(named: "kakaoLogo")
+    let appleLogo = UIImage(named: "appleLogo")
     
     let keyboardDownButton = UIImage(
         systemName: "keyboard.chevron.compact.down"
@@ -37,4 +42,5 @@ struct ParticleImage {
     
     let checkBox = UIImage(named: "checkbox")
     let checkBox_checked = UIImage(named: "checkbox_checked")
+    let loginBackground = UIImage(named: "loginBackground")
 }

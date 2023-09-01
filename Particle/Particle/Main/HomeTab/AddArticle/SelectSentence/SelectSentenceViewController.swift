@@ -51,7 +51,7 @@ final class SelectSentenceViewController: UIViewController,
     
     private let navigationBar: UIView = {
         let view = UIView()
-        view.backgroundColor = .init(hex: 0x1f1f1f)
+        view.backgroundColor = .particleColor.black
         return view
     }()
     
@@ -79,14 +79,14 @@ final class SelectSentenceViewController: UIViewController,
     
     private let infoBox: UIView = {
         let view = UIView()
-        view.backgroundColor = .init(hex: 0x161616)
+        view.backgroundColor = .particleColor.bk02
         return view
     }()
     
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "시작 단어와 끝 단어를 터치해 주세요."
-        label.textColor = .init(hex: 0x696969)
+        label.textColor = .particleColor.gray03
         return label
     }()
     

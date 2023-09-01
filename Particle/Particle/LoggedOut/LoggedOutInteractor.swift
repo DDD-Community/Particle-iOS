@@ -9,7 +9,7 @@ import RIBs
 import RxSwift
 
 protocol LoggedOutRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func routeToSelectTag()
 }
 
 protocol LoggedOutPresentable: Presentable {
@@ -26,13 +26,11 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
                                  LoggedOutInteractable,
                                  LoggedOutPresentableListener {
     
-    
-    
     weak var router: LoggedOutRouting?
     weak var listener: LoggedOutListener?
     
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
+    private let disposeBag = DisposeBag()
+    
     override init(presenter: LoggedOutPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -40,16 +38,52 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
     }
     
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
     }
     
     // MARK: - LoggedOutPresentableListener
-    func login() {
-        listener?.login()
+    
+    func successLogin(with provider: String, identifier: String) {
+        let service = AuthService()
+        let request = LoginRequest(provider: provider, identifier: identifier)
+        
+        service.login(with: request).subscribe { [weak self] result in
+            
+            switch result {
+            case .success(let response):
+                if response.isNew {
+                    UserDefaults.standard.set("\(response.tokens.accessToken)", forKey: "ACCESSTOKEN")
+                    UserDefaults.standard.set("\(response.tokens.refreshToken)", forKey: "REFRESHTOKEN")
+                    self?.router?.routeToSelectTag()
+                } else {
+                    self?.listener?.login()
+                }
+            case .failure(let error):
+                Console.error(error.localizedDescription)
+            }
+        }
+        .disposed(by: disposeBag)
+    }
+    
+    // MARK: - SelectTagListener
+    
+    func selectTagStartButtonTapped(with selectedTags: [String]) {
+        let repository = UserRepository()
+        
+        repository.setTags(items: selectedTags).subscribe { [weak self] result in
+            if let result = result.element {
+                switch result {
+                case .success(let response):
+                    Console.log("\(response)")
+                    self?.listener?.login()
+                case .failure(let error):
+                    Console.log(error.localizedDescription)
+                }
+            }
+        }
+        .disposed(by: disposeBag)
     }
 }
