@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.7.1)
+  - Alamofire (5.8.0)
   - KakaoSDK (2.16.0):
     - KakaoSDKAuth (= 2.16.0)
     - KakaoSDKCommon (= 2.16.0)
@@ -84,7 +84,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/uber/RIBs
 
 SPEC CHECKSUMS:
-  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
   KakaoSDK: 53f557e4b10bb0a90965588691bba7234c4d4728
   KakaoSDKAuth: 1b85ed7c41b0517bfd1fc9dc46c292c75b8cb610
   KakaoSDKCommon: d6579aa2e9d963d74e13d741cbf1cce48b8b0c17

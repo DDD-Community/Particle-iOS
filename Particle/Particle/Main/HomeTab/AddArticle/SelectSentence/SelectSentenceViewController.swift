@@ -65,7 +65,7 @@ final class SelectSentenceViewController: UIViewController,
         let button = UIButton()
         button.setTitle("다음", for: .normal)
         button.setTitleColor(.systemGray, for: .disabled)
-        button.setTitleColor(.particleColor.main, for: .normal)
+        button.setTitleColor(.particleColor.main100, for: .normal)
         return button
     }()
     
