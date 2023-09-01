@@ -62,13 +62,16 @@
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
 		AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */; };
 		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
+		AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */; };
 		AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122732A977BEA00262088 /* SelectTagRouter.swift */; };
 		AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122742A977BEA00262088 /* SelectTagViewController.swift */; };
 		AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122752A977BEA00262088 /* SelectTagBuilder.swift */; };
 		AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122762A977BEA00262088 /* SelectTagInteractor.swift */; };
 		AF31227D2A9780E900262088 /* Accordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF31227C2A9780E900262088 /* Accordion.swift */; };
+		AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473BBF2A9F6241002EE27B /* AuthService.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
+		AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B2E682AA1FC5B00806149 /* Tag.swift */; };
 		AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F12A8CFF9200877C85 /* LoginRequest.swift */; };
 		AF9702F42A8D005F00877C85 /* LoginSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */; };
 		AF9702F82A8D01C700877C85 /* RecordCreateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F72A8D01C700877C85 /* RecordCreateDTO.swift */; };
@@ -105,6 +108,7 @@
 		AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */; };
 		AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */; };
 		AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */; };
+		AFC387FA2A9F726100AF9C4D /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC387F92A9F726100AF9C4D /* UserRepository.swift */; };
 		AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */; };
 		AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */; };
 		AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */; };
@@ -172,14 +176,17 @@
 		AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerBuilder.swift; sourceTree = "<group>"; };
 		AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerInteractor.swift; sourceTree = "<group>"; };
+		AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
 		AF3122732A977BEA00262088 /* SelectTagRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagRouter.swift; sourceTree = "<group>"; };
 		AF3122742A977BEA00262088 /* SelectTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagViewController.swift; sourceTree = "<group>"; };
 		AF3122752A977BEA00262088 /* SelectTagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagBuilder.swift; sourceTree = "<group>"; };
 		AF3122762A977BEA00262088 /* SelectTagInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagInteractor.swift; sourceTree = "<group>"; };
 		AF31227C2A9780E900262088 /* Accordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accordion.swift; sourceTree = "<group>"; };
+		AF473BBF2A9F6241002EE27B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Particle.entitlements; sourceTree = "<group>"; };
+		AF7B2E682AA1FC5B00806149 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		AF9702F12A8CFF9200877C85 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessResponse.swift; sourceTree = "<group>"; };
 		AF9702F72A8D01C700877C85 /* RecordCreateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateDTO.swift; sourceTree = "<group>"; };
@@ -218,6 +225,7 @@
 		AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceBuilder.swift; sourceTree = "<group>"; };
 		AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceInteractor.swift; sourceTree = "<group>"; };
 		AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ParticleColor.swift"; sourceTree = "<group>"; };
+		AFC387F92A9F726100AF9C4D /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleRouter.swift; sourceTree = "<group>"; };
 		AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
 		AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleInteractor.swift; sourceTree = "<group>"; };
@@ -453,12 +461,55 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AF473BBA2A9F6063002EE27B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AF473BBC2A9F609F002EE27B /* Services */,
+				AF473BBB2A9F6094002EE27B /* Repositories */,
+				AF9702EF2A8CFF8100877C85 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AF473BBB2A9F6094002EE27B /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AFC387F92A9F726100AF9C4D /* UserRepository.swift */,
+				AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		AF473BBC2A9F609F002EE27B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AF473BBF2A9F6241002EE27B /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		AF4A190F2A6A1E4100932372 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				AF4A19102A6A1E4B00932372 /* PhotoCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AF7B2E662AA1FC3000806149 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				AF7B2E672AA1FC5200806149 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		AF7B2E672AA1FC5200806149 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				AF7B2E682AA1FC5B00806149 /* Tag.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		AF86D82C2A4E6030009F1E9D /* Entry */ = {
@@ -524,11 +575,12 @@
 		AFB4BDC32A4093DC008BA9E0 /* Particle */ = {
 			isa = PBXGroup;
 			children = (
-				AF9702EF2A8CFF8100877C85 /* Network */,
 				AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */,
-				3520EF212A5FB17800A53B34 /* Utils */,
-				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
 				AFE885F62A5C29E5001EF2C0 /* Extension */,
+				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
+				AF7B2E662AA1FC3000806149 /* Domain */,
+				AF473BBA2A9F6063002EE27B /* Data */,
+				3520EF212A5FB17800A53B34 /* Utils */,
 				AF86D82C2A4E6030009F1E9D /* Entry */,
 				AF0D71C62A5BE9AC00157758 /* Root */,
 				AF0D71CF2A5BEA6C00157758 /* LoggedOut */,
@@ -809,6 +861,8 @@
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
 				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
+				AFC387FA2A9F726100AF9C4D /* UserRepository.swift in Sources */,
+				AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */,
 				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
 				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
 				AFBB5F6B2A66ABBF002416DA /* SearchInteractor.swift in Sources */,
@@ -832,6 +886,7 @@
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
 				3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */,
 				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
+				AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */,
 				AFBB5F4F2A66AAB0002416DA /* ExploreViewController.swift in Sources */,
 				AFBB5F472A66AA99002416DA /* HomeBuilder.swift in Sources */,
 				AFBB5F452A66AA99002416DA /* HomeRouter.swift in Sources */,
@@ -846,6 +901,7 @@
 				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
 				AFBB5F692A66ABBF002416DA /* SearchViewController.swift in Sources */,
+				AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */,
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
 				AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */,
 				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
