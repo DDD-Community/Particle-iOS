@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 
 protocol EditSentencePresentableListener: AnyObject {
-    func nextButtonTapped()
+    func saveButtonTapped(with text: String)
 }
 
 final class EditSentenceViewController: UIViewController, EditSentencePresentable, EditSentenceViewControllable {
@@ -72,9 +72,9 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         return button
     }()
     
-    private let nextButton: UIButton = {
+    private let saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다음", for: .normal)
+        button.setTitle("저장", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .particleColor.main100
         button.layer.cornerRadius = 8
@@ -90,9 +90,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
                 height: 50
             )
         )
-        uiview.layer.borderWidth = 1
-        uiview.layer.borderColor = UIColor.systemGray6.cgColor
-        uiview.layer.backgroundColor = UIColor.systemBackground.cgColor
+        uiview.layer.backgroundColor = UIColor.darkGray.cgColor
         return uiview
     }()
     
@@ -105,6 +103,8 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
         return button
     }()
     
+    // MARK: - Initializers
+    
     init(with text: String) {
         self.originalText = text
         super.init(nibName: nil, bundle: nil)
@@ -115,6 +115,8 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View LifeCycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,6 +138,7 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
     
     private func setupInitialView() {
         view.backgroundColor = .init(hex: 0x1F1F1F)
+        view.addRoundedCorner(corners: [.topLeft, .topRight], radius: 24)
         addSubviews()
         setConstraints()
     }
@@ -147,9 +150,10 @@ final class EditSentenceViewController: UIViewController, EditSentencePresentabl
             }
             .disposed(by: disposeBag)
         
-        nextButton.rx.tap
+        saveButton.rx.tap
             .bind { [weak self] in
-                self?.listener?.nextButtonTapped()
+                guard let self = self else { return }
+                self.listener?.saveButtonTapped(with: self.textView.text)
             }
             .disposed(by: disposeBag)
         
@@ -208,7 +212,7 @@ private extension EditSentenceViewController {
             view.addSubview($0)
         }
         
-        [refreshButton, nextButton].forEach {
+        [refreshButton, saveButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
         
@@ -253,7 +257,10 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct EditSentenceViewController_Preview: PreviewProvider {
     static var previews: some View {
-        EditSentenceViewController(with: "테스트 문구").showPreview()
+        EditSentenceViewController(
+            with: "테스트 문구"
+        )
+        .showPreview()
     }
 }
 #endif

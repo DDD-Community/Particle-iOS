@@ -49,7 +49,7 @@ final class EditSentencePresentationController: UIPresentationController {
         guard let superview = presentingViewController.view else { return }
         superview.addSubview(dimmingView)
         setupDimmingViewLayout(in: superview)
-        adoptTapGestureRecognizer()
+//        adoptTapGestureRecognizer() // FIXME: dimmingView 탭시, 모달 dismiss 기능을 막아둠
         dimmingView.alpha = 0
         
         presentingViewController.transitionCoordinator?.animate(

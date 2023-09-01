@@ -17,6 +17,7 @@ protocol SelectSentenceRouting: ViewableRouting {
 protocol SelectSentencePresentable: Presentable {
     var listener: SelectSentencePresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func showSwipeAnimation()
 }
 
 protocol SelectSentenceListener: AnyObject {
@@ -28,13 +29,16 @@ protocol SelectSentenceListener: AnyObject {
 final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresentable>,
                                       SelectSentenceInteractable,
                                       SelectSentencePresentableListener {
-
+    
     weak var router: SelectSentenceRouting?
     weak var listener: SelectSentenceListener?
     
+    private var organizingSentenceRepository: OrganizingSentenceRepository
+    
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
-    override init(presenter: SelectSentencePresentable) {
+    init(presenter: SelectSentencePresentable, repository: OrganizingSentenceRepository) {
+        self.organizingSentenceRepository = repository
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -56,12 +60,29 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
         router?.attachEditSentence(with: text)
     }
     
-    func dismissEditSentence() {
-        router?.detachEditSentence()
-        listener?.pushToOrganizingSentence()
-    }
-    
     func backButtonTapped() {
         listener?.popSelectSentence()
     }
+    
+    func nextButtonTapped() {
+        listener?.pushToOrganizingSentence()
+    }
+    
+    // MARK: - SelectSentenceInteractable
+    
+    func dismissEditSentence(with text: String) {
+        guard var list = try? organizingSentenceRepository.sentenceFile.value() else {
+            Console.error("\(#function) value 를 가져올 수 없습니다.")
+            return
+        }
+        list.append(text)
+        organizingSentenceRepository.sentenceFile.onNext(list)
+        router?.detachEditSentence()
+    }
+    
+    func swipeToNextPhoto() {
+        // TODO: 다음 사진으로 자동 스와이프 처리
+        presenter.showSwipeAnimation()
+    }
+    
 }

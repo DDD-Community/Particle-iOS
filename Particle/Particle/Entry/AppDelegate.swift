@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         KakaoSDK.initSDK(appKey: "082e213b8e9609caba039a0e66b54690")
-            
+        UserDefaults.standard.set(false, forKey: "ShowSwipeGuide")
+
         return true
     }
 
