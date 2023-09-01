@@ -10,8 +10,6 @@ struct RecordCreateDTO {
     let url: String
     let items: [RecordItemCreateDTO]
     let tags: [String]
-    // 가능한 String 값
-    // UXUI, BRANDING, GRAPHIC, INDUSTRY, IOS, ANDROID, WEB, SERVER, AI, DATA, HR, TREND, INVEST, GROWTH, CONTENTS
     
     struct RecordItemCreateDTO {
         let content: String

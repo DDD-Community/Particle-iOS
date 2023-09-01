@@ -5,7 +5,7 @@
 //  Created by 이원빈 on 2023/08/16.
 //
 
-struct UserReadDTO {
+struct UserReadDTO: Decodable {
     let id: String
     let nickname: String
     let profileImageUrl: String
