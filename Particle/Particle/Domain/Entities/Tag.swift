@@ -29,51 +29,97 @@ enum Tag: String {
     case branding_marketing = "#브랜드 마케팅"
     case growth_marketing = "#그로스 마케팅"
     case contents_marketing = "#콘텐츠 마케팅"
-
+    
     var value: String {
         switch self {
         case .branding:
-            return "BRANDING"
+            return "브랜딩"
         case .uxui:
             return "UXUI"
         case .graphic:
-            return "GRAPHIC"
+            return "그래픽 디자인"
         case .industry:
-            return "INDUSTRY"
+            return "산업 디자인"
         case .ios:
-            return "IOS"
+            return "iOS"
         case .android:
-            return "ANDROID"
+            return "Android"
         case .web:
-            return "WEB"
+            return "Web"
         case .server:
-            return "SERVER"
+            return "서버"
         case .ai:
             return "AI"
         case .service_plan:
-            return "SERVICE_PLAN"
+            return "서비스 기획"
         case .strategy_plan:
-            return "STRATEGY_PLAN"
+            return "전략 기획"
         case .system_plan:
-            return "SYSTEM_PLAN"
+            return "시스템 기획"
         case .data_anal:
-            return "DATA_ANAL"
+            return "데이터 분석"
         case .company_culture:
-            return "COMPANY_CULTURE"
+            return "조직 문화"
         case .trend:
-            return "TREND"
+            return "트랜드"
         case .cx:
             return "CX"
         case .leadership:
-            return "LEADERSHIP"
+            return "리더쉽"
         case .insight:
-            return "INSIGHT"
+            return "인사이트"
         case .branding_marketing:
-            return "BRANDING_MARKETING"
+            return "브랜드 마케팅"
         case .growth_marketing:
-            return "GROWTH_MARKETING"
+            return "그로스 마케팅"
         case .contents_marketing:
-            return "CONTENTS_MARKETING"
+            return "콘텐츠 마케팅"
         }
     }
+//    var value: String {
+//        switch self {
+//        case .branding:
+//            return "BRANDING"
+//        case .uxui:
+//            return "UXUI"
+//        case .graphic:
+//            return "GRAPHIC"
+//        case .industry:
+//            return "INDUSTRY"
+//        case .ios:
+//            return "IOS"
+//        case .android:
+//            return "ANDROID"
+//        case .web:
+//            return "WEB"
+//        case .server:
+//            return "SERVER"
+//        case .ai:
+//            return "AI"
+//        case .service_plan:
+//            return "SERVICE_PLAN"
+//        case .strategy_plan:
+//            return "STRATEGY_PLAN"
+//        case .system_plan:
+//            return "SYSTEM_PLAN"
+//        case .data_anal:
+//            return "DATA_ANAL"
+//        case .company_culture:
+//            return "COMPANY_CULTURE"
+//        case .trend:
+//            return "TREND"
+//        case .cx:
+//            return "CX"
+//        case .leadership:
+//            return "LEADERSHIP"
+//        case .insight:
+//            return "INSIGHT"
+//        case .branding_marketing:
+//            return "BRANDING_MARKETING"
+//        case .growth_marketing:
+//            return "GROWTH_MARKETING"
+//        case .contents_marketing:
+//            return "CONTENTS_MARKETING"
+//        }
+//    }
 }
