@@ -14,11 +14,9 @@ protocol LoggedOutRouting: ViewableRouting {
 
 protocol LoggedOutPresentable: Presentable {
     var listener: LoggedOutPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol LoggedOutListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func login()
 }
 
@@ -59,6 +57,8 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
                     UserDefaults.standard.set("\(response.tokens.refreshToken)", forKey: "REFRESHTOKEN")
                     self?.router?.routeToSelectTag()
                 } else {
+                    UserDefaults.standard.set("\(response.tokens.accessToken)", forKey: "ACCESSTOKEN")
+                    UserDefaults.standard.set("\(response.tokens.refreshToken)", forKey: "REFRESHTOKEN")
                     self?.listener?.login()
                 }
             case .failure(let error):

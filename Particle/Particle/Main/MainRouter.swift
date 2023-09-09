@@ -54,66 +54,6 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
         interactor.router = self
     }
     
-    //    func routeToAddArticle() {
-    //        let organizingSentenceRouter = organizingSentenceBuilder.build(withListener: interactor)
-    //        self.organizingSentence = organizingSentenceRouter
-    //        attachChild(organizingSentenceRouter)
-    //
-    //        presentInsideNavigation(organizingSentenceRouter.viewControllable)
-    //    }
-    //
-    //    func popToAddArticle() {
-    //        guard let router = organizingSentence else {
-    //            return
-    //        }
-    //
-    //        guard let navigationControllable = navigationControllable else {
-    //            return
-    //        }
-    //
-    //        navigationControllable.dismiss(completion: nil)
-    //
-    //        detachChild(router)
-    //        organizingSentence = nil
-    //        self.navigationControllable = nil
-    //    }
-    //
-    //    func routeToSetAdditionalInfo() {
-    //        let router = setAdditionalInfoBuilder.build(withListener: interactor)
-    //        self.setAdditionalInfo = router
-    //        attachChild(router)
-    //
-    //        guard let navigationControllable = navigationControllable else {
-    //            presentInsideNavigation(router.viewControllable)
-    //            return
-    //        }
-    //
-    //        navigationControllable.pushViewController(router.viewControllable, animated: true)
-    //    }
-    //
-    //    func popSetAdditionalInfo() {
-    //        guard let router = setAdditionalInfo else {
-    //            return
-    //        }
-    //
-    //        guard let navigationControllable = navigationControllable else {
-    //            return
-    //        }
-    //
-    //        navigationControllable.popViewController(animated: true)
-    //
-    //        detachChild(router)
-    //        setAdditionalInfo = nil
-    //    }
-    //
-    //    private func presentInsideNavigation(_ viewControllable: ViewControllable) {
-    //        let navigation = NavigationControllerable(root: viewControllable)
-    //        self.navigationControllable = navigation
-    //        navigation.navigationController.navigationBar.isHidden = true
-    //        navigation.navigationController.modalPresentationStyle  = .fullScreen
-    //        viewController.present(navigation, animated: true, completion: nil)
-    //    }
-    
     func attachTabs() {
         let home = home.build(withListener: interactor)
         let explore = explore.build(withListener: interactor)

@@ -51,6 +51,16 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
     private func configureTabBar() {
         tabBar.backgroundColor = .particleColor.bk03
         tabBar.tintColor = .particleColor.main100
+        if #available(iOS 13.0, *) {
+            let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithDefaultBackground()
+            tabBarAppearance.backgroundColor = .particleColor.bk03
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+
+            if #available(iOS 15.0, *) {
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
+        }
     }
     
     func present(viewController: RIBs.ViewControllable) {

@@ -19,6 +19,12 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
 
     weak var listener: SearchPresentableListener?
     
+    private let infoLabel: UILabel = {
+        let label = UILabel()
+        label.setParticleFont(.y_title02, color: .particleColor.gray05, text: "화면 준비중 입니다.")
+        return label
+    }()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         title = "검색"
@@ -31,6 +37,29 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .particleColor.main100
+        setupInitialView()
+        addSubviews()
+        setConstraints()
+    }
+    
+    private func setupInitialView() {
+        view.backgroundColor = .particleColor.black
+        navigationController?.isNavigationBarHidden = true
+    }
+}
+
+// MARK: - Layout Settting
+
+private extension SearchViewController {
+    func addSubviews() {
+        [infoLabel].forEach {
+            view.addSubview($0)
+        }
+    }
+    
+    func setConstraints() {
+        infoLabel.snp.makeConstraints{
+            $0.center.equalToSuperview()
+        }
     }
 }

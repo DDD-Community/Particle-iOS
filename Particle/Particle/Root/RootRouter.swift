@@ -13,14 +13,12 @@ protocol RootInteractable: Interactable, LoggedOutListener, LoggedInListener {
 }
 
 protocol RootViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
     func present(viewController: ViewControllable)
     func dismiss(viewController: ViewControllable)
 }
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
     init(
         interactor: RootInteractor,
         viewController: RootViewControllable,
