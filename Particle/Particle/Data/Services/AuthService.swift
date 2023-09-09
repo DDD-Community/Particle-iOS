@@ -28,6 +28,7 @@ final class AuthService {
                     case .success:
                         if let data = response.value {
                             emitter.onNext(.success(data))
+                            Console.debug("ACCESSTOKEN: \(data.tokens.accessToken)")
                         }
                         
                     case .failure(let error):

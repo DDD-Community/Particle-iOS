@@ -10,37 +10,40 @@ import RxSwift
 
 final class UserRepository {
     
-    func fetchMyProfile() {
+    func fetchMyProfile() -> Observable<AFResult<UserReadDTO>> {
         
         let urlComponent = URLComponents(string: "https://particle.k-net.kr/api/v1/user/my/profile")
 
         guard let url = urlComponent?.url else {
-            return
+            return Observable.empty()
         }
         
         guard let accessToken = UserDefaults.standard.string(forKey: "ACCESSTOKEN") else {
             Console.error("AccessToken 이 존재하지 않습니다.")
-            return
+            return Observable.empty()
         }
         
         let header: HTTPHeaders = [
             "Authorization": "Bearer \(accessToken)"
         ]
         
-        let request = AF.request(url, method: .get, encoding: JSONEncoding.default, headers: header)
-        request
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: UserReadDTO.self) { response in
-                switch response.result {
-                case .success:
-                    if let data = response.value {
-                        print(data)
+        return Observable.create { emitter in
+            let request = AF.request(url, method: .get, headers: header)
+            request
+                .validate(statusCode: 200..<300)
+                .responseDecodable(of: UserReadDTO.self) { response in
+                    switch response.result {
+                    case .success:
+                        if let data = response.value {
+                            emitter.onNext(.success(data))
+                        }
+                        
+                    case .failure(let err):
+                        print(err.localizedDescription)
                     }
-                    
-                case .failure(let err):
-                    print(err.localizedDescription)
                 }
-            }
+            return Disposables.create()
+        }
     }
     
     func setTags(items: [String]) -> Observable<AFResult<UserReadDTO>> {

@@ -5,7 +5,7 @@
 //  Created by 이원빈 on 2023/08/16.
 //
 
-struct RecordReadDTO {
+struct RecordReadDTO: Decodable {
     let id: String
     let title: String
     let url: String
@@ -14,10 +14,16 @@ struct RecordReadDTO {
     let createdAt: String
     let createdBy: String
     
-    struct RecordItemReadDTO {
+    func toDomain() -> RecordCellModel {
+        .init(id: id, createdAt: createdAt, items: items.map { $0.toDomain() }, title: title, url: url)
+    }
+    
+    struct RecordItemReadDTO: Decodable {
         let content: String
         let isMain: Bool
+        
+        func toDomain() -> (content: String, isMain: Bool) {
+            return (content, isMain)
+        }
     }
 }
-
-
