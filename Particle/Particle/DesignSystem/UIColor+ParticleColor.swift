@@ -35,4 +35,6 @@ struct ParticleColor {
     
     let white = UIColor(hex: 0xF6F6F6)
     let white10 = UIColor(hex: 0xF6F6F6).withAlphaComponent(0.06)
+    
+    let warning = UIColor(hex: 0xE57085)
 }

@@ -16,6 +16,11 @@ struct ParticleFont {
     func generate(style: FontStyle, size: CGFloat) -> UIFont? {
         return UIFont(name: style.rawValue, size: size)
     }
+    
+    // MARK: - Pretendard
+    
+    // MARK: - YDE
+    
 }
 
 enum FontStyle: String {

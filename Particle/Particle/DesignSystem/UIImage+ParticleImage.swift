@@ -16,11 +16,17 @@ struct ParticleImage {
     // MARK: - Button
     
     let backButton = UIImage(named: "backButtonIcon")
+    let backButton2 = UIImage(named: "chevron-left")
     let xmarkButton = UIImage(named: "xmark")
     let plusButton = UIImage(named: "plus")
     let refreshButton = UIImage(named: "refresh")
     let arrowUp = UIImage(named: "chevron-up")
     let arrowUp_main = UIImage(named: "chevron-up-main")
+    let arrowRight = UIImage(named: "chevron-right")
+    let ellipsis = UIImage(named: "more-horizontal")
+    let heart = UIImage(named: "heart")
+    let info = UIImage(named: "info")
+    let check = UIImage(named: "check")
 
     let kakaoLogo = UIImage(named: "kakaoLogo")
     let appleLogo = UIImage(named: "appleLogo")
@@ -38,9 +44,17 @@ struct ParticleImage {
     let exploreTabIcon = UIImage(named: "book-open")
     let mypageTabIcon = UIImage(named: "user")
     
+    let bell = UIImage(named: "bell")
+    let grid = UIImage(named: "grid")
+    let tag = UIImage(named: "tag")
+    let user2 = UIImage(named: "user2")
+    
     // MARK: - Etc
     
     let checkBox = UIImage(named: "checkbox")
     let checkBox_checked = UIImage(named: "checkbox_checked")
     let loginBackground = UIImage(named: "loginBackground")
+    
+    let eyes = UIImage(named: "eyes")
+    let tooltip1 = UIImage(named: "tooltip1")
 }
