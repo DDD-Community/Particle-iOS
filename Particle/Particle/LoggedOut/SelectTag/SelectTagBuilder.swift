@@ -7,15 +7,9 @@
 
 import RIBs
 
-protocol SelectTagDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
-}
+protocol SelectTagDependency: Dependency {}
 
-final class SelectTagComponent: Component<SelectTagDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-}
+final class SelectTagComponent: Component<SelectTagDependency> {}
 
 // MARK: - Builder
 

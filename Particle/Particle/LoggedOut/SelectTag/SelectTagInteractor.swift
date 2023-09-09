@@ -8,17 +8,13 @@
 import RIBs
 import RxSwift
 
-protocol SelectTagRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-}
+protocol SelectTagRouting: ViewableRouting {}
 
 protocol SelectTagPresentable: Presentable {
     var listener: SelectTagPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
 protocol SelectTagListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func selectTagStartButtonTapped(with selectedTags: [String])
 }
 
@@ -27,8 +23,6 @@ final class SelectTagInteractor: PresentableInteractor<SelectTagPresentable>, Se
     weak var router: SelectTagRouting?
     weak var listener: SelectTagListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
     override init(presenter: SelectTagPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -36,18 +30,16 @@ final class SelectTagInteractor: PresentableInteractor<SelectTagPresentable>, Se
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
     }
     
     // MARK: - SelectTagPresentableListener
     
     func backButtonTapped() {
-        // TODO: LoggedOut RIB로 돌아가기
+        // TODO: LoggedOut RIB로 돌아가기?
     }
     
     func startButtonTapped(with selectedTags: [String]) {

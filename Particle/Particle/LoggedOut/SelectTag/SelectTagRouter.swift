@@ -12,13 +12,11 @@ protocol SelectTagInteractable: Interactable {
     var listener: SelectTagListener? { get set }
 }
 
-protocol SelectTagViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-}
+protocol SelectTagViewControllable: ViewControllable {}
 
-final class SelectTagRouter: ViewableRouter<SelectTagInteractable, SelectTagViewControllable>, SelectTagRouting {
+final class SelectTagRouter: ViewableRouter<SelectTagInteractable, SelectTagViewControllable>,
+                             SelectTagRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
     override init(interactor: SelectTagInteractable, viewController: SelectTagViewControllable) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
