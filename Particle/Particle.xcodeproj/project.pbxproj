@@ -56,6 +56,11 @@
 		AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */; };
 		AF130A8D2AA225F000F2E0BD /* SelectedPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A8C2AA225F000F2E0BD /* SelectedPhotoCell.swift */; };
 		AF130A8F2AA226CF00F2E0BD /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A8E2AA226CF00F2E0BD /* UIView+.swift */; };
+		AF130A912AA2DE0F00F2E0BD /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A902AA2DE0F00F2E0BD /* UITextField+.swift */; };
+		AF130A972AA2E9E200F2E0BD /* RecordDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A932AA2E9E200F2E0BD /* RecordDetailRouter.swift */; };
+		AF130A982AA2E9E200F2E0BD /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A942AA2E9E200F2E0BD /* RecordDetailViewController.swift */; };
+		AF130A992AA2E9E200F2E0BD /* RecordDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A952AA2E9E200F2E0BD /* RecordDetailBuilder.swift */; };
+		AF130A9A2AA2E9E200F2E0BD /* RecordDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A962AA2E9E200F2E0BD /* RecordDetailInteractor.swift */; };
 		AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2DE2A68EEB100C54490 /* Console.swift */; };
 		AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */; };
 		AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */; };
@@ -70,6 +75,19 @@
 		AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122752A977BEA00262088 /* SelectTagBuilder.swift */; };
 		AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122762A977BEA00262088 /* SelectTagInteractor.swift */; };
 		AF31227D2A9780E900262088 /* Accordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF31227C2A9780E900262088 /* Accordion.swift */; };
+		AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647412AA9E94700701B83 /* SetAccountRouter.swift */; };
+		AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647422AA9E94700701B83 /* SetAccountViewController.swift */; };
+		AF4647472AA9E94700701B83 /* SetAccountBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */; };
+		AF4647482AA9E94700701B83 /* SetAccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647442AA9E94700701B83 /* SetAccountInteractor.swift */; };
+		AF4647502AAA0D6700701B83 /* SetAlarmRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46474C2AAA0D6700701B83 /* SetAlarmRouter.swift */; };
+		AF4647512AAA0D6700701B83 /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46474D2AAA0D6700701B83 /* SetAlarmViewController.swift */; };
+		AF4647522AAA0D6700701B83 /* SetAlarmBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46474E2AAA0D6700701B83 /* SetAlarmBuilder.swift */; };
+		AF4647532AAA0D6700701B83 /* SetAlarmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46474F2AAA0D6700701B83 /* SetAlarmInteractor.swift */; };
+		AF4647582AAA0E9A00701B83 /* AlarmToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647572AAA0E9A00701B83 /* AlarmToggleRow.swift */; };
+		AF4647602AAA196F00701B83 /* DirectlySetAlarmRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475C2AAA196F00701B83 /* DirectlySetAlarmRouter.swift */; };
+		AF4647612AAA196F00701B83 /* DirectlySetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475D2AAA196F00701B83 /* DirectlySetAlarmViewController.swift */; };
+		AF4647622AAA196F00701B83 /* DirectlySetAlarmBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475E2AAA196F00701B83 /* DirectlySetAlarmBuilder.swift */; };
+		AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */; };
 		AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473BBF2A9F6241002EE27B /* AuthService.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
@@ -80,6 +98,7 @@
 		AF9702FA2A8D021800877C85 /* RecordReadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F92A8D021800877C85 /* RecordReadDTO.swift */; };
 		AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702FB2A8D02C300877C85 /* RecordUpdateDTO.swift */; };
 		AF9702FE2A8D031000877C85 /* UserReadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702FD2A8D031000877C85 /* UserReadDTO.swift */; };
+		AF9C6FCD2AA3038F00948BE2 /* UILabel+ParticleFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C6FCC2AA3038F00948BE2 /* UILabel+ParticleFont.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
 		AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */; };
@@ -114,6 +133,12 @@
 		AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */; };
 		AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */; };
 		AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */; };
+		AFDE0F3B2AA4588C008DC539 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE0F3A2AA4588C008DC539 /* RecordCell.swift */; };
+		AFDE0F3D2AA4AC51008DC539 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE0F3C2AA4AC51008DC539 /* DateManager.swift */; };
+		AFDE0F432AA4C1F3008DC539 /* MyRecordListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE0F3F2AA4C1F3008DC539 /* MyRecordListRouter.swift */; };
+		AFDE0F442AA4C1F3008DC539 /* MyRecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE0F402AA4C1F3008DC539 /* MyRecordListViewController.swift */; };
+		AFDE0F452AA4C1F3008DC539 /* MyRecordListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE0F412AA4C1F3008DC539 /* MyRecordListBuilder.swift */; };
+		AFDE0F462AA4C1F3008DC539 /* MyRecordListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDE0F422AA4C1F3008DC539 /* MyRecordListInteractor.swift */; };
 		AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */; };
 		AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE885F72A5C29F7001EF2C0 /* Color+.swift */; };
 		AFFAEBE62A8CFBBA009EC03B /* UIFont+ParticleFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFAEBE52A8CFBBA009EC03B /* UIFont+ParticleFont.swift */; };
@@ -172,6 +197,11 @@
 		AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootComponent+LoggedIn.swift"; sourceTree = "<group>"; };
 		AF130A8C2AA225F000F2E0BD /* SelectedPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotoCell.swift; sourceTree = "<group>"; };
 		AF130A8E2AA226CF00F2E0BD /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		AF130A902AA2DE0F00F2E0BD /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		AF130A932AA2E9E200F2E0BD /* RecordDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailRouter.swift; sourceTree = "<group>"; };
+		AF130A942AA2E9E200F2E0BD /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
+		AF130A952AA2E9E200F2E0BD /* RecordDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailBuilder.swift; sourceTree = "<group>"; };
+		AF130A962AA2E9E200F2E0BD /* RecordDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailInteractor.swift; sourceTree = "<group>"; };
 		AF18E2DE2A68EEB100C54490 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentencePresentationController.swift; sourceTree = "<group>"; };
@@ -186,6 +216,19 @@
 		AF3122752A977BEA00262088 /* SelectTagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagBuilder.swift; sourceTree = "<group>"; };
 		AF3122762A977BEA00262088 /* SelectTagInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagInteractor.swift; sourceTree = "<group>"; };
 		AF31227C2A9780E900262088 /* Accordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accordion.swift; sourceTree = "<group>"; };
+		AF4647412AA9E94700701B83 /* SetAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountRouter.swift; sourceTree = "<group>"; };
+		AF4647422AA9E94700701B83 /* SetAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountViewController.swift; sourceTree = "<group>"; };
+		AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountBuilder.swift; sourceTree = "<group>"; };
+		AF4647442AA9E94700701B83 /* SetAccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountInteractor.swift; sourceTree = "<group>"; };
+		AF46474C2AAA0D6700701B83 /* SetAlarmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmRouter.swift; sourceTree = "<group>"; };
+		AF46474D2AAA0D6700701B83 /* SetAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmViewController.swift; sourceTree = "<group>"; };
+		AF46474E2AAA0D6700701B83 /* SetAlarmBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmBuilder.swift; sourceTree = "<group>"; };
+		AF46474F2AAA0D6700701B83 /* SetAlarmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmInteractor.swift; sourceTree = "<group>"; };
+		AF4647572AAA0E9A00701B83 /* AlarmToggleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmToggleRow.swift; sourceTree = "<group>"; };
+		AF46475C2AAA196F00701B83 /* DirectlySetAlarmRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmRouter.swift; sourceTree = "<group>"; };
+		AF46475D2AAA196F00701B83 /* DirectlySetAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmViewController.swift; sourceTree = "<group>"; };
+		AF46475E2AAA196F00701B83 /* DirectlySetAlarmBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmBuilder.swift; sourceTree = "<group>"; };
+		AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmInteractor.swift; sourceTree = "<group>"; };
 		AF473BBF2A9F6241002EE27B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
@@ -197,6 +240,7 @@
 		AF9702F92A8D021800877C85 /* RecordReadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReadDTO.swift; sourceTree = "<group>"; };
 		AF9702FB2A8D02C300877C85 /* RecordUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUpdateDTO.swift; sourceTree = "<group>"; };
 		AF9702FD2A8D031000877C85 /* UserReadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReadDTO.swift; sourceTree = "<group>"; };
+		AF9C6FCC2AA3038F00948BE2 /* UILabel+ParticleFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ParticleFont.swift"; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -233,6 +277,12 @@
 		AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleRouter.swift; sourceTree = "<group>"; };
 		AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
 		AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleInteractor.swift; sourceTree = "<group>"; };
+		AFDE0F3A2AA4588C008DC539 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
+		AFDE0F3C2AA4AC51008DC539 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		AFDE0F3F2AA4C1F3008DC539 /* MyRecordListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordListRouter.swift; sourceTree = "<group>"; };
+		AFDE0F402AA4C1F3008DC539 /* MyRecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordListViewController.swift; sourceTree = "<group>"; };
+		AFDE0F412AA4C1F3008DC539 /* MyRecordListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordListBuilder.swift; sourceTree = "<group>"; };
+		AFDE0F422AA4C1F3008DC539 /* MyRecordListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordListInteractor.swift; sourceTree = "<group>"; };
 		AFE885F42A5C26EC001EF2C0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AFE885F72A5C29F7001EF2C0 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		AFFAEBE52A8CFBBA009EC03B /* UIFont+ParticleFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+ParticleFont.swift"; sourceTree = "<group>"; };
@@ -309,6 +359,7 @@
 				3520EF222A5FB18A00A53B34 /* RibsUtil.swift */,
 				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
 				AF18E2DE2A68EEB100C54490 /* Console.swift */,
+				AFDE0F3C2AA4AC51008DC539 /* DateManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -406,6 +457,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AF130A922AA2E9CA00F2E0BD /* RecordDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AF130A932AA2E9E200F2E0BD /* RecordDetailRouter.swift */,
+				AF130A942AA2E9E200F2E0BD /* RecordDetailViewController.swift */,
+				AF130A952AA2E9E200F2E0BD /* RecordDetailBuilder.swift */,
+				AF130A962AA2E9E200F2E0BD /* RecordDetailInteractor.swift */,
+			);
+			path = RecordDetail;
+			sourceTree = "<group>";
+		};
 		AF18E2E02A68FE6A00C54490 /* ModalStyle */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +484,7 @@
 				3520EF072A5E8F3400A53B34 /* UIImage+ParticleImage.swift */,
 				AFFAEBE52A8CFBBA009EC03B /* UIFont+ParticleFont.swift */,
 				AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */,
+				AF9C6FCC2AA3038F00948BE2 /* UILabel+ParticleFont.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -471,6 +534,49 @@
 				AF31227C2A9780E900262088 /* Accordion.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AF4647402AA9E92C00701B83 /* SetAccount */ = {
+			isa = PBXGroup;
+			children = (
+				AF4647412AA9E94700701B83 /* SetAccountRouter.swift */,
+				AF4647422AA9E94700701B83 /* SetAccountViewController.swift */,
+				AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */,
+				AF4647442AA9E94700701B83 /* SetAccountInteractor.swift */,
+			);
+			path = SetAccount;
+			sourceTree = "<group>";
+		};
+		AF4647492AAA0D2B00701B83 /* SetAlarm */ = {
+			isa = PBXGroup;
+			children = (
+				AF4647542AAA0E1A00701B83 /* View */,
+				AF46474C2AAA0D6700701B83 /* SetAlarmRouter.swift */,
+				AF46474D2AAA0D6700701B83 /* SetAlarmViewController.swift */,
+				AF46474E2AAA0D6700701B83 /* SetAlarmBuilder.swift */,
+				AF46474F2AAA0D6700701B83 /* SetAlarmInteractor.swift */,
+				AF4647592AAA194D00701B83 /* DirectlySetAlarm */,
+			);
+			path = SetAlarm;
+			sourceTree = "<group>";
+		};
+		AF4647542AAA0E1A00701B83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF4647572AAA0E9A00701B83 /* AlarmToggleRow.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AF4647592AAA194D00701B83 /* DirectlySetAlarm */ = {
+			isa = PBXGroup;
+			children = (
+				AF46475C2AAA196F00701B83 /* DirectlySetAlarmRouter.swift */,
+				AF46475D2AAA196F00701B83 /* DirectlySetAlarmViewController.swift */,
+				AF46475E2AAA196F00701B83 /* DirectlySetAlarmBuilder.swift */,
+				AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */,
+			);
+			path = DirectlySetAlarm;
 			sourceTree = "<group>";
 		};
 		AF473BBA2A9F6063002EE27B /* Data */ = {
@@ -606,10 +712,13 @@
 		AFBB5F402A66AA82002416DA /* HomeTab */ = {
 			isa = PBXGroup;
 			children = (
+				AFDE0F392AA45883008DC539 /* View */,
 				AFBB5F412A66AA99002416DA /* HomeRouter.swift */,
 				AFBB5F422A66AA99002416DA /* HomeViewController.swift */,
 				AFBB5F442A66AA99002416DA /* HomeInteractor.swift */,
 				AFBB5F432A66AA99002416DA /* HomeBuilder.swift */,
+				AFDE0F3E2AA4C1D8008DC539 /* MyRecordList */,
+				AF130A922AA2E9CA00F2E0BD /* RecordDetail */,
 				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
 			);
 			path = HomeTab;
@@ -644,6 +753,8 @@
 				AFBB5F5D2A66AAD7002416DA /* MyPageViewController.swift */,
 				AFBB5F5E2A66AAD7002416DA /* MyPageBuilder.swift */,
 				AFBB5F5F2A66AAD7002416DA /* MyPageInteractor.swift */,
+				AF4647492AAA0D2B00701B83 /* SetAlarm */,
+				AF4647402AA9E92C00701B83 /* SetAccount */,
 			);
 			path = MyPageTab;
 			sourceTree = "<group>";
@@ -673,6 +784,25 @@
 			path = EditSentence;
 			sourceTree = "<group>";
 		};
+		AFDE0F392AA45883008DC539 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AFDE0F3A2AA4588C008DC539 /* RecordCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AFDE0F3E2AA4C1D8008DC539 /* MyRecordList */ = {
+			isa = PBXGroup;
+			children = (
+				AFDE0F3F2AA4C1F3008DC539 /* MyRecordListRouter.swift */,
+				AFDE0F402AA4C1F3008DC539 /* MyRecordListViewController.swift */,
+				AFDE0F412AA4C1F3008DC539 /* MyRecordListBuilder.swift */,
+				AFDE0F422AA4C1F3008DC539 /* MyRecordListInteractor.swift */,
+			);
+			path = MyRecordList;
+			sourceTree = "<group>";
+		};
 		AFE885F62A5C29E5001EF2C0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +810,7 @@
 				3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */,
 				AFBB5F6C2A66B5C1002416DA /* UIViewController+.swift */,
 				AF130A8E2AA226CF00F2E0BD /* UIView+.swift */,
+				AF130A902AA2DE0F00F2E0BD /* UITextField+.swift */,
 				AF4A19122A6A59BA00932372 /* UIImageView+.swift */,
 			);
 			path = Extension;
@@ -828,6 +959,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4647532AAA0D6700701B83 /* SetAlarmInteractor.swift in Sources */,
 				AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */,
 				AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */,
 				AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */,
@@ -836,15 +968,19 @@
 				AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */,
 				AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */,
 				AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */,
+				AF4647622AAA196F00701B83 /* DirectlySetAlarmBuilder.swift in Sources */,
 				AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */,
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
 				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
 				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
+				AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */,
 				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
 				AF130A8F2AA226CF00F2E0BD /* UIView+.swift in Sources */,
 				AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */,
+				AF4647502AAA0D6700701B83 /* SetAlarmRouter.swift in Sources */,
 				AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */,
+				AFDE0F462AA4C1F3008DC539 /* MyRecordListInteractor.swift in Sources */,
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
@@ -853,26 +989,33 @@
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */,
+				AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */,
 				AFBB5F7D2A66B66B002416DA /* EditSentenceViewController.swift in Sources */,
 				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
 				3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */,
+				AFDE0F452AA4C1F3008DC539 /* MyRecordListBuilder.swift in Sources */,
 				AFBB5F482A66AA99002416DA /* HomeInteractor.swift in Sources */,
 				3520EEFC2A5D5F7D00A53B34 /* ReusableCell.swift in Sources */,
 				AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */,
+				AF4647472AA9E94700701B83 /* SetAccountBuilder.swift in Sources */,
 				AFBB5F772A66B65D002416DA /* SelectSentenceInteractor.swift in Sources */,
 				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
 				AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */,
+				AFDE0F432AA4C1F3008DC539 /* MyRecordListRouter.swift in Sources */,
 				AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */,
 				AF9702FA2A8D021800877C85 /* RecordReadDTO.swift in Sources */,
 				AF0D71DA2A5BEEAD00157758 /* RootComponent+LoggedOut.swift in Sources */,
 				AFBB5F752A66B65D002416DA /* SelectSentenceViewController.swift in Sources */,
 				AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */,
+				AF4647512AAA0D6700701B83 /* SetAlarmViewController.swift in Sources */,
 				3520EEF32A5CD3C000A53B34 /* OrganizingSentenceViewController.swift in Sources */,
 				AF9702F42A8D005F00877C85 /* LoginSuccessResponse.swift in Sources */,
 				AFBB5F462A66AA99002416DA /* HomeViewController.swift in Sources */,
 				AFBB5F7C2A66B66B002416DA /* EditSentenceRouter.swift in Sources */,
 				3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */,
+				AF4647522AAA0D6700701B83 /* SetAlarmBuilder.swift in Sources */,
+				AF130A992AA2E9E200F2E0BD /* RecordDetailBuilder.swift in Sources */,
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
 				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
@@ -891,36 +1034,49 @@
 				AFBB5F612A66AAD7002416DA /* MyPageViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
 				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
+				AF130A9A2AA2E9E200F2E0BD /* RecordDetailInteractor.swift in Sources */,
 				AF31227D2A9780E900262088 /* Accordion.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
 				AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */,
 				AFFAEBE62A8CFBBA009EC03B /* UIFont+ParticleFont.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
+				AFDE0F442AA4C1F3008DC539 /* MyRecordListViewController.swift in Sources */,
 				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
+				AF4647482AA9E94700701B83 /* SetAccountInteractor.swift in Sources */,
 				AF130A8D2AA225F000F2E0BD /* SelectedPhotoCell.swift in Sources */,
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
+				AF130A982AA2E9E200F2E0BD /* RecordDetailViewController.swift in Sources */,
 				3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */,
+				AF130A972AA2E9E200F2E0BD /* RecordDetailRouter.swift in Sources */,
 				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
 				AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */,
 				AFBB5F4F2A66AAB0002416DA /* ExploreViewController.swift in Sources */,
 				AFBB5F472A66AA99002416DA /* HomeBuilder.swift in Sources */,
 				AFBB5F452A66AA99002416DA /* HomeRouter.swift in Sources */,
 				AFBB5F682A66ABBF002416DA /* SearchRouter.swift in Sources */,
+				AF9C6FCD2AA3038F00948BE2 /* UILabel+ParticleFont.swift in Sources */,
 				AF9702FE2A8D031000877C85 /* UserReadDTO.swift in Sources */,
 				AF9702F82A8D01C700877C85 /* RecordCreateDTO.swift in Sources */,
 				AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */,
 				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
 				AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */,
+				AF4647602AAA196F00701B83 /* DirectlySetAlarmRouter.swift in Sources */,
+				AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */,
 				AFBB5F622A66AAD7002416DA /* MyPageBuilder.swift in Sources */,
+				AFDE0F3B2AA4588C008DC539 /* RecordCell.swift in Sources */,
+				AFDE0F3D2AA4AC51008DC539 /* DateManager.swift in Sources */,
 				3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */,
 				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,
+				AF4647582AAA0E9A00701B83 /* AlarmToggleRow.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
 				AFBB5F692A66ABBF002416DA /* SearchViewController.swift in Sources */,
 				AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */,
+				AF4647612AAA196F00701B83 /* DirectlySetAlarmViewController.swift in Sources */,
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
 				AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */,
 				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
+				AF130A912AA2DE0F00F2E0BD /* UITextField+.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
 				AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
