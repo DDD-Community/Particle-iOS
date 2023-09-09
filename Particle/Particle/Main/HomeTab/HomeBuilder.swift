@@ -7,10 +7,7 @@
 
 import RIBs
 
-protocol HomeDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
-}
+protocol HomeDependency: Dependency {}
 
 final class HomeComponent: Component<HomeDependency> {
     let rootViewController: HomeViewController
@@ -22,7 +19,6 @@ final class HomeComponent: Component<HomeDependency> {
         self.rootViewController = rootViewController
         super.init(dependency: dependency)
     }
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
@@ -47,16 +43,18 @@ final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
         interactor.listener = listener
         
         let addArticleBuilder = AddArticleBuilder(dependency: component)
+        let recordDetailBuilder = RecordDetailBuilder(dependency: component)
         
         return HomeRouter(
             interactor: interactor,
             viewController: viewController,
-            addArticleBuilder: addArticleBuilder
+            addArticleBuildable: addArticleBuilder,
+            recordDetailBuildable: recordDetailBuilder
         )
     }
 }
 
-extension HomeComponent: AddArticleDependency {
+extension HomeComponent: AddArticleDependency, RecordDetailDependency {
     var addArticleViewController: RIBs.ViewControllable {
         return rootViewController
     }

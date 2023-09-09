@@ -7,19 +7,131 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import UIKit
 
 protocol HomePresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    func cellTapped(with model: RecordReadDTO)
     func showPHPickerViewController()
     func dismiss()
 }
 
 final class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
-
+    
     weak var listener: HomePresentableListener?
+    private var disposeBag = DisposeBag()
+    
+    private var realData: BehaviorRelay<[RecordReadDTO]> = .init(value: [])
+    
+    // MARK: - UIComponents
+    
+    private let mainScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
+    private let myArticleSectionTitle: UIView = {
+        let view = UIView()
+        view.backgroundColor = .particleColor.black
+        
+        let title = UILabel()
+        title.setParticleFont(.y_title01, color: .particleColor.white, text: "나의 아티클")
+        
+        let infoButton = UIImageView()
+        infoButton.image = .particleImage.info
+        
+        [title, infoButton].forEach {
+            view.addSubview($0)
+        }
+        
+        title.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(20)
+        }
+        
+        infoButton.snp.makeConstraints{
+            $0.width.height.equalTo(24)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(title.snp.trailing).offset(8)
+        }
+        
+        return view
+    }()
+    
+    private let myArticleSectionArrowButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.particleImage.arrowRight, for: .normal)
+        return button
+    }()
+    
+    private let uxuiSectionTitle: UIView = {
+        let view = UIView()
+        view.backgroundColor = .particleColor.black
+        
+        let title = UILabel()
+
+        title.attributedText = NSMutableAttributedString()
+            .attributeString(
+                string: "UX/UI",
+                font: .particleFont.generate(style: .ydeStreetB, size: 25),
+                textColor: .particleColor.main100
+            )
+            .attributeString(
+                string: " 태그에 담긴\n나의 아티클",
+                font: .particleFont.generate(style: .ydeStreetB, size: 25),
+                textColor: .particleColor.white
+            )
+        
+        title.numberOfLines = 0
+        
+        [title].forEach {
+            view.addSubview($0)
+        }
+        
+        title.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(20)
+        }
+        
+        return view
+    }()
+    
+    private let uxuiSectionArrowButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.particleImage.arrowRight, for: .normal)
+        return button
+    }()
+    
+    private let horizontalCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = .init(width: DeviceSize.width-40, height: 400)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 40
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(RecordCell.self)
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .particleColor.black
+        return collectionView
+    }()
+    
+    private let horizontalCollectionView2: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = .init(width: DeviceSize.width-40, height: 400)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 40
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(RecordCell.self)
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .particleColor.black
+        return collectionView
+    }()
     
     private let plusButton: UIView = {
         let plusIcon: UIImageView = {
@@ -41,6 +153,25 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         return blurView
     }()
     
+    private let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.setParticleFont(.y_body01, color: .particleColor.main100, text: "앗! 아직 저장한 아티클이 없어요")
+        return label
+    }()
+    
+    private let emptyImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .particleImage.eyes
+        return imageView
+    }()
+    
+    private let toolTip: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .particleImage.tooltip1
+        return imageView
+    }()
+    
+    // MARK: - Initializers
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -52,11 +183,28 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View LifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
         configurePlusButton()
+        bind()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.1) { [self] in
+            toolTip.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        } completion: { [self] _ in
+            UIView.animate(withDuration: 0.3) { [self] in
+                toolTip.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }
+        }
+    }
+    
+    // MARK: - Methods
     
     private func setupInitialView() {
         view.backgroundColor = .particleColor.black
@@ -69,8 +217,46 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         statusBarView.backgroundColor = .particleColor.black
         window?.addSubview(statusBarView)
         
+        emptyLabel.isHidden = true
+        emptyImage.isHidden = true
+        
         addSubviews()
         setConstraints()
+    }
+    
+    private func bind() {
+
+        realData.bind(to: horizontalCollectionView.rx.items(
+            cellIdentifier: RecordCell.defaultReuseIdentifier,
+            cellType: RecordCell.self)) { index, dto, cell in
+                cell.setupData(data: dto.toDomain())
+            }
+            .disposed(by: disposeBag)
+        
+        horizontalCollectionView.rx.itemSelected.bind { [weak self] indexPath in
+            guard let self = self else { return }
+            self.listener?.cellTapped(with: self.realData.value[indexPath.row])
+            // TODO: RecordDetail RIB로 이동.
+        }
+        .disposed(by: disposeBag)
+        
+        Observable.of(realData.value.filter { $0.tags.contains("UXUI") })
+            .bind(to: horizontalCollectionView2.rx.items(
+                cellIdentifier: RecordCell.defaultReuseIdentifier,
+                cellType: RecordCell.self)) { index, dto, cell in
+                    cell.setupData(data: dto.toDomain())
+                }
+                .disposed(by: disposeBag)
+        
+        myArticleSectionArrowButton.rx.tap.bind {
+            Console.log("myArticleButtonTapped")
+        }
+        .disposed(by: disposeBag)
+        
+        uxuiSectionArrowButton.rx.tap.bind {
+            Console.log("uxuiSectionArrowButton Tapped")
+        }
+        .disposed(by: disposeBag)
     }
     
     private func configurePlusButton() {
@@ -89,9 +275,13 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
                 plusButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             }
             listener?.showPHPickerViewController()
+            toolTip.isHidden = true
         }
     }
     
+    func setData(data: [RecordReadDTO]) {
+        realData.accept(data)
+    }
     
     func present(viewController: RIBs.ViewControllable) {
         present(viewController.uiviewController, animated: true, completion: nil)
@@ -108,15 +298,103 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
 private extension HomeViewController {
     
     func addSubviews() {
-        view.addSubview(plusButton)
+        [
+            mainScrollView,
+            plusButton,
+            toolTip,
+            emptyLabel,
+            emptyImage
+        ]
+            .forEach {
+                view.addSubview($0)
+            }
+        
+        [
+            myArticleSectionTitle,
+            horizontalCollectionView,
+            uxuiSectionTitle,
+            horizontalCollectionView2,
+            
+        ]
+            .forEach {
+                mainScrollView.addSubview($0)
+            }
+        myArticleSectionTitle.addSubview(myArticleSectionArrowButton)
+        uxuiSectionTitle.addSubview(uxuiSectionArrowButton)
     }
     
     func setConstraints() {
         
+        mainScrollView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview().inset(90)
+            $0.width.equalToSuperview()
+        }
+        
+        myArticleSectionTitle.snp.makeConstraints {
+            $0.top.equalTo(mainScrollView.snp.top)
+            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
+            $0.height.equalTo(55)
+        }
+        myArticleSectionArrowButton.imageView?.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
+        myArticleSectionArrowButton.snp.makeConstraints{
+            $0.width.height.equalTo(44)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(8)
+        }
+        
+        horizontalCollectionView.snp.makeConstraints {
+            $0.top.equalTo(myArticleSectionTitle.snp.bottom)
+            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
+            $0.height.greaterThanOrEqualTo(400)
+        }
+        
+        uxuiSectionTitle.snp.makeConstraints {
+            $0.top.equalTo(horizontalCollectionView.snp.bottom).offset(32)
+            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
+            $0.height.equalTo(78)
+        }
+        uxuiSectionArrowButton.imageView?.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
+        uxuiSectionArrowButton.snp.makeConstraints{
+            $0.width.height.equalTo(44)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(8)
+        }
+        
+        horizontalCollectionView2.snp.makeConstraints {
+            $0.top.equalTo(uxuiSectionTitle.snp.bottom)
+            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
+            $0.height.greaterThanOrEqualTo(400)
+            $0.bottom.equalTo(mainScrollView.snp.bottom).inset(20)
+        }
+        
         plusButton.snp.makeConstraints {
             $0.width.height.equalTo(60)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalToSuperview().offset(-110)
+        }
+        
+        emptyLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(331)
+            $0.centerX.equalToSuperview()
+        }
+        
+        emptyImage.snp.makeConstraints {
+            $0.top.equalTo(emptyLabel.snp.bottom).offset(35)
+            $0.width.equalTo(88)
+            $0.height.equalTo(60)
+            $0.centerX.equalToSuperview()
+        }
+        
+        toolTip.snp.makeConstraints {
+            $0.width.equalTo(226)
+            $0.height.equalTo(37)
+            $0.centerY.equalTo(plusButton.snp.centerY)
+            $0.trailing.equalTo(plusButton.snp.leading).offset(-12)
         }
     }
 }

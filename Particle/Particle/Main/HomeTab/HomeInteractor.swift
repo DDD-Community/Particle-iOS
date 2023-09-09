@@ -9,19 +9,19 @@ import RIBs
 import RxSwift
 
 protocol HomeRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-    func routeToAddArticle()
+    func attachAddArticle()
     func detachAddArticle()
+    func attachRecordDetail(data: RecordReadDTO)
+    func detachRecordDetail()
 }
 
 protocol HomePresentable: Presentable {
     var listener: HomePresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    
+    func setData(data: [RecordReadDTO])
 }
 
-protocol HomeListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-}
+protocol HomeListener: AnyObject {}
 
 final class HomeInteractor: PresentableInteractor<HomePresentable>,
                             HomeInteractable,
@@ -30,8 +30,8 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     weak var router: HomeRouting?
     weak var listener: HomeListener?
     
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
+    private var disposeBag = DisposeBag()
+    
     override init(presenter: HomePresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -39,21 +39,56 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        // 데이터 받아오기?
+        let repo = RecordRepository()
+        repo.readMyRecord().subscribe { [weak self] result in
+            switch result.element {
+            case .success(let dto):
+                self?.presenter.setData(data: dto)
+            case .failure(let error):
+                Console.error(error.localizedDescription)
+            case .none:
+                return
+            }
+        }
+        .disposed(by: disposeBag)
+
     }
     
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
     }
     
     // MARK: - HomePresentableListener
     
+    func cellTapped(with model: RecordReadDTO) {
+        router?.attachRecordDetail(data: model)
+    }
+    
     func showPHPickerViewController() {
-        router?.routeToAddArticle()
+        router?.attachAddArticle()
     }
     
     func dismiss() {
         router?.detachAddArticle()
+    }
+    
+    
+    func recordDetailCloseButtonTapped() {
+        router?.detachAddArticle()
+        router?.detachRecordDetail()
+        
+        let repo = RecordRepository()
+        repo.readMyRecord().subscribe { [weak self] result in
+            switch result.element {
+            case .success(let dto):
+                self?.presenter.setData(data: dto)
+            case .failure(let error):
+                Console.error(error.localizedDescription)
+            case .none:
+                return
+            }
+        }
+        .disposed(by: disposeBag)
     }
 }
