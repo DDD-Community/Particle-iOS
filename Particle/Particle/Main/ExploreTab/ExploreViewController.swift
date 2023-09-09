@@ -16,8 +16,16 @@ protocol ExplorePresentableListener: AnyObject {
 }
 
 final class ExploreViewController: UIViewController, ExplorePresentable, ExploreViewControllable {
-
+    
     weak var listener: ExplorePresentableListener?
+    
+    private let infoLabel: UILabel = {
+        let label = UILabel()
+        label.setParticleFont(.y_title02, color: .particleColor.gray05, text: "화면 준비중 입니다.")
+        return label
+    }()
+    
+    // MARK: - Initializers
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -29,8 +37,35 @@ final class ExploreViewController: UIViewController, ExplorePresentable, Explore
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View LifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .particleColor.main100
+        setupInitialView()
+        addSubviews()
+        setConstraints()
+    }
+    
+    // MARK: - Methods
+    
+    private func setupInitialView() {
+        view.backgroundColor = .particleColor.black
+        navigationController?.isNavigationBarHidden = true
+    }
+}
+
+// MARK: - Layout Settting
+
+private extension ExploreViewController {
+    func addSubviews() {
+        [infoLabel].forEach {
+            view.addSubview($0)
+        }
+    }
+    
+    func setConstraints() {
+        infoLabel.snp.makeConstraints{
+            $0.center.equalToSuperview()
+        }
     }
 }

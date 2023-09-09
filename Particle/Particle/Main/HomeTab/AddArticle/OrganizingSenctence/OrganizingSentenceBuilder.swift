@@ -11,7 +11,7 @@ protocol OrganizingSentenceDependency: Dependency {
     var organizingSentenceRepository: OrganizingSentenceRepository { get }
 }
 
-final class OrganizingSentenceComponent: Component<OrganizingSentenceDependency>, OrganizingSentenceInteractorDependency {
+final class OrganizingSentenceComponent: Component<OrganizingSentenceDependency> {
     var organizingSentenceRepository: OrganizingSentenceRepository {
         dependency.organizingSentenceRepository
     }
@@ -34,7 +34,7 @@ final class OrganizingSentenceBuilder: Builder<OrganizingSentenceDependency>, Or
         let viewController = OrganizingSentenceViewController()
         let interactor = OrganizingSentenceInteractor(
             presenter: viewController,
-            dependency: component
+            dependency: component.organizingSentenceRepository
         )
         interactor.listener = listener
         return OrganizingSentenceRouter(

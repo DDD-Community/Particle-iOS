@@ -8,13 +8,13 @@
 import RIBs
 
 protocol SetAdditionalInformationDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var organizingSentenceRepository: OrganizingSentenceRepository { get }
 }
 
 final class SetAdditionalInformationComponent: Component<SetAdditionalInformationDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    var organizingSentenceRepository: OrganizingSentenceRepository {
+        dependency.organizingSentenceRepository
+    }
 }
 
 // MARK: - Builder
@@ -30,9 +30,12 @@ final class SetAdditionalInformationBuilder: Builder<SetAdditionalInformationDep
     }
 
     func build(withListener listener: SetAdditionalInformationListener) -> SetAdditionalInformationRouting {
-        let _ = SetAdditionalInformationComponent(dependency: dependency)
+        let component = SetAdditionalInformationComponent(dependency: dependency)
         let viewController = SetAdditionalInformationViewController()
-        let interactor = SetAdditionalInformationInteractor(presenter: viewController)
+        let interactor = SetAdditionalInformationInteractor(
+            presenter: viewController,
+            repository: component.organizingSentenceRepository
+        )
         interactor.listener = listener
         return SetAdditionalInformationRouter(interactor: interactor, viewController: viewController)
     }

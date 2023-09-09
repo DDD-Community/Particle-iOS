@@ -27,11 +27,11 @@ protocol AddArticleBuildable: Buildable {
 
 final class AddArticleBuilder: Builder<AddArticleDependency>, AddArticleBuildable {
     
-
+    
     override init(dependency: AddArticleDependency) {
         super.init(dependency: dependency)
     }
-
+    
     func build(withListener listener: AddArticleListener) -> AddArticleRouting {
         let component = AddArticleComponent(dependency: dependency)
         
@@ -42,6 +42,7 @@ final class AddArticleBuilder: Builder<AddArticleDependency>, AddArticleBuildabl
         let selectSentenceBuilder = SelectSentenceBuilder(dependency: component)
         let organizingSentenceBuilder = OrganizingSentenceBuilder(dependency: component)
         let setAdditionalInformationBuilder = SetAdditionalInformationBuilder(dependency: component)
+        let recordDetailBuilder = RecordDetailBuilder(dependency: component)
         
         return AddArticleRouter(
             interactor: interactor,
@@ -49,7 +50,8 @@ final class AddArticleBuilder: Builder<AddArticleDependency>, AddArticleBuildabl
             photoPickerBuildable: photoPickerBuilder,
             selectSentenceBuildable: selectSentenceBuilder,
             organizingSentenceBuildable: organizingSentenceBuilder,
-            setAdditionalInformationBuildable: setAdditionalInformationBuilder
+            setAdditionalInformationBuildable: setAdditionalInformationBuilder,
+            recordDetailBuildable: recordDetailBuilder
         )
     }
 }
@@ -57,7 +59,8 @@ final class AddArticleBuilder: Builder<AddArticleDependency>, AddArticleBuildabl
 extension AddArticleComponent: PhotoPickerDependency,
                                SelectSentenceDependency,
                                OrganizingSentenceDependency,
-                               SetAdditionalInformationDependency {
+                               SetAdditionalInformationDependency,
+                               RecordDetailDependency {
     
     var organizingSentenceRepository: OrganizingSentenceRepository {
         return repository

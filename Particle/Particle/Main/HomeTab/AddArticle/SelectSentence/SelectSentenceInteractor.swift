@@ -71,12 +71,21 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
     // MARK: - SelectSentenceInteractable
     
     func dismissEditSentence(with text: String) {
-        guard var list = try? organizingSentenceRepository.sentenceFile.value() else {
-            Console.error("\(#function) value 를 가져올 수 없습니다.")
-            return
-        }
-        list.append(text)
-        organizingSentenceRepository.sentenceFile.onNext(list)
+//        guard var list = try? organizingSentenceRepository.sentenceFile.value() else {
+//            Console.error("\(#function) value 를 가져올 수 없습니다.")
+//            return
+//        }
+//        list.append(text)
+//        organizingSentenceRepository.sentenceFile.onNext(list)
+        
+        // TEST
+        
+        var list2 = organizingSentenceRepository.sentenceFile2.value
+        list2.append(.init(sentence: text, isRepresent: false))
+        organizingSentenceRepository.sentenceFile2.accept(list2)
+        
+        // TEST
+        
         router?.detachEditSentence()
     }
     

@@ -33,7 +33,10 @@ final class SelectSentenceBuilder: Builder<SelectSentenceDependency>, SelectSent
     func build(withListener listener: SelectSentenceListener, images: [PHAsset]) -> SelectSentenceRouting {
         let component = SelectSentenceComponent(dependency: dependency)
         let viewController = SelectSentenceViewController(selectedImages: images)
-        let interactor = SelectSentenceInteractor(presenter: viewController, repository: component.organizingSentenceRepository)
+        let interactor = SelectSentenceInteractor(
+            presenter: viewController,
+            repository: component.organizingSentenceRepository
+        )
         interactor.listener = listener
         
         let editSentenceBuilder = EditSentenceBuilder(dependency: component)

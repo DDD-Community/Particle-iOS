@@ -23,12 +23,16 @@ protocol AddArticleRouting: Routing {
     
     func attachSetAdditionalInformation()
     func detachSetAdditionalInformation()
+    
+    func attachRecordDetail(with data: RecordReadDTO)
 }
 
-protocol AddArticleListener: AnyObject { }
+protocol AddArticleListener: AnyObject {
+    func recordDetailCloseButtonTapped()
+}
 
 final class AddArticleInteractor: Interactor, AddArticleInteractable {
-
+    
     weak var router: AddArticleRouting?
     weak var listener: AddArticleListener?
 
@@ -79,5 +83,15 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable {
     
     func setAdditionalInfoBackButtonTapped() {
         router?.detachSetAdditionalInformation()
+    }
+    
+    func setAdditionalInfoSuccessPost(data: RecordReadDTO) {
+        router?.attachRecordDetail(with: data)
+    }
+    
+    // MARK: - RecordDetailListener
+    
+    func recordDetailCloseButtonTapped() {
+        listener?.recordDetailCloseButtonTapped()
     }
 }

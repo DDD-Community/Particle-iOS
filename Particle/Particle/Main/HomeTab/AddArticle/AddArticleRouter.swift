@@ -12,7 +12,8 @@ protocol AddArticleInteractable: Interactable,
                                  PhotoPickerListener,
                                  SelectSentenceListener,
                                  OrganizingSentenceListener,
-                                 SetAdditionalInformationListener {
+                                 SetAdditionalInformationListener,
+                                 RecordDetailListener {
     
     var router: AddArticleRouting? { get set }
     var listener: AddArticleListener? { get set }
@@ -40,19 +41,24 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
     private let setAdditionalInformationBuildable: SetAdditionalInformationBuildable
     private var setAdditionalInformationRouting: SetAdditionalInformationRouting?
     
+    private let recordDetailBuildable: RecordDetailBuildable
+    private var recordDetailRouting: RecordDetailRouting?
+    
     init(
         interactor: AddArticleInteractable,
         viewController: ViewControllable,
         photoPickerBuildable: PhotoPickerBuildable,
         selectSentenceBuildable: SelectSentenceBuildable,
         organizingSentenceBuildable: OrganizingSentenceBuildable,
-        setAdditionalInformationBuildable: SetAdditionalInformationBuildable
+        setAdditionalInformationBuildable: SetAdditionalInformationBuildable,
+        recordDetailBuildable: RecordDetailBuildable
     ) {
         self.viewController = viewController
         self.selectSentenceBuildable = selectSentenceBuildable
         self.photoPickerBuildable = photoPickerBuildable
         self.organizingSentenceBuildable = organizingSentenceBuildable
         self.setAdditionalInformationBuildable = setAdditionalInformationBuildable
+        self.recordDetailBuildable = recordDetailBuildable
         super.init(interactor: interactor)
         interactor.router = self
     }
@@ -145,6 +151,18 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
         navigationControllable?.popViewController(animated: true)
         detachChild(router)
         setAdditionalInformationRouting = nil
+    }
+    
+    // MARK: - RecordDetail RIB
+    
+    func attachRecordDetail(with data: RecordReadDTO) {
+        if recordDetailRouting != nil {
+            return
+        }
+        let router = recordDetailBuildable.build(withListener: interactor, data: data)
+        navigationControllable?.pushViewController(router.viewControllable, animated: true)
+        recordDetailRouting = router
+        attachChild(router)
     }
     
     func cleanupViews() {
