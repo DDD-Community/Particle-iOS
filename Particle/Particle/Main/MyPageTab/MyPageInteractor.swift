@@ -9,12 +9,17 @@ import RIBs
 import RxSwift
 
 protocol MyPageRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func attachSetAccount()
+    func detachSetAccount()
+    
+    func attachSetAlarm()
+    func detachSetAlarm()
 }
 
 protocol MyPagePresentable: Presentable {
     var listener: MyPagePresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    
+    func setData(data: UserReadDTO)
 }
 
 protocol MyPageListener: AnyObject {
@@ -22,12 +27,12 @@ protocol MyPageListener: AnyObject {
 }
 
 final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageInteractable, MyPagePresentableListener {
-
+    
     weak var router: MyPageRouting?
     weak var listener: MyPageListener?
+    
+    private var disposeBag = DisposeBag()
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
     override init(presenter: MyPagePresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -35,11 +40,45 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        // TODO: user정보 받아와서 저장
+        let repo = UserRepository()
+        repo.fetchMyProfile().subscribe { [weak self] result in
+            switch result.element {
+            case .success(let response):
+                self?.presenter.setData(data: response)
+            case .failure(let error):
+                Console.error(error.localizedDescription)
+            case .none:
+                return
+            }
+        }
+        .disposed(by: disposeBag)
+
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+        
     }
+    
+    // MARK: - MyPagePresentableListener
+    
+    func setAccountButtonTapped() {
+        router?.attachSetAccount()
+    }
+    
+    func setAccountBackButtonTapped() {
+        router?.detachSetAccount()
+    }
+    
+    // MARK: - MyPageInteractable
+    
+    func setAlarmButtonTapped() {
+        router?.attachSetAlarm()
+    }
+    
+    func setAlarmBackButtonTapped() {
+        router?.detachSetAlarm()
+    }
+    
 }

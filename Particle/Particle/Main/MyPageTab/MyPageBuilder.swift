@@ -12,7 +12,7 @@ protocol MyPageDependency: Dependency {
     // created by this RIB.
 }
 
-final class MyPageComponent: Component<MyPageDependency> {
+final class MyPageComponent: Component<MyPageDependency>, SetAccountDependency, SetAlarmDependency {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
@@ -30,10 +30,19 @@ final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
     }
 
     func build(withListener listener: MyPageListener) -> MyPageRouting {
-        let _ = MyPageComponent(dependency: dependency)
+        let component = MyPageComponent(dependency: dependency)
         let viewController = MyPageViewController()
         let interactor = MyPageInteractor(presenter: viewController)
         interactor.listener = listener
-        return MyPageRouter(interactor: interactor, viewController: viewController)
+        
+        let setAccountBuildable = SetAccountBuilder(dependency: component)
+        let setAlarmBuildable = SetAlarmBuilder(dependency: component)
+        
+        return MyPageRouter(
+            interactor: interactor,
+            viewController: viewController,
+            setAccountBuildable: setAccountBuildable,
+            setAlarmBuildable: setAlarmBuildable
+        )
     }
 }
