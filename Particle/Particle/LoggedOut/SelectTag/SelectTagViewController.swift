@@ -260,7 +260,8 @@ private extension SelectTagViewController {
         
         mainStackView.snp.makeConstraints {
             $0.top.equalTo(subTitle.snp.bottom).offset(18)
-            $0.leading.trailing.bottom.equalTo(mainScrollView)
+            $0.leading.trailing.equalTo(mainScrollView)
+            $0.bottom.equalTo(mainScrollView).inset(20)
             $0.width.equalTo(mainScrollView.frameLayoutGuide)
         }
         
