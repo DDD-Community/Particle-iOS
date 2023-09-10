@@ -91,6 +91,11 @@
 		AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473BBF2A9F6241002EE27B /* AuthService.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
+		AF621F682AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */; };
+		AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */; };
+		AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */; };
+		AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */; };
+		AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */; };
 		AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B2E682AA1FC5B00806149 /* Tag.swift */; };
 		AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F12A8CFF9200877C85 /* LoginRequest.swift */; };
 		AF9702F42A8D005F00877C85 /* LoginSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */; };
@@ -99,6 +104,7 @@
 		AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702FB2A8D02C300877C85 /* RecordUpdateDTO.swift */; };
 		AF9702FE2A8D031000877C85 /* UserReadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702FD2A8D031000877C85 /* UserReadDTO.swift */; };
 		AF9C6FCD2AA3038F00948BE2 /* UILabel+ParticleFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C6FCC2AA3038F00948BE2 /* UILabel+ParticleFont.swift */; };
+		AFAB32582AACB35D000EA542 /* SectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB32572AACB35D000EA542 /* SectionTitle.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
 		AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */; };
@@ -233,6 +239,11 @@
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Particle.entitlements; sourceTree = "<group>"; };
+		AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsRouter.swift; sourceTree = "<group>"; };
+		AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsViewController.swift; sourceTree = "<group>"; };
+		AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsBuilder.swift; sourceTree = "<group>"; };
+		AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsInteractor.swift; sourceTree = "<group>"; };
+		AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlert.swift; sourceTree = "<group>"; };
 		AF7B2E682AA1FC5B00806149 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		AF9702F12A8CFF9200877C85 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessResponse.swift; sourceTree = "<group>"; };
@@ -241,6 +252,7 @@
 		AF9702FB2A8D02C300877C85 /* RecordUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUpdateDTO.swift; sourceTree = "<group>"; };
 		AF9702FD2A8D031000877C85 /* UserReadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReadDTO.swift; sourceTree = "<group>"; };
 		AF9C6FCC2AA3038F00948BE2 /* UILabel+ParticleFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ParticleFont.swift"; sourceTree = "<group>"; };
+		AFAB32572AACB35D000EA542 /* SectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitle.swift; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -360,6 +372,7 @@
 				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
 				AF18E2DE2A68EEB100C54490 /* Console.swift */,
 				AFDE0F3C2AA4AC51008DC539 /* DateManager.swift */,
+				AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -614,6 +627,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AF621F5B2AAD835700DBD514 /* SetInterestedTags */ = {
+			isa = PBXGroup;
+			children = (
+				AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */,
+				AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */,
+				AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */,
+				AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */,
+			);
+			path = SetInterestedTags;
+			sourceTree = "<group>";
+		};
 		AF7B2E662AA1FC3000806149 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,6 +777,7 @@
 				AFBB5F5D2A66AAD7002416DA /* MyPageViewController.swift */,
 				AFBB5F5E2A66AAD7002416DA /* MyPageBuilder.swift */,
 				AFBB5F5F2A66AAD7002416DA /* MyPageInteractor.swift */,
+				AF621F5B2AAD835700DBD514 /* SetInterestedTags */,
 				AF4647492AAA0D2B00701B83 /* SetAlarm */,
 				AF4647402AA9E92C00701B83 /* SetAccount */,
 			);
@@ -788,6 +813,7 @@
 			isa = PBXGroup;
 			children = (
 				AFDE0F3A2AA4588C008DC539 /* RecordCell.swift */,
+				AFAB32572AACB35D000EA542 /* SectionTitle.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -985,12 +1011,15 @@
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
+				AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */,
 				AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */,
 				AFBB5F7D2A66B66B002416DA /* EditSentenceViewController.swift in Sources */,
+				AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */,
+				AFAB32582AACB35D000EA542 /* SectionTitle.swift in Sources */,
 				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
 				3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */,
 				AFDE0F452AA4C1F3008DC539 /* MyRecordListBuilder.swift in Sources */,
@@ -998,6 +1027,7 @@
 				3520EEFC2A5D5F7D00A53B34 /* ReusableCell.swift in Sources */,
 				AF0D71D72A5BEA8A00157758 /* LoggedOutBuilder.swift in Sources */,
 				AF4647472AA9E94700701B83 /* SetAccountBuilder.swift in Sources */,
+				AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */,
 				AFBB5F772A66B65D002416DA /* SelectSentenceInteractor.swift in Sources */,
 				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
@@ -1030,6 +1060,7 @@
 				AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */,
 				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
 				3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */,
+				AF621F682AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift in Sources */,
 				AFBB5F632A66AAD7002416DA /* MyPageInteractor.swift in Sources */,
 				AFBB5F612A66AAD7002416DA /* MyPageViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
@@ -1078,6 +1109,7 @@
 				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
 				AF130A912AA2DE0F00F2E0BD /* UITextField+.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
+				AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */,
 				AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
 				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
