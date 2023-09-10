@@ -21,7 +21,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     weak var listener: HomePresentableListener?
     private var disposeBag = DisposeBag()
     
-    private var realData: BehaviorRelay<[RecordReadDTO]> = .init(value: [])
+    private var recordList: BehaviorRelay<[RecordReadDTO]> = .init(value: [])
     
     // MARK: - UIComponents
     
@@ -65,60 +65,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         return button
     }()
     
-    private let uxuiSectionTitle: UIView = {
-        let view = UIView()
-        view.backgroundColor = .particleColor.black
-        
-        let title = UILabel()
-
-        title.attributedText = NSMutableAttributedString()
-            .attributeString(
-                string: "UX/UI",
-                font: .particleFont.generate(style: .ydeStreetB, size: 25),
-                textColor: .particleColor.main100
-            )
-            .attributeString(
-                string: " 태그에 담긴\n나의 아티클",
-                font: .particleFont.generate(style: .ydeStreetB, size: 25),
-                textColor: .particleColor.white
-            )
-        
-        title.numberOfLines = 0
-        
-        [title].forEach {
-            view.addSubview($0)
-        }
-        
-        title.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        return view
-    }()
-    
-    private let uxuiSectionArrowButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.particleImage.arrowRight, for: .normal)
-        return button
-    }()
-    
     private let horizontalCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = .init(width: DeviceSize.width-40, height: 400)
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 40
-        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(RecordCell.self)
-        collectionView.isPagingEnabled = true
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .particleColor.black
-        return collectionView
-    }()
-    
-    private let horizontalCollectionView2: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = .init(width: DeviceSize.width-40, height: 400)
         layout.scrollDirection = .horizontal
@@ -219,6 +166,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         
         emptyLabel.isHidden = true
         emptyImage.isHidden = true
+        mainScrollView.isHidden = true
         
         addSubviews()
         setConstraints()
@@ -226,37 +174,38 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     private func bind() {
 
-        realData.bind(to: horizontalCollectionView.rx.items(
+        recordList.bind(to: horizontalCollectionView.rx.items(
             cellIdentifier: RecordCell.defaultReuseIdentifier,
             cellType: RecordCell.self)) { index, dto, cell in
                 cell.setupData(data: dto.toDomain())
             }
             .disposed(by: disposeBag)
         
-        horizontalCollectionView.rx.itemSelected.bind { [weak self] indexPath in
-            guard let self = self else { return }
-            self.listener?.cellTapped(with: self.realData.value[indexPath.row])
-            // TODO: RecordDetail RIB로 이동.
+        recordList.subscribe { [weak self] element in
+            if element.isEmpty {
+                self?.emptyLabel.isHidden = false
+                self?.emptyImage.isHidden = false
+                self?.mainScrollView.isHidden = true
+            } else {
+                self?.emptyLabel.isHidden = true
+                self?.emptyImage.isHidden = true
+                self?.mainScrollView.isHidden = false
+            }
         }
         .disposed(by: disposeBag)
         
-        Observable.of(realData.value.filter { $0.tags.contains("UXUI") })
-            .bind(to: horizontalCollectionView2.rx.items(
-                cellIdentifier: RecordCell.defaultReuseIdentifier,
-                cellType: RecordCell.self)) { index, dto, cell in
-                    cell.setupData(data: dto.toDomain())
-                }
-                .disposed(by: disposeBag)
+        horizontalCollectionView.rx.itemSelected.bind { [weak self] indexPath in
+            guard let self = self else { return }
+            self.listener?.cellTapped(with: self.recordList.value[indexPath.row])
+            // TODO: RecordDetail RIB로 이동.
+        }
+        .disposed(by: disposeBag)
         
         myArticleSectionArrowButton.rx.tap.bind {
             Console.log("myArticleButtonTapped")
         }
         .disposed(by: disposeBag)
         
-        uxuiSectionArrowButton.rx.tap.bind {
-            Console.log("uxuiSectionArrowButton Tapped")
-        }
-        .disposed(by: disposeBag)
     }
     
     private func configurePlusButton() {
@@ -280,7 +229,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     }
     
     func setData(data: [RecordReadDTO]) {
-        realData.accept(data)
+        recordList.accept(data)
     }
     
     func present(viewController: RIBs.ViewControllable) {
@@ -312,15 +261,11 @@ private extension HomeViewController {
         [
             myArticleSectionTitle,
             horizontalCollectionView,
-            uxuiSectionTitle,
-            horizontalCollectionView2,
-            
         ]
             .forEach {
                 mainScrollView.addSubview($0)
             }
         myArticleSectionTitle.addSubview(myArticleSectionArrowButton)
-        uxuiSectionTitle.addSubview(uxuiSectionArrowButton)
     }
     
     func setConstraints() {
@@ -349,27 +294,6 @@ private extension HomeViewController {
             $0.top.equalTo(myArticleSectionTitle.snp.bottom)
             $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
             $0.height.greaterThanOrEqualTo(400)
-        }
-        
-        uxuiSectionTitle.snp.makeConstraints {
-            $0.top.equalTo(horizontalCollectionView.snp.bottom).offset(32)
-            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
-            $0.height.equalTo(78)
-        }
-        uxuiSectionArrowButton.imageView?.snp.makeConstraints {
-            $0.width.height.equalTo(20)
-        }
-        uxuiSectionArrowButton.snp.makeConstraints{
-            $0.width.height.equalTo(44)
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(8)
-        }
-        
-        horizontalCollectionView2.snp.makeConstraints {
-            $0.top.equalTo(uxuiSectionTitle.snp.bottom)
-            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
-            $0.height.greaterThanOrEqualTo(400)
-            $0.bottom.equalTo(mainScrollView.snp.bottom).inset(20)
         }
         
         plusButton.snp.makeConstraints {
