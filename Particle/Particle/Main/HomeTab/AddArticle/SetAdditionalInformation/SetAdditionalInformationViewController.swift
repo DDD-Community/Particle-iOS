@@ -16,18 +16,20 @@ protocol SetAdditionalInformationPresentableListener: AnyObject {
     func setAdditionalInfoNextButtonTapped(title: String, url: String, tags: [String])
 }
 
-final class SetAdditionalInformationViewController: UIViewController, SetAdditionalInformationPresentable, SetAdditionalInformationViewControllable {
-
+final class SetAdditionalInformationViewController: UIViewController,
+                                                    SetAdditionalInformationPresentable,
+                                                    SetAdditionalInformationViewControllable {
+    
     weak var listener: SetAdditionalInformationPresentableListener?
     private var disposeBag = DisposeBag()
-    private var selectedTags2 = [String]()
     private var selectedTags: BehaviorRelay<[[String]]> = .init(value: Array(repeating: [], count: 5))
-    private var tags: [(title: String, isSelected: Bool)] = [
-        ("#UXUI", false),
-        ("#브랜딩", false),
-        ("#iOS", false),
-        ("#그래픽 디자인", false)
-    ]
+    
+    private var tags: [(title: String, isSelected: Bool)] = {
+        guard let userInterestedTags = UserDefaults.standard.object(forKey: "INTERESTED_TAGS") as? [String] else {
+            return []
+        }
+        return userInterestedTags.map { ($0, false) }
+    }()
     
     enum Metric {
         enum Title {
@@ -65,6 +67,8 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
             static let minimumInterItemSpacing: CGFloat = 10
         }
     }
+    
+    // MARK: - UI Components
     
     private let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -214,10 +218,18 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         return stackView
     }()
     
-    private let allTagOpenButton: UILabel = {
-        let label = UILabel()
-        label.setParticleFont(.p_subhead, color: .particleColor.gray03, text: "전체 펼치기")
-        return label
+    private let allTagOpenButton: UIButton = {
+        let button = UIButton()
+        button.setAttributedTitle(
+            NSMutableAttributedString()
+                .attributeString(
+                    string: "전체 펼치기",
+                    font: .particleFont.generate(style: .pretendard_Regular, size: 12),
+                    textColor: .particleColor.gray03
+                ),
+            for: .normal
+        )
+        return button
     }()
     
     private let allTagTitleLabel: UILabel = {
@@ -253,6 +265,8 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
     private var accordion4HeightConstraint: Constraint?
     private var accordion5HeightConstraint: Constraint?
     
+    // MARK: - Initializers
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         
@@ -268,11 +282,15 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View LifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         urlTextFieldWarningLabel.isHidden = true
         titleTextFieldWarningLabel.isHidden = true
     }
+    
+    // MARK: - Methods
     
     private func bindAccordion() {
         
@@ -303,23 +321,17 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
             }
             .disposed(by: disposeBag)
         }
-        
-        selectedTags.subscribe { [weak self] tags in
-            let flattenList = tags.flatMap { $0 }
-            Console.debug("\(flattenList)")
-        }
-        .disposed(by: disposeBag)
     }
     
     private func bind() {
         Observable.of(tags)
-        .bind(to: recommendTagCollectionView.rx.items(
-            cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
-            cellType: LeftAlignedCollectionViewCell.self)
-        ) { index, item, cell in
-            cell.titleLabel.text = item.title
-        }
-        .disposed(by: disposeBag)
+            .bind(to: recommendTagCollectionView.rx.items(
+                cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
+                cellType: LeftAlignedCollectionViewCell.self)
+            ) { index, item, cell in
+                cell.titleLabel.text = item.title
+            }
+            .disposed(by: disposeBag)
         
         recommendTagCollectionView.rx.itemSelected.subscribe { [weak self] indexPath in
             guard let self = self else { return }
@@ -328,7 +340,6 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
                 return
             }
             selectedCell.setSelected()
-            // TODO: 현재 선택된 태그 저장
             self.tags[index.row].isSelected.toggle()
         }
         .disposed(by: disposeBag)
@@ -357,10 +368,14 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
                 } else {
                     let selectedTags = self?.tags.filter { $0.isSelected == true }.map { Tag(rawValue: $0.title)?.value ?? "UXUI" } ?? []
                     
+                    let selectedTagsInAccordion: [String] = self?.selectedTags.value
+                        .flatMap { $0 }
+                        .map { Tag(rawValue: $0)?.value ?? "UXUI" } ?? []
+                    
                     self?.listener?.setAdditionalInfoNextButtonTapped(
                         title: self?.titleTextField.text ?? "",
                         url: self?.urlTextField.text ?? "",
-                        tags: selectedTags // TODO: 선택된 태그정보 전달
+                        tags: selectedTags + selectedTagsInAccordion
                     )
                 }
             }
@@ -381,11 +396,14 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
             }
         }
         .disposed(by: disposeBag)
-
     }
+}
+
+// MARK: - Layout Setting
+
+private extension SetAdditionalInformationViewController {
     
-    // MARK: - Add Subviews
-    private func addSubviews() {
+    func addSubviews() {
         [backButton, nextButton]
             .forEach {
                 navigationBar.addSubview($0)
@@ -397,7 +415,6 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
             }
         
         [
-//            navigationBar,
             titleLabel,
             urlTextFieldSectionTitle,
             urlTextField,
@@ -420,8 +437,7 @@ final class SetAdditionalInformationViewController: UIViewController, SetAdditio
         }
     }
     
-    // MARK: - Layout
-    private func layout() {
+    func layout() {
         navigationBar.snp.makeConstraints { make in
             make.top.left.right.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(Metric.NavigationBar.height)
