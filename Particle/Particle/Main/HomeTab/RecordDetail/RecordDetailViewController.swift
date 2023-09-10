@@ -14,8 +14,10 @@ protocol RecordDetailPresentableListener: AnyObject {
     func recordDetailDeleteButtonTapped(with id: String) -> Observable<Bool>
 }
 
-final class RecordDetailViewController: UIViewController, RecordDetailPresentable, RecordDetailViewControllable {
-
+final class RecordDetailViewController: UIViewController,
+                                        RecordDetailPresentable,
+                                        RecordDetailViewControllable {
+    
     weak var listener: RecordDetailPresentableListener?
     private var disposeBag = DisposeBag()
     private let data: RecordReadDTO
@@ -131,6 +133,52 @@ final class RecordDetailViewController: UIViewController, RecordDetailPresentabl
         return button
     }()
     
+    private lazy var warningAlert: ParticleAlert = {
+        let deleteButton = UIButton()
+        deleteButton.setAttributedTitle(NSMutableAttributedString().attributeString(string: "삭제", font: .particleFont.generate(style: .pretendard_SemiBold, size: 17), textColor: .init(hex: 0xFF453A)), for: .normal)
+        deleteButton.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        
+        let cancelButton = UIButton()
+        cancelButton.setAttributedTitle(NSMutableAttributedString().attributeString(string: "취소", font: .particleFont.generate(style: .pretendard_Regular, size: 17), textColor: .init(hex: 0xC5C5C5)), for: .normal)
+        cancelButton.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        
+        let alert = ParticleAlert(title: "파티클 삭제", body: "내 파티클을 정말 삭제하시겠어요?", buttons: [deleteButton, cancelButton], buttonsAxis: .vertical)
+        alert.alpha = 0
+        
+        cancelButton.rx.tap.bind { [weak self] _ in
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+                alert.alpha = 0
+            }
+        }
+        .disposed(by: self.disposeBag)
+        
+        
+        deleteButton.rx.tap.bind { [weak self] _ in
+            guard let self = self else { return }
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+                alert.alpha = 0
+            }
+            
+            // TODO: 삭제 로딩중
+            
+            self.listener?.recordDetailDeleteButtonTapped(with: self.data.id).subscribe { [weak self] bool in
+                if bool == true {
+                    self?.listener?.recordDetailCloseButtonTapped()
+                } else {
+                    // TODO: 삭제실패얼럿
+                }
+            }
+            .disposed(by: self.disposeBag)
+        }
+        .disposed(by: self.disposeBag)
+        
+        return alert
+    }()
+    
     // MARK: - Initializers
     
     init(data: RecordReadDTO) {
@@ -155,7 +203,7 @@ final class RecordDetailViewController: UIViewController, RecordDetailPresentabl
     }
     
     // MARK: - Methods
-
+    
     private func setSentences() {
         setRecordTitle(data.title)
         urlLabel.text = data.url
@@ -181,13 +229,13 @@ final class RecordDetailViewController: UIViewController, RecordDetailPresentabl
     
     private func bind() {
         Observable.of(data.tags)
-        .bind(to: recommendTagCollectionView.rx.items(
-            cellIdentifier: LeftAlignedCollectionViewCell2.defaultReuseIdentifier,
-            cellType: LeftAlignedCollectionViewCell2.self)
-        ) { index, item, cell in
-            cell.titleLabel.text = item
-        }
-        .disposed(by: disposeBag)
+            .bind(to: recommendTagCollectionView.rx.items(
+                cellIdentifier: LeftAlignedCollectionViewCell2.defaultReuseIdentifier,
+                cellType: LeftAlignedCollectionViewCell2.self)
+            ) { index, item, cell in
+                cell.titleLabel.text = item
+            }
+            .disposed(by: disposeBag)
     }
     
     private func configureButton() {
@@ -206,27 +254,30 @@ final class RecordDetailViewController: UIViewController, RecordDetailPresentabl
     }
     
     private func showActionSheetInMyRecord() {
+        let shareAction = UIAlertAction(title: "공유하기", style: .default, handler: { action in
+            //
+        })
+        
+        let modifyAction = UIAlertAction(title: "수정하기", style: .default, handler: { action in
+            //
+        })
+        
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] action in
+
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [weak self] in
+                self?.warningAlert.alpha = 1
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: { action in
+            //
+        })
+        
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "공유하기", style: .default, handler: { action in
-            //
-        }))
-        actionSheet.addAction(UIAlertAction(title: "수정하기", style: .default, handler: { action in
-            //
-        }))
-        actionSheet.addAction(UIAlertAction(title: "삭제하기", style: .destructive, handler: { [weak self] action in
-            guard let self = self else { return }
-            self.listener?.recordDetailDeleteButtonTapped(with: self.data.id).subscribe { [weak self] bool in
-                if bool == true {
-                    // 뒤로가기 후 리프레쉬
-                    self?.listener?.recordDetailCloseButtonTapped()
-                } else {
-                    // TODO: 삭제 실패얼럿 띄우기
-                }
-            }.disposed(by: self.disposeBag)
-        }))
-        actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { action in
-            //
-        }))
+        actionSheet.addAction(shareAction)
+        actionSheet.addAction(modifyAction)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)
     }
 }
@@ -248,11 +299,12 @@ private extension RecordDetailViewController {
             urlLabel,
             dateLabel,
             directorLabel,
-            heartButton
+            heartButton,
+            warningAlert
         ]
             .forEach {
-            self.view.addSubview($0)
-        }
+                self.view.addSubview($0)
+            }
     }
     
     func setConstraints() {
@@ -305,6 +357,10 @@ private extension RecordDetailViewController {
         heartButton.snp.makeConstraints {
             $0.top.equalTo(directorLabel.snp.bottom).offset(27)
             $0.leading.equalToSuperview().inset(20)
+        }
+        
+        warningAlert.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }

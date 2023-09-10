@@ -52,6 +52,44 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         return stack
     }()
     
+    private lazy var logoutAlert: ParticleAlert = {
+        
+        let cancelButton = generateAlertButton(title: "취소") { [weak self] in
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
+                self?.logoutAlert.alpha = 0
+            }
+        }
+        
+        let okButton = generateAlertButton(title: "확인", {})
+        
+        let alert = ParticleAlert(
+            title: nil,
+            body: "정말 로그아웃 할까요?",
+            buttons: [cancelButton, okButton],
+            buttonsAxis: .horizontal
+        )
+        return alert
+    }()
+    
+    private lazy var deleteAccountAlert: ParticleAlert = {
+        
+        let cancelButton = generateAlertButton(title: "취소") { [weak self] in
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
+                self?.deleteAccountAlert.alpha = 0
+            }
+        }
+        
+        let okButton = generateAlertButton(title: "확인", {})
+        
+        let alert = ParticleAlert(
+            title: nil,
+            body: "정말 탈퇴 할까요?\n저장한 파티클이 삭제됩니다.",
+            buttons: [cancelButton, okButton],
+            buttonsAxis: .horizontal
+        )
+        return alert
+    }()
+    
     // MARK: - Initializers
     
     init() {
@@ -73,6 +111,8 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         addRows(icon: .particleImage.arrowRight, title: "로그아웃", selector: #selector(logoutButtonTapped))
         addRows(icon: .particleImage.arrowRight, title: "탈퇴하기", selector: #selector(deleteAccountButtonTapped))
         bind()
+        logoutAlert.alpha = 0
+        deleteAccountAlert.alpha = 0
     }
     
     private func bind() {
@@ -96,7 +136,6 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         label.font = .particleFont.generate(style: .pretendard_SemiBold, size: 16)
         label.textColor = .particleColor.white
         label.text = title
-        
 
         [label, iconImage].forEach {
             row.addSubview($0)
@@ -133,10 +172,33 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
     
     @objc private func logoutButtonTapped() {
         
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [weak self] in
+            guard let self = self else { return }
+            self.logoutAlert.alpha = 1
+        }
     }
     
     @objc private func deleteAccountButtonTapped() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [weak self] in
+            guard let self = self else { return }
+            self.deleteAccountAlert.alpha = 1
+        }
+    }
+    
+    private func generateAlertButton(title: String, _ buttonAction: @escaping () -> Void) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
         
+        button.rx.tap.bind { [weak self] _ in
+            buttonAction()
+        }
+        .disposed(by: disposeBag)
+        
+        return button
     }
 }
 
@@ -149,9 +211,16 @@ private extension SetAccountViewController {
             navigationBar.addSubview($0)
         }
         
-        [navigationBar, sectionTitle, buttonStack].forEach {
-            view.addSubview($0)
-        }
+        [
+            navigationBar,
+            sectionTitle,
+            buttonStack,
+            logoutAlert,
+            deleteAccountAlert
+        ]
+            .forEach {
+                view.addSubview($0)
+            }
     }
     
     func setConstraints() {
@@ -172,6 +241,14 @@ private extension SetAccountViewController {
         buttonStack.snp.makeConstraints {
             $0.top.equalTo(sectionTitle.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview()
+        }
+        
+        logoutAlert.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        deleteAccountAlert.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }
