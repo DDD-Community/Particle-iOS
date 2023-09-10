@@ -12,9 +12,11 @@ protocol MyPageDependency: Dependency {
     // created by this RIB.
 }
 
-final class MyPageComponent: Component<MyPageDependency>, SetAccountDependency, SetAlarmDependency {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+final class MyPageComponent: Component<MyPageDependency>,
+                             SetAccountDependency,
+                             SetAlarmDependency,
+                             SetInterestedTagsDependency {
+    
 }
 
 // MARK: - Builder
@@ -24,11 +26,11 @@ protocol MyPageBuildable: Buildable {
 }
 
 final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
-
+    
     override init(dependency: MyPageDependency) {
         super.init(dependency: dependency)
     }
-
+    
     func build(withListener listener: MyPageListener) -> MyPageRouting {
         let component = MyPageComponent(dependency: dependency)
         let viewController = MyPageViewController()
@@ -37,12 +39,14 @@ final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
         
         let setAccountBuildable = SetAccountBuilder(dependency: component)
         let setAlarmBuildable = SetAlarmBuilder(dependency: component)
+        let setInterestedTagsBuildable = SetInterestedTagsBuilder(dependency: component)
         
         return MyPageRouter(
             interactor: interactor,
             viewController: viewController,
             setAccountBuildable: setAccountBuildable,
-            setAlarmBuildable: setAlarmBuildable
+            setAlarmBuildable: setAlarmBuildable,
+            setInterestedTagsBuildable: setInterestedTagsBuildable
         )
     }
 }

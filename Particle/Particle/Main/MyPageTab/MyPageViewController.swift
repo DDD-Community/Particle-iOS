@@ -15,6 +15,7 @@ import Kingfisher
 protocol MyPagePresentableListener: AnyObject {
     func setAccountButtonTapped()
     func setAlarmButtonTapped()
+    func setInterestedTagsButtonTapped()
 }
 
 final class MyPageViewController: UIViewController, MyPagePresentable, MyPageViewControllable {
@@ -194,12 +195,11 @@ final class MyPageViewController: UIViewController, MyPagePresentable, MyPageVie
     }
     
     @objc private func setAlarmButtonTapped(){
-        Console.debug("\(#function)")
         listener?.setAlarmButtonTapped()
     }
     
     @objc private func setInterestedTagButtonTapped(){
-        Console.debug("\(#function)")
+        listener?.setInterestedTagsButtonTapped()
     }
     
     @objc private func setWidgetButtonTapped(){

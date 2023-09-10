@@ -14,6 +14,9 @@ protocol MyPageRouting: ViewableRouting {
     
     func attachSetAlarm()
     func detachSetAlarm()
+    
+    func attachSetInterestedTags()
+    func detachSetInterestedTags()
 }
 
 protocol MyPagePresentable: Presentable {
@@ -26,18 +29,20 @@ protocol MyPageListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageInteractable, MyPagePresentableListener {
+final class MyPageInteractor: PresentableInteractor<MyPagePresentable>,
+                              MyPageInteractable,
+                              MyPagePresentableListener {
     
     weak var router: MyPageRouting?
     weak var listener: MyPageListener?
     
     private var disposeBag = DisposeBag()
-
+    
     override init(presenter: MyPagePresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
     }
-
+    
     override func didBecomeActive() {
         super.didBecomeActive()
         // TODO: user정보 받아와서 저장
@@ -46,6 +51,7 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
             switch result.element {
             case .success(let response):
                 self?.presenter.setData(data: response)
+                UserDefaults.standard.set(response.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
             case .failure(let error):
                 Console.error(error.localizedDescription)
             case .none:
@@ -53,9 +59,9 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
             }
         }
         .disposed(by: disposeBag)
-
+        
     }
-
+    
     override func willResignActive() {
         super.willResignActive()
         
@@ -67,18 +73,30 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>, MyPageIn
         router?.attachSetAccount()
     }
     
-    func setAccountBackButtonTapped() {
-        router?.detachSetAccount()
+    func setAlarmButtonTapped() {
+        router?.attachSetAlarm()
     }
+    
+    func setInterestedTagsButtonTapped() {
+        router?.attachSetInterestedTags()
+    }
+    
     
     // MARK: - MyPageInteractable
     
-    func setAlarmButtonTapped() {
-        router?.attachSetAlarm()
+    func setAccountBackButtonTapped() {
+        router?.detachSetAccount()
     }
     
     func setAlarmBackButtonTapped() {
         router?.detachSetAlarm()
     }
     
+    func setInterestedTagsBackButtonTapped() {
+        router?.detachSetInterestedTags()
+    }
+    
+//    func setInterestedTagsOKButtonTapped() {
+//        router?.detachSetInterestedTags()
+//    }
 }
