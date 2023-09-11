@@ -114,7 +114,7 @@ final class ParticleAlert: UIView {
         backgroundColor = .particleColor.black.withAlphaComponent(0.5)
     }
     
-    private func generateDivider(axis: Axis) -> UIView {
+    private func generateDivider(axis: NSLayoutConstraint.Axis) -> UIView {
         
         let divider = UIView()
         divider.backgroundColor = UIColor.init(hex: 0x545458).withAlphaComponent(0.65)
