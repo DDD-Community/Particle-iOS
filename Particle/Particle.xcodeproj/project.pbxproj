@@ -421,6 +421,8 @@
 				AF0D71CA2A5BE9B600157758 /* RootInteractor.swift */,
 				AF0D71D92A5BEEAD00157758 /* RootComponent+LoggedOut.swift */,
 				AF0D71EA2A5BF02700157758 /* RootComponent+LoggedIn.swift */,
+				AF0D71D02A5BEA7200157758 /* LoggedIn */,
+				AF0D71CF2A5BEA6C00157758 /* LoggedOut */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -638,6 +640,20 @@
 			path = SetInterestedTags;
 			sourceTree = "<group>";
 		};
+		AF7953D02AB3386800A7044A /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AFE885F62A5C29E5001EF2C0 /* Extension */,
+				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
+				AF7B2E662AA1FC3000806149 /* Domain */,
+				AF473BBA2A9F6063002EE27B /* Data */,
+				3520EF212A5FB17800A53B34 /* Utils */,
+				AF86D82C2A4E6030009F1E9D /* Entry */,
+				AF0D71E12A5BEF8900157758 /* Main */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		AF7B2E662AA1FC3000806149 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,6 +676,7 @@
 				AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */,
 				AF0D71C42A5BE6A200157758 /* AppComponent.swift */,
 				AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */,
+				AF0D71C62A5BE9AC00157758 /* Root */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -669,6 +686,7 @@
 			children = (
 				3520EF272A74DADE00A53B34 /* Fonts */,
 				AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */,
+				AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */,
 				AFB4BDCF2A4093DD008BA9E0 /* LaunchScreen.storyboard */,
 				AFB4BDD22A4093DD008BA9E0 /* Info.plist */,
 			);
@@ -717,17 +735,7 @@
 		AFB4BDC32A4093DC008BA9E0 /* Particle */ = {
 			isa = PBXGroup;
 			children = (
-				AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */,
-				AFE885F62A5C29E5001EF2C0 /* Extension */,
-				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
-				AF7B2E662AA1FC3000806149 /* Domain */,
-				AF473BBA2A9F6063002EE27B /* Data */,
-				3520EF212A5FB17800A53B34 /* Utils */,
-				AF86D82C2A4E6030009F1E9D /* Entry */,
-				AF0D71C62A5BE9AC00157758 /* Root */,
-				AF0D71CF2A5BEA6C00157758 /* LoggedOut */,
-				AF0D71D02A5BEA7200157758 /* LoggedIn */,
-				AF0D71E12A5BEF8900157758 /* Main */,
+				AF7953D02AB3386800A7044A /* Sources */,
 				AF86D82D2A4E6044009F1E9D /* Resources */,
 			);
 			path = Particle;
@@ -1250,7 +1258,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Particle/Particle.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SWPBG3YXG5;
@@ -1284,7 +1292,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Particle/Particle.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
