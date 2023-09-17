@@ -14,10 +14,17 @@ protocol RecordDetailInteractable: Interactable {
 
 protocol RecordDetailViewControllable: ViewControllable {}
 
-final class RecordDetailRouter: ViewableRouter<RecordDetailInteractable, RecordDetailViewControllable>, RecordDetailRouting {
+final class RecordDetailRouter: ViewableRouter<RecordDetailInteractable,RecordDetailViewControllable>,
+                                RecordDetailRouting {
 
-    override init(interactor: RecordDetailInteractable, viewController: RecordDetailViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
+    override init(
+        interactor: RecordDetailInteractable,
+        viewController: RecordDetailViewControllable
+    ) {
+        super.init(
+            interactor: interactor,
+            viewController: viewController
+        )
         interactor.router = self
     }
 }

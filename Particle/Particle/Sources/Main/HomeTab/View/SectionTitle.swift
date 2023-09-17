@@ -10,11 +10,14 @@ import SnapKit
 
 final class SectionTitle: UIView {
     
-    private let backgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .particleColor.black
-        return view
-    }()
+    enum Metric {
+        static let minimumHeight: CGFloat = 44
+        static let titleLeadingMargin: CGFloat = 20
+        static let titleTopMargin: CGFloat = 7
+        static let buttonTrailingMargin: CGFloat = 8
+        static let buttonSize: CGFloat = 20
+        static let buttonTapSize: CGFloat = 40
+    }
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -32,6 +35,8 @@ final class SectionTitle: UIView {
     
     init(title: String) {
         super.init(frame: .zero)
+        
+        self.backgroundColor = .particleColor.black
         addSubviews()
         setConstraints()
         
@@ -57,34 +62,32 @@ final class SectionTitle: UIView {
 private extension SectionTitle {
     
     func addSubviews() {
-        [backgroundView].forEach {
-            addSubview($0)
-        }
+
         [titleLabel, rightArrowButton].forEach {
-            backgroundView.addSubview($0)
+            addSubview($0)
         }
     }
     
     func setConstraints() {
-        backgroundView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.greaterThanOrEqualTo(44)
+        self.snp.makeConstraints {
+            $0.width.equalTo(DeviceSize.width)
+            $0.height.greaterThanOrEqualTo(Metric.minimumHeight)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalToSuperview().inset(7)
+            $0.leading.equalToSuperview().inset(Metric.titleLeadingMargin)
+            $0.top.equalToSuperview().inset(Metric.titleTopMargin)
         }
         
         rightArrowButton.imageView?.snp.makeConstraints {
-            $0.width.height.equalTo(20)
+            $0.width.height.equalTo(Metric.buttonSize)
         }
         
         rightArrowButton.snp.makeConstraints {
-            $0.width.height.equalTo(40)
+            $0.width.height.equalTo(Metric.buttonTapSize)
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(8)
+            $0.trailing.equalToSuperview().inset(Metric.buttonTrailingMargin)
         }
     }
 }

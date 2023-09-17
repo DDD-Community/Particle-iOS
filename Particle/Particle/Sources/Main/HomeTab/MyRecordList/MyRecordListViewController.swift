@@ -14,7 +14,9 @@ protocol MyRecordListPresentableListener: AnyObject {
 
 }
 
-final class MyRecordListViewController: UIViewController, MyRecordListPresentable, MyRecordListViewControllable {
+final class MyRecordListViewController: UIViewController,
+                                        MyRecordListPresentable,
+                                        MyRecordListViewControllable {
 
     weak var listener: MyRecordListPresentableListener?
     private var disposeBag = DisposeBag()
@@ -23,6 +25,8 @@ final class MyRecordListViewController: UIViewController, MyRecordListPresentabl
         enum NavigationBar {
             static let height = 45
             static let backButtonLeftMargin = 8
+            static let backButtonIconSize = 20
+            static let backButtonTapSize = 44
         }
     }
     
@@ -43,25 +47,13 @@ final class MyRecordListViewController: UIViewController, MyRecordListPresentabl
         let button = UIButton()
         button.setImage(.particleImage.backButton2, for: .normal)
         button.imageView?.snp.makeConstraints {
-            $0.width.equalTo(20)
-            $0.height.equalTo(20)
+            $0.width.height.equalTo(Metric.NavigationBar.backButtonIconSize)
         }
         button.snp.makeConstraints {
-            $0.width.height.equalTo(44)
+            $0.width.height.equalTo(Metric.NavigationBar.backButtonTapSize)
         }
         return button
     }()
-    
-//    private let recentlyOrderButton: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = .particleColor.bk02
-//        view.layer.cornerRadius = 12
-//        view.snp.makeConstraints {
-//            $0.width.equalTo((DeviceSize.width-40-14)/2)
-//            $0.height.equalTo(25)
-//        }
-//        return view
-//    }()
     
     private let recentlyOrderButtonLabel: UILabel = {
         let label = UILabel()
@@ -74,18 +66,6 @@ final class MyRecordListViewController: UIViewController, MyRecordListPresentabl
         label.isUserInteractionEnabled = true
         return label
     }()
-    
-//    private let oldlyOrderButton: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = .black
-//        view.layer.cornerRadius = 12
-//        view.snp.makeConstraints {
-//            $0.width.equalTo((DeviceSize.width-40-14)/2)
-//            $0.height.equalTo(25)
-//        }
-//
-//        return view
-//    }()
     
     private let oldlyOrderButtonLabel: UILabel = {
         let label = UILabel()
@@ -149,10 +129,16 @@ final class MyRecordListViewController: UIViewController, MyRecordListPresentabl
     }
     
     private func configureSegmentControl() {
-        let tabGesture = UITapGestureRecognizer(target: self, action: #selector(recentlyOrderButtonTapped))
+        let tabGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(recentlyOrderButtonTapped)
+        )
         recentlyOrderButtonLabel.addGestureRecognizer(tabGesture)
         
-        let tabGesture2 = UITapGestureRecognizer(target: self, action: #selector(oldlyOrderButtonTapped))
+        let tabGesture2 = UITapGestureRecognizer(
+            target: self,
+            action: #selector(oldlyOrderButtonTapped)
+        )
         oldlyOrderButtonLabel.addGestureRecognizer(tabGesture2)
     }
     
@@ -164,7 +150,6 @@ final class MyRecordListViewController: UIViewController, MyRecordListPresentabl
             self.segmentBarLeft?.update(offset: 0)
             self.view.layoutIfNeeded()
         }
-        
     }
     
     @objc private func oldlyOrderButtonTapped() {
@@ -194,12 +179,10 @@ private extension MyRecordListViewController {
         [segmentBar, recentlyOrderButtonLabel, oldlyOrderButtonLabel].forEach {
             segmentControl.addSubview($0)
         }
-        
-//        recentlyOrderButton.addSubview(recentlyOrderButtonLabel)
-//        oldlyOrderButton.addSubview(oldlyOrderButtonLabel)
     }
     
     func setConstraints() {
+        
         navigationBar.snp.makeConstraints {
             $0.top.left.right.equalTo(self.view.safeAreaLayoutGuide)
             $0.height.equalTo(Metric.NavigationBar.height)
@@ -223,9 +206,8 @@ private extension MyRecordListViewController {
         segmentBar.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             segmentBarLeft = $0.leading.equalTo(recentlyOrderButtonLabel.snp.leading).constraint
-//            segmentBarRight = $0.leading.equalTo(oldlyOrderButtonLabel.snp.leading).constraint
         }
-//        segmentBarRight?.deactivate()
+        
         recentlyOrderButtonLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(5)

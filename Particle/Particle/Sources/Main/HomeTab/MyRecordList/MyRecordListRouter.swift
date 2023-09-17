@@ -12,15 +12,19 @@ protocol MyRecordListInteractable: Interactable {
     var listener: MyRecordListListener? { get set }
 }
 
-protocol MyRecordListViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-}
+protocol MyRecordListViewControllable: ViewControllable {}
 
-final class MyRecordListRouter: ViewableRouter<MyRecordListInteractable, MyRecordListViewControllable>, MyRecordListRouting {
+final class MyRecordListRouter: ViewableRouter<MyRecordListInteractable, MyRecordListViewControllable>,
+                                MyRecordListRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: MyRecordListInteractable, viewController: MyRecordListViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
+    override init(
+        interactor: MyRecordListInteractable,
+        viewController: MyRecordListViewControllable
+    ) {
+        super.init(
+            interactor: interactor,
+            viewController: viewController
+        )
         interactor.router = self
     }
 }

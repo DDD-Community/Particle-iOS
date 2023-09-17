@@ -23,6 +23,14 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     private var recordList: BehaviorRelay<[RecordReadDTO]> = .init(value: [])
     
+    private enum Metric {
+        enum RecordCell {
+            static let width: CGFloat = DeviceSize.width-40
+            static let height: CGFloat = 400
+            static let inset: CGFloat = 20
+        }
+    }
+    
     // MARK: - UIComponents
     
     private let mainScrollView: UIScrollView = {
@@ -58,6 +66,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         
         return view
     }()
+    // FIXME: Compositional Layout 으로 변경하기.
     
     private let myArticleSectionArrowButton: UIButton = {
         let button = UIButton()
@@ -67,10 +76,16 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     private let horizontalCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = .init(width: DeviceSize.width-40, height: 400)
+        layout.itemSize = .init(width: Metric.RecordCell.width,
+                                height: Metric.RecordCell.height)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 40
-        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        layout.sectionInset = .init(
+            top: 0,
+            left: Metric.RecordCell.inset,
+            bottom: 0,
+            right: Metric.RecordCell.inset
+        )
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(RecordCell.self)
@@ -102,7 +117,11 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     private let emptyLabel: UILabel = {
         let label = UILabel()
-        label.setParticleFont(.y_body01, color: .particleColor.main100, text: "앗! 아직 저장한 아티클이 없어요")
+        label.setParticleFont(
+            .y_body01,
+            color: .particleColor.main100,
+            text: "앗! 아직 저장한 아티클이 없어요"
+        )
         return label
     }()
     
@@ -157,13 +176,6 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         view.backgroundColor = .particleColor.black
         navigationController?.isNavigationBarHidden = true
         
-        let window = UIApplication.shared.windows.first
-        let statusBarManager = window?.windowScene?.statusBarManager
-        
-        let statusBarView = UIView(frame: statusBarManager?.statusBarFrame ?? .zero)
-        statusBarView.backgroundColor = .particleColor.black
-        window?.addSubview(statusBarView)
-        
         emptyLabel.isHidden = true
         emptyImage.isHidden = true
         mainScrollView.isHidden = true
@@ -176,10 +188,11 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
 
         recordList.bind(to: horizontalCollectionView.rx.items(
             cellIdentifier: RecordCell.defaultReuseIdentifier,
-            cellType: RecordCell.self)) { index, dto, cell in
-                cell.setupData(data: dto.toDomain())
-            }
-            .disposed(by: disposeBag)
+            cellType: RecordCell.self)
+        ) { index, dto, cell in
+            cell.setupData(data: dto.toDomain())
+        }
+        .disposed(by: disposeBag)
         
         recordList.subscribe { [weak self] element in
             if element.isEmpty {
@@ -194,29 +207,28 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         }
         .disposed(by: disposeBag)
         
-        horizontalCollectionView.rx.itemSelected.bind { [weak self] indexPath in
-            guard let self = self else { return }
-            self.listener?.cellTapped(with: self.recordList.value[indexPath.row])
-            // TODO: RecordDetail RIB로 이동.
-        }
-        .disposed(by: disposeBag)
+        horizontalCollectionView.rx.itemSelected
+            .bind { [weak self] indexPath in
+                guard let self = self else { return }
+                self.listener?.cellTapped(with: self.recordList.value[indexPath.row])
+            }
+            .disposed(by: disposeBag)
         
         myArticleSectionArrowButton.rx.tap.bind {
             Console.log("myArticleButtonTapped")
         }
         .disposed(by: disposeBag)
-        
     }
     
     private func configurePlusButton() {
         let tapGesture = UITapGestureRecognizer(
             target: self,
-            action: #selector(buttonTapped)
+            action: #selector(plusButtonTapped)
         )
         plusButton.addGestureRecognizer(tapGesture)
     }
     
-    @objc private func buttonTapped() {
+    @objc private func plusButtonTapped() {
         UIView.animate(withDuration: 0.1) { [self] in
             plusButton.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         } completion: { [self] _ in
@@ -228,9 +240,14 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         }
     }
     
+    
+    // MARK: - HomePresentable
+    
     func setData(data: [RecordReadDTO]) {
         recordList.accept(data)
     }
+    
+    // MARK: - HomeViewControllable
     
     func present(viewController: RIBs.ViewControllable) {
         present(viewController.uiviewController, animated: true, completion: nil)
@@ -265,6 +282,7 @@ private extension HomeViewController {
             .forEach {
                 mainScrollView.addSubview($0)
             }
+        
         myArticleSectionTitle.addSubview(myArticleSectionArrowButton)
     }
     
@@ -281,9 +299,11 @@ private extension HomeViewController {
             $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
             $0.height.equalTo(55)
         }
+        
         myArticleSectionArrowButton.imageView?.snp.makeConstraints {
             $0.width.height.equalTo(20)
         }
+        
         myArticleSectionArrowButton.snp.makeConstraints{
             $0.width.height.equalTo(44)
             $0.centerY.equalToSuperview()

@@ -15,7 +15,6 @@ protocol HomeInteractable: Interactable, AddArticleListener, RecordDetailListene
 protocol HomeViewControllable: ViewControllable {
     func present(viewController: ViewControllable)
     func dismiss(viewController: ViewControllable)
-//    func pushViewController(_ viewController: ViewControllable) // 이미 구현?
 }
 
 final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, HomeRouting {

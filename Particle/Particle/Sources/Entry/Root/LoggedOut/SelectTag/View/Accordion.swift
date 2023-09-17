@@ -41,7 +41,6 @@ final class Accordion: UIView {
     private var disposeBag = DisposeBag()
     private let tags: [String]
     private(set) var selectedTags: BehaviorRelay<[String]> = .init(value: [])
-    private(set) var height: BehaviorSubject<CGFloat> = .init(value: 0.0)
     
     // MARK: - UI Components
     
@@ -154,13 +153,7 @@ final class Accordion: UIView {
     }
     
     // MARK: - Methods
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
 
-        height.onNext(mainStack.bounds.height)
-    }
-    
     private func setupInitialView() {
         backgroundColor = .clear
         self.recommendTagCollectionView.isHidden = true
@@ -240,6 +233,25 @@ final class Accordion: UIView {
             self.arrowButton.transform = CGAffineTransform.init(rotationAngle: self.angle)
         }
     }
+    
+    func openAccordion() {
+        UIView.animate(withDuration: 0.3, delay: 0) { [weak self] in
+            guard let self = self else { return }
+            self.recommendTagCollectionView.isHidden = false
+            self.angle = 0
+            
+            self.arrowButton.transform = CGAffineTransform.init(rotationAngle: self.angle)
+        }
+    }
+    
+    func closeAccordion() {
+        UIView.animate(withDuration: 0.3, delay: 0) { [weak self] in
+            guard let self = self else { return }
+            self.recommendTagCollectionView.isHidden = true
+            self.angle = .pi
+            self.arrowButton.transform = CGAffineTransform.init(rotationAngle: self.angle)
+        }
+    }
 }
 
 // MARK: - Layout Settting
@@ -265,6 +277,10 @@ private extension Accordion {
     }
     
     func setConstraints() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(mainStack)
+            $0.width.equalTo(DeviceSize.width)
+        }
         
         mainStack.snp.makeConstraints {
             $0.leading.trailing.equalTo(safeAreaLayoutGuide).inset(20)

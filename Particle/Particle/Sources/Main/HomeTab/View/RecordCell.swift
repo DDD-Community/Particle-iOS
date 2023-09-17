@@ -18,6 +18,14 @@ struct RecordCellModel {
 
 final class RecordCell: UICollectionViewCell {
     
+    enum Metric {
+        
+        enum SentenceBoxChild {
+            static let height: CGFloat = 112
+            static let horizontalMargin: CGFloat = 20
+        }
+    }
+    
     // MARK: - UIComponents
     
     private let dateLabel: UILabel = {
@@ -211,19 +219,19 @@ private extension RecordCell {
         sentenceBoxChild1.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(112)
+            $0.height.equalTo(Metric.SentenceBoxChild.height)
         }
         sentenceBoxChild2.snp.makeConstraints {
             $0.top.equalTo(sentenceBoxChild1.snp.bottom).inset(16)
             $0.leading.equalToSuperview().inset(15)
             $0.trailing.equalToSuperview().inset(25)
-            $0.height.equalTo(112)
+            $0.height.equalTo(Metric.SentenceBoxChild.height)
         }
         sentenceBoxChild3.snp.makeConstraints {
             $0.top.equalTo(sentenceBoxChild2.snp.bottom).inset(16)
             $0.leading.equalToSuperview().inset(25)
             $0.trailing.equalToSuperview().inset(15)
-            $0.height.equalTo(112)
+            $0.height.equalTo(Metric.SentenceBoxChild.height)
         }
         
         sentenceBoxChild1Label.snp.makeConstraints {

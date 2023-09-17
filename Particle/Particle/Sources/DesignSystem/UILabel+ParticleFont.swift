@@ -100,16 +100,6 @@ enum Particle_Font {
 
 extension UILabel {
     
-//    func setParticleStyle(_ font: Particle_Font, color: UIColor, text: String) {
-//        setParticleFont(font, color: color)
-//        setTextWithLineHeight(text: text, lineHeight: font.lineHeight)
-//    }
-//
-//    func setParticleFont(_ font: Particle_Font, color: UIColor) {
-//        self.font = font.fontStyle
-//        self.textColor = color
-//    }
-    
     func setParticleFont(_ font: Particle_Font, color: UIColor, text: String? = nil) {
         self.font = font.fontStyle
         let style = NSMutableParagraphStyle()
@@ -124,20 +114,4 @@ extension UILabel {
         let attrString = NSAttributedString(string: text ?? "", attributes: attributes)
         self.attributedText = attrString
     }
-    
-//    func setTextWithLineHeight(text: String?, lineHeight: CGFloat) {
-//        if let text = text {
-//            let style = NSMutableParagraphStyle()
-//            style.maximumLineHeight = lineHeight
-//            style.minimumLineHeight = lineHeight
-//
-//            let attributes: [NSAttributedString.Key: Any] = [
-//                .paragraphStyle: style,
-//                .baselineOffset: (lineHeight - font.lineHeight) / 4
-//            ]
-//
-//            let attString = NSAttributedString(string: text, attributes: attributes)
-//            self.attributedText = attString
-//        }
-//    }
 }

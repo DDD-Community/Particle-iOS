@@ -65,7 +65,11 @@ final class RecordDetailViewController: UIViewController,
     
     private let recordTitle: UILabel = {
         let label = UILabel()
-        label.setParticleFont(.y_title01, color: .white, text: "효과적인 포스트모텔 회의를 진행하는 방법")
+        label.setParticleFont(
+            .y_title01,
+            color: .white,
+            text: "효과적인 포스트모텔 회의를 진행하는 방법"
+        )
         label.numberOfLines = 0
         return label
     }()
@@ -83,7 +87,10 @@ final class RecordDetailViewController: UIViewController,
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 0
         
-        let collectionView = DynamicHeightCollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = DynamicHeightCollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
         collectionView.register(LeftAlignedCollectionViewCell2.self)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.backgroundColor = .clear
@@ -93,7 +100,7 @@ final class RecordDetailViewController: UIViewController,
     
     private let urlLabel: UILabel = {
         let label = UILabel()
-        label.text = "https://stackoverflow.com/questions/67082716/swiftui-tabbar-ellipsis-not-vertically-centered"
+        label.text = "www.mockUrl.com"
         label.numberOfLines = 0
         label.textColor = .particleColor.gray03
         label.font = .particleFont.generate(style: .pretendard_Regular, size: 11)
@@ -133,50 +140,46 @@ final class RecordDetailViewController: UIViewController,
         return button
     }()
     
-    private lazy var warningAlert: ParticleAlert = {
-        let deleteButton = UIButton()
-        deleteButton.setAttributedTitle(NSMutableAttributedString().attributeString(string: "삭제", font: .particleFont.generate(style: .pretendard_SemiBold, size: 17), textColor: .init(hex: 0xFF453A)), for: .normal)
-        deleteButton.snp.makeConstraints {
-            $0.height.equalTo(44)
-        }
-        
-        let cancelButton = UIButton()
-        cancelButton.setAttributedTitle(NSMutableAttributedString().attributeString(string: "취소", font: .particleFont.generate(style: .pretendard_Regular, size: 17), textColor: .init(hex: 0xC5C5C5)), for: .normal)
-        cancelButton.snp.makeConstraints {
-            $0.height.equalTo(44)
-        }
-        
-        let alert = ParticleAlert(title: "파티클 삭제", body: "내 파티클을 정말 삭제하시겠어요?", buttons: [deleteButton, cancelButton], buttonsAxis: .vertical)
-        alert.alpha = 0
-        
-        cancelButton.rx.tap.bind { [weak self] _ in
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
-                alert.alpha = 0
-            }
-        }
-        .disposed(by: self.disposeBag)
-        
-        
-        deleteButton.rx.tap.bind { [weak self] _ in
-            guard let self = self else { return }
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
-                alert.alpha = 0
-            }
-            
-            // TODO: 삭제 로딩중
-            
-            self.listener?.recordDetailDeleteButtonTapped(with: self.data.id).subscribe { [weak self] bool in
-                if bool == true {
-                    self?.listener?.recordDetailCloseButtonTapped()
-                } else {
-                    // TODO: 삭제실패얼럿
-                }
-            }
-            .disposed(by: self.disposeBag)
-        }
-        .disposed(by: self.disposeBag)
-        
+    private lazy var warningAlertController: ParticleAlertController = {
+        let alert = ParticleAlertController(
+            title: "파티클 삭제",
+            body: "내 파티클을 정말 삭제하시겠어요?",
+            buttons: [deleteButton, cancelButton],
+            buttonsAxis: .vertical
+        )
         return alert
+    }()
+    
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setAttributedTitle(
+            NSMutableAttributedString()
+                .attributeString(
+                    string: "삭제",
+                    font: .particleFont.generate(style: .pretendard_SemiBold, size: 17),
+                    textColor: .init(hex: 0xFF453A)),
+            for: .normal
+        )
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        return button
+    }()
+    
+    private let cancelButton: UIButton = {
+        let button = UIButton()
+        button.setAttributedTitle(
+            NSMutableAttributedString()
+                .attributeString(
+                    string: "취소",
+                    font: .particleFont.generate(style: .pretendard_Regular, size: 17),
+                    textColor: .init(hex: 0xC5C5C5)),
+            for: .normal
+        )
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        return button
     }()
     
     // MARK: - Initializers
@@ -251,6 +254,28 @@ final class RecordDetailViewController: UIViewController,
             }
         }
         .disposed(by: disposeBag)
+        
+        deleteButton.rx.tap.bind { [weak self] _ in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+
+            // TODO: 삭제 로딩중
+
+            self.listener?.recordDetailDeleteButtonTapped(with: self.data.id).subscribe { [weak self] bool in
+                if bool == true {
+                    self?.listener?.recordDetailCloseButtonTapped()
+                } else {
+                    // TODO: 삭제실패얼럿
+                }
+            }
+            .disposed(by: self.disposeBag)
+        }
+        .disposed(by: self.disposeBag)
+        
+        cancelButton.rx.tap.bind { [weak self] _ in
+            self?.dismiss(animated: true)
+        }
+        .disposed(by: self.disposeBag)
     }
     
     private func showActionSheetInMyRecord() {
@@ -263,10 +288,8 @@ final class RecordDetailViewController: UIViewController,
         })
         
         let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] action in
-
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [weak self] in
-                self?.warningAlert.alpha = 1
-            }
+            guard let self = self else { return }
+            self.present(self.warningAlertController, animated: true)
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: { action in
@@ -300,7 +323,6 @@ private extension RecordDetailViewController {
             dateLabel,
             directorLabel,
             heartButton,
-            warningAlert
         ]
             .forEach {
                 self.view.addSubview($0)
@@ -357,10 +379,6 @@ private extension RecordDetailViewController {
         heartButton.snp.makeConstraints {
             $0.top.equalTo(directorLabel.snp.bottom).offset(27)
             $0.leading.equalToSuperview().inset(20)
-        }
-        
-        warningAlert.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }

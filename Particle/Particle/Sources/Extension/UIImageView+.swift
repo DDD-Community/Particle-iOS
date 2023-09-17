@@ -10,7 +10,12 @@ import Photos
 
 extension UIImageView {
     
-    func fetchImage(asset: PHAsset, contentMode: PHImageContentMode, targetSize: CGSize, _ completion: ((CGFloat) -> Void)? = nil) {
+    func fetchImage(
+        asset: PHAsset,
+        contentMode: PHImageContentMode,
+        targetSize: CGSize,
+        _ completion: ((CGFloat) -> Void)? = nil) {
+        
         let options = PHImageRequestOptions()
         options.version = .original
         options.deliveryMode = .opportunistic
@@ -34,7 +39,11 @@ extension UIImageView {
 
 extension PHAsset {
     
-    func toImage(contentMode: PHImageContentMode, targetSize: CGSize, _ completion: @escaping (UIImage?) -> Void) {
+    func toImage(
+        contentMode: PHImageContentMode,
+        targetSize: CGSize,
+        _ completion: @escaping (UIImage?) -> Void) {
+        
         let options = PHImageRequestOptions()
         options.version = .original
         options.deliveryMode = .opportunistic

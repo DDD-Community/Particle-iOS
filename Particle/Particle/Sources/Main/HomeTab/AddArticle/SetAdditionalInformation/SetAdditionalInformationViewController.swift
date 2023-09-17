@@ -138,6 +138,19 @@ final class SetAdditionalInformationViewController: UIViewController,
         return textField
     }()
     
+    private let urlTextFieldClearButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.particleImage.xmarkButton, for: .normal)
+        button.imageView?.snp.makeConstraints {
+            $0.width.height.equalTo(16)
+        }
+        button.snp.makeConstraints {
+            $0.width.height.equalTo(32)
+        }
+        
+        return button
+    }()
+    
     private let urlTextFieldWarningLabel: UILabel = {
         let label = UILabel()
         label.text = "url을 입력해 주세요."
@@ -179,6 +192,19 @@ final class SetAdditionalInformationViewController: UIViewController,
         return textField
     }()
     
+    private let titleTextFieldClearButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.particleImage.xmarkButton, for: .normal)
+        button.imageView?.snp.makeConstraints {
+            $0.width.height.equalTo(16)
+        }
+        button.snp.makeConstraints {
+            $0.width.height.equalTo(32)
+        }
+        
+        return button
+    }()
+    
     private let titleTextFieldWarningLabel: UILabel = {
         let label = UILabel()
         label.text = "제목을 입력해 주세요."
@@ -202,7 +228,10 @@ final class SetAdditionalInformationViewController: UIViewController,
         layout.minimumLineSpacing = Metric.Tags.minimumLineSpacing
         layout.minimumInteritemSpacing = Metric.Tags.minimumInterItemSpacing
         
-        let collectionView = DynamicHeightCollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = DynamicHeightCollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
         collectionView.register(LeftAlignedCollectionViewCell.self)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.backgroundColor = .clear
@@ -211,7 +240,7 @@ final class SetAdditionalInformationViewController: UIViewController,
         return collectionView
     }()
     
-    private let mainStackView: UIStackView = {
+    private let accordionStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
@@ -229,6 +258,15 @@ final class SetAdditionalInformationViewController: UIViewController,
                 ),
             for: .normal
         )
+        button.setAttributedTitle(
+            NSMutableAttributedString()
+                .attributeString(
+                    string: "전체 접기",
+                    font: .particleFont.generate(style: .pretendard_Regular, size: 12),
+                    textColor: .particleColor.gray03
+                ),
+            for: .selected
+        )
         return button
     }()
     
@@ -238,32 +276,30 @@ final class SetAdditionalInformationViewController: UIViewController,
         return label
     }()
     
-    private let accordion1: Accordion = {
-        let accordion = Accordion(title: "디자인", tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"])
-        return accordion
-    }()
-    private let accordion2: Accordion = {
-        let accordion = Accordion(title: "마케팅", tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"])
-        return accordion
-    }()
-    private let accordion3: Accordion = {
-        let accordion = Accordion(title: "기획", tags: ["#서비스 기획", "#전략 기획", "#시스템 기획", "#데이터 분석"])
-        return accordion
-    }()
-    private let accordion4: Accordion = {
-        let accordion = Accordion(title: "개발", tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"])
-        return accordion
-    }()
-    private let accordion5: Accordion = {
-        let accordion = Accordion(title: "스타트업", tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"])
-        return accordion
-    }()
+    private let accordion1 = Accordion(
+        title: "디자인",
+        tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"]
+    )
     
-    private var accordion1HeightConstraint: Constraint?
-    private var accordion2HeightConstraint: Constraint?
-    private var accordion3HeightConstraint: Constraint?
-    private var accordion4HeightConstraint: Constraint?
-    private var accordion5HeightConstraint: Constraint?
+    private let accordion2 = Accordion(
+        title: "마케팅",
+        tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"]
+    )
+    
+    private let accordion3 = Accordion(
+        title: "기획",
+        tags: ["#서비스 기획", "#전략 기획", "#시스템 기획", "#데이터 분석"]
+    )
+    
+    private let accordion4 = Accordion(
+        title: "개발",
+        tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"]
+    )
+    
+    private let accordion5 = Accordion(
+        title: "스타트업",
+        tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"]
+    )
     
     // MARK: - Initializers
     
@@ -274,6 +310,7 @@ final class SetAdditionalInformationViewController: UIViewController,
         self.view.backgroundColor = .particleColor.black
         addSubviews()
         layout()
+        configureButton()
         bind()
         bindAccordion()
     }
@@ -292,26 +329,38 @@ final class SetAdditionalInformationViewController: UIViewController,
     
     // MARK: - Methods
     
+    private func configureButton() {
+        
+        urlTextField.rightView = urlTextFieldClearButton
+        urlTextField.rightViewMode = .whileEditing
+        urlTextFieldClearButton.rx.tap.bind { [weak self] _ in
+            self?.urlTextField.text = ""
+            self?.urlTextField.rightViewMode = .never
+        }
+        .disposed(by: disposeBag)
+        
+        titleTextField.rightView = titleTextFieldClearButton
+        titleTextField.rightViewMode = .whileEditing
+        titleTextFieldClearButton.rx.tap.bind { [weak self] _ in
+            self?.titleTextField.text = ""
+            self?.titleTextField.rightViewMode = .never
+        }
+        .disposed(by: disposeBag)
+    }
+    
     private func bindAccordion() {
         
-        let accordions: [(view: Accordion, constraint: Constraint?)] = [
-            (accordion1, accordion1HeightConstraint),
-            (accordion2, accordion2HeightConstraint),
-            (accordion3, accordion3HeightConstraint),
-            (accordion4, accordion4HeightConstraint),
-            (accordion5, accordion5HeightConstraint)
+        let accordions: [Accordion] = [
+            accordion1,
+            accordion2,
+            accordion3,
+            accordion4,
+            accordion5
         ]
         
         accordions.enumerated().forEach { (i, accordion) in
-            accordion.view.height.subscribe { dynamicHeight in
-                guard let dynamicHeight = dynamicHeight.element, dynamicHeight > 50 else {
-                    return
-                }
-                accordion.constraint?.update(offset: dynamicHeight)
-            }
-            .disposed(by: disposeBag)
-            
-            accordion.view.selectedTags.subscribe { [weak self] selectedTagsInAccordion in
+
+            accordion.selectedTags.subscribe { [weak self] selectedTagsInAccordion in
                 guard let self = self else { return }
                 guard let selectedTagsInAccordion = selectedTagsInAccordion.element else { return }
                 var list = self.selectedTags.value
@@ -386,6 +435,7 @@ final class SetAdditionalInformationViewController: UIViewController,
                 self?.urlTextField.layer.borderWidth = 0
                 self?.urlTextFieldWarningLabel.isHidden = true
             }
+            self?.urlTextField.rightViewMode = .whileEditing
         }
         .disposed(by: disposeBag)
         
@@ -394,6 +444,30 @@ final class SetAdditionalInformationViewController: UIViewController,
                 self?.titleTextField.layer.borderWidth = 0
                 self?.titleTextFieldWarningLabel.isHidden = true
             }
+            self?.titleTextField.rightViewMode = .whileEditing
+        }
+        .disposed(by: disposeBag)
+        
+        allTagOpenButton.rx.tap.bind { [weak self] _ in
+            
+            guard let self = self else { return }
+            Console.debug("allTagOpenButton Tapped!")
+            self.allTagOpenButton.isSelected.toggle()
+            
+            [
+                self.accordion1,
+                self.accordion2,
+                self.accordion3,
+                self.accordion4,
+                self.accordion5
+            ]
+                .forEach {
+                    if self.allTagOpenButton.isSelected {
+                        $0.openAccordion()
+                    } else {
+                        $0.closeAccordion()
+                    }
+                }
         }
         .disposed(by: disposeBag)
     }
@@ -426,14 +500,14 @@ private extension SetAdditionalInformationViewController {
             recommendTagCollectionView,
             allTagOpenButton,
             allTagTitleLabel,
-            mainStackView
+            accordionStackView
         ]
             .forEach {
                 mainScrollView.addSubview($0)
             }
         
         [accordion1, accordion2, accordion3, accordion4, accordion5].forEach {
-            mainStackView.addArrangedSubview($0)
+            accordionStackView.addArrangedSubview($0)
         }
     }
     
@@ -514,26 +588,11 @@ private extension SetAdditionalInformationViewController {
             $0.leading.equalToSuperview().inset(20)
         }
         
-        mainStackView.snp.makeConstraints {
+        accordionStackView.snp.makeConstraints {
             $0.top.equalTo(allTagTitleLabel.snp.bottom).offset(18)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(20)
             $0.width.equalTo(mainScrollView.frameLayoutGuide)
-        }
-        accordion1.snp.makeConstraints {
-            accordion1HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion2.snp.makeConstraints {
-            accordion2HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion3.snp.makeConstraints {
-            accordion3HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion4.snp.makeConstraints {
-            accordion4HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion5.snp.makeConstraints {
-            accordion5HeightConstraint = $0.height.equalTo(52).constraint
         }
     }
 }

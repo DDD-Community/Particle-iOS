@@ -89,6 +89,7 @@
 		AF4647622AAA196F00701B83 /* DirectlySetAlarmBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475E2AAA196F00701B83 /* DirectlySetAlarmBuilder.swift */; };
 		AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */; };
 		AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473BBF2A9F6241002EE27B /* AuthService.swift */; };
+		AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
 		AF621F682AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */; };
@@ -104,6 +105,9 @@
 		AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702FB2A8D02C300877C85 /* RecordUpdateDTO.swift */; };
 		AF9702FE2A8D031000877C85 /* UserReadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702FD2A8D031000877C85 /* UserReadDTO.swift */; };
 		AF9C6FCD2AA3038F00948BE2 /* UILabel+ParticleFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C6FCC2AA3038F00948BE2 /* UILabel+ParticleFont.swift */; };
+		AF9E9C032AB6E1370058AB70 /* ParticleAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */; };
+		AF9E9C062AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */; };
+		AF9E9C082AB6E1760058AB70 /* ParticleAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */; };
 		AFAB32582AACB35D000EA542 /* SectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB32572AACB35D000EA542 /* SectionTitle.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
@@ -236,6 +240,7 @@
 		AF46475E2AAA196F00701B83 /* DirectlySetAlarmBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmBuilder.swift; sourceTree = "<group>"; };
 		AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmInteractor.swift; sourceTree = "<group>"; };
 		AF473BBF2A9F6241002EE27B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleLoginButton.swift; sourceTree = "<group>"; };
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Particle.entitlements; sourceTree = "<group>"; };
@@ -252,6 +257,9 @@
 		AF9702FB2A8D02C300877C85 /* RecordUpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUpdateDTO.swift; sourceTree = "<group>"; };
 		AF9702FD2A8D031000877C85 /* UserReadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReadDTO.swift; sourceTree = "<group>"; };
 		AF9C6FCC2AA3038F00948BE2 /* UILabel+ParticleFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ParticleFont.swift"; sourceTree = "<group>"; };
+		AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertController.swift; sourceTree = "<group>"; };
+		AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertTransitioningDelegate.swift; sourceTree = "<group>"; };
+		AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertPresentationController.swift; sourceTree = "<group>"; };
 		AFAB32572AACB35D000EA542 /* SectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitle.swift; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -373,6 +381,7 @@
 				AF18E2DE2A68EEB100C54490 /* Console.swift */,
 				AFDE0F3C2AA4AC51008DC539 /* DateManager.swift */,
 				AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */,
+				AF9E9C042AB6E13A0058AB70 /* ParticleAlert */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -430,6 +439,7 @@
 		AF0D71CF2A5BEA6C00157758 /* LoggedOut */ = {
 			isa = PBXGroup;
 			children = (
+				AF4823712AB48EC100E90E77 /* View */,
 				AF0D71D12A5BEA8A00157758 /* LoggedOutRouter.swift */,
 				AF0D71D22A5BEA8A00157758 /* LoggedOutViewController.swift */,
 				AF0D71D32A5BEA8A00157758 /* LoggedOutBuilder.swift */,
@@ -621,6 +631,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		AF4823712AB48EC100E90E77 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		AF4A190F2A6A1E4100932372 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,6 +730,16 @@
 				AF9702FD2A8D031000877C85 /* UserReadDTO.swift */,
 			);
 			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		AF9E9C042AB6E13A0058AB70 /* ParticleAlert */ = {
+			isa = PBXGroup;
+			children = (
+				AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */,
+				AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */,
+				AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */,
+			);
+			path = ParticleAlert;
 			sourceTree = "<group>";
 		};
 		AFB4BDB82A4093DC008BA9E0 = {
@@ -1020,6 +1048,7 @@
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
 				AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */,
+				AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
@@ -1076,6 +1105,7 @@
 				AF130A9A2AA2E9E200F2E0BD /* RecordDetailInteractor.swift in Sources */,
 				AF31227D2A9780E900262088 /* Accordion.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
+				AF9E9C082AB6E1760058AB70 /* ParticleAlertPresentationController.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
 				AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */,
 				AFFAEBE62A8CFBBA009EC03B /* UIFont+ParticleFont.swift in Sources */,
@@ -1096,6 +1126,7 @@
 				AFBB5F682A66ABBF002416DA /* SearchRouter.swift in Sources */,
 				AF9C6FCD2AA3038F00948BE2 /* UILabel+ParticleFont.swift in Sources */,
 				AF9702FE2A8D031000877C85 /* UserReadDTO.swift in Sources */,
+				AF9E9C032AB6E1370058AB70 /* ParticleAlertController.swift in Sources */,
 				AF9702F82A8D01C700877C85 /* RecordCreateDTO.swift in Sources */,
 				AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */,
 				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
@@ -1104,6 +1135,7 @@
 				AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */,
 				AFBB5F622A66AAD7002416DA /* MyPageBuilder.swift in Sources */,
 				AFDE0F3B2AA4588C008DC539 /* RecordCell.swift in Sources */,
+				AF9E9C062AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift in Sources */,
 				AFDE0F3D2AA4AC51008DC539 /* DateManager.swift in Sources */,
 				3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */,
 				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,

@@ -52,7 +52,6 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
             }
         }
         .disposed(by: disposeBag)
-
     }
     
     override func willResignActive() {
@@ -72,7 +71,6 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     func dismiss() {
         router?.detachAddArticle()
     }
-    
     
     func recordDetailCloseButtonTapped() {
         router?.detachAddArticle()

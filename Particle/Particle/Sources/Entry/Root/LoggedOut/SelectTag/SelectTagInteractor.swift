@@ -18,20 +18,22 @@ protocol SelectTagListener: AnyObject {
     func selectTagStartButtonTapped(with selectedTags: [String])
 }
 
-final class SelectTagInteractor: PresentableInteractor<SelectTagPresentable>, SelectTagInteractable, SelectTagPresentableListener {
-   
+final class SelectTagInteractor: PresentableInteractor<SelectTagPresentable>,
+                                 SelectTagInteractable,
+                                 SelectTagPresentableListener {
+    
     weak var router: SelectTagRouting?
     weak var listener: SelectTagListener?
-
+    
     override init(presenter: SelectTagPresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
     }
-
+    
     override func didBecomeActive() {
         super.didBecomeActive()
     }
-
+    
     override func willResignActive() {
         super.willResignActive()
     }

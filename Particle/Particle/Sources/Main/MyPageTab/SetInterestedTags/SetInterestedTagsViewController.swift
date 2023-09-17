@@ -35,7 +35,7 @@ final class SetInterestedTagsViewController: UIViewController,
     // MARK: - UI Components
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        // Create an indicator.
+        
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .medium
@@ -88,32 +88,32 @@ final class SetInterestedTagsViewController: UIViewController,
         stackView.spacing = 16
         return stackView
     }()
-    private let accordion1: Accordion = {
-        let accordion = Accordion(title: "디자인", tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"])
-        return accordion
-    }()
-    private let accordion2: Accordion = {
-        let accordion = Accordion(title: "마케팅", tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"])
-        return accordion
-    }()
-    private let accordion3: Accordion = {
-        let accordion = Accordion(title: "기획", tags: ["#서비스 기획", "#전략 기획", "#시스템 기획", "#데이터 분석"])
-        return accordion
-    }()
-    private let accordion4: Accordion = {
-        let accordion = Accordion(title: "개발", tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"])
-        return accordion
-    }()
-    private let accordion5: Accordion = {
-        let accordion = Accordion(title: "스타트업", tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"])
-        return accordion
-    }()
     
-    private var accordion1HeightConstraint: Constraint?
-    private var accordion2HeightConstraint: Constraint?
-    private var accordion3HeightConstraint: Constraint?
-    private var accordion4HeightConstraint: Constraint?
-    private var accordion5HeightConstraint: Constraint?
+    private let accordion1 = Accordion(
+        title: "디자인",
+        tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"]
+    )
+    
+    private let accordion2 = Accordion(
+        title: "마케팅",
+        tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"]
+    )
+    
+    private let accordion3 = Accordion(
+        title: "기획",
+        tags: ["#서비스 기획", "#전략 기획", "#시스템 기획", "#데이터 분석"]
+    )
+    
+    private let accordion4 = Accordion(
+        title: "개발",
+        tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"]
+    )
+    
+    private let accordion5 = Accordion(
+        title: "스타트업",
+        tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"]
+    )
+    
     
     // MARK: - Initializers
     
@@ -140,24 +140,11 @@ final class SetInterestedTagsViewController: UIViewController,
     
     private func bindAccordion() {
         
-        let accordions: [(view: Accordion, constraint: Constraint?)] = [
-            (accordion1, accordion1HeightConstraint),
-            (accordion2, accordion2HeightConstraint),
-            (accordion3, accordion3HeightConstraint),
-            (accordion4, accordion4HeightConstraint),
-            (accordion5, accordion5HeightConstraint)
-        ]
+        let accordions: [Accordion] = [accordion1, accordion2, accordion3, accordion4, accordion5]
         
         accordions.enumerated().forEach { (i, accordion) in
-            accordion.view.height.subscribe { dynamicHeight in
-                guard let dynamicHeight = dynamicHeight.element, dynamicHeight > 50 else {
-                    return
-                }
-                accordion.constraint?.update(offset: dynamicHeight)
-            }
-            .disposed(by: disposeBag)
             
-            accordion.view.selectedTags.subscribe { [weak self] selectedTagsInAccordion in
+            accordion.selectedTags.subscribe { [weak self] selectedTagsInAccordion in
                 guard let self = self else { return }
                 guard let selectedTagsInAccordion = selectedTagsInAccordion.element else { return }
                 var list = self.selectedTags.value
@@ -204,38 +191,21 @@ final class SetInterestedTagsViewController: UIViewController,
 private extension SetInterestedTagsViewController {
     
     func addSubviews() {
-        [
-            backButton,
-            navigationTitle,
-            okButton
-        ]
-            .forEach {
-                navigationBar.addSubview($0)
-            }
+        [backButton, navigationTitle, okButton].forEach {
+            navigationBar.addSubview($0)
+        }
         
-        [
-            navigationBar,
-            mainScrollView,
-            activityIndicator
-        ]
-            .forEach {
-                view.addSubview($0)
-            }
+        [navigationBar, mainScrollView, activityIndicator].forEach {
+            view.addSubview($0)
+        }
         
         [mainStackView].forEach {
             mainScrollView.addSubview($0)
         }
         
-        [
-            accordion1,
-            accordion2,
-            accordion3,
-            accordion4,
-            accordion5,
-        ]
-            .forEach {
-                mainStackView.addArrangedSubview($0)
-            }
+        [accordion1, accordion2, accordion3, accordion4, accordion5].forEach {
+            mainStackView.addArrangedSubview($0)
+        }
     }
     
     func setConstraints() {
@@ -272,22 +242,6 @@ private extension SetInterestedTagsViewController {
             $0.leading.trailing.equalToSuperview()
             $0.width.equalTo(mainScrollView.frameLayoutGuide)
             $0.bottom.equalToSuperview().inset(16)
-        }
-        
-        accordion1.snp.makeConstraints {
-            accordion1HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion2.snp.makeConstraints {
-            accordion2HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion3.snp.makeConstraints {
-            accordion3HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion4.snp.makeConstraints {
-            accordion4HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion5.snp.makeConstraints {
-            accordion5HeightConstraint = $0.height.equalTo(52).constraint
         }
     }
 }

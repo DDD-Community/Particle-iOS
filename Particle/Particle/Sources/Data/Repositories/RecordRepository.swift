@@ -10,7 +10,7 @@ import Alamofire
 
 final class RecordRepository {
     
-    func create(record: RecordCreateDTO) -> Observable<AFResult<RecordReadDTO>> { // RecordReadDTO로 변경해야 할지도..?
+    func create(record: RecordCreateDTO) -> Observable<AFResult<RecordReadDTO>> {
         let urlComponent = URLComponents(string: "https://particle.k-net.kr/api/v1/record")
 
         guard let url = urlComponent?.url else {
@@ -27,7 +27,13 @@ final class RecordRepository {
         ]
         return Observable.create { emitter in
             
-            let request = AF.request(url, method: .post ,parameters: record.toDictionary(), encoding: JSONEncoding.default, headers: header)
+            let request = AF.request(
+                url,
+                method: .post ,
+                parameters: record.toDictionary(),
+                encoding: JSONEncoding.default,
+                headers: header)
+            
             request
                 .validate(statusCode: 200..<300)
                 .responseDecodable(of: RecordReadDTO.self) { response in

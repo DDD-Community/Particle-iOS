@@ -21,12 +21,29 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
     
     weak var listener: LoggedOutPresentableListener?
     
+    private enum Metric {
+        static let backgroundImageTopInset: CGFloat = 136
+        static let backgroundImageBottomInset: CGFloat = 186
+        
+        enum TitleStack {
+            static let spacing: CGFloat = 14
+            static let topInset: CGFloat = 56
+            static let horizontalInset: CGFloat = 20
+        }
+        
+        enum ButtonStack {
+            static let spacing: CGFloat = 16
+            static let horizontalInset: CGFloat = 20
+            static let bottomInset: CGFloat = 91
+        }
+    }
+    
     // MARK: - UIComponents
     
     private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 14
+        stackView.spacing = Metric.TitleStack.spacing
         return stackView
     }()
     
@@ -50,79 +67,23 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
     private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = Metric.ButtonStack.spacing
         return stackView
     }()
     
-    private let kakaoLoginButton: UIView = {
-        let button = UIView()
-        button.backgroundColor = .init(hex: 0xFEE500)
-        button.layer.cornerRadius = 8
-        
-        button.snp.makeConstraints {
-            $0.height.equalTo(44)
-        }
-        
-        let imageView = UIImageView()
-        imageView.image = .particleImage.kakaoLogo
-        imageView.snp.makeConstraints {
-            $0.width.height.equalTo(20)
-        }
-        
-        let title = UILabel()
-        title.text = "카카오 로그인"
-        title.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
-        title.textColor = .init(hex: 0x191919)
-        
-        let stack = UIStackView(arrangedSubviews: [imageView, title])
-        stack.axis = .horizontal
-        stack.spacing = 6
-        
-        [stack].forEach {
-            button.addSubview($0)
-        }
-        
-        stack.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        
-        return button
-    }()
-    
-    private let appleLoginButton: UIView = {
-        let button = UIView()
-        button.backgroundColor = .init(hex: 0x000000)
-        button.layer.cornerRadius = 8
-        
-        button.snp.makeConstraints {
-            $0.height.equalTo(44)
-        }
-        
-        let imageView = UIImageView()
-        imageView.image = .particleImage.appleLogo
-        imageView.snp.makeConstraints {
-            $0.width.height.equalTo(20)
-        }
-        
-        let title = UILabel()
-        title.text = "Apple 로그인"
-        title.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
-        title.textColor = .init(hex:0xFFFFFF)
-        
-        let stack = UIStackView(arrangedSubviews: [imageView, title])
-        stack.axis = .horizontal
-        stack.spacing = 6
-        
-        [stack].forEach {
-            button.addSubview($0)
-        }
-        
-        stack.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        
-        return button
-    }()
+    private let kakaoLoginButton = ParticleLoginButton(
+        backgroundColor: .init(hex: 0xFEE500),
+        iconImage: .particleImage.kakaoLogo,
+        title: "카카오 로그인",
+        titleColor: .init(hex: 0x191919)
+    )
+
+    private let appleLoginButton = ParticleLoginButton(
+        backgroundColor: .init(hex: 0x000000),
+        iconImage: .particleImage.appleLogo,
+        title: "Apple 로그인",
+        titleColor: .init(hex:0xFFFFFF)
+    )
     
     private let backgroundImage: UIImageView = {
         let imageView = UIImageView()
@@ -251,13 +212,13 @@ extension LoggedOutViewController: ASAuthorizationControllerDelegate,
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
             let _ = appleIDCredential.fullName
-            let email = appleIDCredential.email
+            let _ = appleIDCredential.email
             Console.log("\(#function) success")
             listener?.successLogin(with: "apple", identifier: "\(userIdentifier)")
             
         case let passwordCredential as ASPasswordCredential:
             let username = passwordCredential.user
-            let password = passwordCredential.password
+            let _ = passwordCredential.password
             Console.log("\(#function) success")
             listener?.successLogin(with: "apple", identifier: "\(username)")
             
@@ -294,19 +255,19 @@ private extension LoggedOutViewController {
     func setConstraints() {
         backgroundImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(136)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(186)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(Metric.backgroundImageTopInset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.backgroundImageBottomInset)
         }
         
         titleStackView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(56)
-            $0.horizontalEdges.equalToSuperview().offset(20)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(Metric.TitleStack.topInset)
+            $0.horizontalEdges.equalToSuperview().inset(Metric.TitleStack.horizontalInset)
         }
         
         buttonStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(91)
+            $0.horizontalEdges.equalToSuperview().inset(Metric.ButtonStack.horizontalInset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.ButtonStack.bottomInset)
         }
     }
 }

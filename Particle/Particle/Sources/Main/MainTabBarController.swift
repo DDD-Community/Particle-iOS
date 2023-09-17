@@ -18,12 +18,13 @@ protocol MainPresentableListener: AnyObject {
 final class MainTabBarController: UITabBarController, MainPresentable, MainViewControllable {
     
     private enum Metric {
-        static let HEIGHT_TAB_BAR: CGFloat = 90
+        static let tabBarHeight: CGFloat = 90
     }
     
     weak var listener: MainPresentableListener?
     
     // MARK: - Initializers
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
@@ -35,6 +36,7 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
     }
     
     // MARK: - View LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTabBar()
@@ -43,14 +45,15 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         var tabFrame = self.tabBar.frame
-        tabFrame.size.height = Metric.HEIGHT_TAB_BAR
-        tabFrame.origin.y = self.view.frame.size.height - Metric.HEIGHT_TAB_BAR
+        tabFrame.size.height = Metric.tabBarHeight
+        tabFrame.origin.y = self.view.frame.size.height - Metric.tabBarHeight
         self.tabBar.frame = tabFrame
     }
     
     private func configureTabBar() {
         tabBar.backgroundColor = .particleColor.bk03
         tabBar.tintColor = .particleColor.main100
+        
         if #available(iOS 13.0, *) {
             let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithDefaultBackground()
@@ -70,5 +73,4 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
     func setViewControllers(_ viewControllers: [ViewControllable]) {
       super.setViewControllers(viewControllers.map(\.uiviewController), animated: false)
     }
-    
 }

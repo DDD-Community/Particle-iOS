@@ -21,7 +21,9 @@ protocol MyRecordListListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
-final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentable>, MyRecordListInteractable, MyRecordListPresentableListener {
+final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentable>,
+                                    MyRecordListInteractable,
+                                    MyRecordListPresentableListener {
 
     weak var router: MyRecordListRouting?
     weak var listener: MyRecordListListener?

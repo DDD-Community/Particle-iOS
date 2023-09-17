@@ -16,7 +16,9 @@ protocol SelectTagPresentableListener: AnyObject {
     func startButtonTapped(with selectedTags: [String])
 }
 
-final class SelectTagViewController: UIViewController, SelectTagPresentable, SelectTagViewControllable {
+final class SelectTagViewController: UIViewController,
+                                     SelectTagPresentable,
+                                     SelectTagViewControllable {
     
     enum Metric {
         
@@ -24,6 +26,25 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
             static let height = 44
             static let backButtonLeftMargin = 8
             static let nextButtonRightMargin = 8
+        }
+        
+        enum MainScrollView {
+            static let topMargin: CGFloat = 12
+        }
+        
+        enum TitleStack {
+            static let topMargin: CGFloat = 12
+            static let horizontalMargin: CGFloat = 20
+        }
+        
+        enum AccordionStack {
+            static let topMargin: CGFloat = 18
+            static let bottomMargin: CGFloat = 20
+        }
+        
+        enum StartButton {
+            static let height: CGFloat = 44
+            static let horizontalMargin: CGFloat = 20
         }
     }
 
@@ -51,10 +72,18 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
         return scrollView
     }()
     
-    private let mainStackView: UIStackView = {
+    private let accordionStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
+        return stackView
+    }()
+    
+    private let titleStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .leading
         return stackView
     }()
     
@@ -75,32 +104,30 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
         return label
     }()
     
-    private let accordion1: Accordion = {
-        let accordion = Accordion(title: "디자인", tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"])
-        return accordion
-    }()
-    private let accordion2: Accordion = {
-        let accordion = Accordion(title: "마케팅", tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"])
-        return accordion
-    }()
-    private let accordion3: Accordion = {
-        let accordion = Accordion(title: "기획", tags: ["#서비스 기획", "#전략 기획", "#시스템 기획", "#데이터 분석"])
-        return accordion
-    }()
-    private let accordion4: Accordion = {
-        let accordion = Accordion(title: "개발", tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"])
-        return accordion
-    }()
-    private let accordion5: Accordion = {
-        let accordion = Accordion(title: "스타트업", tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"])
-        return accordion
-    }()
+    private let accordion1 = Accordion(
+        title: "디자인",
+        tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"]
+    )
     
-    private var accordion1HeightConstraint: Constraint?
-    private var accordion2HeightConstraint: Constraint?
-    private var accordion3HeightConstraint: Constraint?
-    private var accordion4HeightConstraint: Constraint?
-    private var accordion5HeightConstraint: Constraint?
+    private let accordion2 = Accordion(
+        title: "마케팅",
+        tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"]
+    )
+    
+    private let accordion3 = Accordion(
+        title: "기획",
+        tags: ["#서비스 기획", "#전략 기획", "#시스템 기획", "#데이터 분석"]
+    )
+    
+    private let accordion4 = Accordion(
+        title: "개발",
+        tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"]
+    )
+    
+    private let accordion5 = Accordion(
+        title: "스타트업",
+        tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"]
+    )
     
     private let startButton: UIButton = {
         let button = UIButton()
@@ -126,7 +153,7 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - ViewLifeCycles
+    // MARK: - View LifeCycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +162,7 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
         setConstraints()
         setupNavigationBar()
         configureButton()
-        bind()
+        bindAccordion()
     }
     
     private func setupInitialView() {
@@ -152,40 +179,34 @@ final class SelectTagViewController: UIViewController, SelectTagPresentable, Sel
     }
     
     private func configureButton() {
-        startButton.addTarget(
-            self,
-            action: #selector(startButtonTapped),
-            for: .touchUpInside
-        )
+
+        startButton.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                let tags = self.selectedTags.value.flatMap { $0 }
+                let mappedTags = tags.map { Tag(rawValue: $0)?.value ?? "UXUI" }
+                self.listener?.startButtonTapped(with: mappedTags)
+            }
+            .disposed(by: disposeBag)
     }
     
-    @objc private func startButtonTapped() {
-        let tags = selectedTags.value.flatMap { $0 }
-        listener?.startButtonTapped(with: tags.map { Tag(rawValue: $0)?.value ?? "UXUI" })
-    }
-    
-    private func bind() {
+    private func bindAccordion() {
         
-        let accordions: [(view: Accordion, constraint: Constraint?)] = [
-            (accordion1, accordion1HeightConstraint),
-            (accordion2, accordion2HeightConstraint),
-            (accordion3, accordion3HeightConstraint),
-            (accordion4, accordion4HeightConstraint),
-            (accordion5, accordion5HeightConstraint)
+        let accordions: [Accordion] = [
+            accordion1,
+            accordion2,
+            accordion3,
+            accordion4,
+            accordion5
         ]
         
         accordions.enumerated().forEach { (i, accordion) in
-            accordion.view.height.subscribe { dynamicHeight in
-                guard let dynamicHeight = dynamicHeight.element, dynamicHeight > 50 else {
+
+            accordion.selectedTags.subscribe { [weak self] selectedTagsInAccordion in
+                guard let self = self else { return }
+                guard let selectedTagsInAccordion = selectedTagsInAccordion.element else {
                     return
                 }
-                accordion.constraint?.update(offset: dynamicHeight)
-            }
-            .disposed(by: disposeBag)
-            
-            accordion.view.selectedTags.subscribe { [weak self] selectedTagsInAccordion in
-                guard let self = self else { return }
-                guard let selectedTagsInAccordion = selectedTagsInAccordion.element else { return }
                 var list = self.selectedTags.value
                 list[i] = selectedTagsInAccordion
                 self.selectedTags.accept(list)
@@ -221,12 +242,17 @@ private extension SelectTagViewController {
         [navigationBar, mainScrollView, startButton].forEach {
             view.addSubview($0)
         }
-        [mainTitle, subTitle, mainStackView].forEach {
+        
+        [titleStack, accordionStack].forEach {
             mainScrollView.addSubview($0)
         }
         
+        [mainTitle, subTitle].forEach {
+            titleStack.addArrangedSubview($0)
+        }
+        
         [accordion1, accordion2, accordion3, accordion4, accordion5].forEach {
-            mainStackView.addArrangedSubview($0)
+            accordionStack.addArrangedSubview($0)
         }
     }
     
@@ -242,48 +268,27 @@ private extension SelectTagViewController {
             $0.left.equalToSuperview().inset(Metric.NavigationBar.backButtonLeftMargin)
         }
         
-        mainTitle.snp.makeConstraints {
-            $0.top.equalTo(mainScrollView.snp.top).offset(12)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
-        }
-        
-        subTitle.snp.makeConstraints {
-            $0.top.equalTo(mainTitle.snp.bottom).offset(8)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
-        }
-        
         mainScrollView.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom).offset(12)
+            $0.top.equalTo(navigationBar.snp.bottom).offset(Metric.MainScrollView.topMargin)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(startButton.snp.top)
         }
         
-        mainStackView.snp.makeConstraints {
-            $0.top.equalTo(subTitle.snp.bottom).offset(18)
+        titleStack.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(Metric.TitleStack.topMargin)
+            $0.horizontalEdges.equalToSuperview().inset(Metric.TitleStack.horizontalMargin)
+        }
+        
+        accordionStack.snp.makeConstraints {
+            $0.top.equalTo(titleStack.snp.bottom).offset(Metric.AccordionStack.topMargin)
             $0.leading.trailing.equalTo(mainScrollView)
-            $0.bottom.equalTo(mainScrollView).inset(20)
+            $0.bottom.equalTo(mainScrollView).inset(Metric.AccordionStack.bottomMargin)
             $0.width.equalTo(mainScrollView.frameLayoutGuide)
         }
         
-        accordion1.snp.makeConstraints {
-            accordion1HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion2.snp.makeConstraints {
-            accordion2HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion3.snp.makeConstraints {
-            accordion3HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion4.snp.makeConstraints {
-            accordion4HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        accordion5.snp.makeConstraints {
-            accordion5HeightConstraint = $0.height.equalTo(52).constraint
-        }
-        
         startButton.snp.makeConstraints {
-            $0.width.equalToSuperview().inset(20)
-            $0.height.equalTo(44)
+            $0.width.equalToSuperview().inset(Metric.StartButton.horizontalMargin)
+            $0.height.equalTo(Metric.StartButton.height)
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }

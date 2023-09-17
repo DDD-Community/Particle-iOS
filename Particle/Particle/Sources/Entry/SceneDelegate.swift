@@ -26,6 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.overrideUserInterfaceStyle = .dark
         self.window = window
         
+        let statusBarManager = window.windowScene?.statusBarManager
+        
+        let statusBarView = UIView(frame: statusBarManager?.statusBarFrame ?? .zero)
+        statusBarView.backgroundColor = .particleColor.black
+        window.addSubview(statusBarView)
+        
         let launchRouter = RootBuilder(dependency: AppComponent()).build()
         self.launchRouter = launchRouter
         launchRouter.launch(from: window)

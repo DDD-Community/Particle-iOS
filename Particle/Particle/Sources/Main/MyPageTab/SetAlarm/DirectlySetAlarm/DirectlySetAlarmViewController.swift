@@ -13,7 +13,9 @@ protocol DirectlySetAlarmPresentableListener: AnyObject {
     func directlySetAlarmCloseButtonTapped()
 }
 
-final class DirectlySetAlarmViewController: UIViewController, DirectlySetAlarmPresentable, DirectlySetAlarmViewControllable {
+final class DirectlySetAlarmViewController: UIViewController,
+                                            DirectlySetAlarmPresentable,
+                                            DirectlySetAlarmViewControllable {
 
     weak var listener: DirectlySetAlarmPresentableListener?
     private var disposeBag = DisposeBag()
@@ -123,7 +125,6 @@ final class DirectlySetAlarmViewController: UIViewController, DirectlySetAlarmPr
         return icon
     }()
     
-    
     // MARK: - Initializers
     
     init() {
@@ -143,6 +144,13 @@ final class DirectlySetAlarmViewController: UIViewController, DirectlySetAlarmPr
         setConstraints()
         configureButton()
         setInitialState()
+    }
+    
+    // MARK: - Methods
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
     private func setInitialState() {
