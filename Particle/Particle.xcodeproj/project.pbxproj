@@ -667,6 +667,7 @@
 				AF473BBA2A9F6063002EE27B /* Data */,
 				3520EF212A5FB17800A53B34 /* Utils */,
 				AF86D82C2A4E6030009F1E9D /* Entry */,
+				AF0D71C62A5BE9AC00157758 /* Root */,
 				AF0D71E12A5BEF8900157758 /* Main */,
 			);
 			path = Sources;
@@ -694,7 +695,6 @@
 				AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */,
 				AF0D71C42A5BE6A200157758 /* AppComponent.swift */,
 				AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */,
-				AF0D71C62A5BE9AC00157758 /* Root */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
