@@ -30,10 +30,7 @@ final class OrganizingSentenceViewController: UIViewController,
             .init(sentence: "일반문장일반문장", isRepresent: false),
             .init(sentence: "일반문장일반문장일반문장1", isRepresent: false),
             .init(sentence: "일반문장일반문장일반문장2", isRepresent: false),
-            .init(sentence: "일반문장일반문장일반문장3", isRepresent: false),
-            .init(sentence: "일반문장일반문장일반문장4", isRepresent: false),
-            .init(sentence: "일반문장일반문장일반문장일반문장", isRepresent: false)
-               ]
+        ]
     )
     
     enum Metric {
@@ -48,11 +45,18 @@ final class OrganizingSentenceViewController: UIViewController,
         }
         
         enum NavigationBar {
-            static let height = 44
-            static let backButtonLeftMargin = 8
-            static let nextButtonRightMargin = 8
+            static let height: CGFloat = 44
+            static let backButtonLeftMargin: CGFloat = 8
+            static let nextButtonRightMargin: CGFloat = 8
+        }
+        
+        enum SelectFlag {
+            static let verticalInset: CGFloat = 6
+            static let horizontalInset: CGFloat = 16
         }
     }
+    
+    // MARK: - UIComponents
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -72,6 +76,7 @@ final class OrganizingSentenceViewController: UIViewController,
         table.rowHeight = UITableView.automaticDimension
         table.separatorColor = .clear
         table.estimatedRowHeight = 50
+        table.showsVerticalScrollIndicator = false
         return table
     }()
     
@@ -90,11 +95,12 @@ final class OrganizingSentenceViewController: UIViewController,
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-//            .particleFont.generate(style: .pretendard_SemiBold, size: 16)
         button.setTitleColor(.particleColor.gray03, for: .disabled)
         button.setTitleColor(.particleColor.main100, for: .normal)
         return button
     }()
+    
+    // MARK: - Initializers
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -102,7 +108,7 @@ final class OrganizingSentenceViewController: UIViewController,
         self.modalPresentationStyle = .fullScreen
         self.view.backgroundColor = .particleColor.black
         addSubviews()
-        layout()
+        setConstraints()
         bind()
     }
     
@@ -110,42 +116,57 @@ final class OrganizingSentenceViewController: UIViewController,
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - ViewLifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
     }
+    
+    // MARK: - Methods
     
     private func setupInitialView() {
         nextButton.isEnabled = false
     }
     
     private func bind() {
+        
         organizingViewModels
-            .bind(to: sentenceTableView.rx.items(cellIdentifier: SentenceTableViewCell.defaultReuseIdentifier, cellType: SentenceTableViewCell.self)) { index, item, cell in
-                Console.debug("index \(index) : \(item)")
+            .bind(to: sentenceTableView.rx.items(
+                cellIdentifier: SentenceTableViewCell.defaultReuseIdentifier,
+                cellType: SentenceTableViewCell.self)
+            ) { index, item, cell in
                 cell.setCellData(item)
             }
             .disposed(by: disposeBag)
         
         sentenceTableView.rx.itemSelected.subscribe { [weak self] index in
-            guard let index = index.element, let list = self?.organizingViewModels.value else { return }
-
+            guard let self = self,
+                  let index = index.element else { return }
+            
+            let list = self.organizingViewModels.value
+            
             var newList = [OrganizingSentenceViewModel]()
             list.enumerated().forEach { (i, item) in
-                newList.append(OrganizingSentenceViewModel(sentence: item.sentence, isRepresent: i == index.row))
+                newList.append(
+                    OrganizingSentenceViewModel(sentence: item.sentence,
+                                                isRepresent: i == index.row)
+                )
             }
-
-            self?.organizingViewModels.accept(newList)
             
-            if self?.nextButton.isEnabled == false {
-                self?.nextButton.isEnabled = true
+            self.organizingViewModels.accept(newList)
+            
+            if self.nextButton.isEnabled == false {
+                self.nextButton.isEnabled = true
             }
         }
         .disposed(by: disposeBag)
         
         nextButton.rx.tap
             .bind { [weak self] in
-                self?.listener?.nextButtonTapped(with: self?.organizingViewModels.value ?? [])
+                self?.listener?.nextButtonTapped(
+                    with: self?.organizingViewModels.value ?? []
+                )
                 // TODO: isMain 의 여부를 알려주기 위해 다음화면에 organizingViewModel 을 전달.
                 // organizingRepository 에 적용
             }
@@ -158,8 +179,16 @@ final class OrganizingSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
     }
     
-    // MARK: - Add Subviews
-    private func addSubviews() {
+    func setUpData(with viewModels: [OrganizingSentenceViewModel]) {
+        organizingViewModels.accept(viewModels)
+    }
+}
+
+// MARK: - Layout Settings
+
+private extension OrganizingSentenceViewController {
+    
+    func addSubviews() {
         [backButton, nextButton]
             .forEach {
                 navigationBar.addSubview($0)
@@ -173,10 +202,10 @@ final class OrganizingSentenceViewController: UIViewController,
             .forEach {
                 self.view.addSubview($0)
             }
+        
     }
     
-    // MARK: - Layout
-    private func layout() {
+    func setConstraints() {
         navigationBar.snp.makeConstraints { make in
             make.top.left.right.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(Metric.NavigationBar.height)
@@ -188,6 +217,8 @@ final class OrganizingSentenceViewController: UIViewController,
         }
         
         nextButton.snp.makeConstraints { make in
+            make.width.equalTo(52)
+            make.height.equalTo(44)
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(Metric.NavigationBar.nextButtonRightMargin)
         }
@@ -199,13 +230,9 @@ final class OrganizingSentenceViewController: UIViewController,
         
         sentenceTableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(Metric.TableView.topMargin)
-            make.left.right.equalToSuperview().inset(Metric.TableView.horizontalMargin)
+            make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-    }
-    
-    func setUpData(with viewModels: [OrganizingSentenceViewModel]) {
-        organizingViewModels.accept(viewModels)
     }
 }
 

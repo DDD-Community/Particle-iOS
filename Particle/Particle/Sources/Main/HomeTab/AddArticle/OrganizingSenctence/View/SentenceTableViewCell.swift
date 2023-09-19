@@ -15,6 +15,11 @@ final class SentenceTableViewCell: UITableViewCell {
         static let labelVerticalInset: CGFloat = 16
         static let labelHorizontalInset: CGFloat = 14
         static let labelCornerRadius: CGFloat = 12
+        
+        enum SelectFlag {
+            static let verticalInset: CGFloat = 6
+            static let horizontalInset: CGFloat = 16
+        }
     }
     
     private let sentenceLabel: PaddingLabel = {
@@ -35,14 +40,14 @@ final class SentenceTableViewCell: UITableViewCell {
     
     private let selectFlag: PaddingLabel = {
         let label = PaddingLabel()
-        label.topInset = 6
-        label.bottomInset = 6
-        label.leftInset = 16
-        label.rightInset = 16
+        label.topInset = Metric.SelectFlag.verticalInset
+        label.bottomInset = Metric.SelectFlag.verticalInset
+        label.leftInset = Metric.SelectFlag.horizontalInset
+        label.rightInset = Metric.SelectFlag.horizontalInset
         label.font = .particleFont.generate(style: .pretendard_SemiBold, size: 11)
         label.textColor = .particleColor.main30
         label.backgroundColor = .particleColor.main100
-        label.layer.cornerRadius = 8
+        label.layer.cornerRadius = 12
         label.clipsToBounds = true
         label.text = "대표 문장"
         return label
@@ -55,13 +60,13 @@ final class SentenceTableViewCell: UITableViewCell {
         
         self.contentView.addSubview(sentenceLabel)
         sentenceLabel.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(20)
             make.top.bottom.equalToSuperview().inset(Metric.bottomMargin)
         }
         self.contentView.addSubview(selectFlag)
         selectFlag.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(12)
         }
     }
     

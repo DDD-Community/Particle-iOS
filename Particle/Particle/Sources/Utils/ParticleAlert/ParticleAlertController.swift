@@ -19,7 +19,7 @@ final class ParticleAlertController: UIViewController {
         let view = UIStackView()
         view.axis = .vertical
         view.spacing = 0
-        view.backgroundColor = .init(hex: 0x252525, alpha: 0.82)
+        view.backgroundColor = .init(hex: 0x252525)
         view.layer.cornerRadius = 14
         return view
     }()
