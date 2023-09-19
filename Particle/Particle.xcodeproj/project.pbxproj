@@ -823,11 +823,11 @@
 		AFBB5F6E2A66B60D002416DA /* SelectSentence */ = {
 			isa = PBXGroup;
 			children = (
+				AF130A8B2AA225E800F2E0BD /* View */,
 				AFBB5F702A66B65D002416DA /* SelectSentenceRouter.swift */,
 				AFBB5F712A66B65D002416DA /* SelectSentenceViewController.swift */,
 				AFBB5F722A66B65D002416DA /* SelectSentenceBuilder.swift */,
 				AFBB5F732A66B65D002416DA /* SelectSentenceInteractor.swift */,
-				AF130A8B2AA225E800F2E0BD /* View */,
 				AFBB5F6F2A66B616002416DA /* EditSentence */,
 			);
 			path = SelectSentence;

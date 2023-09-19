@@ -13,7 +13,6 @@ protocol SelectSentenceInteractable: Interactable, EditSentenceListener {
 }
 
 protocol SelectSentenceViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
     func present(viewController: ViewControllable)
     func dismiss(viewController: ViewControllable)
 }
@@ -22,7 +21,6 @@ final class SelectSentenceRouter: ViewableRouter<SelectSentenceInteractable,
                                   SelectSentenceViewControllable>,
                                   SelectSentenceRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
     init(
         interactor: SelectSentenceInteractable,
         viewController: SelectSentenceViewControllable,

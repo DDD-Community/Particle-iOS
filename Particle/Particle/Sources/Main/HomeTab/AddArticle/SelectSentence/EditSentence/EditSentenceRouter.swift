@@ -16,7 +16,8 @@ protocol EditSentenceViewControllable: ViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
-final class EditSentenceRouter: ViewableRouter<EditSentenceInteractable, EditSentenceViewControllable>, EditSentenceRouting {
+final class EditSentenceRouter: ViewableRouter<EditSentenceInteractable, EditSentenceViewControllable>,
+                                EditSentenceRouting {
 
     // TODO: Constructor inject child builder protocols to allow building children.
     override init(interactor: EditSentenceInteractable, viewController: EditSentenceViewControllable) {

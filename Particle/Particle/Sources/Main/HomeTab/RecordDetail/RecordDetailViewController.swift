@@ -23,10 +23,50 @@ final class RecordDetailViewController: UIViewController,
     private let data: RecordReadDTO
     
     enum Metric {
+        static let horizontalInset = 20
+        
         enum NavigationBar {
             static let height = 44
             static let backButtonLeftMargin = 8
             static let nextButtonRightMargin = 8
+            static let buttonSize = 20
+            static let buttonTapSize = 44
+        }
+        
+        enum RecordTitle {
+            static let topOffset: CGFloat = 12
+        }
+        
+        enum SentenceStack {
+            static let topOffset: CGFloat = 33
+            static let spacing: CGFloat = 16
+        }
+        
+        enum RecommendTagCollectionView {
+            static let topOffset: CGFloat = 24
+        }
+        
+        enum UrlLabel {
+            static let topOffset: CGFloat = 24
+        }
+        
+        enum DateLabel {
+            static let topOffset: CGFloat = 16
+            static let lineHeight: CGFloat = 21
+        }
+        
+        enum DirectorLabel {
+            static let topOffset: CGFloat = 4
+            static let lineHeight: CGFloat = 21
+        }
+        
+        enum HeartButton {
+            static let topOffset: CGFloat = 27
+            static let size: CGFloat = 20
+        }
+        
+        enum ParticleAlert {
+            static let buttonHeight: CGFloat = 44
         }
     }
     
@@ -41,11 +81,11 @@ final class RecordDetailViewController: UIViewController,
         let button = UIButton()
         button.setImage(.particleImage.xmarkButton, for: .normal)
         button.imageView?.snp.makeConstraints {
-            $0.width.equalTo(20)
-            $0.height.equalTo(20)
+            $0.width.equalTo(Metric.NavigationBar.buttonSize)
+            $0.height.equalTo(Metric.NavigationBar.buttonSize)
         }
         button.snp.makeConstraints {
-            $0.width.height.equalTo(44)
+            $0.width.height.equalTo(Metric.NavigationBar.buttonTapSize)
         }
         return button
     }()
@@ -54,11 +94,11 @@ final class RecordDetailViewController: UIViewController,
         let button = UIButton()
         button.setImage(.particleImage.ellipsis, for: .normal)
         button.imageView?.snp.makeConstraints {
-            $0.width.equalTo(20)
-            $0.height.equalTo(20)
+            $0.width.equalTo(Metric.NavigationBar.buttonSize)
+            $0.height.equalTo(Metric.NavigationBar.buttonSize)
         }
         button.snp.makeConstraints {
-            $0.width.height.equalTo(44)
+            $0.width.height.equalTo(Metric.NavigationBar.buttonTapSize)
         }
         return button
     }()
@@ -77,7 +117,7 @@ final class RecordDetailViewController: UIViewController,
     private let sentenceStack: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = Metric.SentenceStack.spacing
         return stackView
     }()
     
@@ -92,7 +132,6 @@ final class RecordDetailViewController: UIViewController,
             collectionViewLayout: layout
         )
         collectionView.register(LeftAlignedCollectionViewCell2.self)
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
@@ -114,7 +153,7 @@ final class RecordDetailViewController: UIViewController,
         label.textColor = .particleColor.gray03
         label.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
         label.snp.makeConstraints{
-            $0.height.equalTo(21)
+            $0.height.equalTo(Metric.DateLabel.lineHeight)
         }
         return label
     }()
@@ -126,7 +165,7 @@ final class RecordDetailViewController: UIViewController,
         label.textColor = .particleColor.gray03
         label.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
         label.snp.makeConstraints{
-            $0.height.equalTo(21)
+            $0.height.equalTo(Metric.DirectorLabel.lineHeight)
         }
         return label
     }()
@@ -135,7 +174,7 @@ final class RecordDetailViewController: UIViewController,
         let button = UIButton()
         button.setImage(.particleImage.heart, for: .normal)
         button.snp.makeConstraints {
-            $0.width.height.equalTo(20)
+            $0.width.height.equalTo(Metric.HeartButton.size)
         }
         return button
     }()
@@ -161,7 +200,7 @@ final class RecordDetailViewController: UIViewController,
             for: .normal
         )
         button.snp.makeConstraints {
-            $0.height.equalTo(44)
+            $0.height.equalTo(Metric.ParticleAlert.buttonHeight)
         }
         return button
     }()
@@ -177,7 +216,7 @@ final class RecordDetailViewController: UIViewController,
             for: .normal
         )
         button.snp.makeConstraints {
-            $0.height.equalTo(44)
+            $0.height.equalTo(Metric.ParticleAlert.buttonHeight)
         }
         return button
     }()
@@ -248,7 +287,7 @@ final class RecordDetailViewController: UIViewController,
         .disposed(by: disposeBag)
         
         ellipsisButton.rx.tap.bind { [weak self] _ in
-            // TODO: Activity Controller
+
             DispatchQueue.main.async {
                 self?.showActionSheetInMyRecord()
             }
@@ -280,11 +319,11 @@ final class RecordDetailViewController: UIViewController,
     
     private func showActionSheetInMyRecord() {
         let shareAction = UIAlertAction(title: "공유하기", style: .default, handler: { action in
-            //
+            // TODO: 공유하기 액션
         })
         
         let modifyAction = UIAlertAction(title: "수정하기", style: .default, handler: { action in
-            //
+            // TODO: 글 수정 화면으로 이동
         })
         
         let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] action in
@@ -292,9 +331,7 @@ final class RecordDetailViewController: UIViewController,
             self.present(self.warningAlertController, animated: true)
         }
         
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: { action in
-            //
-        })
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.addAction(shareAction)
@@ -346,39 +383,38 @@ private extension RecordDetailViewController {
         }
         
         recordTitle.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.equalTo(navigationBar.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
+            $0.top.equalTo(navigationBar.snp.bottom).offset(Metric.RecordTitle.topOffset)
         }
         
         sentenceStack.snp.makeConstraints {
-            $0.top.equalTo(recordTitle.snp.bottom).offset(33)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.greaterThanOrEqualTo(50)
+            $0.top.equalTo(recordTitle.snp.bottom).offset(Metric.SentenceStack.topOffset)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
         }
         
         recommendTagCollectionView.snp.makeConstraints {
-            $0.top.equalTo(sentenceStack.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(sentenceStack.snp.bottom).offset(Metric.RecommendTagCollectionView.topOffset)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
         }
         
         urlLabel.snp.makeConstraints {
-            $0.top.equalTo(recommendTagCollectionView.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(recommendTagCollectionView.snp.bottom).offset(Metric.UrlLabel.topOffset)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(urlLabel.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(urlLabel.snp.bottom).offset(Metric.DateLabel.topOffset)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
         }
         
         directorLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(4)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(Metric.DirectorLabel.topOffset)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
         }
         
         heartButton.snp.makeConstraints {
-            $0.top.equalTo(directorLabel.snp.bottom).offset(27)
-            $0.leading.equalToSuperview().inset(20)
+            $0.top.equalTo(directorLabel.snp.bottom).offset(Metric.HeartButton.topOffset)
+            $0.leading.equalToSuperview().inset(Metric.horizontalInset)
         }
     }
 }
@@ -401,7 +437,7 @@ struct RecordDetailViewController_Preview: PreviewProvider {
             .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false)
         ],
         tags: ["#UXUI", "#브랜딩"],
-        createdAt: "11",
+        createdAt: "2023-09-18T11:49:52.955Z",
         createdBy: "노란 동그라미"
     )
     

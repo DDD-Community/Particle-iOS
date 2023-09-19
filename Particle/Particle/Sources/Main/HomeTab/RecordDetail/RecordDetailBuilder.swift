@@ -20,7 +20,9 @@ final class RecordDetailComponent: Component<RecordDetailDependency> {
 // MARK: - Builder
 
 protocol RecordDetailBuildable: Buildable {
-    func build(withListener listener: RecordDetailListener, data: RecordReadDTO) -> RecordDetailRouting
+    func build(
+        withListener listener: RecordDetailListener,
+        data: RecordReadDTO) -> RecordDetailRouting
 }
 
 final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBuildable {
@@ -29,7 +31,9 @@ final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBu
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: RecordDetailListener, data: RecordReadDTO) -> RecordDetailRouting {
+    func build(withListener listener: RecordDetailListener,
+               data: RecordReadDTO) -> RecordDetailRouting {
+        
         let _ = RecordDetailComponent(dependency: dependency)
         let viewController = RecordDetailViewController(data: data)
         let interactor = RecordDetailInteractor(presenter: viewController)

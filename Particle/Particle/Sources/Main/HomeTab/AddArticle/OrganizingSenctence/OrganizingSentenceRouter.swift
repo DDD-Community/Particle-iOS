@@ -16,7 +16,8 @@ protocol OrganizingSentenceViewControllable: ViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
-final class OrganizingSentenceRouter: ViewableRouter<OrganizingSentenceInteractable, OrganizingSentenceViewControllable>, OrganizingSentenceRouting {
+final class OrganizingSentenceRouter: ViewableRouter<OrganizingSentenceInteractable, OrganizingSentenceViewControllable>,
+                                      OrganizingSentenceRouting {
     
     override init(
         interactor: OrganizingSentenceInteractable,

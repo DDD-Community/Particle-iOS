@@ -38,6 +38,7 @@ final class SelectSentenceViewController: UIViewController,
         
         enum InfoBox {
             static let height: CGFloat = 53
+            static let infoLabelLeftInset: CGFloat = 20
         }
         
         enum CollectionViewCell {
@@ -181,6 +182,7 @@ final class SelectSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
     }
     
+    // FIXME: - 사진 선택 맥시멈갯수 지정
     private func bindPageIndex() {
         selectedPhotoCollectionView
             .rx
@@ -297,7 +299,7 @@ private extension SelectSentenceViewController {
         
         infoLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(Metric.InfoBox.infoLabelLeftInset)
         }
         
         selectedPhotoCollectionView.snp.makeConstraints {

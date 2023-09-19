@@ -13,7 +13,9 @@ protocol EditSentencePresentableListener: AnyObject {
     func saveButtonTapped(with text: String)
 }
 
-final class EditSentenceViewController: UIViewController, EditSentencePresentable, EditSentenceViewControllable {
+final class EditSentenceViewController: UIViewController,
+                                        EditSentencePresentable,
+                                        EditSentenceViewControllable {
     
     weak var listener: EditSentencePresentableListener?
     private let disposeBag = DisposeBag()

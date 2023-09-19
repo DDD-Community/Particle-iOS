@@ -77,6 +77,7 @@ final class PhotoPickerViewController: UIViewController,
     }()
     
     // MARK: - Initializers
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .fullScreen
@@ -87,6 +88,7 @@ final class PhotoPickerViewController: UIViewController,
     }
     
     // MARK: - View LifeCycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
@@ -94,24 +96,11 @@ final class PhotoPickerViewController: UIViewController,
         bind()
     }
     
-    override func viewWillLayoutSubviews() {
-        setupStatusBar()
-    }
-    
     private func setupInitialView() {
         view.backgroundColor = .particleColor.black
         navigationController?.isNavigationBarHidden = true
         addSubviews()
         setConstraints()
-    }
-    
-    private func setupStatusBar() {
-        let window = UIApplication.shared.windows.first
-        let statusBarManager = window?.windowScene?.statusBarManager
-        
-        let statusBarView = UIView(frame: statusBarManager?.statusBarFrame ?? .zero)
-        statusBarView.backgroundColor = .particleColor.black
-        window?.addSubview(statusBarView)
     }
     
     private func configureButton() {

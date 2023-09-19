@@ -16,11 +16,18 @@ protocol PhotoPickerViewControllable: ViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
-final class PhotoPickerRouter: ViewableRouter<PhotoPickerInteractable, PhotoPickerViewControllable>, PhotoPickerRouting {
+final class PhotoPickerRouter: ViewableRouter<PhotoPickerInteractable, PhotoPickerViewControllable>,
+                               PhotoPickerRouting {
 
     // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: PhotoPickerInteractable, viewController: PhotoPickerViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
+    override init(
+        interactor: PhotoPickerInteractable,
+        viewController: PhotoPickerViewControllable
+    ) {
+        super.init(
+            interactor: interactor,
+            viewController: viewController
+        )
         interactor.router = self
     }
 }
