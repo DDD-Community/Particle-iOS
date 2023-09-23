@@ -14,9 +14,7 @@ class CacheManager {
     static let shared = CacheManager()
     private let imageCache = NSCache<NSString, UIImage>()
 
-    private init() {
-        // 싱글톤 패턴을 위한 private 초기화 메서드
-    }
+    private init() {}
 
     func cacheImage(_ image: UIImage, forKey key: String) {
         imageCache.setObject(image, forKey: key as NSString)
@@ -30,6 +28,13 @@ class CacheManager {
 final class PhotoCell: UICollectionViewCell {
     
     private var disposeBag = DisposeBag()
+    
+    private enum Metric {
+        static let checkBoxSize: CGFloat = 20
+        static let checkBoxTopTrailiingInset: CGFloat = 8
+    }
+    
+    // MARK: - UIComponents
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -63,6 +68,8 @@ final class PhotoCell: UICollectionViewCell {
         return number
     }()
     
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -77,8 +84,11 @@ final class PhotoCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    
     override func prepareForReuse() {
         super.prepareForReuse()
+        uncheck()
         imageView.image = nil
         disposeBag = DisposeBag()
     }
@@ -107,9 +117,9 @@ final class PhotoCell: UICollectionViewCell {
     }
     
     func uncheck() {
-        dimmingView.alpha = 0
-        checkBox_checked.alpha = 0
-        numberLabel.alpha = 0
+        dimmingView.alpha = .zero
+        checkBox_checked.alpha = .zero
+        numberLabel.alpha = .zero
     }
     
     private func fetchImage(asset: PHAsset,
@@ -166,11 +176,11 @@ private extension PhotoCell {
             $0.top.bottom.leading.trailing.equalTo(contentView)
         }
         checkBox.snp.makeConstraints {
-            $0.width.height.equalTo(20)
-            $0.top.trailing.equalToSuperview().inset(8)
+            $0.width.height.equalTo(Metric.checkBoxSize)
+            $0.top.trailing.equalToSuperview().inset(Metric.checkBoxTopTrailiingInset)
         }
         checkBox_checked.snp.makeConstraints {
-            $0.width.height.equalTo(20)
+            $0.width.height.equalTo(Metric.checkBoxSize)
             $0.center.equalTo(checkBox)
         }
         numberLabel.snp.makeConstraints {

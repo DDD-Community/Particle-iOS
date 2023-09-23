@@ -54,7 +54,19 @@ final class PhotoPickerInteractor: PresentableInteractor<PhotoPickerPresentable>
         listener?.cancelButtonTapped()
     }
     
-    func nextButtonTapped(with images: [PHAsset]) {
-        listener?.nextButtonTapped(with: images)
+    func nextButtonTapped(with indexes: [Int]) {
+        listener?.nextButtonTapped(with: getSelectedPhotos(from: indexes))
+    }
+    
+    private func getSelectedPhotos(from indexes: [Int]) -> [PHAsset] {
+        guard let allPhotos = allPhotos else {
+            Console.error("\(#function) allPhotos 값이 존재하지 않습니다.")
+            return []
+        }
+        let selectedPhotos = indexes.map {
+            allPhotos.object(at: $0)
+        }
+        
+        return selectedPhotos
     }
 }

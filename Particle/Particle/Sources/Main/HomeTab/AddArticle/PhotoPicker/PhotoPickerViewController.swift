@@ -7,20 +7,25 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import Photos
 import UIKit
 
 protocol PhotoPickerPresentableListener: AnyObject {
     
     func cancelButtonTapped()
-    func nextButtonTapped(with images: [PHAsset])
+    func nextButtonTapped(with indexes: [Int])
 }
 
 final class PhotoPickerViewController: UIViewController,
                                        PhotoPickerPresentable,
                                        PhotoPickerViewControllable {
     
-    enum Metric {
+    private enum Constant {
+        static let fetchingAmount = 100
+    }
+    
+    private enum Metric {
         enum NavigationBar {
             static let height = 44
             static let backButtonLeftMargin = 20
@@ -33,7 +38,11 @@ final class PhotoPickerViewController: UIViewController,
     
     weak var listener: PhotoPickerPresentableListener?
     private var disposeBag: DisposeBag = .init()
-    private var selectedIndexPaths: [IndexPath] = []
+    private var selectedIndexPaths: BehaviorRelay<[Int]> = .init(value: [])
+    private var indexDataSource: BehaviorRelay<[Int]> = .init(value: [])
+    private var page: Int = 1
+    
+    // MARK: - UIComponents
     
     private let navigationBar: UIView = {
         let view = UIView()
@@ -92,9 +101,10 @@ final class PhotoPickerViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
-        configureButton()
         bind()
     }
+    
+    // MARK: - Methods
     
     private func setupInitialView() {
         view.backgroundColor = .particleColor.black
@@ -103,39 +113,56 @@ final class PhotoPickerViewController: UIViewController,
         setConstraints()
     }
     
-    private func configureButton() {
-        cancelButton.rx.tap
-            .bind { [weak self] in
-                self?.listener?.cancelButtonTapped()
-                self?.dismiss(animated: true)
-            }
-            .disposed(by: disposeBag)
-        
-        nextButton.rx.tap
-            .bind { [weak self] in
-                guard let self = self else { return }
-                self.listener?.nextButtonTapped(with: self.getSelectedPhotoes())
-            }
-            .disposed(by: disposeBag)
-    }
-    
     private func bind() {
         bindCollectionViewCell()
         bindItemSelected()
+        bindButtonAction()
     }
     
     private func bindCollectionViewCell() {
-        Observable.of(Array(0...(photoCount - 1)))
+
+        indexDataSource
             .bind(to: photoCollectionView.rx.items(
                 cellIdentifier: PhotoCell.defaultReuseIdentifier,
                 cellType: PhotoCell.self)
-            ) { index, item, cell in
+            ) { [weak self] index, item, cell in
                 
-                guard let allPhotos = allPhotos else {
+                guard let self = self, let allPhotos = allPhotos else {
                     Console.error("\(#function) allPhotos 값이 존재하지 않습니다.")
                     return
                 }
                 cell.setImage(with: allPhotos.object(at: item))
+                
+                if self.selectedIndexPaths.value.contains(index) {
+                    let number = self.selectedIndexPaths.value.firstIndex(of: index) ?? 0
+                    cell.check(number: number + 1)
+                } else {
+                    cell.uncheck()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        selectedIndexPaths
+            .bind { [weak self] indexs in
+                for (i, index) in indexs.enumerated() {
+                    guard let cell = self?.getCell(at: IndexPath(row: index, section: 0)) else {
+                        return
+                    }
+                    cell.check(number: i + 1)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        photoCollectionView.rx.contentOffset
+            .bind { [weak self] offset in
+                guard let self = self else { return }
+                let totalScrollHeight = self.photoCollectionView.contentSize.height
+                let collectionViewHeight = self.photoCollectionView.bounds.height
+                let maximumOffset = totalScrollHeight - collectionViewHeight
+                
+                if offset.y > maximumOffset {
+                    self.fetchMorePhotos()
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -146,36 +173,39 @@ final class PhotoPickerViewController: UIViewController,
             .itemSelected
             .subscribe { [weak self] indexPath in
                 guard let self = self,
-                      let indexPath = indexPath.element else { return }
+                      let indexPath = indexPath.element,
+                      let cell = getCell(at: indexPath) else { return }
                 
-                if self.selectedIndexPaths.contains(indexPath) {
-                    self.selectedIndexPaths.remove(
-                        at: self.selectedIndexPaths.firstIndex(of: indexPath) ?? .zero
+                var list = self.selectedIndexPaths.value
+                if list.contains(indexPath.row) {
+                    list.remove(
+                        at: list.firstIndex(of: indexPath.row) ?? .zero
                     )
-                    guard let cell = self.getCell(at: indexPath) else { return }
                     cell.uncheck()
                 } else {
-                    self.selectedIndexPaths.append(indexPath)
+                    list.append(indexPath.row)
+                    cell.check(number: list.count)
                 }
-                
-                for (order, indexPath) in self.selectedIndexPaths.enumerated() {
-                    guard let cell = self.getCell(at: indexPath) else { return }
-                    cell.check(number: order + 1)
-                }
+                self.selectedIndexPaths.accept(list)
+                Console.debug("selectedIndex: \(self.selectedIndexPaths.value)")
             }
             .disposed(by: disposeBag)
     }
     
-    private func getSelectedPhotoes() -> [PHAsset] {
-        guard let allPhotos = allPhotos else {
-            Console.error("\(#function) allPhotos 값이 존재하지 않습니다.")
-            return []
-        }
-        let selectedPhotoes = selectedIndexPaths.map {
-            allPhotos.object(at: $0.row)
-        }
+    private func bindButtonAction() {
+        cancelButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.cancelButtonTapped()
+                self?.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
         
-        return selectedPhotoes
+        nextButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.listener?.nextButtonTapped(with: selectedIndexPaths.value)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func getCell(at indexPath: IndexPath?) -> PhotoCell? {
@@ -187,6 +217,19 @@ final class PhotoPickerViewController: UIViewController,
             return nil
         }
         return cell
+    }
+    
+    private func fetchMorePhotos() {
+        if (photoCount / Constant.fetchingAmount) <= page {
+            if photoCount % Constant.fetchingAmount == 0 {
+                return
+            } else {
+                self.indexDataSource.accept(Array(0...(photoCount-1)))
+            }
+        } else {
+            self.indexDataSource.accept(Array(0...(Constant.fetchingAmount*page)))
+            self.page += 1
+        }
     }
 }
 
