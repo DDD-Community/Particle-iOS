@@ -56,7 +56,6 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         let okButton = generateAlertButton(title: "확인", {})
         
         let cancelButton = generateAlertButton(title: "취소") { [weak self] in
-            // TODO: alert 내리기
             self?.dismiss(animated: true)
         }
         
@@ -74,7 +73,6 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         let okButton = generateAlertButton(title: "확인", {})
         
         let cancelButton = generateAlertButton(title: "취소") { [weak self] in
-            // TODO: alert 내리기
             self?.dismiss(animated: true)
         }
         

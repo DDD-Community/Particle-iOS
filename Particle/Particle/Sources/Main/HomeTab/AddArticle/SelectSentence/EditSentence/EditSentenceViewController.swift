@@ -23,6 +23,15 @@ final class EditSentenceViewController: UIViewController,
     private var originalCenterY: CGFloat = 0.0
     private let originalText: String
     
+    private enum Metric {
+        static let titleLabelTopInset: CGFloat = 15
+        static let dividerHeight: CGFloat = 1
+        static let dividerTopInset: CGFloat = 13
+        static let mainStackViewTopInset: CGFloat = 19
+    }
+    
+    // MARK: - UIComponents
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "선택한 문장"
@@ -132,6 +141,9 @@ final class EditSentenceViewController: UIViewController,
         originalCenterY = self.view.center.y
     }
     
+    
+    // MARK: - Methods
+    
     private func setupModalStyle() {
         modalPresentationStyle = .custom
         modalTransitionStyle = .coverVertical
@@ -228,18 +240,18 @@ private extension EditSentenceViewController {
     func setConstraints() {
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(15)
+            $0.top.equalToSuperview().offset(Metric.titleLabelTopInset)
         }
         
         divider.snp.makeConstraints {
-            $0.height.equalTo(1)
+            $0.height.equalTo(Metric.dividerHeight)
             $0.width.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(13)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(Metric.dividerTopInset)
         }
         
         mainStackView.snp.makeConstraints {
-            $0.top.equalTo(divider.snp.bottom).offset(19)
+            $0.top.equalTo(divider.snp.bottom).offset(Metric.mainStackViewTopInset)
             $0.bottom.leading.trailing.equalTo(view)
         }
         

@@ -68,6 +68,7 @@ final class OrganizingSentenceViewController: UIViewController,
         return label
     }()
     
+    // TODO: 드래그 앤 드롭 기능 추가하기.
     private let sentenceTableView: UITableView = {
         let table = UITableView()
         table.register(SentenceTableViewCell.self)

@@ -12,16 +12,19 @@ protocol EditSentenceInteractable: Interactable {
     var listener: EditSentenceListener? { get set }
 }
 
-protocol EditSentenceViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-}
+protocol EditSentenceViewControllable: ViewControllable {}
 
 final class EditSentenceRouter: ViewableRouter<EditSentenceInteractable, EditSentenceViewControllable>,
                                 EditSentenceRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: EditSentenceInteractable, viewController: EditSentenceViewControllable) {
-        super.init(interactor: interactor, viewController: viewController)
+    override init(
+        interactor: EditSentenceInteractable,
+        viewController: EditSentenceViewControllable
+    ) {
+        super.init(
+            interactor: interactor,
+            viewController: viewController
+        )
         interactor.router = self
     }
 }

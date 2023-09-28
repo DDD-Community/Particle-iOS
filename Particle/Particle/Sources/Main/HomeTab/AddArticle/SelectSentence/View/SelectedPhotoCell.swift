@@ -15,6 +15,12 @@ protocol SelectedPhotoCellListener: AnyObject {
 
 final class SelectedPhotoCell: UICollectionViewCell {
     
+    private let imageAnalyzer = ImageAnalyzer()
+    private var copiedText = ""
+    weak var listener: SelectedPhotoCellListener?
+    
+    // MARK: - UIComponents
+    
     private let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
@@ -33,22 +39,12 @@ final class SelectedPhotoCell: UICollectionViewCell {
         return interaction
     }()
 
-    private let imageAnalyzer = ImageAnalyzer()
-    
-    private var copiedText = ""
-    weak var listener: SelectedPhotoCellListener?
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews()
-        setConstraints()
-        contentView.clipsToBounds = true
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(copyButtonTapped),
-            name: UIPasteboard.changedNotification,
-            object: nil
-        )
+        setupInitialView()
+        setupNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -59,9 +55,27 @@ final class SelectedPhotoCell: UICollectionViewCell {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - Methods
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+        // FIXME: 이미지 사이즈 초기화
+    }
+    
+    private func setupInitialView() {
+        addSubviews()
+        setConstraints()
+        contentView.clipsToBounds = true
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(copyButtonTapped),
+            name: UIPasteboard.changedNotification,
+            object: nil
+        )
     }
     
     private func showLiveText() {
@@ -89,11 +103,9 @@ final class SelectedPhotoCell: UICollectionViewCell {
         }
     }
     
-    
     @objc func copyButtonTapped() {
         if let theString = UIPasteboard.general.string {
             copiedText = theString
-            Console.log(copiedText)
             listener?.copyButtonTapped(with: copiedText)
         }
     }
@@ -106,6 +118,7 @@ final class SelectedPhotoCell: UICollectionViewCell {
             contentMode: .default,
             targetSize: imageView.frame.size
         ) { [weak self] aspectRatio in
+            
             self?.imageView.snp.makeConstraints {
                 $0.width.equalTo(DeviceSize.width)
                 $0.height.equalTo(aspectRatio * DeviceSize.width)
