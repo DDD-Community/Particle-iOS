@@ -69,6 +69,7 @@
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
 		AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */; };
 		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
+		AF2ED9832AC4F0E700F6B4B0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */; };
 		AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */; };
 		AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122732A977BEA00262088 /* SelectTagRouter.swift */; };
 		AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122742A977BEA00262088 /* SelectTagViewController.swift */; };
@@ -140,6 +141,7 @@
 		AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */; };
 		AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */; };
 		AFC387FA2A9F726100AF9C4D /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC387F92A9F726100AF9C4D /* UserRepository.swift */; };
+		AFC9FC562AC1C45300AA5EB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFC9FC552AC1C45300AA5EB1 /* GoogleService-Info.plist */; };
 		AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */; };
 		AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */; };
 		AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */; };
@@ -294,6 +296,7 @@
 		AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceInteractor.swift; sourceTree = "<group>"; };
 		AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ParticleColor.swift"; sourceTree = "<group>"; };
 		AFC387F92A9F726100AF9C4D /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		AFC9FC552AC1C45300AA5EB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleRouter.swift; sourceTree = "<group>"; };
 		AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
 		AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleInteractor.swift; sourceTree = "<group>"; };
@@ -314,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF2ED9832AC4F0E700F6B4B0 /* FirebaseMessaging in Frameworks */,
 				B1CF9FD70DAD1AF6216BEB95 /* Pods_Particle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -707,6 +711,7 @@
 				AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */,
 				AFB4BDCF2A4093DD008BA9E0 /* LaunchScreen.storyboard */,
 				AFB4BDD22A4093DD008BA9E0 /* Info.plist */,
+				AFC9FC552AC1C45300AA5EB1 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -897,6 +902,9 @@
 			dependencies = (
 			);
 			name = Particle;
+			packageProductDependencies = (
+				AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */,
+			);
 			productName = Particle;
 			productReference = AFB4BDC12A4093DC008BA9E0 /* Particle.app */;
 			productType = "com.apple.product-type.application";
@@ -925,6 +933,9 @@
 				Base,
 			);
 			mainGroup = AFB4BDB82A4093DC008BA9E0;
+			packageReferences = (
+				AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = AFB4BDC22A4093DC008BA9E0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -952,6 +963,7 @@
 				3520EF332A74DB1C00A53B34 /* Pretendard-ExtraBold.otf in Resources */,
 				3520EF312A74DB1C00A53B34 /* Pretendard-Light.otf in Resources */,
 				3520EF322A74DB1C00A53B34 /* Pretendard-Thin.otf in Resources */,
+				AFC9FC562AC1C45300AA5EB1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1387,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AFB4BDB92A4093DC008BA9E0 /* Project object */;
 }

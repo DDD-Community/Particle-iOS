@@ -8,6 +8,7 @@
 import RIBs
 import RxSwift
 import UIKit
+import UserNotifications
 
 protocol SetAlarmPresentableListener: AnyObject {
     func setAlarmBackButtonTapped()
@@ -20,6 +21,14 @@ final class SetAlarmViewController: UIViewController, SetAlarmPresentable, SetAl
     private var disposeBag = DisposeBag()
     
     enum Metric {
+        
+        static let horizontalInset: CGFloat = 20
+        static let sectionTitleTopInset: CGFloat = 12
+        static let rowStackTopInset: CGFloat = 24
+        static let rowStackSpacing: CGFloat = 16
+        static let buttonHeight: CGFloat = 44
+        static let buttonCornerRadius: CGFloat = 8
+        
         enum NavigationBar {
             static let height = 44
             static let backButtonLeftMargin = 8
@@ -49,45 +58,65 @@ final class SetAlarmViewController: UIViewController, SetAlarmPresentable, SetAl
     private let rowStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 16
+        stack.spacing = Metric.rowStackSpacing
         return stack
     }()
     
     private let row1: AlarmToggleRow = {
-        let row = AlarmToggleRow(title: "출근할 때 한 번 더 보기", description: "8시에 알림을 드릴게요")
-        row.snp.makeConstraints {
-            $0.height.equalTo(103)
+        let title = "출근할 때 한 번 더 보기"
+        
+        let row = AlarmToggleRow(
+            title: title,
+            description: "8시에 알림을 드릴게요"
+        ) { state in
+            
+            UserDefaults.standard.set(state, forKey: title)
         }
         return row
     }()
     
     private let row2: AlarmToggleRow = {
-        let row = AlarmToggleRow(title: "점심시간에 한 번 더 보기", description: "12시에 알림을 드릴게요")
-        row.snp.makeConstraints {
-            $0.height.equalTo(103)
+        let title = "점심시간에 한 번 더 보기"
+        
+        let row = AlarmToggleRow(
+            title: title,
+            description: "12시에 알림을 드릴게요"
+        ) { state in
+            
+            UserDefaults.standard.set(state, forKey: title)
         }
         return row
     }()
     
     private let row3: AlarmToggleRow = {
-        let row = AlarmToggleRow(title: "퇴근할 때 한 번 더 보기", description: "7시에 알림을 드릴게요")
-        row.snp.makeConstraints {
-            $0.height.equalTo(103)
+        let title = "퇴근할 때 한 번 더 보기"
+        
+        let row = AlarmToggleRow(
+            title: title,
+            description: "7시에 알림을 드릴게요"
+        ) { state in
+            
+            UserDefaults.standard.set(state, forKey: title)
         }
         return row
     }()
     
     private let row4: AlarmToggleRow = {
-        let row = AlarmToggleRow(title: "자기전에 한 번 더 보기", description: "10시에 알림을 드릴게요")
-        row.snp.makeConstraints {
-            $0.height.equalTo(103)
+        let title = "자기전에 한 번 더 보기"
+        
+        let row = AlarmToggleRow(
+            title: title,
+            description: "10시에 알림을 드릴게요"
+        ) { state in
+            
+            UserDefaults.standard.set(state, forKey: title)
         }
         return row
     }()
     
     private let directlySettingButton: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = Metric.buttonCornerRadius
         view.backgroundColor = .init(hex: 0xFFFFFF).withAlphaComponent(0.02)
         
         let label = UILabel()
@@ -123,11 +152,14 @@ final class SetAlarmViewController: UIViewController, SetAlarmPresentable, SetAl
         setConstraints()
         configureButton()
     }
-    
+
     // MARK: - Methods
     
     private func configureButton() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(directlySettingButtonTapped))
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(directlySettingButtonTapped)
+        )
         directlySettingButton.addGestureRecognizer(tapGesture)
         
         backButton.rx.tap.bind { [weak self]_ in
@@ -166,26 +198,31 @@ private extension SetAlarmViewController {
     }
     
     func setConstraints() {
+        
         navigationBar.snp.makeConstraints { make in
             make.top.left.right.equalTo(self.view.safeAreaLayoutGuide)
             make.height.equalTo(Metric.NavigationBar.height)
         }
+        
         backButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().inset(Metric.NavigationBar.backButtonLeftMargin)
         }
+        
         sectionTitle.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(navigationBar.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().inset(Metric.horizontalInset)
+            $0.top.equalTo(navigationBar.snp.bottom).offset(Metric.sectionTitleTopInset)
         }
+        
         rowStack.snp.makeConstraints {
-            $0.top.equalTo(sectionTitle.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(sectionTitle.snp.bottom).offset(Metric.rowStackTopInset)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
         }
+        
         directlySettingButton.snp.makeConstraints {
-            $0.top.equalTo(rowStack.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(44)
+            $0.top.equalTo(rowStack.snp.bottom).offset(Metric.rowStackSpacing)
+            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
+            $0.height.equalTo(Metric.buttonHeight)
         }
     }
 }

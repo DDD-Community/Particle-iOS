@@ -7,18 +7,13 @@
 
 import UIKit
 import SnapKit
-
+import RxSwift
 
 final class AlarmToggleRow: UIView {
     
-    // MARK: - UIComponents
+    private var disposeBag = DisposeBag()
     
-    private let row: UIView = {
-        let row = UIView()
-        row.backgroundColor = .particleColor.gray01
-        row.layer.cornerRadius = 16
-        return row
-    }()
+    // MARK: - UIComponents
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -47,19 +42,40 @@ final class AlarmToggleRow: UIView {
         return label
     }()
     
-    
     // MARK: - Initializers
     
-    init(title: String, description: String) { // 토글 action도 같이 받아야하지 않나?
+    init(title: String, description: String, handler: @escaping (Bool) -> Void) {
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
-        titleLabel.text = title
-        descriptionLabel.text = description
+        setupInitialView()
+        setupInitialData(title: title, description: description)
+        
+        bind(handler)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Methods
+    
+    private func setupInitialView() {
+        backgroundColor = .particleColor.gray01
+        layer.cornerRadius = 16
+    }
+    
+    private func setupInitialData(title: String, description: String) {
+        titleLabel.text = title
+        descriptionLabel.text = description
+        toggleButton.isOn =  UserDefaults.standard.bool(forKey: title)
+    }
+    
+    private func bind(_ handler: @escaping (Bool) -> Void) {
+        toggleButton.rx.isOn.bind { state in
+            handler(state)
+        }
+        .disposed(by: disposeBag)
     }
 }
 
@@ -68,10 +84,7 @@ final class AlarmToggleRow: UIView {
 private extension AlarmToggleRow {
     
     func addSubviews() {
-        [row]
-            .forEach {
-                addSubview($0)
-            }
+        
         [
             titleLabel,
             toggleButton,
@@ -79,13 +92,12 @@ private extension AlarmToggleRow {
             descriptionLabel
         ]
             .forEach {
-                row.addSubview($0)
+                addSubview($0)
             }
     }
     
     func setConstraints() {
-        row.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
+        self.snp.makeConstraints {
             $0.height.equalTo(103)
         }
         
@@ -121,7 +133,9 @@ import SnapKit
 struct AlarmToggleRow_Preview: PreviewProvider {
     
     static let alarmToggleRow: AlarmToggleRow = {
-        let row = AlarmToggleRow(title: "출근할 때 한번 더 보기", description: "8시에 알림을 드릴게요")
+        let row = AlarmToggleRow(title: "출근할 때 한번 더 보기", description: "8시에 알림을 드릴게요") { state in
+            Console.debug("state is \(state)")
+        }
         return row
     }()
     

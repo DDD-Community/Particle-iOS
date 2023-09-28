@@ -8,6 +8,8 @@
 import UIKit
 import Photos
 import KakaoSDKCommon
+import FirebaseCore
+import FirebaseMessaging
 
 var allPhotos: PHFetchResult<PHAsset>? = nil
 var photoCount = Int()
@@ -25,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .authorized:
                 let fetchOptions = PHFetchOptions()
                 fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false, selector: nil)]
+
                 allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
                 photoCount = allPhotos?.count ?? 0
                 Console.log("PHPhotoLibrary Success Authrization")
@@ -42,7 +45,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         KakaoSDK.initSDK(appKey: "082e213b8e9609caba039a0e66b54690")
         UserDefaults.standard.set(false, forKey: "ShowSwipeGuide")
-
+        
+        // MARK: - Firebase 등록
+        
+        FirebaseApp.configure()
+        
+        // MARK: - FCM 등록
+        
+        UNUserNotificationCenter.current().delegate = self
+        Messaging.messaging().delegate = self
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { bool, error in
+            if let error = error {
+                Console.error(error.localizedDescription)
+            }
+            Console.debug("Authorization result == \(bool)")
+        }
+        
+        application.registerForRemoteNotifications()
+        
         return true
     }
 
@@ -59,5 +82,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         
+    }
+}
+
+
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        Console.log("파이어베이스 토큰: \(fcmToken ?? "nil")")
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+            
+        completionHandler([.list, .banner, .badge, .sound])
+    }
+    
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        
+        completionHandler()
     }
 }
