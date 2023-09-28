@@ -126,6 +126,7 @@ final class SelectSentenceViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
+        bind()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,11 +139,10 @@ final class SelectSentenceViewController: UIViewController,
     }
     
     private func setupInitialView() {
-        view.backgroundColor = .black
+        view.backgroundColor = .particleColor.black
         addSubviews()
         setConstraints()
         setupNavigationBar()
-        bind()
     }
     
     private func setupNavigationBar() {
@@ -161,7 +161,8 @@ final class SelectSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
         
         // TODO: 각 사진에서 문장추출이 모두 완료되었을 때 nextButton 활성화
-        nextButton.isEnabled = false
+        // FIXME: nextButton 활성화 정책 필요.
+//        nextButton.isEnabled = false
     }
     
     private func bind() {
@@ -182,29 +183,20 @@ final class SelectSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
     }
     
-    // FIXME: - 사진 선택 맥시멈갯수 지정
     private func bindPageIndex() {
         selectedPhotoCollectionView
             .rx
             .contentOffset
-            .subscribe { [weak self] point in
-                guard let self = self, let positionX = point.element?.x else { return }
-                switch positionX {
-                case (0..<DeviceSize.width/2):
-                    self.navigationTitle.text = "문장 선택 1/\(self.selectedImages.count)"
-                case (DeviceSize.width/2..<DeviceSize.width*(3/2)):
-                    self.navigationTitle.text = "문장 선택 2/\(self.selectedImages.count)"
-                case (DeviceSize.width*(3/2)..<DeviceSize.width*(5/2)):
-                    self.navigationTitle.text = "문장 선택 3/\(self.selectedImages.count)"
-                case (DeviceSize.width*(5/2)..<DeviceSize.width*(7/2)):
-                    self.navigationTitle.text = "문장 선택 4/\(self.selectedImages.count)"
-                case (DeviceSize.width*(7/2)..<DeviceSize.width*(9/2)):
-                    self.navigationTitle.text = "문장 선택 5/\(self.selectedImages.count)"
-                default:
-                    return
-                }
+            .subscribe { [weak self] offset in
+                guard let self = self, let offsetX = offset.element?.x else { return }
+                calculatePageIndex(with: offsetX)
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func calculatePageIndex(with offsetX: CGFloat) {
+        let index = Int((offsetX + DeviceSize.width/2) / DeviceSize.width) + 1
+        navigationTitle.text = "문장 선택 \(index)/\(selectedImages.count)"
     }
     
     private func showSwipeGuide() {

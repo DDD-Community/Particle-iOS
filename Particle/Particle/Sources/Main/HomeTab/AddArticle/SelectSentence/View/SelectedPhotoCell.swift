@@ -67,6 +67,12 @@ final class SelectedPhotoCell: UICollectionViewCell {
         addSubviews()
         setConstraints()
         contentView.clipsToBounds = true
+        
+        mainScrollView.zoomScale = 1
+        mainScrollView.minimumZoomScale = 1
+        mainScrollView.maximumZoomScale = 2
+        
+        mainScrollView.delegate = self
     }
     
     private func setupNotification() {
@@ -128,6 +134,14 @@ final class SelectedPhotoCell: UICollectionViewCell {
     }
 }
 
+// MARK: - ScrollViewDelegate
+
+extension SelectedPhotoCell: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
+}
+
 // MARK: - Layout Settting
 
 private extension SelectedPhotoCell {
@@ -144,6 +158,7 @@ private extension SelectedPhotoCell {
         
         imageView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalTo(mainScrollView)
+            $0.center.equalToSuperview()
         }
     }
 }
