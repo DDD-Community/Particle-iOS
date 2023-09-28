@@ -15,8 +15,7 @@ protocol EditSentencePresentable: Presentable {
 }
 
 protocol EditSentenceListener: AnyObject {
-    func dismissEditSentence(with text: String)
-    func swipeToNextPhoto()
+    func dismissEditSentence(with text: String?)
 }
 
 final class EditSentenceInteractor: PresentableInteractor<EditSentencePresentable>,
@@ -43,6 +42,9 @@ final class EditSentenceInteractor: PresentableInteractor<EditSentencePresentabl
     
     func saveButtonTapped(with text: String) {
         listener?.dismissEditSentence(with: text)
-        listener?.swipeToNextPhoto()
+    }
+    
+    func editSentenceViewDidDisappear() {
+        listener?.dismissEditSentence(with: nil)
     }
 }

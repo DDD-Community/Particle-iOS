@@ -231,21 +231,6 @@ final class SelectSentenceViewController: UIViewController,
             dismiss(animated: true)
         }
     }
-    
-    // MARK: - SelectSentencePresentable
-    
-    func showSwipeAnimation() {
-        
-        let contentOffset = selectedPhotoCollectionView.contentOffset.x
-        let contentOffsetOnLastPage = DeviceSize.width * CGFloat(selectedImages.count-1)
-        guard contentOffset != contentOffsetOnLastPage else {
-            nextButton.isEnabled = true
-            return
-        }
-        UIView.animate(withDuration: 0.5, delay: 0) {
-            self.selectedPhotoCollectionView.contentOffset.x += DeviceSize.width
-        }
-    }
 }
 
 extension SelectSentenceViewController: SelectedPhotoCellListener {

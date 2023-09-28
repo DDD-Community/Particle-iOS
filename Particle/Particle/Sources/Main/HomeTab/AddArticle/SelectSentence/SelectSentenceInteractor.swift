@@ -15,8 +15,6 @@ protocol SelectSentenceRouting: ViewableRouting {
 
 protocol SelectSentencePresentable: Presentable {
     var listener: SelectSentencePresentableListener? { get set }
-
-    func showSwipeAnimation()
 }
 
 protocol SelectSentenceListener: AnyObject {
@@ -66,18 +64,15 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
     
     // MARK: - SelectSentenceInteractable
     
-    func dismissEditSentence(with text: String) {
+    func dismissEditSentence(with text: String?) {
         
-        var list = organizingSentenceRepository.sentenceFile2.value
-        list.append(.init(sentence: text, isRepresent: false))
-        organizingSentenceRepository.sentenceFile2.accept(list)
+        if let inputText = text {
+            var list = organizingSentenceRepository.sentenceFile2.value
+            list.append(.init(sentence: inputText, isRepresent: false))
+            organizingSentenceRepository.sentenceFile2.accept(list)
+        }
 
         router?.detachEditSentence()
-    }
-    
-    func swipeToNextPhoto() {
-        // TODO: 다음 사진으로 자동 스와이프 처리
-        presenter.showSwipeAnimation()
     }
 }
 

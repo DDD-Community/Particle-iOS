@@ -11,6 +11,7 @@ import UIKit
 
 protocol EditSentencePresentableListener: AnyObject {
     func saveButtonTapped(with text: String)
+    func editSentenceViewDidDisappear()
 }
 
 final class EditSentenceViewController: UIViewController,
@@ -141,6 +142,10 @@ final class EditSentenceViewController: UIViewController,
         originalCenterY = self.view.center.y
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        listener?.editSentenceViewDidDisappear()
+    }
     
     // MARK: - Methods
     
