@@ -69,6 +69,7 @@
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
 		AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */; };
 		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
+		AF2906DF2AC7AD4B00CBE801 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = AF2906DE2AC7AD4B00CBE801 /* RxDataSources */; };
 		AF2ED9832AC4F0E700F6B4B0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */; };
 		AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */; };
 		AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122732A977BEA00262088 /* SelectTagRouter.swift */; };
@@ -76,6 +77,7 @@
 		AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122752A977BEA00262088 /* SelectTagBuilder.swift */; };
 		AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122762A977BEA00262088 /* SelectTagInteractor.swift */; };
 		AF31227D2A9780E900262088 /* Accordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF31227C2A9780E900262088 /* Accordion.swift */; };
+		AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */; };
 		AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647412AA9E94700701B83 /* SetAccountRouter.swift */; };
 		AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647422AA9E94700701B83 /* SetAccountViewController.swift */; };
 		AF4647472AA9E94700701B83 /* SetAccountBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */; };
@@ -228,6 +230,7 @@
 		AF3122752A977BEA00262088 /* SelectTagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagBuilder.swift; sourceTree = "<group>"; };
 		AF3122762A977BEA00262088 /* SelectTagInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagInteractor.swift; sourceTree = "<group>"; };
 		AF31227C2A9780E900262088 /* Accordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accordion.swift; sourceTree = "<group>"; };
+		AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfRecord.swift; sourceTree = "<group>"; };
 		AF4647412AA9E94700701B83 /* SetAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountRouter.swift; sourceTree = "<group>"; };
 		AF4647422AA9E94700701B83 /* SetAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountViewController.swift; sourceTree = "<group>"; };
 		AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountBuilder.swift; sourceTree = "<group>"; };
@@ -317,6 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF2906DF2AC7AD4B00CBE801 /* RxDataSources in Frameworks */,
 				AF2ED9832AC4F0E700F6B4B0 /* FirebaseMessaging in Frameworks */,
 				B1CF9FD70DAD1AF6216BEB95 /* Pods_Particle.framework in Frameworks */,
 			);
@@ -782,6 +786,7 @@
 				AFBB5F422A66AA99002416DA /* HomeViewController.swift */,
 				AFBB5F442A66AA99002416DA /* HomeInteractor.swift */,
 				AFBB5F432A66AA99002416DA /* HomeBuilder.swift */,
+				AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */,
 				AFDE0F3E2AA4C1D8008DC539 /* MyRecordList */,
 				AF130A922AA2E9CA00F2E0BD /* RecordDetail */,
 				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
@@ -904,6 +909,7 @@
 			name = Particle;
 			packageProductDependencies = (
 				AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */,
+				AF2906DE2AC7AD4B00CBE801 /* RxDataSources */,
 			);
 			productName = Particle;
 			productReference = AFB4BDC12A4093DC008BA9E0 /* Particle.app */;
@@ -935,6 +941,7 @@
 			mainGroup = AFB4BDB82A4093DC008BA9E0;
 			packageReferences = (
 				AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AF2906DD2AC7AD4B00CBE801 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = AFB4BDC22A4093DC008BA9E0 /* Products */;
 			projectDirPath = "";
@@ -1055,6 +1062,7 @@
 				AF4647502AAA0D6700701B83 /* SetAlarmRouter.swift in Sources */,
 				AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */,
 				AFDE0F462AA4C1F3008DC539 /* MyRecordListInteractor.swift in Sources */,
+				AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecord.swift in Sources */,
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
@@ -1389,6 +1397,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF2906DD2AC7AD4B00CBE801 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1400,6 +1416,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF2906DE2AC7AD4B00CBE801 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF2906DD2AC7AD4B00CBE801 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
