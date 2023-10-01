@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SectionTitle: UIView {
+final class SectionTitle: UICollectionReusableView {
     
     enum Metric {
         static let minimumHeight: CGFloat = 44
@@ -25,6 +25,12 @@ final class SectionTitle: UIView {
         return label
     }()
     
+    private let infoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.particleImage.info, for: .normal)
+        return button
+    }()
+    
     private let rightArrowButton: UIButton = {
         let button = UIButton()
         button.setImage(.particleImage.arrowRight, for: .normal)
@@ -33,27 +39,59 @@ final class SectionTitle: UIView {
     
     // MARK: - Initializers
     
-    init(title: String) {
-        super.init(frame: .zero)
-        
-        self.backgroundColor = .particleColor.black
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupInitialView()
         addSubviews()
         setConstraints()
-        
-        titleLabel.attributedText = NSMutableAttributedString()
-            .attributeString(
-                string: title,
-                font: .particleFont.generate(style: .ydeStreetB, size: 25),
-                textColor: .particleColor.main100)
-            .attributeString(
-                string: " 태그에 담긴\n나의 아티클",
-                font: .particleFont.generate(style: .ydeStreetB, size: 25),
-                textColor: .particleColor.white)
-
+    }
+    
+    init() {
+        super.init(frame: .zero)
+        setupInitialView()
+        addSubviews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Methods
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        infoButton.isHidden = true
+        titleLabel.text = nil
+    }
+    
+    private func setupInitialView() {
+        self.backgroundColor = .particleColor.black
+        infoButton.isHidden = true
+    }
+    
+    func setupData(title: String) {
+        
+        if title == "My" {
+            
+            titleLabel.attributedText = NSMutableAttributedString()
+                .attributeString(
+                    string: "나의 아티클",
+                    font: .particleFont.generate(style: .ydeStreetB, size: 25),
+                    textColor: .particleColor.white)
+            infoButton.isHidden = false
+        } else {
+            
+            titleLabel.attributedText = NSMutableAttributedString()
+                .attributeString(
+                    string: title,
+                    font: .particleFont.generate(style: .ydeStreetB, size: 25),
+                    textColor: .particleColor.main100)
+                .attributeString(
+                    string: " 태그에 담긴\n나의 아티클",
+                    font: .particleFont.generate(style: .ydeStreetB, size: 25),
+                    textColor: .particleColor.white)
+        }
     }
 }
 
@@ -63,7 +101,7 @@ private extension SectionTitle {
     
     func addSubviews() {
 
-        [titleLabel, rightArrowButton].forEach {
+        [titleLabel, infoButton, rightArrowButton].forEach {
             addSubview($0)
         }
     }
@@ -78,6 +116,12 @@ private extension SectionTitle {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(Metric.titleLeadingMargin)
             $0.top.equalToSuperview().inset(Metric.titleTopMargin)
+        }
+        
+        infoButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(8)
+            $0.width.height.equalTo(24)
         }
         
         rightArrowButton.imageView?.snp.makeConstraints {
@@ -100,8 +144,14 @@ import SwiftUI
 @available(iOS 13.0, *)
 struct SectionTitle_Preview: PreviewProvider {
     
+    static var sectionTitle: SectionTitle = {
+        let sectionTitle = SectionTitle()
+        sectionTitle.setupData(title: "My")
+        return sectionTitle
+    }()
+    
     static var previews: some View {
-        SectionTitle(title: "UX/UI").showPreview()
+        sectionTitle.showPreview()
     }
 }
 #endif

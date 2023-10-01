@@ -5,10 +5,13 @@
 //  Created by 이원빈 on 2023/07/18.
 //
 
+import UIKit
+
 import RIBs
 import RxSwift
 import RxRelay
-import UIKit
+import RxCocoa
+import RxDataSources
 
 protocol HomePresentableListener: AnyObject {
     func cellTapped(with model: RecordReadDTO)
@@ -20,15 +23,40 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     weak var listener: HomePresentableListener?
     private var disposeBag = DisposeBag()
+    private var recordList: BehaviorRelay<[SectionOfRecord]> = .init(value: [])
     
-    private var recordList: BehaviorRelay<[RecordReadDTO]> = .init(value: [])
+    private let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfRecord>(
+        configureCell: { (dataSource, collectionView, indexPath, item) in
+            let cell: RecordCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.setupData(data: item.toDomain())
+            
+            return cell
+        },
+        configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) in
+            let header: SectionTitle = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                for: indexPath)
+            header.setupData(title: dataSource.sectionModels[indexPath.section].header)
+            
+            return header
+        })
     
     private enum Metric {
-        enum RecordCell {
-            static let width: CGFloat = DeviceSize.width-40
-            static let height: CGFloat = 400
-            static let inset: CGFloat = 20
-        }
+        static let plusButtonCornerRadius: CGFloat = 30
+        static let plusButtonBorderWidth: CGFloat = 1
+        static let plusButtonSize: CGFloat = 60
+        static let plusButtonScale: (min: CGFloat, max: CGFloat) = (0.85, 1.0)
+        static let plusButtonTrailingInset: CGFloat = 16
+        static let plusButtonBottomInset: CGFloat = 110
+        
+        static let emptyImage: (width: CGFloat, height: CGFloat) = (88, 60)
+        static let emptyImageCenterYOffset = 14
+        static let emptyLabelOffset = -35
+        
+        static let mainScrollViewBottomInset: CGFloat = 90
+        static let toolTip: (width: CGFloat, height: CGFloat) = (226, 37)
+        static let toolTipScale: (min: CGFloat, max: CGFloat) = (0.85, 1.0)
+        static let toolTipTrailingInset: CGFloat = -12
     }
     
     // MARK: - UIComponents
@@ -39,59 +67,17 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         return scrollView
     }()
     
-    private let myArticleSectionTitle: UIView = {
-        let view = UIView()
-        view.backgroundColor = .particleColor.black
-        
-        let title = UILabel()
-        title.setParticleFont(.y_title01, color: .particleColor.white, text: "나의 아티클")
-        
-        let infoButton = UIImageView()
-        infoButton.image = .particleImage.info
-        
-        [title, infoButton].forEach {
-            view.addSubview($0)
-        }
-        
-        title.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        infoButton.snp.makeConstraints{
-            $0.width.height.equalTo(24)
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(title.snp.trailing).offset(8)
-        }
-        
-        return view
-    }()
-    // FIXME: Compositional Layout 으로 변경하기.
-    
-    private let myArticleSectionArrowButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.particleImage.arrowRight, for: .normal)
-        return button
-    }()
-    
-    private let horizontalCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = .init(width: Metric.RecordCell.width,
-                                height: Metric.RecordCell.height)
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 40
-        layout.sectionInset = .init(
-            top: 0,
-            left: Metric.RecordCell.inset,
-            bottom: 0,
-            right: Metric.RecordCell.inset
-        )
+    private lazy var horizontalCollectionView: UICollectionView = {
+        let layout = configureCollectionViewLayout()
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(RecordCell.self)
-        collectionView.isPagingEnabled = true
+        collectionView.register(
+            SectionTitle.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .particleColor.black
+        
         return collectionView
     }()
     
@@ -104,9 +90,9 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
         let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.layer.cornerRadius = 30
+        blurView.layer.cornerRadius = Metric.plusButtonCornerRadius
         blurView.layer.borderColor = UIColor(hex: 0xFFFFFF, alpha: 0.1).cgColor
-        blurView.layer.borderWidth = 1
+        blurView.layer.borderWidth = Metric.plusButtonBorderWidth
         blurView.clipsToBounds = true
         blurView.contentView.addSubview(plusIcon)
         plusIcon.snp.makeConstraints {
@@ -162,10 +148,16 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         super.viewDidAppear(animated)
         
         UIView.animate(withDuration: 0.1) { [self] in
-            toolTip.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+            toolTip.transform = CGAffineTransform(
+                scaleX: Metric.toolTipScale.min,
+                y: Metric.toolTipScale.min
+            )
         } completion: { [self] _ in
             UIView.animate(withDuration: 0.3) { [self] in
-                toolTip.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                toolTip.transform = CGAffineTransform(
+                    scaleX: Metric.toolTipScale.max,
+                    y: Metric.toolTipScale.max
+                )
             }
         }
     }
@@ -185,14 +177,11 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     }
     
     private func bind() {
-
-        recordList.bind(to: horizontalCollectionView.rx.items(
-            cellIdentifier: RecordCell.defaultReuseIdentifier,
-            cellType: RecordCell.self)
-        ) { index, dto, cell in
-            cell.setupData(data: dto.toDomain())
-        }
-        .disposed(by: disposeBag)
+        
+        recordList
+            .bind(to: horizontalCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
         
         recordList.subscribe { [weak self] element in
             if element.isEmpty {
@@ -210,14 +199,53 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         horizontalCollectionView.rx.itemSelected
             .bind { [weak self] indexPath in
                 guard let self = self else { return }
-                self.listener?.cellTapped(with: self.recordList.value[indexPath.row])
+                
+                let tappedCell = self.recordList.value[indexPath.section].items[indexPath.row]
+                self.listener?.cellTapped(with: tappedCell)
             }
             .disposed(by: disposeBag)
         
-        myArticleSectionArrowButton.rx.tap.bind {
-            Console.log("myArticleButtonTapped")
-        }
-        .disposed(by: disposeBag)
+    }
+    
+    private func configureCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 20,
+            bottom: 0,
+            trailing: 20
+        )
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(394)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 32, trailing: 0)
+
+        let headerFooterSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(50)
+        )
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerFooterSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [sectionHeader]
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
     
     private func configurePlusButton() {
@@ -230,20 +258,25 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     @objc private func plusButtonTapped() {
         UIView.animate(withDuration: 0.1) { [self] in
-            plusButton.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+            plusButton.transform = CGAffineTransform(
+                scaleX: Metric.plusButtonScale.min,
+                y: Metric.plusButtonScale.min
+            )
         } completion: { [self] _ in
             UIView.animate(withDuration: 0.1) { [self] in
-                plusButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                plusButton.transform = CGAffineTransform(
+                    scaleX: Metric.plusButtonScale.max,
+                    y: Metric.plusButtonScale.max
+                )
             }
             listener?.showPHPickerViewController()
             toolTip.isHidden = true
         }
     }
     
-    
     // MARK: - HomePresentable
     
-    func setData(data: [RecordReadDTO]) {
+    func setData(data: [SectionOfRecord]) {
         recordList.accept(data)
     }
     
@@ -276,69 +309,50 @@ private extension HomeViewController {
             }
         
         [
-            myArticleSectionTitle,
             horizontalCollectionView,
         ]
             .forEach {
                 mainScrollView.addSubview($0)
             }
-        
-        myArticleSectionTitle.addSubview(myArticleSectionArrowButton)
     }
     
     func setConstraints() {
         
         mainScrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview().inset(90)
+            $0.bottom.equalToSuperview().inset(Metric.mainScrollViewBottomInset)
             $0.width.equalToSuperview()
         }
         
-        myArticleSectionTitle.snp.makeConstraints {
-            $0.top.equalTo(mainScrollView.snp.top)
-            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
-            $0.height.equalTo(55)
-        }
-        
-        myArticleSectionArrowButton.imageView?.snp.makeConstraints {
-            $0.width.height.equalTo(20)
-        }
-        
-        myArticleSectionArrowButton.snp.makeConstraints{
-            $0.width.height.equalTo(44)
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(8)
-        }
-        
         horizontalCollectionView.snp.makeConstraints {
-            $0.top.equalTo(myArticleSectionTitle.snp.bottom)
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide)
-            $0.height.greaterThanOrEqualTo(400)
+            $0.height.equalToSuperview()
         }
         
         plusButton.snp.makeConstraints {
-            $0.width.height.equalTo(60)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.bottom.equalToSuperview().offset(-110)
+            $0.width.height.equalTo(Metric.plusButtonSize)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.plusButtonTrailingInset)
+            $0.bottom.equalToSuperview().inset(Metric.plusButtonBottomInset)
         }
         
         emptyLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(331)
+            $0.bottom.equalTo(emptyImage.snp.top).offset(Metric.emptyLabelOffset)
             $0.centerX.equalToSuperview()
         }
         
         emptyImage.snp.makeConstraints {
-            $0.top.equalTo(emptyLabel.snp.bottom).offset(35)
-            $0.width.equalTo(88)
-            $0.height.equalTo(60)
+            $0.width.equalTo(Metric.emptyImage.width)
+            $0.height.equalTo(Metric.emptyImage.height)
             $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(Metric.emptyImageCenterYOffset)
         }
         
         toolTip.snp.makeConstraints {
-            $0.width.equalTo(226)
-            $0.height.equalTo(37)
+            $0.width.equalTo(Metric.toolTip.width)
+            $0.height.equalTo(Metric.toolTip.height)
             $0.centerY.equalTo(plusButton.snp.centerY)
-            $0.trailing.equalTo(plusButton.snp.leading).offset(-12)
+            $0.trailing.equalTo(plusButton.snp.leading).inset(Metric.toolTipTrailingInset)
         }
     }
 }
@@ -349,8 +363,18 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 struct HomeViewController_Preview: PreviewProvider {
+    
+    static var homeVC: HomeViewController = {
+        let vc = HomeViewController()
+        vc.setData(data: [
+            .init(header: "My", items: [.stub(), .stub()]),
+            .init(header: "iOS", items: [.stub(), .stub()]),
+        ])
+        return vc
+    }()
+    
     static var previews: some View {
-        HomeViewController().showPreview()
+        homeVC.showPreview()
     }
 }
 #endif
