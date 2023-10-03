@@ -18,10 +18,6 @@ protocol OrganizingSentencePresentable: Presentable {
     func setUpData(with viewModels: [OrganizingSentenceViewModel])
 }
 
-//protocol OrganizingSentenceInteractorDependency {
-//    var organizingSentenceRepository: OrganizingSentenceRepository { get }
-//}
-
 protocol OrganizingSentenceListener: AnyObject {
     func organizingSentenceNextButtonTapped()
     func organizingSentenceBackButtonTapped()
@@ -49,30 +45,14 @@ final class OrganizingSentenceInteractor: PresentableInteractor<OrganizingSenten
     override func didBecomeActive() {
         super.didBecomeActive()
         
-//        dependency.organizingSentenceRepository
-//            .sentenceFile
-//            .bind { [weak self] sentences in
-//                let viewModels = sentences.map {
-//                    OrganizingSentenceViewModel(
-//                        sentence: $0, isRepresent: false
-//                    )
-//                }
-//                self?.presenter.setUpData(with: viewModels)
-//            }
-//            .disposed(by: disposeBag)
-        
-        // TEST
         organizingSentenceRepository.sentenceFile2.bind { [weak self] in
             self?.presenter.setUpData(with: $0)
         }
         .disposed(by: disposeBag)
-        
-        // TEST
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
     }
     
     // MARK: - OrganizingSentencePresentableListener
