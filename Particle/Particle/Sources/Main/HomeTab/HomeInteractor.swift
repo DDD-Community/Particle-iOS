@@ -13,6 +13,8 @@ protocol HomeRouting: ViewableRouting {
     func detachAddArticle()
     func attachRecordDetail(data: RecordReadDTO)
     func detachRecordDetail()
+    func attachMyRecordList()
+    func detachMyRecordList()
 }
 
 protocol HomePresentable: Presentable {
@@ -39,7 +41,7 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        // 데이터 받아오기?
+        
         let repo = RecordRepository()
         repo.readMyRecord().subscribe { [weak self] result in
             guard let self = self else { return }
@@ -62,17 +64,19 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     
     // MARK: - HomePresentableListener
     
-    func cellTapped(with model: RecordReadDTO) {
+    func homeCellTapped(with model: RecordReadDTO) {
         router?.attachRecordDetail(data: model)
     }
     
-    func showPHPickerViewController() {
+    func homePlusButtonTapped() {
         router?.attachAddArticle()
     }
     
-    func dismiss() {
-        router?.detachAddArticle()
+    func homeSectionTitleTapped() {
+        router?.attachMyRecordList()
     }
+    
+    // MARK: - HomeInteractable
     
     func recordDetailCloseButtonTapped() {
         router?.detachAddArticle()
@@ -94,6 +98,10 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
         .disposed(by: disposeBag)
     }
     
+    func myRecordListBackButtonTapped() {
+        router?.detachMyRecordList()
+    }
+
     // MARK: - Methods
     
     private func mapDTO(data: [RecordReadDTO]) -> [SectionOfRecord] {

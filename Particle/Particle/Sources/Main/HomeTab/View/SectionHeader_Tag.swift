@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import RxSwift
 import SnapKit
 
-final class SectionTitle: UICollectionReusableView {
+final class SectionHeader_Tag: UICollectionReusableView {
+    
+    private var disposeBag = DisposeBag()
     
     enum Metric {
-        static let minimumHeight: CGFloat = 44
         static let titleLeadingMargin: CGFloat = 20
         static let titleTopMargin: CGFloat = 7
         static let buttonTrailingMargin: CGFloat = 8
@@ -63,6 +65,7 @@ final class SectionTitle: UICollectionReusableView {
         super.prepareForReuse()
         infoButton.isHidden = true
         titleLabel.text = nil
+        disposeBag = DisposeBag()
     }
     
     private func setupInitialView() {
@@ -93,11 +96,19 @@ final class SectionTitle: UICollectionReusableView {
                     textColor: .particleColor.white)
         }
     }
+    
+    func setButtonAction(_ handler: @escaping () -> Void) {
+        rightArrowButton.rx.tap
+            .bind { _ in
+                handler()
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 // MARK: - Layout Setting
 
-private extension SectionTitle {
+private extension SectionHeader_Tag {
     
     func addSubviews() {
 
@@ -107,11 +118,7 @@ private extension SectionTitle {
     }
     
     func setConstraints() {
-        self.snp.makeConstraints {
-            $0.width.equalTo(DeviceSize.width)
-            $0.height.greaterThanOrEqualTo(Metric.minimumHeight)
-        }
-        
+
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(Metric.titleLeadingMargin)
@@ -142,10 +149,10 @@ private extension SectionTitle {
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct SectionTitle_Preview: PreviewProvider {
+struct SectionHeader_Tag_Preview: PreviewProvider {
     
-    static var sectionTitle: SectionTitle = {
-        let sectionTitle = SectionTitle()
+    static var sectionTitle: SectionHeader_Tag = {
+        let sectionTitle = SectionHeader_Tag()
         sectionTitle.setupData(title: "My")
         return sectionTitle
     }()

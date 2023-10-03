@@ -44,17 +44,20 @@ final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
         
         let addArticleBuilder = AddArticleBuilder(dependency: component)
         let recordDetailBuilder = RecordDetailBuilder(dependency: component)
+        let myRecordListBuilder = MyRecordListBuilder(dependency: component)
         
         return HomeRouter(
             interactor: interactor,
             viewController: viewController,
             addArticleBuildable: addArticleBuilder,
-            recordDetailBuildable: recordDetailBuilder
+            recordDetailBuildable: recordDetailBuilder,
+            myRecordListBuildable: myRecordListBuilder
         )
     }
 }
 
-extension HomeComponent: AddArticleDependency, RecordDetailDependency {
+extension HomeComponent: AddArticleDependency, RecordDetailDependency, MyRecordListDependency {
+    
     var addArticleViewController: RIBs.ViewControllable {
         return rootViewController
     }

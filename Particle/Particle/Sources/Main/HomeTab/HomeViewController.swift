@@ -14,9 +14,9 @@ import RxCocoa
 import RxDataSources
 
 protocol HomePresentableListener: AnyObject {
-    func cellTapped(with model: RecordReadDTO)
-    func showPHPickerViewController()
-    func dismiss()
+    func homeCellTapped(with model: RecordReadDTO)
+    func homePlusButtonTapped()
+    func homeSectionTitleTapped()
 }
 
 final class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
@@ -25,18 +25,19 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     private var disposeBag = DisposeBag()
     private var recordList: BehaviorRelay<[SectionOfRecord]> = .init(value: [])
     
-    private let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfRecord>(
+    private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfRecord>(
         configureCell: { (dataSource, collectionView, indexPath, item) in
             let cell: RecordCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
             cell.setupData(data: item.toDomain())
             
             return cell
         },
-        configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) in
-            let header: SectionTitle = collectionView.dequeueReusableSupplementaryView(
+        configureSupplementaryView: { [weak self](dataSource, collectionView, kind, indexPath) in
+            let header: SectionHeader_Tag = collectionView.dequeueReusableSupplementaryView(
                 ofKind: UICollectionView.elementKindSectionHeader,
                 for: indexPath)
             header.setupData(title: dataSource.sectionModels[indexPath.section].header)
+            header.setButtonAction { self?.listener?.homeSectionTitleTapped() }
             
             return header
         })
@@ -73,7 +74,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(RecordCell.self)
         collectionView.register(
-            SectionTitle.self,
+            SectionHeader_Tag.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .particleColor.black
@@ -182,7 +183,6 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
             .bind(to: horizontalCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        
         recordList.subscribe { [weak self] element in
             if element.isEmpty {
                 self?.emptyLabel.isHidden = false
@@ -201,10 +201,9 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
                 guard let self = self else { return }
                 
                 let tappedCell = self.recordList.value[indexPath.section].items[indexPath.row]
-                self.listener?.cellTapped(with: tappedCell)
+                self.listener?.homeCellTapped(with: tappedCell)
             }
             .disposed(by: disposeBag)
-        
     }
     
     private func configureCollectionViewLayout() -> UICollectionViewLayout {
@@ -269,7 +268,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
                     y: Metric.plusButtonScale.max
                 )
             }
-            listener?.showPHPickerViewController()
+            listener?.homePlusButtonTapped()
             toolTip.isHidden = true
         }
     }
@@ -369,6 +368,8 @@ struct HomeViewController_Preview: PreviewProvider {
         vc.setData(data: [
             .init(header: "My", items: [.stub(), .stub()]),
             .init(header: "iOS", items: [.stub(), .stub()]),
+            .init(header: "Android", items: [.stub(), .stub()]),
+            .init(header: "서버", items: [.stub(), .stub()]),
         ])
         return vc
     }()

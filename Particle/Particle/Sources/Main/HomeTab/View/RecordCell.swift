@@ -156,7 +156,7 @@ final class RecordCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .particleColor.black
+        contentView.backgroundColor = .clear
         addSubviews()
         setConstraints()
     }

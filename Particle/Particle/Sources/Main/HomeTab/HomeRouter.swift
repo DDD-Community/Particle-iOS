@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol HomeInteractable: Interactable, AddArticleListener, RecordDetailListener {
+protocol HomeInteractable: Interactable, AddArticleListener, RecordDetailListener, MyRecordListListener {
     var router: HomeRouting? { get set }
     var listener: HomeListener? { get set }
 }
@@ -23,10 +23,12 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
         interactor: HomeInteractable,
         viewController: HomeViewControllable,
         addArticleBuildable: AddArticleBuildable,
-        recordDetailBuildable: RecordDetailBuildable
+        recordDetailBuildable: RecordDetailBuildable,
+        myRecordListBuildable: MyRecordListBuilder
     ) {
         self.addArticleBuildable = addArticleBuildable
         self.recordDetailBuildable = recordDetailBuildable
+        self.myRecordListBuildable = myRecordListBuildable
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
@@ -66,6 +68,26 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
         }
     }
     
+    // MARK: - MyRecordList RIB
+    
+    func attachMyRecordList() {
+        if myRecordListRouting != nil {
+            return
+        }
+        let router = myRecordListBuildable.build(withListener: interactor)
+        viewController.pushViewController(router.viewControllable, animated: true)
+        attachChild(router)
+        myRecordListRouting = router
+    }
+    
+    func detachMyRecordList() {
+        if let myRecordList = myRecordListRouting {
+            viewController.popViewController(animated: true)
+            detachChild(myRecordList)
+            myRecordListRouting = nil
+        }
+    }
+    
     // MARK: - Private
     
     private let addArticleBuildable: AddArticleBuildable
@@ -73,4 +95,7 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
     
     private let recordDetailBuildable: RecordDetailBuildable
     private var recordDetailRouting: RecordDetailRouting?
+    
+    private let myRecordListBuildable: MyRecordListBuildable
+    private var myRecordListRouting: MyRecordListRouting?
 }
