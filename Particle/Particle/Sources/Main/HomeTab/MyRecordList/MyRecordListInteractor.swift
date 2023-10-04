@@ -8,40 +8,146 @@
 import RIBs
 import RxSwift
 
-protocol MyRecordListRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
-}
+protocol MyRecordListRouting: ViewableRouting {}
 
 protocol MyRecordListPresentable: Presentable {
     var listener: MyRecordListPresentableListener? { get set }
-    // TODO: Declare methods the interactor can invoke the presenter to present data.
+    
+    func setData(with data: [SectionOfRecordDate])
 }
 
 protocol MyRecordListListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func myRecordListBackButtonTapped()
 }
 
 final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentable>,
                                     MyRecordListInteractable,
                                     MyRecordListPresentableListener {
-
+    
+    private let tag: String
+    private var disposeBag = DisposeBag()
+    private var sortedByRecentRecords: [SectionOfRecordDate] = []
+    private var sortedByOldRecords: [SectionOfRecordDate] = []
     weak var router: MyRecordListRouting?
     weak var listener: MyRecordListListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    override init(presenter: MyRecordListPresentable) {
+    init(presenter: MyRecordListPresentable, tag: String) {
+        self.tag = tag
         super.init(presenter: presenter)
         presenter.listener = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        fetchData()
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+    }
+    
+    // MARK: - Methods
+    
+    private func fetchData() {
+        
+        if tag == "My" {
+            fetchAllRecords()
+        } else {
+            fetchRecordsFromTag()
+        }
+    }
+    
+    private func fetchAllRecords() {
+        let repo = RecordRepository()
+        repo.readMyRecord().subscribe { [weak self] result in
+            guard let self = self else { return }
+            switch result.element {
+            case .success(let dto):
+                Console.log("Success \(#function)")
+                
+                let data = self.mapDTO(dto: dto)
+                self.sortedByRecentRecords = data
+                self.sortedByOldRecords = reverseRecords(data: data)
+                self.presenter.setData(with: data)
+            case .failure(let error):
+                Console.error(error.localizedDescription)
+            case .none:
+                return
+            }
+        }
+        .disposed(by: disposeBag)
+    }
+    
+    private func fetchRecordsFromTag() {
+        let repo = RecordRepository()
+        repo.read(byTag: tag).subscribe { [weak self] result in
+            guard let self = self else { return }
+            switch result.element {
+            case .success(let dto):
+                Console.log("Success \(#function)")
+                let data = self.mapDTO(dto: dto)
+                self.sortedByRecentRecords = data
+                self.sortedByOldRecords = reverseRecords(data: data)
+                self.presenter.setData(with: data)
+            case .failure(let error):
+                Console.error(error.localizedDescription)
+            case .none:
+                return
+            }
+        }
+        .disposed(by: disposeBag)
+    }
+    
+    private func mapDTO(dto: [RecordReadDTO]) ->  [SectionOfRecordDate] {
+        var list = dto
+        list.sort { a, b in
+            a.fetchDate().timeIntervalSince1970 > b.fetchDate().timeIntervalSince1970
+        }
+        
+        var headers = [String]()
+        
+        for ele in list {
+            let header = ele.fetchDateSectionHeaderString()
+            if headers.contains(header) {
+                continue
+            } else {
+                headers.append(header)
+            }
+        }
+        
+        var result = [SectionOfRecordDate]()
+        
+        for header in headers {
+            result.append(
+                .init(
+                    header: header,
+                    items: list.filter { $0.fetchDateSectionHeaderString() == header }
+                )
+            )
+        }
+        
+        return result
+    }
+    
+    private func reverseRecords(data: [SectionOfRecordDate]) -> [SectionOfRecordDate] {
+        var newList = [SectionOfRecordDate]()
+        for record in data.reversed() {
+            newList.append(record.reverseItems())
+        }
+        return newList
+    }
+    
+    // MARK: - MyRecordListPresentableListener
+    
+    func myRecordListBackButtonTapped() {
+        listener?.myRecordListBackButtonTapped()
+    }
+    
+    func myRecordSorByRecentButtonTapped() {
+        self.presenter.setData(with: sortedByRecentRecords)
+    }
+    
+    func myRecordSorByOldButtonTapped() {
+        self.presenter.setData(with: sortedByOldRecords)
     }
 }

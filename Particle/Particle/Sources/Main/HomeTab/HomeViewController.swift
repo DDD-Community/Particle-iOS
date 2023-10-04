@@ -16,7 +16,7 @@ import RxDataSources
 protocol HomePresentableListener: AnyObject {
     func homeCellTapped(with model: RecordReadDTO)
     func homePlusButtonTapped()
-    func homeSectionTitleTapped()
+    func homeSectionTitleTapped(tag: String)
 }
 
 final class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
@@ -36,8 +36,11 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
             let header: SectionHeader_Tag = collectionView.dequeueReusableSupplementaryView(
                 ofKind: UICollectionView.elementKindSectionHeader,
                 for: indexPath)
-            header.setupData(title: dataSource.sectionModels[indexPath.section].header)
-            header.setButtonAction { self?.listener?.homeSectionTitleTapped() }
+            let headerTitle = dataSource.sectionModels[indexPath.section].header
+            header.setupData(title: headerTitle)
+            header.setButtonAction {
+                self?.listener?.homeSectionTitleTapped(tag: headerTitle)
+            }
             
             return header
         })

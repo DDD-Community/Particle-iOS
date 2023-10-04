@@ -13,7 +13,7 @@ protocol HomeRouting: ViewableRouting {
     func detachAddArticle()
     func attachRecordDetail(data: RecordReadDTO)
     func detachRecordDetail()
-    func attachMyRecordList()
+    func attachMyRecordList(tag: String)
     func detachMyRecordList()
 }
 
@@ -72,8 +72,8 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
         router?.attachAddArticle()
     }
     
-    func homeSectionTitleTapped() {
-        router?.attachMyRecordList()
+    func homeSectionTitleTapped(tag: String) {
+        router?.attachMyRecordList(tag: tag)
     }
     
     // MARK: - HomeInteractable

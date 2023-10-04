@@ -5,6 +5,8 @@
 //  Created by 이원빈 on 2023/08/16.
 //
 
+import Foundation
+
 struct RecordReadDTO: Decodable {
     let id: String
     let title: String
@@ -16,6 +18,14 @@ struct RecordReadDTO: Decodable {
     
     func toDomain() -> RecordCellModel {
         .init(id: id, createdAt: createdAt, items: items.map { $0.toDomain() }, title: title, url: url)
+    }
+    
+    func fetchDateSectionHeaderString() -> String {
+        return DateManager.shared.convert(previousDate: createdAt, to: "yyyy년 MM월")
+    }
+    
+    func fetchDate() -> Date {
+        return DateManager.shared.convert(dateString: createdAt)
     }
     
     static func stub() -> Self {

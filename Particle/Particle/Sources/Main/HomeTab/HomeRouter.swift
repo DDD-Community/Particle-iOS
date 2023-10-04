@@ -70,11 +70,11 @@ final class HomeRouter: ViewableRouter<HomeInteractable, HomeViewControllable>, 
     
     // MARK: - MyRecordList RIB
     
-    func attachMyRecordList() {
+    func attachMyRecordList(tag: String) {
         if myRecordListRouting != nil {
             return
         }
-        let router = myRecordListBuildable.build(withListener: interactor)
+        let router = myRecordListBuildable.build(withListener: interactor, tag: tag)
         viewController.pushViewController(router.viewControllable, animated: true)
         attachChild(router)
         myRecordListRouting = router
