@@ -52,6 +52,7 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
     
     func recordDetailDeleteButtonTapped(with id: String) -> Observable<Bool> {
         
+        // TODO: Listener 로 보내서 MyRecordList RIB 에서도 리프레쉬 되도록 구현해야 함.
         return Observable.create { [weak self] emitter in
             guard let self = self else { return Disposables.create() }
             let repo = RecordRepository()

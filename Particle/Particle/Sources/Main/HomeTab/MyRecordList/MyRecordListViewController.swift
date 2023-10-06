@@ -17,6 +17,7 @@ protocol MyRecordListPresentableListener: AnyObject {
     func myRecordListBackButtonTapped()
     func myRecordSorByRecentButtonTapped()
     func myRecordSorByOldButtonTapped()
+    func myRecordListCellTapped(with: RecordReadDTO)
 }
 
 final class MyRecordListViewController: UIViewController,
@@ -189,6 +190,15 @@ final class MyRecordListViewController: UIViewController,
         
         recordList
             .bind(to: dateCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        dateCollectionView.rx.itemSelected
+            .bind { [weak self] indexPath in
+                guard let self = self else { return }
+                
+                let tappedCell = self.recordList.value[indexPath.section].items[indexPath.row]
+                self.listener?.myRecordListCellTapped(with: tappedCell)
+            }
             .disposed(by: disposeBag)
     }
     

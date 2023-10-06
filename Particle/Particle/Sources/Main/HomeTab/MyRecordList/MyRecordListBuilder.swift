@@ -34,6 +34,17 @@ final class MyRecordListBuilder: Builder<MyRecordListDependency>, MyRecordListBu
         let viewController = MyRecordListViewController()
         let interactor = MyRecordListInteractor(presenter: viewController, tag: tag)
         interactor.listener = listener
-        return MyRecordListRouter(interactor: interactor, viewController: viewController)
+        
+        let recordDetailBuilder = RecordDetailBuilder(dependency: component)
+        
+        return MyRecordListRouter(
+            interactor: interactor,
+            viewController: viewController,
+            recordDetailBuildable: recordDetailBuilder
+        )
     }
+}
+
+extension MyRecordListComponent: RecordDetailDependency {
+    
 }

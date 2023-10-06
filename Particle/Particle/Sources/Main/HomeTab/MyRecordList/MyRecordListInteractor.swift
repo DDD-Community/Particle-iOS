@@ -8,7 +8,10 @@
 import RIBs
 import RxSwift
 
-protocol MyRecordListRouting: ViewableRouting {}
+protocol MyRecordListRouting: ViewableRouting {
+    func attachRecordDetail(data: RecordReadDTO)
+    func detachRecordDetail()
+}
 
 protocol MyRecordListPresentable: Presentable {
     var listener: MyRecordListPresentableListener? { get set }
@@ -149,5 +152,15 @@ final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentabl
     
     func myRecordSorByOldButtonTapped() {
         self.presenter.setData(with: sortedByOldRecords)
+    }
+    
+    func myRecordListCellTapped(with data: RecordReadDTO) {
+        router?.attachRecordDetail(data: data)
+    }
+    
+    // MARK: - MyRecordListInteractable
+    
+    func recordDetailCloseButtonTapped() {
+        router?.detachRecordDetail()
     }
 }
