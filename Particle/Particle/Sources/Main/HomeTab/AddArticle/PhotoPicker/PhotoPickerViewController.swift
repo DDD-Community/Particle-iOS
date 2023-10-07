@@ -102,6 +102,7 @@ final class PhotoPickerViewController: UIViewController,
         super.viewDidLoad()
         setupInitialView()
         bind()
+        fetchMorePhotos()
     }
     
     // MARK: - Methods

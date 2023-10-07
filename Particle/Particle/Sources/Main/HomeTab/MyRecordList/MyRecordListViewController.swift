@@ -5,21 +5,58 @@
 //  Created by 이원빈 on 2023/09/03.
 //
 
-import RIBs
-import RxSwift
-import SnapKit
 import UIKit
 
-protocol MyRecordListPresentableListener: AnyObject {
+import RIBs
+import RxSwift
+import RxRelay
+import RxDataSources
+import SnapKit
 
+protocol MyRecordListPresentableListener: AnyObject {
+    func myRecordListBackButtonTapped()
+    func myRecordSorByRecentButtonTapped()
+    func myRecordSorByOldButtonTapped()
+    func myRecordListCellTapped(with: RecordReadDTO)
 }
 
 final class MyRecordListViewController: UIViewController,
                                         MyRecordListPresentable,
                                         MyRecordListViewControllable {
-
+    
     weak var listener: MyRecordListPresentableListener?
     private var disposeBag = DisposeBag()
+    private var recordList: BehaviorRelay<[SectionOfRecordDate]> = .init(value: [
+        .init(header: "2023년 6월", items: [.stub(), .stub(), .stub()]),
+        .init(header: "2023년 7월", items: [.stub(), .stub(), .stub()]),
+        .init(header: "2023년 8월", items: [.stub(), .stub(), .stub()])
+    ])
+    
+    private var dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfRecordDate>(
+        configureCell: { (dataSource, collectionView, indexPath, item) in
+            let cell: RecordCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.setupData(data: item.toDomain())
+            
+            return cell
+        },
+        configureSupplementaryView: { (dataSource, collectionView, kind, indexPath) in
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                let header: SectionHeader_Date = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    for: indexPath)
+                header.setupData(title: dataSource.sectionModels[indexPath.section].header)
+                return header
+            case UICollectionView.elementKindSectionFooter:
+                let footer: SectionFooter_Divider = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionFooter,
+                    for: indexPath)
+                return footer
+            default:
+                Console.error("dataSource - configureSupplementaryView Error")
+                assert(false, "Unexpected element kind")
+            }
+        })
     
     enum Metric {
         enum NavigationBar {
@@ -29,6 +66,8 @@ final class MyRecordListViewController: UIViewController,
             static let backButtonTapSize = 44
         }
     }
+    
+    // MARK: - UIComponents
     
     private let navigationBar: UIView = {
         let view = UIView()
@@ -103,6 +142,23 @@ final class MyRecordListViewController: UIViewController,
     private var segmentBarLeft: Constraint?
     private var segmentBarRight: Constraint?
     
+    private lazy var dateCollectionView: UICollectionView = {
+        let layout = configureCollectionViewLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(RecordCell.self)
+        collectionView.register(
+            SectionHeader_Date.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+        collectionView.register(
+            SectionFooter_Divider.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .particleColor.bk02
+        
+        return collectionView
+    }()
+    
     // MARK: - Initializers
     
     init() {
@@ -120,29 +176,47 @@ final class MyRecordListViewController: UIViewController,
         addSubviews()
         setConstraints()
         configureSegmentControl()
+        bind()
     }
     
     // MARK: - Methods
     
     private func bind() {
+        backButton.rx.tap
+            .bind { [weak self]_ in
+                self?.listener?.myRecordListBackButtonTapped()
+            }
+            .disposed(by: disposeBag)
         
+        recordList
+            .bind(to: dateCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        dateCollectionView.rx.itemSelected
+            .bind { [weak self] indexPath in
+                guard let self = self else { return }
+                
+                let tappedCell = self.recordList.value[indexPath.section].items[indexPath.row]
+                self.listener?.myRecordListCellTapped(with: tappedCell)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func configureSegmentControl() {
         let tabGesture = UITapGestureRecognizer(
             target: self,
-            action: #selector(recentlyOrderButtonTapped)
+            action: #selector(sorByRecentButtonTapped)
         )
         recentlyOrderButtonLabel.addGestureRecognizer(tabGesture)
         
         let tabGesture2 = UITapGestureRecognizer(
             target: self,
-            action: #selector(oldlyOrderButtonTapped)
+            action: #selector(sortByOldButtonTapped)
         )
         oldlyOrderButtonLabel.addGestureRecognizer(tabGesture2)
     }
     
-    @objc private func recentlyOrderButtonTapped() {
+    @objc private func sorByRecentButtonTapped() {
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
             self.recentlyOrderButtonLabel.textColor = .particleColor.gray04
@@ -150,9 +224,10 @@ final class MyRecordListViewController: UIViewController,
             self.segmentBarLeft?.update(offset: 0)
             self.view.layoutIfNeeded()
         }
+        listener?.myRecordSorByRecentButtonTapped()
     }
     
-    @objc private func oldlyOrderButtonTapped() {
+    @objc private func sortByOldButtonTapped() {
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
             self.recentlyOrderButtonLabel.textColor = .particleColor.gray03
@@ -160,6 +235,13 @@ final class MyRecordListViewController: UIViewController,
             self.segmentBarLeft?.update(offset: ((DeviceSize.width-40-14) / 2) + 4)
             self.view.layoutIfNeeded()
         }
+        listener?.myRecordSorByOldButtonTapped()
+    }
+    
+    // MARK: - MyRecordListPresentable
+    
+    func setData(with data: [SectionOfRecordDate]) {
+        recordList.accept(data)
     }
 }
 
@@ -168,7 +250,7 @@ final class MyRecordListViewController: UIViewController,
 private extension MyRecordListViewController {
     
     func addSubviews() {
-        [navigationBar, segmentControl].forEach {
+        [navigationBar, segmentControl, dateCollectionView].forEach {
             view.addSubview($0)
         }
         
@@ -217,6 +299,57 @@ private extension MyRecordListViewController {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(5)
         }
+        
+        dateCollectionView.snp.makeConstraints {
+            $0.top.equalTo(segmentControl.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func configureCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 20,
+            bottom: 0,
+            trailing: 20
+        )
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(394)
+        )
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 16, leading: 0, bottom: 0, trailing: 0)
+        section.interGroupSpacing = 32
+
+        let headerFooterSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(50)
+        )
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerFooterSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerFooterSize,
+            elementKind: UICollectionView.elementKindSectionFooter,
+            alignment: .bottom
+        )
+        section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
 }
 

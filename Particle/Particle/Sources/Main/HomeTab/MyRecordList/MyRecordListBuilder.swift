@@ -20,7 +20,7 @@ final class MyRecordListComponent: Component<MyRecordListDependency> {
 // MARK: - Builder
 
 protocol MyRecordListBuildable: Buildable {
-    func build(withListener listener: MyRecordListListener) -> MyRecordListRouting
+    func build(withListener listener: MyRecordListListener, tag: String) -> MyRecordListRouting
 }
 
 final class MyRecordListBuilder: Builder<MyRecordListDependency>, MyRecordListBuildable {
@@ -29,11 +29,22 @@ final class MyRecordListBuilder: Builder<MyRecordListDependency>, MyRecordListBu
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: MyRecordListListener) -> MyRecordListRouting {
+    func build(withListener listener: MyRecordListListener, tag: String) -> MyRecordListRouting {
         let component = MyRecordListComponent(dependency: dependency)
         let viewController = MyRecordListViewController()
-        let interactor = MyRecordListInteractor(presenter: viewController)
+        let interactor = MyRecordListInteractor(presenter: viewController, tag: tag)
         interactor.listener = listener
-        return MyRecordListRouter(interactor: interactor, viewController: viewController)
+        
+        let recordDetailBuilder = RecordDetailBuilder(dependency: component)
+        
+        return MyRecordListRouter(
+            interactor: interactor,
+            viewController: viewController,
+            recordDetailBuildable: recordDetailBuilder
+        )
     }
+}
+
+extension MyRecordListComponent: RecordDetailDependency {
+    
 }
