@@ -9,6 +9,7 @@ import RIBs
 
 protocol AddArticleDependency: Dependency {
     var addArticleViewController: ViewControllable { get }
+    var recordRepository: RecordRepository { get }
 }
 
 final class AddArticleComponent: Component<AddArticleDependency> {
@@ -16,6 +17,10 @@ final class AddArticleComponent: Component<AddArticleDependency> {
     
     fileprivate var addArticleViewController: ViewControllable {
         return dependency.addArticleViewController
+    }
+    
+    var recordRepository: RecordRepository {
+        return dependency.recordRepository
     }
 }
 
