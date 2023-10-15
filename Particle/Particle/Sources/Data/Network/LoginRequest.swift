@@ -8,8 +8,4 @@
 struct LoginRequest: Encodable {
     let provider: String
     let identifier: String
-    
-    func toDictionary() -> Dictionary<String, String> {
-        ["provider": provider, "identifier": identifier]
-    }
 }
