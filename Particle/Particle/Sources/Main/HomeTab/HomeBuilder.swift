@@ -7,16 +7,23 @@
 
 import RIBs
 
-protocol HomeDependency: Dependency {}
+protocol HomeDependency: Dependency {
+    var recordRepository: RecordRepository { get }
+}
 
 final class HomeComponent: Component<HomeDependency> {
     let rootViewController: HomeViewController
+    
+    let fetchMyAllRecordsUseCase: FetchMyAllRecordsUseCase
     
     init(
         dependency: HomeDependency,
         rootViewController: HomeViewController
     ) {
         self.rootViewController = rootViewController
+        self.fetchMyAllRecordsUseCase = DefaultFetchMyAllRecordsUseCase(
+            recordRepository: dependency.recordRepository
+        )
         super.init(dependency: dependency)
     }
 }
@@ -39,7 +46,10 @@ final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
             dependency: dependency,
             rootViewController: viewController // ?? 어떻게 된건지 잘 모름
         )
-        let interactor = HomeInteractor(presenter: viewController)
+        let interactor = HomeInteractor(
+            presenter: viewController,
+            fetchMyAllRecordsUseCase: component.fetchMyAllRecordsUseCase
+        )
         interactor.listener = listener
         
         let addArticleBuilder = AddArticleBuilder(dependency: component)
@@ -57,6 +67,9 @@ final class HomeBuilder: Builder<HomeDependency>, HomeBuildable {
 }
 
 extension HomeComponent: AddArticleDependency, RecordDetailDependency, MyRecordListDependency {
+    var recordRepository: RecordRepository {
+        return dependency.recordRepository
+    }
     
     var addArticleViewController: RIBs.ViewControllable {
         return rootViewController

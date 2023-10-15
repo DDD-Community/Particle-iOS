@@ -8,8 +8,7 @@
 import RIBs
 
 protocol MyPageDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var userRepository: UserRepository { get }
 }
 
 final class MyPageComponent: Component<MyPageDependency>,
@@ -17,6 +16,13 @@ final class MyPageComponent: Component<MyPageDependency>,
                              SetAlarmDependency,
                              SetInterestedTagsDependency {
     
+    var userRepository: UserRepository {
+        return dependency.userRepository
+    }
+    
+    fileprivate var fetchMyProfileUseCase: FetchMyProfileUseCase {
+        return DefaultFetchMyProfileUseCase(userRepository: userRepository)
+    }
 }
 
 // MARK: - Builder
@@ -34,7 +40,10 @@ final class MyPageBuilder: Builder<MyPageDependency>, MyPageBuildable {
     func build(withListener listener: MyPageListener) -> MyPageRouting {
         let component = MyPageComponent(dependency: dependency)
         let viewController = MyPageViewController()
-        let interactor = MyPageInteractor(presenter: viewController)
+        let interactor = MyPageInteractor(
+            presenter: viewController,
+            fetchMyProfileUseCase: component.fetchMyProfileUseCase
+        )
         interactor.listener = listener
         
         let setAccountBuildable = SetAccountBuilder(dependency: component)

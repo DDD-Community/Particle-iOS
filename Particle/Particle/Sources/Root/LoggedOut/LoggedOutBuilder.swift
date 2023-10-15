@@ -8,9 +8,20 @@
 import RIBs
 import Alamofire
 
-protocol LoggedOutDependency: Dependency {}
+protocol LoggedOutDependency: Dependency {
+    var loginUseCase: LoginUseCase { get }
+    var setInterestedTagsUseCase: SetInterestedTagsUseCase { get }
+}
 
-final class LoggedOutComponent: Component<LoggedOutDependency>, SelectTagDependency {}
+final class LoggedOutComponent: Component<LoggedOutDependency>, SelectTagDependency {
+    fileprivate var loginUseCase: LoginUseCase {
+        return dependency.loginUseCase
+    }
+    
+    fileprivate var setInterestedTagsUseCase: SetInterestedTagsUseCase {
+        return dependency.setInterestedTagsUseCase
+    }
+}
 
 // MARK: - Builder
 
@@ -27,7 +38,11 @@ final class LoggedOutBuilder: Builder<LoggedOutDependency>, LoggedOutBuildable {
     func build(withListener listener: LoggedOutListener) -> LoggedOutRouting {
         let component = LoggedOutComponent(dependency: dependency)
         let viewController = LoggedOutViewController()
-        let interactor = LoggedOutInteractor(presenter: viewController)
+        let interactor = LoggedOutInteractor(
+            presenter: viewController,
+            loginUseCase: component.loginUseCase,
+            setInterestedTagsUseCase: component.setInterestedTagsUseCase
+        )
         interactor.listener = listener
         
         let selectTagBuilder = SelectTagBuilder(dependency: component)

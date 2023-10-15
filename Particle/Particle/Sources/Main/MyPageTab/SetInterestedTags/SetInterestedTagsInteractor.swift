@@ -30,9 +30,14 @@ final class SetInterestedTagsInteractor: PresentableInteractor<SetInterestedTags
 
     weak var router: SetInterestedTagsRouting?
     weak var listener: SetInterestedTagsListener?
+    private let setInterestedTagsUseCase: SetInterestedTagsUseCase
     private var disposeBag = DisposeBag()
 
-    override init(presenter: SetInterestedTagsPresentable) {
+    init(
+        presenter: SetInterestedTagsPresentable,
+        setInterestedTagsUseCase: SetInterestedTagsUseCase
+    ) {
+        self.setInterestedTagsUseCase = setInterestedTagsUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -55,19 +60,12 @@ final class SetInterestedTagsInteractor: PresentableInteractor<SetInterestedTags
     
     func setInterestedTagsOKButtonTapped(with tags: [String]) {
 
-        let repo = UserRepository()
-        repo.setTags(items: tags).subscribe { [weak self] result in
-            switch result.element {
-            case .success(let dto):
-                UserDefaults.standard.set(dto.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
+        setInterestedTagsUseCase.execute(tags: tags)
+            .subscribe { [weak self] dto in
                 self?.presenter.showUploadSuccessAlert()
-            case .failure(let error):
-                // TODO: 실패얼럿 띄우기
+            } onError: { error in
                 Console.error(error.localizedDescription)
-            case .none:
-                return
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
 }
