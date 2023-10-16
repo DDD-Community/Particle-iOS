@@ -27,6 +27,7 @@ public class DefaultNetworkSessionManager: NetworkSessionManager {
             }
             
             return Disposables.create {
+                Console.log("\(#function) 작업 취소")
                 task.cancel()
             }
         }

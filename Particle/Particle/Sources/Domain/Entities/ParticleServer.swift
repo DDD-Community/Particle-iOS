@@ -9,7 +9,7 @@ enum ParticleServer {
     static let baseURL = "https://particle.k-net.kr"
     
     enum Version: String {
-        case v1 = "/api/v1"
+        case v1 = "api/v1"
     }
     
     enum Path {
