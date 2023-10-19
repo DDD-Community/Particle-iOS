@@ -8,13 +8,18 @@
 import RIBs
 
 protocol MyRecordListDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var recordRepository: RecordRepository { get }
 }
 
 final class MyRecordListComponent: Component<MyRecordListDependency> {
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    fileprivate var fetchMyRecordsByTagUseCase: FetchMyRecordsByTagUseCase {
+        return DefaultFetchMyRecordsByTagUseCase(recordRepository: dependency.recordRepository)
+    }
+    
+    fileprivate var fetchMyRecordsByDateUseCase: FetchMyRecordsByDateUseCase {
+        return DefaultFetchMyRecordsByDateUseCase(recordRepository: dependency.recordRepository)
+    }
 }
 
 // MARK: - Builder
@@ -32,7 +37,13 @@ final class MyRecordListBuilder: Builder<MyRecordListDependency>, MyRecordListBu
     func build(withListener listener: MyRecordListListener, tag: String) -> MyRecordListRouting {
         let component = MyRecordListComponent(dependency: dependency)
         let viewController = MyRecordListViewController()
-        let interactor = MyRecordListInteractor(presenter: viewController, tag: tag)
+        
+        let interactor = MyRecordListInteractor(
+            presenter: viewController,
+            tag: tag,
+            fetchMyRecordsByTagUseCase: component.fetchMyRecordsByTagUseCase,
+            fetchMyRecordsByDateUseCase: component.fetchMyRecordsByDateUseCase
+        )
         interactor.listener = listener
         
         let recordDetailBuilder = RecordDetailBuilder(dependency: component)
@@ -46,5 +57,7 @@ final class MyRecordListBuilder: Builder<MyRecordListDependency>, MyRecordListBu
 }
 
 extension MyRecordListComponent: RecordDetailDependency {
-    
+    var recordRepository: RecordRepository {
+        return dependency.recordRepository
+    }
 }

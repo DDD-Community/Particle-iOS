@@ -71,13 +71,12 @@
 		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
 		AF2906DF2AC7AD4B00CBE801 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = AF2906DE2AC7AD4B00CBE801 /* RxDataSources */; };
 		AF2ED9832AC4F0E700F6B4B0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */; };
-		AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */; };
 		AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122732A977BEA00262088 /* SelectTagRouter.swift */; };
 		AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122742A977BEA00262088 /* SelectTagViewController.swift */; };
 		AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122752A977BEA00262088 /* SelectTagBuilder.swift */; };
 		AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122762A977BEA00262088 /* SelectTagInteractor.swift */; };
 		AF31227D2A9780E900262088 /* Accordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF31227C2A9780E900262088 /* Accordion.swift */; };
-		AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */; };
+		AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecordTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecordTag.swift */; };
 		AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647412AA9E94700701B83 /* SetAccountRouter.swift */; };
 		AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647422AA9E94700701B83 /* SetAccountViewController.swift */; };
 		AF4647472AA9E94700701B83 /* SetAccountBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */; };
@@ -91,7 +90,7 @@
 		AF4647612AAA196F00701B83 /* DirectlySetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475D2AAA196F00701B83 /* DirectlySetAlarmViewController.swift */; };
 		AF4647622AAA196F00701B83 /* DirectlySetAlarmBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475E2AAA196F00701B83 /* DirectlySetAlarmBuilder.swift */; };
 		AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */; };
-		AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473BBF2A9F6241002EE27B /* AuthService.swift */; };
+		AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473BBF2A9F6241002EE27B /* DefaultAuthService.swift */; };
 		AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
@@ -102,6 +101,33 @@
 		AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */; };
 		AF6F25BB2AC962BC004DA705 /* SectionFooter_Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */; };
 		AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B2E682AA1FC5B00806149 /* Tag.swift */; };
+		AF88ED9A2AD2993B001EB474 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88ED992AD2993B001EB474 /* Requestable.swift */; };
+		AF88ED9C2AD29A7D001EB474 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88ED9B2AD29A7D001EB474 /* NetworkService.swift */; };
+		AF88ED9E2AD29B57001EB474 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88ED9D2AD29B57001EB474 /* NetworkError.swift */; };
+		AF88EDA02AD29C0C001EB474 /* NetworkConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88ED9F2AD29C0C001EB474 /* NetworkConfigurable.swift */; };
+		AF88EDA22AD29C71001EB474 /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDA12AD29C71001EB474 /* DataTransferService.swift */; };
+		AF88EDA52AD29DA2001EB474 /* DefualtNetworkErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDA42AD29DA2001EB474 /* DefualtNetworkErrorLogger.swift */; };
+		AF88EDA72AD29EE8001EB474 /* DefaultNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDA62AD29EE8001EB474 /* DefaultNetworkService.swift */; };
+		AF88EDA92AD29F9D001EB474 /* DefaultNetworkSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDA82AD29F9D001EB474 /* DefaultNetworkSessionManager.swift */; };
+		AF88EDAC2AD2E16B001EB474 /* ApiDataNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDAB2AD2E16B001EB474 /* ApiDataNetworkConfig.swift */; };
+		AF88EDAE2AD2E1A6001EB474 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDAD2AD2E1A6001EB474 /* Endpoint.swift */; };
+		AF88EDB12AD37FB1001EB474 /* DefaultDataTransferErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDB02AD37FB1001EB474 /* DefaultDataTransferErrorLogger.swift */; };
+		AF88EDB32AD37FF5001EB474 /* DefaultDataTransferErrorResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDB22AD37FF5001EB474 /* DefaultDataTransferErrorResolver.swift */; };
+		AF88EDB52AD38026001EB474 /* DefaultDataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDB42AD38026001EB474 /* DefaultDataTransferService.swift */; };
+		AF88EDB72AD3B4EA001EB474 /* JSONResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDB62AD3B4EA001EB474 /* JSONResponseDecoder.swift */; };
+		AF88EDB92AD3B546001EB474 /* RawDataResponseDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDB82AD3B546001EB474 /* RawDataResponseDecoder.swift */; };
+		AF88EDBD2AD3D40E001EB474 /* RecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDBC2AD3D40E001EB474 /* RecordDataSource.swift */; };
+		AF88EDBF2AD3D484001EB474 /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDBE2AD3D484001EB474 /* RecordRepository.swift */; };
+		AF88EDC32AD3D51A001EB474 /* DefaultRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDC22AD3D51A001EB474 /* DefaultRecordRepository.swift */; };
+		AF88EDC52AD3D533001EB474 /* DefaultRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDC42AD3D533001EB474 /* DefaultRecordDataSource.swift */; };
+		AF88EDC72AD588F7001EB474 /* ParticleServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDC62AD588F7001EB474 /* ParticleServer.swift */; };
+		AF88EDC92AD58A99001EB474 /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDC82AD58A99001EB474 /* UserDataSource.swift */; };
+		AF88EDCB2AD58AA0001EB474 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDCA2AD58AA0001EB474 /* UserRepository.swift */; };
+		AF88EDCD2AD58B35001EB474 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDCC2AD58B35001EB474 /* DefaultUserRepository.swift */; };
+		AF88EDCF2AD58B3E001EB474 /* DefaultUserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDCE2AD58B3E001EB474 /* DefaultUserDataSource.swift */; };
+		AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDD02AD81882001EB474 /* AuthService.swift */; };
+		AF88EDD52AD823E3001EB474 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */; };
+		AF88EDD72AD83223001EB474 /* SetInterestedTagsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */; };
 		AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F12A8CFF9200877C85 /* LoginRequest.swift */; };
 		AF9702F42A8D005F00877C85 /* LoginSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */; };
 		AF9702F82A8D01C700877C85 /* RecordCreateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F72A8D01C700877C85 /* RecordCreateDTO.swift */; };
@@ -145,7 +171,13 @@
 		AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */; };
 		AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */; };
 		AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */; };
-		AFC387FA2A9F726100AF9C4D /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC387F92A9F726100AF9C4D /* UserRepository.swift */; };
+		AFC7484E2ADAC1F3009C6819 /* FetchMyAllRecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC7484D2ADAC1F3009C6819 /* FetchMyAllRecordsUseCase.swift */; };
+		AFC748502ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC7484F2ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift */; };
+		AFC748522ADB66EF009C6819 /* RecordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC748512ADB66EF009C6819 /* RecordMapper.swift */; };
+		AFC748542ADB6C54009C6819 /* FetchMyRecordsByDateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC748532ADB6C54009C6819 /* FetchMyRecordsByDateUseCase.swift */; };
+		AFC748562ADB7045009C6819 /* DeleteRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */; };
+		AFC748582ADB71CC009C6819 /* CreateRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */; };
+		AFC7485A2ADB73D9009C6819 /* FetchMyProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC748592ADB73D9009C6819 /* FetchMyProfileUseCase.swift */; };
 		AFC9FC562AC1C45300AA5EB1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFC9FC552AC1C45300AA5EB1 /* GoogleService-Info.plist */; };
 		AFCAB6C82A5C521800E2310D /* AddArticleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */; };
 		AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */; };
@@ -227,13 +259,12 @@
 		AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerBuilder.swift; sourceTree = "<group>"; };
 		AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerInteractor.swift; sourceTree = "<group>"; };
-		AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
 		AF3122732A977BEA00262088 /* SelectTagRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagRouter.swift; sourceTree = "<group>"; };
 		AF3122742A977BEA00262088 /* SelectTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagViewController.swift; sourceTree = "<group>"; };
 		AF3122752A977BEA00262088 /* SelectTagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagBuilder.swift; sourceTree = "<group>"; };
 		AF3122762A977BEA00262088 /* SelectTagInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagInteractor.swift; sourceTree = "<group>"; };
 		AF31227C2A9780E900262088 /* Accordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accordion.swift; sourceTree = "<group>"; };
-		AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfRecord.swift; sourceTree = "<group>"; };
+		AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecordTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfRecordTag.swift; sourceTree = "<group>"; };
 		AF4647412AA9E94700701B83 /* SetAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountRouter.swift; sourceTree = "<group>"; };
 		AF4647422AA9E94700701B83 /* SetAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountViewController.swift; sourceTree = "<group>"; };
 		AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountBuilder.swift; sourceTree = "<group>"; };
@@ -247,7 +278,7 @@
 		AF46475D2AAA196F00701B83 /* DirectlySetAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmViewController.swift; sourceTree = "<group>"; };
 		AF46475E2AAA196F00701B83 /* DirectlySetAlarmBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmBuilder.swift; sourceTree = "<group>"; };
 		AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmInteractor.swift; sourceTree = "<group>"; };
-		AF473BBF2A9F6241002EE27B /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		AF473BBF2A9F6241002EE27B /* DefaultAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthService.swift; sourceTree = "<group>"; };
 		AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleLoginButton.swift; sourceTree = "<group>"; };
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
@@ -259,6 +290,33 @@
 		AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlert.swift; sourceTree = "<group>"; };
 		AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFooter_Divider.swift; sourceTree = "<group>"; };
 		AF7B2E682AA1FC5B00806149 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		AF88ED992AD2993B001EB474 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		AF88ED9B2AD29A7D001EB474 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		AF88ED9D2AD29B57001EB474 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		AF88ED9F2AD29C0C001EB474 /* NetworkConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigurable.swift; sourceTree = "<group>"; };
+		AF88EDA12AD29C71001EB474 /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		AF88EDA42AD29DA2001EB474 /* DefualtNetworkErrorLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefualtNetworkErrorLogger.swift; sourceTree = "<group>"; };
+		AF88EDA62AD29EE8001EB474 /* DefaultNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkService.swift; sourceTree = "<group>"; };
+		AF88EDA82AD29F9D001EB474 /* DefaultNetworkSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkSessionManager.swift; sourceTree = "<group>"; };
+		AF88EDAB2AD2E16B001EB474 /* ApiDataNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDataNetworkConfig.swift; sourceTree = "<group>"; };
+		AF88EDAD2AD2E1A6001EB474 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		AF88EDB02AD37FB1001EB474 /* DefaultDataTransferErrorLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataTransferErrorLogger.swift; sourceTree = "<group>"; };
+		AF88EDB22AD37FF5001EB474 /* DefaultDataTransferErrorResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataTransferErrorResolver.swift; sourceTree = "<group>"; };
+		AF88EDB42AD38026001EB474 /* DefaultDataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataTransferService.swift; sourceTree = "<group>"; };
+		AF88EDB62AD3B4EA001EB474 /* JSONResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONResponseDecoder.swift; sourceTree = "<group>"; };
+		AF88EDB82AD3B546001EB474 /* RawDataResponseDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawDataResponseDecoder.swift; sourceTree = "<group>"; };
+		AF88EDBC2AD3D40E001EB474 /* RecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDataSource.swift; sourceTree = "<group>"; };
+		AF88EDBE2AD3D484001EB474 /* RecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRepository.swift; sourceTree = "<group>"; };
+		AF88EDC22AD3D51A001EB474 /* DefaultRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordRepository.swift; sourceTree = "<group>"; };
+		AF88EDC42AD3D533001EB474 /* DefaultRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordDataSource.swift; sourceTree = "<group>"; };
+		AF88EDC62AD588F7001EB474 /* ParticleServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleServer.swift; sourceTree = "<group>"; };
+		AF88EDC82AD58A99001EB474 /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataSource.swift; sourceTree = "<group>"; };
+		AF88EDCA2AD58AA0001EB474 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		AF88EDCC2AD58B35001EB474 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
+		AF88EDCE2AD58B3E001EB474 /* DefaultUserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserDataSource.swift; sourceTree = "<group>"; };
+		AF88EDD02AD81882001EB474 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsUseCase.swift; sourceTree = "<group>"; };
 		AF9702F12A8CFF9200877C85 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessResponse.swift; sourceTree = "<group>"; };
 		AF9702F72A8D01C700877C85 /* RecordCreateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateDTO.swift; sourceTree = "<group>"; };
@@ -304,7 +362,13 @@
 		AFBB5F7A2A66B66B002416DA /* EditSentenceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceBuilder.swift; sourceTree = "<group>"; };
 		AFBB5F7B2A66B66B002416DA /* EditSentenceInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceInteractor.swift; sourceTree = "<group>"; };
 		AFBD9BC42A715FBC0076A404 /* UIColor+ParticleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ParticleColor.swift"; sourceTree = "<group>"; };
-		AFC387F92A9F726100AF9C4D /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		AFC7484D2ADAC1F3009C6819 /* FetchMyAllRecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyAllRecordsUseCase.swift; sourceTree = "<group>"; };
+		AFC7484F2ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyRecordsByTagUseCase.swift; sourceTree = "<group>"; };
+		AFC748512ADB66EF009C6819 /* RecordMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMapper.swift; sourceTree = "<group>"; };
+		AFC748532ADB6C54009C6819 /* FetchMyRecordsByDateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyRecordsByDateUseCase.swift; sourceTree = "<group>"; };
+		AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordUseCase.swift; sourceTree = "<group>"; };
+		AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecordUseCase.swift; sourceTree = "<group>"; };
+		AFC748592ADB73D9009C6819 /* FetchMyProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMyProfileUseCase.swift; sourceTree = "<group>"; };
 		AFC9FC552AC1C45300AA5EB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleRouter.swift; sourceTree = "<group>"; };
 		AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
@@ -631,8 +695,10 @@
 		AF473BBB2A9F6094002EE27B /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				AFC387F92A9F726100AF9C4D /* UserRepository.swift */,
-				AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */,
+				AF88EDCE2AD58B3E001EB474 /* DefaultUserDataSource.swift */,
+				AF88EDCC2AD58B35001EB474 /* DefaultUserRepository.swift */,
+				AF88EDC42AD3D533001EB474 /* DefaultRecordDataSource.swift */,
+				AF88EDC22AD3D51A001EB474 /* DefaultRecordRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -640,7 +706,7 @@
 		AF473BBC2A9F609F002EE27B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				AF473BBF2A9F6241002EE27B /* AuthService.swift */,
+				AF473BBF2A9F6241002EE27B /* DefaultAuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -675,6 +741,7 @@
 		AF7953D02AB3386800A7044A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AFF00A722AD0E79A00B219D9 /* Infrastructure */,
 				AFE885F62A5C29E5001EF2C0 /* Extension */,
 				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
 				AF7B2E662AA1FC3000806149 /* Domain */,
@@ -691,6 +758,8 @@
 			isa = PBXGroup;
 			children = (
 				AF7B2E672AA1FC5200806149 /* Entities */,
+				AF88EDBA2AD3D3D9001EB474 /* Interfaces */,
+				AF88EDBB2AD3D3E6001EB474 /* UseCases */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -699,6 +768,7 @@
 			isa = PBXGroup;
 			children = (
 				AF7B2E682AA1FC5B00806149 /* Tag.swift */,
+				AF88EDC62AD588F7001EB474 /* ParticleServer.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -726,9 +796,96 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		AF88ED982AD29923001EB474 /* NetworkingInterface */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDA12AD29C71001EB474 /* DataTransferService.swift */,
+				AF88ED9F2AD29C0C001EB474 /* NetworkConfigurable.swift */,
+				AF88ED9D2AD29B57001EB474 /* NetworkError.swift */,
+				AF88ED9B2AD29A7D001EB474 /* NetworkService.swift */,
+				AF88ED992AD2993B001EB474 /* Requestable.swift */,
+			);
+			path = NetworkingInterface;
+			sourceTree = "<group>";
+		};
+		AF88EDA32AD29D8A001EB474 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDA42AD29DA2001EB474 /* DefualtNetworkErrorLogger.swift */,
+				AF88EDA62AD29EE8001EB474 /* DefaultNetworkService.swift */,
+				AF88EDA82AD29F9D001EB474 /* DefaultNetworkSessionManager.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		AF88EDAA2AD2E15B001EB474 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDAD2AD2E1A6001EB474 /* Endpoint.swift */,
+				AF88EDAB2AD2E16B001EB474 /* ApiDataNetworkConfig.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		AF88EDAF2AD37F9E001EB474 /* DataTransferService */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDB02AD37FB1001EB474 /* DefaultDataTransferErrorLogger.swift */,
+				AF88EDB22AD37FF5001EB474 /* DefaultDataTransferErrorResolver.swift */,
+				AF88EDB42AD38026001EB474 /* DefaultDataTransferService.swift */,
+				AF88EDB62AD3B4EA001EB474 /* JSONResponseDecoder.swift */,
+				AF88EDB82AD3B546001EB474 /* RawDataResponseDecoder.swift */,
+			);
+			path = DataTransferService;
+			sourceTree = "<group>";
+		};
+		AF88EDBA2AD3D3D9001EB474 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDD32AD819A3001EB474 /* Services */,
+				AF88EDD22AD81998001EB474 /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		AF88EDBB2AD3D3E6001EB474 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */,
+				AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */,
+				AFC748592ADB73D9009C6819 /* FetchMyProfileUseCase.swift */,
+				AFC7484D2ADAC1F3009C6819 /* FetchMyAllRecordsUseCase.swift */,
+				AFC748532ADB6C54009C6819 /* FetchMyRecordsByDateUseCase.swift */,
+				AFC7484F2ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift */,
+				AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */,
+				AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		AF88EDD22AD81998001EB474 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDC82AD58A99001EB474 /* UserDataSource.swift */,
+				AF88EDCA2AD58AA0001EB474 /* UserRepository.swift */,
+				AF88EDBC2AD3D40E001EB474 /* RecordDataSource.swift */,
+				AF88EDBE2AD3D484001EB474 /* RecordRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		AF88EDD32AD819A3001EB474 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDD02AD81882001EB474 /* AuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		AF9702EF2A8CFF8100877C85 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AFC748512ADB66EF009C6819 /* RecordMapper.swift */,
 				AF9702F12A8CFF9200877C85 /* LoginRequest.swift */,
 				AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */,
 				AF9702F02A8CFF8800877C85 /* DataMapping */,
@@ -801,7 +958,7 @@
 				AFBB5F422A66AA99002416DA /* HomeViewController.swift */,
 				AFBB5F442A66AA99002416DA /* HomeInteractor.swift */,
 				AFBB5F432A66AA99002416DA /* HomeBuilder.swift */,
-				AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */,
+				AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecordTag.swift */,
 				AFDE0F3E2AA4C1D8008DC539 /* MyRecordList */,
 				AF130A922AA2E9CA00F2E0BD /* RecordDetail */,
 				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
@@ -903,6 +1060,25 @@
 				AF4A19122A6A59BA00932372 /* UIImageView+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		AFF00A722AD0E79A00B219D9 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				AFF00A732AD0EA5F00B219D9 /* Networking */,
+				AF88ED982AD29923001EB474 /* NetworkingInterface */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		AFF00A732AD0EA5F00B219D9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AF88EDAF2AD37F9E001EB474 /* DataTransferService */,
+				AF88EDAA2AD2E15B001EB474 /* Endpoint */,
+				AF88EDA32AD29D8A001EB474 /* NetworkService */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1069,8 +1245,10 @@
 				AF4647622AAA196F00701B83 /* DirectlySetAlarmBuilder.swift in Sources */,
 				AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */,
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
+				AF88EDA22AD29C71001EB474 /* DataTransferService.swift in Sources */,
 				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
 				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
+				AF88ED9A2AD2993B001EB474 /* Requestable.swift in Sources */,
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
 				AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */,
 				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
@@ -1078,9 +1256,11 @@
 				AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */,
 				AF4647502AAA0D6700701B83 /* SetAlarmRouter.swift in Sources */,
 				AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */,
+				AF88EDA72AD29EE8001EB474 /* DefaultNetworkService.swift in Sources */,
 				AFDE0F462AA4C1F3008DC539 /* MyRecordListInteractor.swift in Sources */,
-				AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecord.swift in Sources */,
+				AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecordTag.swift in Sources */,
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
+				AF88EDCF2AD58B3E001EB474 /* DefaultUserDataSource.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
@@ -1096,6 +1276,7 @@
 				AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */,
 				AFAB32582AACB35D000EA542 /* SectionHeader_Tag.swift in Sources */,
 				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
+				AF88EDAE2AD2E1A6001EB474 /* Endpoint.swift in Sources */,
 				3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */,
 				AFDE0F452AA4C1F3008DC539 /* MyRecordListBuilder.swift in Sources */,
 				AFBB5F482A66AA99002416DA /* HomeInteractor.swift in Sources */,
@@ -1117,6 +1298,7 @@
 				3520EEF32A5CD3C000A53B34 /* OrganizingSentenceViewController.swift in Sources */,
 				AF9702F42A8D005F00877C85 /* LoginSuccessResponse.swift in Sources */,
 				AFBB5F462A66AA99002416DA /* HomeViewController.swift in Sources */,
+				AFC748522ADB66EF009C6819 /* RecordMapper.swift in Sources */,
 				AFBB5F7C2A66B66B002416DA /* EditSentenceRouter.swift in Sources */,
 				3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */,
 				AF4647522AAA0D6700701B83 /* SetAlarmBuilder.swift in Sources */,
@@ -1124,13 +1306,14 @@
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
 				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
 				AFB86FEF2AC9567600CEBA0F /* SectionOfRecordDate.swift in Sources */,
+				AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
-				AFC387FA2A9F726100AF9C4D /* UserRepository.swift in Sources */,
-				AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */,
+				AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */,
 				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
 				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
 				AFBB5F6B2A66ABBF002416DA /* SearchInteractor.swift in Sources */,
 				3520EF262A5FC40800A53B34 /* NSMutableAttributedString+.swift in Sources */,
+				AF88EDD52AD823E3001EB474 /* LoginUseCase.swift in Sources */,
 				AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */,
 				AFBB5F502A66AAB0002416DA /* ExploreBuilder.swift in Sources */,
 				AF0D71E92A5BEFB800157758 /* MainInteractor.swift in Sources */,
@@ -1144,12 +1327,19 @@
 				AF130A9A2AA2E9E200F2E0BD /* RecordDetailInteractor.swift in Sources */,
 				AF31227D2A9780E900262088 /* Accordion.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
+				AF88EDB72AD3B4EA001EB474 /* JSONResponseDecoder.swift in Sources */,
 				AF9E9C082AB6E1760058AB70 /* ParticleAlertPresentationController.swift in Sources */,
 				3520EF082A5E8F3400A53B34 /* UIImage+ParticleImage.swift in Sources */,
+				AFC748562ADB7045009C6819 /* DeleteRecordUseCase.swift in Sources */,
+				AF88EDC72AD588F7001EB474 /* ParticleServer.swift in Sources */,
 				AFBD9BC52A715FBC0076A404 /* UIColor+ParticleColor.swift in Sources */,
+				AF88EDD72AD83223001EB474 /* SetInterestedTagsUseCase.swift in Sources */,
 				AFFAEBE62A8CFBBA009EC03B /* UIFont+ParticleFont.swift in Sources */,
+				AF88ED9E2AD29B57001EB474 /* NetworkError.swift in Sources */,
 				AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */,
 				AFDE0F442AA4C1F3008DC539 /* MyRecordListViewController.swift in Sources */,
+				AF88ED9C2AD29A7D001EB474 /* NetworkService.swift in Sources */,
+				AF88EDC92AD58A99001EB474 /* UserDataSource.swift in Sources */,
 				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
 				AF4647482AA9E94700701B83 /* SetAccountInteractor.swift in Sources */,
 				AF130A8D2AA225F000F2E0BD /* SelectedPhotoCell.swift in Sources */,
@@ -1158,9 +1348,9 @@
 				3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */,
 				AF130A972AA2E9E200F2E0BD /* RecordDetailRouter.swift in Sources */,
 				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
-				AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */,
 				AFBB5F4F2A66AAB0002416DA /* ExploreViewController.swift in Sources */,
 				AFBB5F472A66AA99002416DA /* HomeBuilder.swift in Sources */,
+				AFC7484E2ADAC1F3009C6819 /* FetchMyAllRecordsUseCase.swift in Sources */,
 				AFBB5F452A66AA99002416DA /* HomeRouter.swift in Sources */,
 				AFBB5F682A66ABBF002416DA /* SearchRouter.swift in Sources */,
 				AF9C6FCD2AA3038F00948BE2 /* UILabel+ParticleFont.swift in Sources */,
@@ -1169,30 +1359,48 @@
 				AF9702F82A8D01C700877C85 /* RecordCreateDTO.swift in Sources */,
 				AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */,
 				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
+				AF88EDC52AD3D533001EB474 /* DefaultRecordDataSource.swift in Sources */,
 				AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */,
 				AF4647602AAA196F00701B83 /* DirectlySetAlarmRouter.swift in Sources */,
+				AF88EDA92AD29F9D001EB474 /* DefaultNetworkSessionManager.swift in Sources */,
 				AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */,
+				AF88EDBD2AD3D40E001EB474 /* RecordDataSource.swift in Sources */,
 				AFBB5F622A66AAD7002416DA /* MyPageBuilder.swift in Sources */,
+				AF88EDA02AD29C0C001EB474 /* NetworkConfigurable.swift in Sources */,
 				AFDE0F3B2AA4588C008DC539 /* RecordCell.swift in Sources */,
+				AF88EDB32AD37FF5001EB474 /* DefaultDataTransferErrorResolver.swift in Sources */,
+				AF88EDAC2AD2E16B001EB474 /* ApiDataNetworkConfig.swift in Sources */,
 				AF9E9C062AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift in Sources */,
 				AFDE0F3D2AA4AC51008DC539 /* DateManager.swift in Sources */,
 				3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */,
+				AF88EDCD2AD58B35001EB474 /* DefaultUserRepository.swift in Sources */,
 				AF6F25BB2AC962BC004DA705 /* SectionFooter_Divider.swift in Sources */,
 				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,
+				AF88EDB92AD3B546001EB474 /* RawDataResponseDecoder.swift in Sources */,
 				AF4647582AAA0E9A00701B83 /* AlarmToggleRow.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
+				AF88EDB52AD38026001EB474 /* DefaultDataTransferService.swift in Sources */,
 				AFBB5F692A66ABBF002416DA /* SearchViewController.swift in Sources */,
+				AF88EDB12AD37FB1001EB474 /* DefaultDataTransferErrorLogger.swift in Sources */,
 				AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */,
+				AF88EDCB2AD58AA0001EB474 /* UserRepository.swift in Sources */,
 				AF4647612AAA196F00701B83 /* DirectlySetAlarmViewController.swift in Sources */,
+				AFC7485A2ADB73D9009C6819 /* FetchMyProfileUseCase.swift in Sources */,
+				AFC748582ADB71CC009C6819 /* CreateRecordUseCase.swift in Sources */,
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
+				AF88EDA52AD29DA2001EB474 /* DefualtNetworkErrorLogger.swift in Sources */,
 				AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */,
 				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
+				AFC748502ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift in Sources */,
 				AF130A912AA2DE0F00F2E0BD /* UITextField+.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
+				AF88EDC32AD3D51A001EB474 /* DefaultRecordRepository.swift in Sources */,
 				AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */,
 				AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
 				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
+				AF88EDBF2AD3D484001EB474 /* RecordRepository.swift in Sources */,
+				AFC748542ADB6C54009C6819 /* FetchMyRecordsByDateUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

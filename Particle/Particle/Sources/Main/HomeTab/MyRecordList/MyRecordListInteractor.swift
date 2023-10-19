@@ -28,14 +28,25 @@ final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentabl
                                     MyRecordListPresentableListener {
     
     private let tag: String
-    private var disposeBag = DisposeBag()
+    private let fetchMyRecordsByDateUseCase: FetchMyRecordsByDateUseCase
+    private let fetchMyRecordsByTagUseCase: FetchMyRecordsByTagUseCase
+    
     private var sortedByRecentRecords: [SectionOfRecordDate] = []
     private var sortedByOldRecords: [SectionOfRecordDate] = []
+    
+    private var disposeBag = DisposeBag()
     weak var router: MyRecordListRouting?
     weak var listener: MyRecordListListener?
 
-    init(presenter: MyRecordListPresentable, tag: String) {
+    init(
+        presenter: MyRecordListPresentable,
+        tag: String,
+        fetchMyRecordsByTagUseCase: FetchMyRecordsByTagUseCase,
+        fetchMyRecordsByDateUseCase: FetchMyRecordsByDateUseCase
+    ) {
         self.tag = tag
+        self.fetchMyRecordsByTagUseCase = fetchMyRecordsByTagUseCase
+        self.fetchMyRecordsByDateUseCase = fetchMyRecordsByDateUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -61,75 +72,31 @@ final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentabl
     }
     
     private func fetchAllRecords() {
-        let repo = RecordRepository()
-        repo.readMyRecord().subscribe { [weak self] result in
-            guard let self = self else { return }
-            switch result.element {
-            case .success(let dto):
-                Console.log("Success \(#function)")
-                
-                let data = self.mapDTO(dto: dto)
-                self.sortedByRecentRecords = data
-                self.sortedByOldRecords = reverseRecords(data: data)
-                self.presenter.setData(with: data)
-            case .failure(let error):
+        
+        fetchMyRecordsByDateUseCase.execute()
+            .subscribe { [weak self] result in
+                guard let self = self else { return }
+                self.sortedByOldRecords = result
+                self.sortedByRecentRecords = self.reverseRecords(data: result)
+                self.presenter.setData(with: result)
+            } onError: { error in
                 Console.error(error.localizedDescription)
-            case .none:
-                return
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func fetchRecordsFromTag() {
-        let repo = RecordRepository()
-        repo.read(byTag: tag).subscribe { [weak self] result in
-            guard let self = self else { return }
-            switch result.element {
-            case .success(let dto):
-                Console.log("Success \(#function)")
-                let data = self.mapDTO(dto: dto)
-                self.sortedByRecentRecords = data
-                self.sortedByOldRecords = reverseRecords(data: data)
-                self.presenter.setData(with: data)
-            case .failure(let error):
+        
+        fetchMyRecordsByTagUseCase.execute(tag: tag)
+            .subscribe { [weak self] result in
+                guard let self = self else { return }
+                self.sortedByOldRecords = result
+                self.sortedByRecentRecords = self.reverseRecords(data: result)
+                self.presenter.setData(with: result)
+            } onError: { error in
                 Console.error(error.localizedDescription)
-            case .none:
-                return
             }
-        }
-        .disposed(by: disposeBag)
-    }
-    
-    private func mapDTO(dto: [RecordReadDTO]) ->  [SectionOfRecordDate] {
-        var list = dto
-        list.sort { a, b in
-            a.fetchDate().timeIntervalSince1970 > b.fetchDate().timeIntervalSince1970
-        }
-        
-        var headers = [String]()
-        
-        for ele in list {
-            let header = ele.fetchDateSectionHeaderString()
-            if headers.contains(header) {
-                continue
-            } else {
-                headers.append(header)
-            }
-        }
-        
-        var result = [SectionOfRecordDate]()
-        
-        for header in headers {
-            result.append(
-                .init(
-                    header: header,
-                    items: list.filter { $0.fetchDateSectionHeaderString() == header }
-                )
-            )
-        }
-        
-        return result
+            .disposed(by: disposeBag)
     }
     
     private func reverseRecords(data: [SectionOfRecordDate]) -> [SectionOfRecordDate] {

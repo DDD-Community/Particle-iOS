@@ -30,12 +30,15 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
 
     private var disposeBag = DisposeBag()
     private let repository: OrganizingSentenceRepository
+    private let createRecordUseCase: CreateRecordUseCase
 
     init(
         presenter: SetAdditionalInformationPresentable,
-        repository: OrganizingSentenceRepository
+        repository: OrganizingSentenceRepository,
+        createRecordUseCase: CreateRecordUseCase
     ) {
         self.repository = repository
+        self.createRecordUseCase = createRecordUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -63,21 +66,14 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
             .init(content: $0.sentence, isMain: $0.isRepresent)
         }
         
-        let repo = RecordRepository()
-        repo.create(
-            record: .init(title: title, url: url, items: requestModel, tags: tags)
-        ).subscribe { [weak self] result in
-            switch result.element {
-            case .success(let response):
-                Console.log("\(#function) success")
-                self?.listener?.setAdditionalInfoSuccessPost(data: response)
-            case .failure(let error):
-                Console.log(error.localizedDescription)
-            case .none:
-                Console.error("none Error")
-                return
+        let model = RecordCreateDTO(title: title, url: url, items: requestModel, tags: tags)
+        
+        createRecordUseCase.execute(model: model)
+            .subscribe { [weak self]  result in
+                self?.listener?.setAdditionalInfoSuccessPost(data: result)
+            } onError: { error in
+                Console.error(error.localizedDescription)
             }
-        }
-        .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
     }
 }

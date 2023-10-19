@@ -36,30 +36,29 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>,
     weak var router: MyPageRouting?
     weak var listener: MyPageListener?
     
+    private let fetchMyProfileUseCase: FetchMyProfileUseCase
     private var disposeBag = DisposeBag()
     
-    override init(presenter: MyPagePresentable) {
+    init(
+        presenter: MyPagePresentable,
+        fetchMyProfileUseCase: FetchMyProfileUseCase
+    ) {
+        self.fetchMyProfileUseCase = fetchMyProfileUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: user정보 받아와서 저장
-        let repo = UserRepository()
-        repo.fetchMyProfile().subscribe { [weak self] result in
-            switch result.element {
-            case .success(let response):
-                self?.presenter.setData(data: response)
-                UserDefaults.standard.set(response.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
-            case .failure(let error):
-                Console.error(error.localizedDescription)
-            case .none:
-                return
-            }
-        }
-        .disposed(by: disposeBag)
         
+        fetchMyProfileUseCase.execute()
+            .subscribe { [weak self] dto in
+                self?.presenter.setData(data: dto)
+                UserDefaults.standard.set(dto.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
+            } onError: { error in
+                Console.error(error.localizedDescription)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func willResignActive() {

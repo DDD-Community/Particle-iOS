@@ -8,8 +8,22 @@
 import RIBs
 
 class AppComponent: Component<EmptyComponent>, RootDependency {
+    var authService: AuthService
+    var userRepository: UserRepository
     
     init() {
+        let config = ApiDataNetworkConfig(
+            baseURL: URL(string: ParticleServer.baseURL) ?? .applicationDirectory,
+            headers: ["Authorization": ""]
+        )
+        let networkService = DefaultNetworkService(config: config)
+        let dataTransferService = DefaultDataTransferService(with: networkService)
+        
+        self.authService = DefaultAuthService(dataTransferService: dataTransferService)
+        
+        let userDataSource = DefaultUserDataSource(dataTransferService: dataTransferService)
+        self.userRepository = DefaultUserRepository(userDataSource: userDataSource)
+        
         super.init(dependency: EmptyComponent())
     }
 }

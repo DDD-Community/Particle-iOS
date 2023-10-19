@@ -14,21 +14,5 @@ struct RecordCreateDTO: Codable {
     struct RecordItemCreateDTO: Codable {
         let content: String
         let isMain: Bool
-        
-        func toDictionary() -> Dictionary<String, Any> {
-            return [
-                "content": content,
-                "isMain": isMain
-            ]
-        }
-    }
-    
-    func toDictionary() -> Dictionary<String, Any> {
-        return [
-            "title": title,
-            "url": url,
-            "items": items.map { $0.toDictionary() },
-            "tags": tags
-        ]
     }
 }
