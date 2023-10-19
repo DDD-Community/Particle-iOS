@@ -21,7 +21,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+                
+        setupPhotoLibrary()
+        setupKakaoSDK()
+        setupSwipeGuide()
+        setupFirebase(to: application)
+
+        return true
+    }
+
+    // MARK: UISceneSession Lifecycle
+
+    func application(_ application: UIApplication,
+                     configurationForConnecting connectingSceneSession: UISceneSession,
+                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+
+        return UISceneConfiguration(name: "Default Configuration",
+                                    sessionRole: connectingSceneSession.role)
+    }
+
+    func application(_ application: UIApplication,
+                     didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         
+    }
+    
+    // MARK: - Methods
+    
+    private func setupPhotoLibrary() {
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             switch status {
             case .authorized:
@@ -42,16 +68,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
         }
-        
+    }
+    
+    private func setupKakaoSDK() {
         KakaoSDK.initSDK(appKey: "082e213b8e9609caba039a0e66b54690")
+    }
+    
+    private func setupSwipeGuide() {
         UserDefaults.standard.set(false, forKey: "ShowSwipeGuide")
-        
-        // MARK: - Firebase 등록
-        
+    }
+    
+    private func setupFirebase(to application: UIApplication) {
         FirebaseApp.configure()
         
         // MARK: - FCM 등록
-        
         UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self
         
@@ -65,23 +95,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         application.registerForRemoteNotifications()
-        
-        return true
-    }
-
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication,
-                     configurationForConnecting connectingSceneSession: UISceneSession,
-                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-
-        return UISceneConfiguration(name: "Default Configuration",
-                                    sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication,
-                     didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        
     }
 }
 

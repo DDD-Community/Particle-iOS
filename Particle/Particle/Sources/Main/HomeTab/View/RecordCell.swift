@@ -14,6 +14,20 @@ struct RecordCellModel {
     let items: [(content: String, isMain: Bool)] // 3개만 받도록?
     let title: String
     let url: String
+    
+    static func stub() -> Self {
+        .init(
+            id: "1",
+            createdAt: "2023-09-30T01:59:05.230Z",
+            items: [
+                ("개인적으로 나는 매일 글쓰는 일을 습관처럼 하고 있다.",false),
+                ("그렇게 쓴 글은 매일 사회관계망서비스(SNS)에 남기기도 하고, 모아서 책으로 내기도 한다.", true),
+                ("이런 습관들이 지금의 나를 만들어 줄 수 있었다.", false)
+            ],
+            title: "미니멀리스트의 삶",
+            url: "www.naver.com"
+        )
+    }
 }
 
 final class RecordCell: UICollectionViewCell {
@@ -142,7 +156,7 @@ final class RecordCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .particleColor.black
+        contentView.backgroundColor = .clear
         addSubviews()
         setConstraints()
     }
@@ -177,7 +191,9 @@ final class RecordCell: UICollectionViewCell {
             }
         }
         
-        dateLabel.text = DateManager.shared.convert(previousDate: data.createdAt, to: "M.dd (E)")
+        dateLabel.text = DateManager.shared.convert(
+            previousDate: data.createdAt,
+            to: "M.dd (E)")
         titleLabel.text = data.title
         urlLabel.text = data.url
     }
@@ -206,6 +222,7 @@ private extension RecordCell {
     }
     
     func setConstraints() {
+        
         dateLabel.snp.makeConstraints {
             $0.leading.top.equalToSuperview()
         }
@@ -263,7 +280,7 @@ struct RecordCell_Preview: PreviewProvider {
     
     static let cell: RecordCell = {
         let cell = RecordCell(frame: .init(origin: .zero, size: .init(width: DeviceSize.width, height: DeviceSize.width * 1.4)))
-        cell.setupData(data: .init(id: "", createdAt: "6.22 수", items: [("init(coder:) has not been implemented",false), ("개인적으로 나는 매일 글쓰는 일을 습관처럼 하고 있다. 그렇게 쓴 글은 매일 사회관계망서비스(SNS)에 남기기도 하고, 모아서 책으로 내기도 한다. ", true), ("init(coder:) has not been implemented", false)], title: "미니멀리스트 어쩌구 보기", url: "www.naver.com"))
+        cell.setupData(data: .stub())
         return cell
     }()
 

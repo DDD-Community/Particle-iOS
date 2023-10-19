@@ -37,7 +37,6 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
-		35471F652ACAACED00687312 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35471F642ACAACED00687312 /* SearchListCell.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -70,6 +69,7 @@
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
 		AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AB2A680CC700980F14 /* PhotoPickerBuilder.swift */; };
 		AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AC2A680CC700980F14 /* PhotoPickerInteractor.swift */; };
+		AF2906DF2AC7AD4B00CBE801 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = AF2906DE2AC7AD4B00CBE801 /* RxDataSources */; };
 		AF2ED9832AC4F0E700F6B4B0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */; };
 		AF2F3CCA2AA0B80700F44A4D /* RecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2F3CC92AA0B80700F44A4D /* RecordRepository.swift */; };
 		AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122732A977BEA00262088 /* SelectTagRouter.swift */; };
@@ -77,6 +77,7 @@
 		AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122752A977BEA00262088 /* SelectTagBuilder.swift */; };
 		AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3122762A977BEA00262088 /* SelectTagInteractor.swift */; };
 		AF31227D2A9780E900262088 /* Accordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF31227C2A9780E900262088 /* Accordion.swift */; };
+		AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */; };
 		AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647412AA9E94700701B83 /* SetAccountRouter.swift */; };
 		AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647422AA9E94700701B83 /* SetAccountViewController.swift */; };
 		AF4647472AA9E94700701B83 /* SetAccountBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */; };
@@ -99,6 +100,7 @@
 		AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */; };
 		AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */; };
 		AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */; };
+		AF6F25BB2AC962BC004DA705 /* SectionFooter_Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */; };
 		AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B2E682AA1FC5B00806149 /* Tag.swift */; };
 		AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F12A8CFF9200877C85 /* LoginRequest.swift */; };
 		AF9702F42A8D005F00877C85 /* LoginSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */; };
@@ -110,11 +112,13 @@
 		AF9E9C032AB6E1370058AB70 /* ParticleAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */; };
 		AF9E9C062AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */; };
 		AF9E9C082AB6E1760058AB70 /* ParticleAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */; };
-		AFAB32582AACB35D000EA542 /* SectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB32572AACB35D000EA542 /* SectionTitle.swift */; };
+		AFAB32582AACB35D000EA542 /* SectionHeader_Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB32572AACB35D000EA542 /* SectionHeader_Tag.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
 		AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */; };
 		AFB4BDD12A4093DD008BA9E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB4BDCF2A4093DD008BA9E0 /* LaunchScreen.storyboard */; };
+		AFB86FEF2AC9567600CEBA0F /* SectionOfRecordDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB86FEE2AC9567600CEBA0F /* SectionOfRecordDate.swift */; };
+		AFB86FF22AC9598700CEBA0F /* SectionHeader_Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB86FF12AC9598700CEBA0F /* SectionHeader_Date.swift */; };
 		AFBB5F452A66AA99002416DA /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F412A66AA99002416DA /* HomeRouter.swift */; };
 		AFBB5F462A66AA99002416DA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F422A66AA99002416DA /* HomeViewController.swift */; };
 		AFBB5F472A66AA99002416DA /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB5F432A66AA99002416DA /* HomeBuilder.swift */; };
@@ -191,7 +195,6 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
-		35471F642ACAACED00687312 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +233,7 @@
 		AF3122752A977BEA00262088 /* SelectTagBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagBuilder.swift; sourceTree = "<group>"; };
 		AF3122762A977BEA00262088 /* SelectTagInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagInteractor.swift; sourceTree = "<group>"; };
 		AF31227C2A9780E900262088 /* Accordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accordion.swift; sourceTree = "<group>"; };
+		AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfRecord.swift; sourceTree = "<group>"; };
 		AF4647412AA9E94700701B83 /* SetAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountRouter.swift; sourceTree = "<group>"; };
 		AF4647422AA9E94700701B83 /* SetAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountViewController.swift; sourceTree = "<group>"; };
 		AF4647432AA9E94700701B83 /* SetAccountBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAccountBuilder.swift; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 		AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsBuilder.swift; sourceTree = "<group>"; };
 		AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsInteractor.swift; sourceTree = "<group>"; };
 		AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlert.swift; sourceTree = "<group>"; };
+		AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFooter_Divider.swift; sourceTree = "<group>"; };
 		AF7B2E682AA1FC5B00806149 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		AF9702F12A8CFF9200877C85 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessResponse.swift; sourceTree = "<group>"; };
@@ -264,13 +269,15 @@
 		AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertController.swift; sourceTree = "<group>"; };
 		AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertPresentationController.swift; sourceTree = "<group>"; };
-		AFAB32572AACB35D000EA542 /* SectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitle.swift; sourceTree = "<group>"; };
+		AFAB32572AACB35D000EA542 /* SectionHeader_Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader_Tag.swift; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AFB4BDCD2A4093DD008BA9E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFB4BDD02A4093DD008BA9E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AFB4BDD22A4093DD008BA9E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFB86FEE2AC9567600CEBA0F /* SectionOfRecordDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfRecordDate.swift; sourceTree = "<group>"; };
+		AFB86FF12AC9598700CEBA0F /* SectionHeader_Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader_Date.swift; sourceTree = "<group>"; };
 		AFBB5F412A66AA99002416DA /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		AFBB5F422A66AA99002416DA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AFBB5F432A66AA99002416DA /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
@@ -319,6 +326,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF2906DF2AC7AD4B00CBE801 /* RxDataSources in Frameworks */,
 				AF2ED9832AC4F0E700F6B4B0 /* FirebaseMessaging in Frameworks */,
 				B1CF9FD70DAD1AF6216BEB95 /* Pods_Particle.framework in Frameworks */,
 			);
@@ -408,14 +416,6 @@
 				3520EF432A74DDA700A53B34 /* YdestreetL.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		35471F632ACAACDC00687312 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				35471F642ACAACED00687312 /* SearchListCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		9968BF91A03407F5B3382E7B /* Pods */ = {
@@ -784,6 +784,15 @@
 			path = Particle;
 			sourceTree = "<group>";
 		};
+		AFB86FF02AC9597600CEBA0F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AFB86FF12AC9598700CEBA0F /* SectionHeader_Date.swift */,
+				AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		AFBB5F402A66AA82002416DA /* HomeTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +801,7 @@
 				AFBB5F422A66AA99002416DA /* HomeViewController.swift */,
 				AFBB5F442A66AA99002416DA /* HomeInteractor.swift */,
 				AFBB5F432A66AA99002416DA /* HomeBuilder.swift */,
+				AF364C9D2AC8FFEF00C1C3F0 /* SectionOfRecord.swift */,
 				AFDE0F3E2AA4C1D8008DC539 /* MyRecordList */,
 				AF130A922AA2E9CA00F2E0BD /* RecordDetail */,
 				AF19451B2A5C50F300B9FFA1 /* AddArticle */,
@@ -813,7 +823,6 @@
 		AFBB5F522A66AAB3002416DA /* SearchTab */ = {
 			isa = PBXGroup;
 			children = (
-				35471F632ACAACDC00687312 /* View */,
 				AFBB5F642A66ABBF002416DA /* SearchRouter.swift */,
 				AFBB5F652A66ABBF002416DA /* SearchViewController.swift */,
 				AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */,
@@ -865,7 +874,7 @@
 			isa = PBXGroup;
 			children = (
 				AFDE0F3A2AA4588C008DC539 /* RecordCell.swift */,
-				AFAB32572AACB35D000EA542 /* SectionTitle.swift */,
+				AFAB32572AACB35D000EA542 /* SectionHeader_Tag.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -873,10 +882,12 @@
 		AFDE0F3E2AA4C1D8008DC539 /* MyRecordList */ = {
 			isa = PBXGroup;
 			children = (
+				AFB86FF02AC9597600CEBA0F /* View */,
 				AFDE0F3F2AA4C1F3008DC539 /* MyRecordListRouter.swift */,
 				AFDE0F402AA4C1F3008DC539 /* MyRecordListViewController.swift */,
 				AFDE0F412AA4C1F3008DC539 /* MyRecordListBuilder.swift */,
 				AFDE0F422AA4C1F3008DC539 /* MyRecordListInteractor.swift */,
+				AFB86FEE2AC9567600CEBA0F /* SectionOfRecordDate.swift */,
 			);
 			path = MyRecordList;
 			sourceTree = "<group>";
@@ -915,6 +926,7 @@
 			name = Particle;
 			packageProductDependencies = (
 				AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */,
+				AF2906DE2AC7AD4B00CBE801 /* RxDataSources */,
 			);
 			productName = Particle;
 			productReference = AFB4BDC12A4093DC008BA9E0 /* Particle.app */;
@@ -946,6 +958,7 @@
 			mainGroup = AFB4BDB82A4093DC008BA9E0;
 			packageReferences = (
 				AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AF2906DD2AC7AD4B00CBE801 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = AFB4BDC22A4093DC008BA9E0 /* Products */;
 			projectDirPath = "";
@@ -1066,6 +1079,7 @@
 				AF4647502AAA0D6700701B83 /* SetAlarmRouter.swift in Sources */,
 				AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */,
 				AFDE0F462AA4C1F3008DC539 /* MyRecordListInteractor.swift in Sources */,
+				AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecord.swift in Sources */,
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
@@ -1075,11 +1089,12 @@
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
+				AFB86FF22AC9598700CEBA0F /* SectionHeader_Date.swift in Sources */,
 				AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */,
 				AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */,
 				AFBB5F7D2A66B66B002416DA /* EditSentenceViewController.swift in Sources */,
 				AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */,
-				AFAB32582AACB35D000EA542 /* SectionTitle.swift in Sources */,
+				AFAB32582AACB35D000EA542 /* SectionHeader_Tag.swift in Sources */,
 				AF0D71CD2A5BE9B600157758 /* RootBuilder.swift in Sources */,
 				3520EF202A5FA86700A53B34 /* LeftAlignedCollectionViewCell.swift in Sources */,
 				AFDE0F452AA4C1F3008DC539 /* MyRecordListBuilder.swift in Sources */,
@@ -1108,6 +1123,7 @@
 				AF130A992AA2E9E200F2E0BD /* RecordDetailBuilder.swift in Sources */,
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
 				3520EEFA2A5CD57800A53B34 /* SentenceTableViewCell.swift in Sources */,
+				AFB86FEF2AC9567600CEBA0F /* SectionOfRecordDate.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
 				AFC387FA2A9F726100AF9C4D /* UserRepository.swift in Sources */,
 				AF473BC02A9F6241002EE27B /* AuthService.swift in Sources */,
@@ -1161,7 +1177,7 @@
 				AF9E9C062AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift in Sources */,
 				AFDE0F3D2AA4AC51008DC539 /* DateManager.swift in Sources */,
 				3520EEF22A5CD3C000A53B34 /* OrganizingSentenceRouter.swift in Sources */,
-				35471F652ACAACED00687312 /* SearchListCell.swift in Sources */,
+				AF6F25BB2AC962BC004DA705 /* SectionFooter_Divider.swift in Sources */,
 				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,
 				AF4647582AAA0E9A00701B83 /* AlarmToggleRow.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
@@ -1401,6 +1417,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF2906DD2AC7AD4B00CBE801 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1412,6 +1436,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF2906DE2AC7AD4B00CBE801 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF2906DD2AC7AD4B00CBE801 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		AF2ED9822AC4F0E700F6B4B0 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF2ED9812AC4F0E700F6B4B0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

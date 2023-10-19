@@ -23,15 +23,7 @@ final class OrganizingSentenceViewController: UIViewController,
     weak var listener: OrganizingSentencePresentableListener?
     private var disposeBag: DisposeBag = .init()
     
-    private let organizingViewModels = BehaviorRelay<[OrganizingSentenceViewModel]>(
-        value: [
-            .init(sentence: "대표문장", isRepresent: false),
-            .init(sentence: "일반문장", isRepresent: false),
-            .init(sentence: "일반문장일반문장", isRepresent: false),
-            .init(sentence: "일반문장일반문장일반문장1", isRepresent: false),
-            .init(sentence: "일반문장일반문장일반문장2", isRepresent: false),
-        ]
-    )
+    private let organizingViewModels = BehaviorRelay<[OrganizingSentenceViewModel]>(value: [])
     
     enum Metric {
         enum Title {
@@ -68,7 +60,6 @@ final class OrganizingSentenceViewController: UIViewController,
         return label
     }()
     
-    // TODO: 드래그 앤 드롭 기능 추가하기.
     private let sentenceTableView: UITableView = {
         let table = UITableView()
         table.register(SentenceTableViewCell.self)
@@ -105,12 +96,7 @@ final class OrganizingSentenceViewController: UIViewController,
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        
-        self.modalPresentationStyle = .fullScreen
-        self.view.backgroundColor = .particleColor.black
-        addSubviews()
-        setConstraints()
-        bind()
+        self.modalPresentationStyle = .fullScreen//?
     }
     
     required init?(coder: NSCoder) {
@@ -122,12 +108,17 @@ final class OrganizingSentenceViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
+        setupTableView()
+        bind()
     }
     
     // MARK: - Methods
     
     private func setupInitialView() {
+        addSubviews()
+        setConstraints()
         nextButton.isEnabled = false
+        self.view.backgroundColor = .particleColor.black
     }
     
     private func bind() {
@@ -141,35 +132,47 @@ final class OrganizingSentenceViewController: UIViewController,
             }
             .disposed(by: disposeBag)
         
-        sentenceTableView.rx.itemSelected.subscribe { [weak self] index in
-            guard let self = self,
-                  let index = index.element else { return }
-            
-            let list = self.organizingViewModels.value
-            
-            var newList = [OrganizingSentenceViewModel]()
-            list.enumerated().forEach { (i, item) in
-                newList.append(
-                    OrganizingSentenceViewModel(sentence: item.sentence,
-                                                isRepresent: i == index.row)
-                )
+        sentenceTableView.rx.itemSelected
+            .subscribe { [weak self] index in
+                guard let self = self,
+                      let index = index.element else { return }
+                
+                let list = self.organizingViewModels.value
+                
+                var newList = [OrganizingSentenceViewModel]()
+                list.enumerated().forEach { (i, item) in
+                    newList.append(
+                        OrganizingSentenceViewModel(sentence: item.sentence,
+                                                    isRepresent: i == index.row)
+                    )
+                }
+                
+                self.organizingViewModels.accept(newList)
+                
+                if self.nextButton.isEnabled == false {
+                    self.nextButton.isEnabled = true
+                }
             }
-            
-            self.organizingViewModels.accept(newList)
-            
-            if self.nextButton.isEnabled == false {
-                self.nextButton.isEnabled = true
-            }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
         
+        sentenceTableView.rx.itemMoved
+            .subscribe { [weak self] event in
+                guard let self = self,
+                      let element = event.element else { return }
+                
+                let moveCell = organizingViewModels.value[element.sourceIndex.row]
+                var list = organizingViewModels.value
+                list.remove(at: element.sourceIndex.row)
+                list.insert(moveCell, at: element.destinationIndex.row)
+                organizingViewModels.accept(list)
+            }
+            .disposed(by: disposeBag)
+
         nextButton.rx.tap
             .bind { [weak self] in
                 self?.listener?.nextButtonTapped(
                     with: self?.organizingViewModels.value ?? []
                 )
-                // TODO: isMain 의 여부를 알려주기 위해 다음화면에 organizingViewModel 을 전달.
-                // organizingRepository 에 적용
             }
             .disposed(by: disposeBag)
         
@@ -180,8 +183,46 @@ final class OrganizingSentenceViewController: UIViewController,
             .disposed(by: disposeBag)
     }
     
+    func setupTableView() {
+        sentenceTableView.dragInteractionEnabled = true
+        sentenceTableView.dragDelegate = self
+        sentenceTableView.dropDelegate = self
+    }
+    
+    // MARK: - OrganizingSentencePresentable
+    
     func setUpData(with viewModels: [OrganizingSentenceViewModel]) {
         organizingViewModels.accept(viewModels)
+    }
+}
+
+// MARK: - UITableViewDragDelegate
+
+extension OrganizingSentenceViewController: UITableViewDragDelegate {
+    
+    func tableView(_ tableView: UITableView,
+                   itemsForBeginning session: UIDragSession,
+                   at indexPath: IndexPath) -> [UIDragItem] {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+}
+
+// MARK: - UITableViewDropDelegate
+
+extension OrganizingSentenceViewController: UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {}
+
+    func tableView(_ tableView: UITableView,
+                   dropSessionDidUpdate session: UIDropSession,
+                   withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        
+        if session.localDragSession != nil {
+            return UITableViewDropProposal(
+                operation: .move,
+                intent: .insertAtDestinationIndexPath)
+        }
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
     }
 }
 
@@ -190,7 +231,10 @@ final class OrganizingSentenceViewController: UIViewController,
 private extension OrganizingSentenceViewController {
     
     func addSubviews() {
-        [backButton, nextButton]
+        [
+            backButton,
+            nextButton
+        ]
             .forEach {
                 navigationBar.addSubview($0)
             }
@@ -203,7 +247,6 @@ private extension OrganizingSentenceViewController {
             .forEach {
                 self.view.addSubview($0)
             }
-        
     }
     
     func setConstraints() {

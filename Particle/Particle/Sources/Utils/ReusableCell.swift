@@ -39,6 +39,7 @@ extension UITableView {
 }
 
 extension UICollectionViewCell: ReusableView { }
+extension UICollectionReusableView: ReusableView { }
 
 extension UICollectionView {
     
@@ -47,13 +48,23 @@ extension UICollectionView {
         register(T.self, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
     }
     
+    public func register<T: UICollectionReusableView>(_ viewClass: T.Type, forSupplementaryViewOfKind elementKind: String) {
+        register(T.self, forSupplementaryViewOfKind: elementKind, withReuseIdentifier: T.defaultReuseIdentifier)
+    }
+    
     /// Get cell with the default reuse cell identifier
     public func dequeueReusableCell<T: UICollectionViewCell>(forIndexPath indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withReuseIdentifier: T.defaultReuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell: \(T.self) with identifier: \(T.defaultReuseIdentifier)")
         }
-        
         return cell
+    }
+    
+    public func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String, for indexPath: IndexPath) -> T {
+        guard let view = dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: T.defaultReuseIdentifier, for: indexPath) as? T else {
+            fatalError("Could not dequeue reusableSupplementaryView: \(T.self) with identifier: \(T.defaultReuseIdentifier)")
+        }
+        return view
     }
 }
 
