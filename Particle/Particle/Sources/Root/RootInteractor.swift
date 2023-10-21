@@ -36,7 +36,8 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        router?.attachLoggedOut()
+//        router?.attachLoggedOut()
+        login()
     }
 
     override func willResignActive() {
