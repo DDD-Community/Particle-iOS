@@ -1,6 +1,17 @@
 # Created by https://www.toptal.com/developers/gitignore/api/xcode,swiftpackagemanager,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=xcode,swiftpackagemanager,git
 
+# fastlane specific
+**/fastlane/report.xml
+
+# deliver temporary files
+**/fastlane/Preview.html
+
+# snapshot generated screenshots
+**/fastlane/screenshots
+
+# scan temporary files
+**/fastlane/test_output
 ### Git ###
 # Created by git for backups. To disable backups in Git:
 # $ git config --global mergetool.keepBackup false
@@ -27,6 +38,7 @@ DerivedData/
 ### Xcode ###
 ## User settings
 xcuserdata/
+/fastlane/.env
 
 ## Xcode 8 and earlier
 *.xcscmblueprint
@@ -56,3 +68,8 @@ xcuserdata/
 Pods/
 
 # End of https://www.toptal.com/developers/gitignore/api/cocoapods
+Particle/Particle.ipa
+Particle/34T7STHRJ9.p12
+Particle/34T7STHRJ9.certSigningRequest
+Particle/34T7STHRJ9.cer
+Particle/fastlane/.env
