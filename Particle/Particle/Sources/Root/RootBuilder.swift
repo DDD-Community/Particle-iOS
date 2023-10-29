@@ -7,7 +7,10 @@
 
 import RIBs
 
-protocol RootDependency: Dependency {}
+protocol RootDependency: Dependency {
+    var authService: AuthService { get }
+    var userRepository: UserRepository { get }
+}
 
 final class RootComponent: Component<RootDependency> {
 

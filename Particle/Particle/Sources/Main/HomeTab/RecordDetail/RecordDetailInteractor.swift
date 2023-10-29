@@ -25,11 +25,17 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
                                     RecordDetailInteractable,
                                     RecordDetailPresentableListener {
     
+    private let deleteRecordUseCase: DeleteRecordUseCase
+    
     weak var router: RecordDetailRouting?
     weak var listener: RecordDetailListener?
     private var disposeBag = DisposeBag()
     
-    override init(presenter: RecordDetailPresentable) {
+    init(
+        presenter: RecordDetailPresentable,
+        deleteRecordUseCase: DeleteRecordUseCase
+    ) {
+        self.deleteRecordUseCase = deleteRecordUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -52,25 +58,40 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
     
     func recordDetailDeleteButtonTapped(with id: String) -> Observable<Bool> {
         
-        // TODO: Listener 로 보내서 MyRecordList RIB 에서도 리프레쉬 되도록 구현해야 함.
-        return Observable.create { [weak self] emitter in
-            guard let self = self else { return Disposables.create() }
-            let repo = RecordRepository()
-            repo.delete(recordId: id).subscribe { result in
-                switch result.element {
-                case .success(let response):
-                    Console.log(response)
-                    emitter.onNext(true)
-                case .failure(let error):
-                    Console.error(error.localizedDescription)
-                    emitter.onNext(false)
-                case .none:
-                    return
-                }
+        deleteRecordUseCase.execute(id: id)
+            .map { str in
+                return str == "성공" /// 성공/실패시 나타나는 string 값 뭔지 모름.
             }
-            .disposed(by: self.disposeBag)
+        
+        
+        // TODO: Listener 로 보내서 MyRecordList RIB 에서도 리프레쉬 되도록 구현해야 함.
+//        return Observable.create { [weak self] emitter in
+//            guard let self = self else { return Disposables.create() }
+//            remoteRepository.deleteRecord(recordId: id)
+//                .subscribe { result in
+//                    emitter.onNext(true)
+//                } onError: { error in
+//                    Console.error(error.localizedDescription)
+//                    emitter.onNext(false)
+//                }
+//                .disposed(by: disposeBag)
+
+//            let repo = RecordRepository()
+//            repo.delete(recordId: id).subscribe { result in
+//                switch result.element {
+//                case .success(let response):
+//                    Console.log(response)
+//                    emitter.onNext(true)
+//                case .failure(let error):
+//                    Console.error(error.localizedDescription)
+//                    emitter.onNext(false)
+//                case .none:
+//                    return
+//                }
+//            }
+//            .disposed(by: self.disposeBag)
             
-            return Disposables.create()
-        }
+//            return Disposables.create()
+//        }
     }
 }

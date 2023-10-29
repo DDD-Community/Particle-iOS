@@ -27,9 +27,17 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     weak var router: LoggedOutRouting?
     weak var listener: LoggedOutListener?
     
+    private let loginUseCase: LoginUseCase
+    private let setInterestedTagsUseCase: SetInterestedTagsUseCase
     private let disposeBag = DisposeBag()
     
-    override init(presenter: LoggedOutPresentable) {
+    init(
+        presenter: LoggedOutPresentable,
+        loginUseCase: LoginUseCase,
+        setInterestedTagsUseCase: SetInterestedTagsUseCase
+    ) {
+        self.loginUseCase = loginUseCase
+        self.setInterestedTagsUseCase = setInterestedTagsUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -45,45 +53,33 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     // MARK: - LoggedOutPresentableListener
     
     func successLogin(with provider: String, identifier: String) {
-        let service = AuthService()
         let request = LoginRequest(provider: provider, identifier: identifier)
         
-        service.login(with: request).subscribe { [weak self] result in
-            
-            switch result {
-            case .success(let response):
-                if response.isNew {
-                    UserDefaults.standard.set("\(response.tokens.accessToken)", forKey: "ACCESSTOKEN")
-                    UserDefaults.standard.set("\(response.tokens.refreshToken)", forKey: "REFRESHTOKEN")
+        loginUseCase.execute(with: request)
+            .subscribe { [weak self] isFirstLogin in
+                if isFirstLogin {
                     self?.router?.routeToSelectTag()
                 } else {
-                    UserDefaults.standard.set("\(response.tokens.accessToken)", forKey: "ACCESSTOKEN")
-                    UserDefaults.standard.set("\(response.tokens.refreshToken)", forKey: "REFRESHTOKEN")
                     self?.listener?.login()
                 }
-            case .failure(let error):
+            } onError: { error in
                 Console.error(error.localizedDescription)
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
     
     // MARK: - SelectTagListener
     
     func selectTagStartButtonTapped(with selectedTags: [String]) {
-        let repository = UserRepository()
         
-        repository.setTags(items: selectedTags).subscribe { [weak self] result in
-            if let result = result.element {
-                switch result {
-                case .success(let response):
-                    Console.log("\(response)")
+        setInterestedTagsUseCase.execute(tags: selectedTags)
+            .subscribe { [weak self] complete in
+                if complete {
                     self?.listener?.login()
-                case .failure(let error):
-                    Console.log(error.localizedDescription)
                 }
+            } onError: { error in
+                Console.error(error.localizedDescription)
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
 }

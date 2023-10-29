@@ -23,9 +23,9 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     weak var listener: HomePresentableListener?
     private var disposeBag = DisposeBag()
-    private var recordList: BehaviorRelay<[SectionOfRecord]> = .init(value: [])
+    private var recordList: BehaviorRelay<[SectionOfRecordTag]> = .init(value: [])
     
-    private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfRecord>(
+    private lazy var dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfRecordTag>(
         configureCell: { (dataSource, collectionView, indexPath, item) in
             let cell: RecordCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
             cell.setupData(data: item.toDomain())
@@ -278,7 +278,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     
     // MARK: - HomePresentable
     
-    func setData(data: [SectionOfRecord]) {
+    func setData(data: [SectionOfRecordTag]) {
         recordList.accept(data)
     }
     

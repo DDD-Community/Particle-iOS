@@ -9,7 +9,11 @@ import RIBs
 import RxSwift
 
 protocol RootRouting: ViewableRouting {
-    func routeToLoggedIn()
+    func attachLoggedIn()
+    func detachLoggedIn()
+    
+    func attachLoggedOut()
+    func detachLoggedOut()
 }
 
 protocol RootPresentable: Presentable {
@@ -32,6 +36,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
 
     override func didBecomeActive() {
         super.didBecomeActive()
+        router?.attachLoggedOut()
     }
 
     override func willResignActive() {
@@ -40,6 +45,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     
     // MARK: - RootInteractable - LoggedOutListener
     func login() {
-        router?.routeToLoggedIn()
+        router?.detachLoggedOut()
+        router?.attachLoggedIn()
     }
 }

@@ -8,13 +8,14 @@
 import RIBs
 
 protocol SetInterestedTagsDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var userRepository: UserRepository { get }
 }
 
 final class SetInterestedTagsComponent: Component<SetInterestedTagsDependency> {
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    fileprivate var setInterestedTagsUseCase: SetInterestedTagsUseCase {
+        return DefaultSetInterestedTagsUseCase(userRepository: dependency.userRepository)
+    }
 }
 
 // MARK: - Builder
@@ -32,7 +33,10 @@ final class SetInterestedTagsBuilder: Builder<SetInterestedTagsDependency>, SetI
     func build(withListener listener: SetInterestedTagsListener) -> SetInterestedTagsRouting {
         let component = SetInterestedTagsComponent(dependency: dependency)
         let viewController = SetInterestedTagsViewController()
-        let interactor = SetInterestedTagsInteractor(presenter: viewController)
+        let interactor = SetInterestedTagsInteractor(
+            presenter: viewController,
+            setInterestedTagsUseCase: component.setInterestedTagsUseCase
+        )
         interactor.listener = listener
         return SetInterestedTagsRouter(interactor: interactor, viewController: viewController)
     }

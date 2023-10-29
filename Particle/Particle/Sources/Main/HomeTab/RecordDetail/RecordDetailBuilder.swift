@@ -8,13 +8,14 @@
 import RIBs
 
 protocol RecordDetailDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var recordRepository: RecordRepository { get }
 }
 
 final class RecordDetailComponent: Component<RecordDetailDependency> {
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    fileprivate var deleteRecordUseCase: DeleteRecordUseCase {
+        return DefaultDeleteRecordUseCase(recordRepository: dependency.recordRepository)
+    }
 }
 
 // MARK: - Builder
@@ -34,9 +35,12 @@ final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBu
     func build(withListener listener: RecordDetailListener,
                data: RecordReadDTO) -> RecordDetailRouting {
         
-        let _ = RecordDetailComponent(dependency: dependency)
+        let component = RecordDetailComponent(dependency: dependency)
         let viewController = RecordDetailViewController(data: data)
-        let interactor = RecordDetailInteractor(presenter: viewController)
+        let interactor = RecordDetailInteractor(
+            presenter: viewController,
+            deleteRecordUseCase: component.deleteRecordUseCase
+        )
         interactor.listener = listener
         return RecordDetailRouter(interactor: interactor, viewController: viewController)
     }

@@ -19,6 +19,12 @@ protocol RootViewControllable: ViewControllable {
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, RootRouting {
 
+    private let loggedOutBuilder: LoggedOutBuildable
+    private var loggedOutRouting: ViewableRouting?
+    
+    private let loggedInBuilder: LoggedInBuildable
+    private var loggedInRouting: Routing?
+    
     init(
         interactor: RootInteractor,
         viewController: RootViewControllable,
@@ -36,31 +42,45 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
     
     override func didLoad() {
         super.didLoad()
-        routeToLoggedOut()
     }
     
-    func routeToLoggedIn() {
-        if let loggedOut = self.loggedOut {
-            detachChild(loggedOut)
-            viewController.dismiss(viewController: loggedOut.viewControllable)
-            self.loggedOut = nil
+    // MARK: - RootRouting
+    
+    func attachLoggedIn() {
+        if loggedInRouting != nil {
+            return
         }
         let loggedIn = loggedInBuilder.build(
             withListener: interactor
         )
+        loggedInRouting = loggedIn
         attachChild(loggedIn)
     }
-    // MARK: - Private
     
-    private let loggedOutBuilder: LoggedOutBuildable
-    private let loggedInBuilder: LoggedInBuildable
+    func detachLoggedIn() {
+        guard let router = loggedInRouting else {
+            return
+        }
+        detachChild(router)
+        loggedInRouting = nil
+    }
     
-    private var loggedOut: ViewableRouting?
-    
-    private func routeToLoggedOut() {
+    func attachLoggedOut() {
+        if loggedOutRouting != nil {
+            return 
+        }
         let loggedOut = loggedOutBuilder.build(withListener: interactor)
-        self.loggedOut = loggedOut
+        self.loggedOutRouting = loggedOut
         attachChild(loggedOut)
         viewController.present(viewController: loggedOut.viewControllable)
+    }
+    
+    func detachLoggedOut() {
+        guard let router = loggedOutRouting else {
+            return
+        }
+        viewController.dismiss(viewController: router.viewControllable)
+        detachChild(router)
+        loggedOutRouting = nil
     }
 }

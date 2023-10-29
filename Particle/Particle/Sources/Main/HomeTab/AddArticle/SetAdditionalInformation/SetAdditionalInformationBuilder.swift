@@ -9,11 +9,16 @@ import RIBs
 
 protocol SetAdditionalInformationDependency: Dependency {
     var organizingSentenceRepository: OrganizingSentenceRepository { get }
+    var recordRepository: RecordRepository { get }
 }
 
 final class SetAdditionalInformationComponent: Component<SetAdditionalInformationDependency> {
     var organizingSentenceRepository: OrganizingSentenceRepository {
         dependency.organizingSentenceRepository
+    }
+    
+    fileprivate var createRecordUseCase: CreateRecordUseCase {
+        return DefaultCreateRecordUseCase(recordRepository: dependency.recordRepository)
     }
 }
 
@@ -34,7 +39,8 @@ final class SetAdditionalInformationBuilder: Builder<SetAdditionalInformationDep
         let viewController = SetAdditionalInformationViewController()
         let interactor = SetAdditionalInformationInteractor(
             presenter: viewController,
-            repository: component.organizingSentenceRepository
+            repository: component.organizingSentenceRepository,
+            createRecordUseCase: component.createRecordUseCase
         )
         interactor.listener = listener
         return SetAdditionalInformationRouter(interactor: interactor, viewController: viewController)
