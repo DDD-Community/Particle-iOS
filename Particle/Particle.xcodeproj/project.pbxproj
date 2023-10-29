@@ -37,6 +37,7 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
+		35D54A942AEE69DD0099BCB0 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -227,6 +228,7 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
+		35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -480,6 +482,14 @@
 				3520EF432A74DDA700A53B34 /* YdestreetL.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		35D54A952AEE69F90099BCB0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9968BF91A03407F5B3382E7B /* Pods */ = {
@@ -980,6 +990,7 @@
 		AFBB5F522A66AAB3002416DA /* SearchTab */ = {
 			isa = PBXGroup;
 			children = (
+				35D54A952AEE69F90099BCB0 /* View */,
 				AFBB5F642A66ABBF002416DA /* SearchRouter.swift */,
 				AFBB5F652A66ABBF002416DA /* SearchViewController.swift */,
 				AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */,
@@ -1233,6 +1244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D54A942AEE69DD0099BCB0 /* SearchListCell.swift in Sources */,
 				AF4647532AAA0D6700701B83 /* SetAlarmInteractor.swift in Sources */,
 				AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */,
 				AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */,
