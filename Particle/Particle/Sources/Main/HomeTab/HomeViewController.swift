@@ -186,7 +186,9 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
             .bind(to: horizontalCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        recordList.subscribe { [weak self] element in
+        recordList
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] element in
             if element.isEmpty {
                 self?.emptyLabel.isHidden = false
                 self?.emptyImage.isHidden = false

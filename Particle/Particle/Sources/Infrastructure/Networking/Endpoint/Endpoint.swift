@@ -17,6 +17,7 @@ public class Endpoint<R>: ResponseRequestable {
     public var headerParameters: [String : String]
     public var queryParametersEncodable: Encodable?
     public var queryParameters: [String : Any]
+    public var queryParametersTuple: [(String, String)]
     public var bodyParametersEncodable: Encodable?
     public var bodyParameters: [String : Any]
     public var bodyEncoding: BodyEncoding
@@ -29,6 +30,7 @@ public class Endpoint<R>: ResponseRequestable {
         headerParameters: [String: String] = [:],
         queryParametersEncodable: Encodable? = nil,
         queryParameters: [String: Any] = [:],
+        queryParametersTuple: [(String, String)] = [],
         bodyParametersEncodable: Encodable? = nil,
         bodyParameters: [String: Any] = [:],
         bodyEncoding: BodyEncoding = .jsonSerializationData,
@@ -40,6 +42,7 @@ public class Endpoint<R>: ResponseRequestable {
         self.headerParameters = headerParameters
         self.queryParametersEncodable = queryParametersEncodable
         self.queryParameters = queryParameters
+        self.queryParametersTuple = queryParametersTuple
         self.bodyParametersEncodable = bodyParametersEncodable
         self.bodyParameters = bodyParameters
         self.bodyEncoding = bodyEncoding
@@ -71,13 +74,23 @@ extension Requestable {
         guard var urlComponents = URLComponents(string: endpoint) else { throw RequestGenerationError.components }
         var urlQueryItems = [URLQueryItem]()
         
-        let queryParameters = try queryParametersEncodable?.toDictionary() ?? self.queryParameters
-        queryParameters.forEach {
-            urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
+        if queryParametersTuple.isEmpty {
+            let queryParameters = try queryParametersEncodable?.toDictionary() ?? self.queryParameters
+            queryParameters.forEach {
+                urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
+            }
+            config.queryParameters.forEach {
+                urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
+            }
+        } else {
+            queryParametersTuple.forEach { (key: String, value: String) in
+                urlQueryItems.append(URLQueryItem(name: key, value: value))
+            }
+            config.queryParameters.forEach {
+                urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
+            }
         }
-        config.queryParameters.forEach {
-            urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
-        }
+        
         urlComponents.queryItems = !urlQueryItems.isEmpty ? urlQueryItems : nil
         guard let url = urlComponents.url else {
             throw RequestGenerationError.components
@@ -106,7 +119,7 @@ private extension Dictionary {
 extension Encodable {
     func toDictionary() throws -> [String: Any]? {
         let data = try JSONEncoder().encode(self)
-        let josnData = try JSONSerialization.jsonObject(with: data)
-        return josnData as? [String: Any]
+        let jsonData = try JSONSerialization.jsonObject(with: data)
+        return jsonData as? [String: Any]
     }
 }

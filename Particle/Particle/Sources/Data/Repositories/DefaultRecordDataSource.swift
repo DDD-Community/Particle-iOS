@@ -35,7 +35,8 @@ final class DefaultRecordDataSource: RecordDataSource {
         
         let endpoint = Endpoint<[RecordReadDTO]>(
             path: path,
-            method: .get
+            method: .get,
+            queryParameters: ["tag": tag]
         )
         return dataTransferService.request(with: endpoint)
     }
@@ -48,7 +49,7 @@ final class DefaultRecordDataSource: RecordDataSource {
         let endpoint = Endpoint<RecordReadDTO>(
             path: path,
             method: .post,
-            queryParametersEncodable: record
+            bodyParametersEncodable: record
         )
         return dataTransferService.request(with: endpoint)
     }
@@ -59,7 +60,8 @@ final class DefaultRecordDataSource: RecordDataSource {
         
         let endpoint = Endpoint<String>(
             path: path,
-            method: .delete
+            method: .delete,
+            responseDecoder: StringResponseDecoder()
         )
         return dataTransferService.request(with: endpoint)
     }

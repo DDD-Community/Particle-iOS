@@ -69,6 +69,7 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
         let model = RecordCreateDTO(title: title, url: url, items: requestModel, tags: tags)
         
         createRecordUseCase.execute(model: model)
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self]  result in
                 self?.listener?.setAdditionalInfoSuccessPost(data: result)
             } onError: { error in

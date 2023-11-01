@@ -59,8 +59,8 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
     func recordDetailDeleteButtonTapped(with id: String) -> Observable<Bool> {
         
         deleteRecordUseCase.execute(id: id)
-            .map { str in
-                return str == "성공" /// 성공/실패시 나타나는 string 값 뭔지 모름.
+            .map { response in
+                return response == id /// 성공/실패시 나타나는 string 값 뭔지 모름.
             }
         
         

@@ -61,6 +61,7 @@ final class SetInterestedTagsInteractor: PresentableInteractor<SetInterestedTags
     func setInterestedTagsOKButtonTapped(with tags: [String]) {
 
         setInterestedTagsUseCase.execute(tags: tags)
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] dto in
                 self?.presenter.showUploadSuccessAlert()
             } onError: { error in
