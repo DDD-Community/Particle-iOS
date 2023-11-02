@@ -19,6 +19,7 @@ protocol SetAccountPresentable: Presentable {
 
 protocol SetAccountListener: AnyObject {
     func setAccountBackButtonTapped()
+    func setAccountLogoutButtonTapped()
 }
 
 final class SetAccountInteractor: PresentableInteractor<SetAccountPresentable>, SetAccountInteractable, SetAccountPresentableListener {
@@ -47,5 +48,11 @@ final class SetAccountInteractor: PresentableInteractor<SetAccountPresentable>, 
     
     func backButtonTapped() {
         listener?.setAccountBackButtonTapped()
+    }
+    
+    func logoutButtonTapped() {
+        UserDefaults.standard.removeObject(forKey: "ACCESSTOKEN")
+        UserDefaults.standard.removeObject(forKey: "REFRESHTOKEN")
+        listener?.setAccountLogoutButtonTapped()
     }
 }
