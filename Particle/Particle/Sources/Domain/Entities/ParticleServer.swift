@@ -34,7 +34,7 @@ enum ParticleServer {
             case .readMyProfile:
                 return "/user/my/profile"
             case .setInterestedTags:
-                return "/user/interested/tags?"
+                return "/user/interested/tags"
             case .login:
                 return "/auth/login"
             }

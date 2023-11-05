@@ -16,7 +16,9 @@ protocol MainPresentable: Presentable {
     var listener: MainPresentableListener? { get set }
 }
 
-protocol MainListener: AnyObject {}
+protocol MainListener: AnyObject {
+    func mainLogout()
+}
 
 final class MainInteractor: PresentableInteractor<MainPresentable>,
                             MainInteractable,
@@ -37,5 +39,11 @@ final class MainInteractor: PresentableInteractor<MainPresentable>,
     
     override func willResignActive() {
         super.willResignActive()
+    }
+    
+    // MARK: - MainInteractable
+    
+    func myPageLogout() {
+        listener?.mainLogout()
     }
 }

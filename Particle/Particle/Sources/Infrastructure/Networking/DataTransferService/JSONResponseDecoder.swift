@@ -16,3 +16,14 @@ public class JSONResponseDecoder: ResponseDecoder {
       return try jsonDecoder.decode(T.self, from: data)
     }
 }
+
+public class StringResponseDecoder: ResponseDecoder {
+    
+    public func decode<T>(_ data: Data) throws -> T where T : Decodable {
+        if let responseString = String(data: data, encoding: .utf8) {
+            return responseString as! T
+        } else {
+            throw DataTransferError.failToDecodeString
+        }
+    }
+}

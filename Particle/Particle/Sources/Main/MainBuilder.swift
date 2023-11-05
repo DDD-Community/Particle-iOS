@@ -47,6 +47,7 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         let configuration = ApiDataNetworkConfig(
             baseURL: URL(string: ParticleServer.baseURL)!,
             headers: [
+                "Content-Type": "application/json",
                 "Authorization": "Bearer \(accessToken)"
             ]
         )

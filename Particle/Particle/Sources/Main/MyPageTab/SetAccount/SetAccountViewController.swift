@@ -11,6 +11,7 @@ import UIKit
 
 protocol SetAccountPresentableListener: AnyObject {
     func backButtonTapped()
+    func logoutButtonTapped()
 }
 
 final class SetAccountViewController: UIViewController, SetAccountPresentable, SetAccountViewControllable {
@@ -53,7 +54,9 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
     }()
     
     private lazy var logoutAlertController: ParticleAlertController = {
-        let okButton = generateAlertButton(title: "확인", {})
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.listener?.logoutButtonTapped()
+        }
         
         let cancelButton = generateAlertButton(title: "취소") { [weak self] in
             self?.dismiss(animated: true)
@@ -103,7 +106,9 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         super.viewDidLoad()
         addSubviews()
         setConstraints()
-        addRows(icon: .particleImage.arrowRight, title: "앱 버전", selector: nil, appVersion: "1.0.0")
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            addRows(icon: .particleImage.arrowRight, title: "앱 버전", selector: nil, appVersion: "v "+appVersion)
+        }
         addRows(icon: .particleImage.arrowRight, title: "로그아웃", selector: #selector(logoutButtonTapped))
         addRows(icon: .particleImage.arrowRight, title: "탈퇴하기", selector: #selector(deleteAccountButtonTapped))
         bind()
