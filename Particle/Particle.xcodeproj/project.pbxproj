@@ -98,7 +98,7 @@
 		AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */; };
 		AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */; };
 		AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */; };
-		AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */; };
+		AF662CAF2AF608BC005B4FCA /* WithdrawResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */; };
 		AF6F25BB2AC962BC004DA705 /* SectionFooter_Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */; };
 		AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B2E682AA1FC5B00806149 /* Tag.swift */; };
 		AF88ED9A2AD2993B001EB474 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88ED992AD2993B001EB474 /* Requestable.swift */; };
@@ -138,6 +138,7 @@
 		AF9E9C032AB6E1370058AB70 /* ParticleAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */; };
 		AF9E9C062AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */; };
 		AF9E9C082AB6E1760058AB70 /* ParticleAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */; };
+		AFA551CC2AF3BEA000E15AC2 /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA551CB2AF3BEA000E15AC2 /* WithdrawUseCase.swift */; };
 		AFAB32582AACB35D000EA542 /* SectionHeader_Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB32572AACB35D000EA542 /* SectionHeader_Tag.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
@@ -287,7 +288,7 @@
 		AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsViewController.swift; sourceTree = "<group>"; };
 		AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsBuilder.swift; sourceTree = "<group>"; };
 		AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsInteractor.swift; sourceTree = "<group>"; };
-		AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlert.swift; sourceTree = "<group>"; };
+		AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawResponse.swift; sourceTree = "<group>"; };
 		AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFooter_Divider.swift; sourceTree = "<group>"; };
 		AF7B2E682AA1FC5B00806149 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		AF88ED992AD2993B001EB474 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
@@ -327,6 +328,7 @@
 		AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertController.swift; sourceTree = "<group>"; };
 		AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertPresentationController.swift; sourceTree = "<group>"; };
+		AFA551CB2AF3BEA000E15AC2 /* WithdrawUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
 		AFAB32572AACB35D000EA542 /* SectionHeader_Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader_Tag.swift; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -458,7 +460,6 @@
 				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
 				AF18E2DE2A68EEB100C54490 /* Console.swift */,
 				AFDE0F3C2AA4AC51008DC539 /* DateManager.swift */,
-				AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */,
 				AF9E9C042AB6E13A0058AB70 /* ParticleAlert */,
 			);
 			path = Utils;
@@ -852,6 +853,7 @@
 			isa = PBXGroup;
 			children = (
 				AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */,
+				AFA551CB2AF3BEA000E15AC2 /* WithdrawUseCase.swift */,
 				AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */,
 				AFC748592ADB73D9009C6819 /* FetchMyProfileUseCase.swift */,
 				AFC7484D2ADAC1F3009C6819 /* FetchMyAllRecordsUseCase.swift */,
@@ -888,6 +890,7 @@
 				AFC748512ADB66EF009C6819 /* RecordMapper.swift */,
 				AF9702F12A8CFF9200877C85 /* LoginRequest.swift */,
 				AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */,
+				AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */,
 				AF9702F02A8CFF8800877C85 /* DataMapping */,
 			);
 			path = Network;
@@ -1249,6 +1252,7 @@
 				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
 				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
 				AF88ED9A2AD2993B001EB474 /* Requestable.swift in Sources */,
+				AFA551CC2AF3BEA000E15AC2 /* WithdrawUseCase.swift in Sources */,
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
 				AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */,
 				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
@@ -1264,7 +1268,6 @@
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
-				AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */,
 				AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
@@ -1288,6 +1291,7 @@
 				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
 				AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */,
+				AF662CAF2AF608BC005B4FCA /* WithdrawResponse.swift in Sources */,
 				AFDE0F432AA4C1F3008DC539 /* MyRecordListRouter.swift in Sources */,
 				AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */,
 				AF9702FA2A8D021800877C85 /* RecordReadDTO.swift in Sources */,
@@ -1540,7 +1544,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = SWPBG3YXG5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
@@ -1574,7 +1578,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = SWPBG3YXG5;
 				GENERATE_INFOPLIST_FILE = YES;
