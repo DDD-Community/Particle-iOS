@@ -154,37 +154,41 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
         Console.debug(#function)
         
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
-                if let error = error {
-                    Console.error(error.localizedDescription)
-                } else {
-                    Console.log("\(#function) success")
-                    
-                    UserApi.shared.me { (user, error) in
-                        guard let identifier = user?.id else {
-                            Console.error("kakaoLogin user.id 가 존재하지 않습니다.")
-                            return
-                        }
-                        self?.listener?.successLogin(with: "kakao", identifier: "\(identifier)")
-                    }
-                }
-            }
+            loginWithKakaoTalkApp()
         } else {
             Console.error("카카오톡이 설치되어있지 않습니다.")
-            loginKakaoAccount()
+            loginWithKakaoAccount()
         }
     }
     
-    private func loginKakaoAccount() {
-        Console.log(#function)
+    private func loginWithKakaoTalkApp() {
         
+        UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
+            if let error = error {
+                Console.error(error.localizedDescription)
+            } else {
+                Console.log("\(#function) success")
+                
+                UserApi.shared.me { (user, error) in
+                    guard let identifier = user?.id else {
+                        Console.error("kakaoLogin user.id 가 존재하지 않습니다.")
+                        return
+                    }
+                    self?.listener?.successLogin(with: "kakao", identifier: "\(identifier)")
+                }
+            }
+        }
+    }
+    
+    private func loginWithKakaoAccount() {
+
         UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
             if let error = error {
                 Console.error(error.localizedDescription)
             } else {
                 Console.log("\(#function) success.")
 
-                UserApi.shared.me { (user, error) in
+                UserApi.shared.me { (user, error) in /// weak self?
                     guard let identifier = user?.id else {
                         Console.error("kakaoLogin user.id 가 존재하지 않습니다.")
                         return

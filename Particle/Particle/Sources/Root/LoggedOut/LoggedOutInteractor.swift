@@ -74,6 +74,7 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     func selectTagStartButtonTapped(with selectedTags: [String]) {
         
         setInterestedTagsUseCase.execute(tags: selectedTags)
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] complete in
                 if complete {
                     self?.listener?.login()
