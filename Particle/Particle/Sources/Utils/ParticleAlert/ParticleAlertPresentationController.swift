@@ -20,17 +20,17 @@ final class ParticleAlertPresentationController: UIPresentationController {
         return dimmingView
     }()
     
-    override var frameOfPresentedViewInContainerView: CGRect {
-
-        let width = DeviceSize.width - 52 - 52
-        let height = CGFloat(160)
-
-        let origin = CGPoint(x: DeviceSize.width/2 - width/2, y: DeviceSize.height/2 - height/2)
-
-        let size = CGSize(width: width, height: height)
-
-        return CGRect(origin: origin, size: size)
-    }
+//    override var frameOfPresentedViewInContainerView: CGRect {
+//
+//        let width = DeviceSize.width - 52 - 52
+//        let height = DeviceSize.height
+//
+//        let origin = CGPoint(x: DeviceSize.width/2 - width/2, y: 0)
+//
+//        let size = CGSize(width: width, height: height)
+//
+//        return CGRect(origin: origin, size: size)
+//    }
     
     override init(presentedViewController: UIViewController,
                   presenting presentingViewController: UIViewController?) {
