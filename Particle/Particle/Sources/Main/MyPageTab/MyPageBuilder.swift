@@ -9,6 +9,7 @@ import RIBs
 
 protocol MyPageDependency: Dependency {
     var userRepository: UserRepository { get }
+    var authService: AuthService { get }
 }
 
 final class MyPageComponent: Component<MyPageDependency>,
@@ -18,6 +19,10 @@ final class MyPageComponent: Component<MyPageDependency>,
     
     var userRepository: UserRepository {
         return dependency.userRepository
+    }
+    
+    var authService: AuthService {
+        return dependency.authService
     }
     
     fileprivate var fetchMyProfileUseCase: FetchMyProfileUseCase {

@@ -46,7 +46,9 @@ public final class DefaultNetworkService: NetworkService {
             } else {
                 let error = NetworkError.error(statusCode: response.statusCode, data: data)
                 logger.log(error: error)
-                throw error
+//                throw error
+                /// statusCode 가 범위를 넘어도 errorMessage를 표시하기 위해 data 넘겨줌
+                return data
             }
         } else {
             logger.log(responseData: data, response: response)

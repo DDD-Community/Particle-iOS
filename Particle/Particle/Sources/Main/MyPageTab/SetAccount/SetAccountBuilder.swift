@@ -8,13 +8,13 @@
 import RIBs
 
 protocol SetAccountDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var authService: AuthService { get }
 }
 
 final class SetAccountComponent: Component<SetAccountDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    fileprivate var withdrawUseCase: WithdrawUseCase {
+        DefaultWithdrawUseCase(authService: dependency.authService)
+    }
 }
 
 // MARK: - Builder
@@ -32,7 +32,10 @@ final class SetAccountBuilder: Builder<SetAccountDependency>, SetAccountBuildabl
     func build(withListener listener: SetAccountListener) -> SetAccountRouting {
         let component = SetAccountComponent(dependency: dependency)
         let viewController = SetAccountViewController()
-        let interactor = SetAccountInteractor(presenter: viewController)
+        let interactor = SetAccountInteractor(
+            presenter: viewController,
+            withdrawUseCase: component.withdrawUseCase
+        )
         interactor.listener = listener
         return SetAccountRouter(interactor: interactor, viewController: viewController)
     }

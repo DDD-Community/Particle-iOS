@@ -11,13 +11,15 @@ import UIKit
 
 protocol SetAccountPresentableListener: AnyObject {
     func backButtonTapped()
+    func deleteAccountButtonTapped()
     func logoutButtonTapped()
 }
 
 final class SetAccountViewController: UIViewController, SetAccountPresentable, SetAccountViewControllable {
-
+    
     weak var listener: SetAccountPresentableListener?
     private var disposeBag = DisposeBag()
+    private var errorDescription = ""
     
     enum Metric {
         enum NavigationBar {
@@ -53,6 +55,8 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         return stack
     }()
     
+    // MARK: - AlertController
+    
     private lazy var logoutAlertController: ParticleAlertController = {
         let okButton = generateAlertButton(title: "확인") { [weak self] in
             self?.listener?.logoutButtonTapped()
@@ -73,7 +77,10 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
     }()
     
     private lazy var deleteAccountAlertController: ParticleAlertController = {
-        let okButton = generateAlertButton(title: "확인", {})
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+            self?.listener?.deleteAccountButtonTapped()
+        }
         
         let cancelButton = generateAlertButton(title: "취소") { [weak self] in
             self?.dismiss(animated: true)
@@ -83,6 +90,37 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
             title: nil,
             body: "정말 탈퇴 할까요?\n저장한 파티클이 삭제됩니다.",
             buttons: [cancelButton, okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
+    }()
+    
+    
+    private lazy var deleteAccountSuccessResultAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.listener?.logoutButtonTapped()
+        }
+        
+        let alert = ParticleAlertController(
+            title: nil,
+            body: "회원탈퇴에 성공했습니다.\n 초기화면으로 돌아갑니다.",
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
+    }()
+    
+    private lazy var deleteAccountFailureResultAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        let alert = ParticleAlertController(
+            title: nil,
+            body: errorDescription,
+            buttons: [okButton],
             buttonsAxis: .horizontal
         )
         
@@ -191,6 +229,17 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
         .disposed(by: disposeBag)
         
         return button
+    }
+    
+    // MARK: - SetAccountPresentable
+    
+    func showErrorAlert(description: String) {
+        errorDescription = description
+        present(deleteAccountFailureResultAlertController, animated: true)
+    }
+    
+    func showSuccessAlert() {
+        present(deleteAccountSuccessResultAlertController, animated: true)
     }
 }
 

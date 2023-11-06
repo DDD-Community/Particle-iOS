@@ -27,4 +27,16 @@ final class DefaultAuthService: AuthService {
         
         return dataTransferService.request(with: endpoint)
     }
+    
+    func withdraw() -> Observable<WithdrawResponse> {
+        let path = ParticleServer.Version.v1.rawValue
+        + ParticleServer.Path.withdraw.value
+        
+        let endpoint = Endpoint<WithdrawResponse>(
+            path: path,
+            method: .delete
+        )
+        
+        return dataTransferService.request(with: endpoint)
+    }
 }
