@@ -25,7 +25,7 @@ protocol RootListener: AnyObject {}
 final class RootInteractor: PresentableInteractor<RootPresentable>,
                             RootInteractable,
                             RootPresentableListener {
- 
+    
     weak var router: RootRouting?
     weak var listener: RootListener?
 
@@ -36,16 +36,26 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        router?.attachLoggedOut()
+        if let _ = UserDefaults.standard.string(forKey: "ACCESSTOKEN") {
+            login()
+        } else {
+            router?.attachLoggedOut()
+        }
     }
 
     override func willResignActive() {
         super.willResignActive()
     }
     
-    // MARK: - RootInteractable - LoggedOutListener
+    // MARK: - RootInteractable
+    
     func login() {
         router?.detachLoggedOut()
         router?.attachLoggedIn()
+    }
+    
+    func logout() {
+        router?.detachLoggedIn()
+        router?.attachLoggedOut()
     }
 }

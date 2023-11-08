@@ -205,7 +205,7 @@ final class MyRecordListViewController: UIViewController,
     private func configureSegmentControl() {
         let tabGesture = UITapGestureRecognizer(
             target: self,
-            action: #selector(sorByRecentButtonTapped)
+            action: #selector(sortByRecentButtonTapped)
         )
         recentlyOrderButtonLabel.addGestureRecognizer(tabGesture)
         
@@ -216,7 +216,7 @@ final class MyRecordListViewController: UIViewController,
         oldlyOrderButtonLabel.addGestureRecognizer(tabGesture2)
     }
     
-    @objc private func sorByRecentButtonTapped() {
+    @objc private func sortByRecentButtonTapped() {
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut) { [weak self] in
             guard let self = self else { return }
             self.recentlyOrderButtonLabel.textColor = .particleColor.gray04

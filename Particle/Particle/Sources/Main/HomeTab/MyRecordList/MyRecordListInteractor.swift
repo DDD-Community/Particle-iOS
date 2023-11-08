@@ -76,8 +76,8 @@ final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentabl
         fetchMyRecordsByDateUseCase.execute()
             .subscribe { [weak self] result in
                 guard let self = self else { return }
-                self.sortedByOldRecords = result
-                self.sortedByRecentRecords = self.reverseRecords(data: result)
+                self.sortedByOldRecords = self.reverseRecords(data: result)
+                self.sortedByRecentRecords = result
                 self.presenter.setData(with: result)
             } onError: { error in
                 Console.error(error.localizedDescription)
@@ -90,11 +90,12 @@ final class MyRecordListInteractor: PresentableInteractor<MyRecordListPresentabl
         fetchMyRecordsByTagUseCase.execute(tag: tag)
             .subscribe { [weak self] result in
                 guard let self = self else { return }
-                self.sortedByOldRecords = result
-                self.sortedByRecentRecords = self.reverseRecords(data: result)
+                self.sortedByOldRecords = self.reverseRecords(data: result)
+                self.sortedByRecentRecords = result
                 self.presenter.setData(with: result)
             } onError: { error in
                 Console.error(error.localizedDescription)
+                // TODO: presenter 로 Alert 전달해주기.
             }
             .disposed(by: disposeBag)
     }

@@ -39,6 +39,13 @@ final class Accordion: UIView {
     }
     
     private var disposeBag = DisposeBag()
+    private var interestedTags: [String] {
+        if let interestedTags = UserDefaults.standard.object(forKey: "INTERESTED_TAGS") as? [String] {
+            return interestedTags
+        } else {
+            return []
+        }
+    }
     private let tags: [String]
     private(set) var selectedTags: BehaviorRelay<[String]> = .init(value: [])
     
@@ -152,6 +159,17 @@ final class Accordion: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        for interestedTag in interestedTags {
+            if tags.contains(interestedTag) {
+                rowTapped()
+                return
+            }
+        }
+    }
+    
     // MARK: - Methods
 
     private func setupInitialView() {
@@ -174,8 +192,13 @@ final class Accordion: UIView {
         Observable.of(tags)
         .bind(to: recommendTagCollectionView.rx.items(
             cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
-            cellType: LeftAlignedCollectionViewCell.self)) { index, item, cell in
-            cell.titleLabel.text = item
+            cellType: LeftAlignedCollectionViewCell.self)) { [weak self] index, item, cell in
+                guard let self = self else { return }
+                cell.titleLabel.text = item
+                if interestedTags.contains(item) {
+                    cell.setSelected()
+                    self.accept(tag: item)
+                }
         }
         .disposed(by: disposeBag)
         

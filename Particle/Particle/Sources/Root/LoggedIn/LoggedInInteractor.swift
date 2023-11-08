@@ -12,10 +12,12 @@ protocol LoggedInRouting: Routing {
     func cleanupViews()
 }
 
-protocol LoggedInListener: AnyObject {}
+protocol LoggedInListener: AnyObject {
+    func logout()
+}
 
 final class LoggedInInteractor: Interactor, LoggedInInteractable {
-
+    
     weak var router: LoggedInRouting?
     weak var listener: LoggedInListener?
 
@@ -29,5 +31,12 @@ final class LoggedInInteractor: Interactor, LoggedInInteractable {
         super.willResignActive()
 
         router?.cleanupViews()
+    }
+    
+    // MARK: - LoggedInInteractor
+    
+    func mainLogout() {
+        router?.cleanupViews()
+        listener?.logout()
     }
 }

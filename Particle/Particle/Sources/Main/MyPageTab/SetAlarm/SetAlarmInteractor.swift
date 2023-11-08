@@ -60,6 +60,8 @@ final class SetAlarmInteractor: PresentableInteractor<SetAlarmPresentable>, SetA
     }
     
     func handleLocalNotificationRegistration() {
+        
+        removeAllLocalNotifications()
 
         let alarms = [
             ("출근할 때 한 번 더 보기", "20000101 08:00:00"),
@@ -68,26 +70,10 @@ final class SetAlarmInteractor: PresentableInteractor<SetAlarmPresentable>, SetA
             ("자기전에 한 번 더 보기", "20000101 22:00:00")
         ]
         
-        var identifiersForRemove = [String]()
-        
         alarms.forEach {
             if UserDefaults.standard.bool(forKey: $0.0) {
                 addLocalNotification(identifier: $0.0, title: "title정하기", body: "body정하기", timeHHmm: $0.1)
-            } else {
-                identifiersForRemove.append($0.0)
             }
-        }
-        
-        removeLocalNotifications(identifiers: identifiersForRemove)
-        
-        // TODO: 알람 설정이 잘 되었는지 테스트 필요.
-        
-        UNUserNotificationCenter.current().getDeliveredNotifications { lists in
-            Console.log("설정된 알람 시간들: \(lists)")
-        }
-        
-        UNUserNotificationCenter.current().getPendingNotificationRequests { lists in
-            Console.log("보류된 요청들 : \(lists)")
         }
     }
     
@@ -118,8 +104,9 @@ final class SetAlarmInteractor: PresentableInteractor<SetAlarmPresentable>, SetA
         }
     }
     
-    private func removeLocalNotifications(identifiers: [String]) {
+    private func removeAllLocalNotifications() {
         let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.removeDeliveredNotifications(withIdentifiers: identifiers)
+        notificationCenter.removeAllPendingNotificationRequests()
+        notificationCenter.removeAllDeliveredNotifications()
     }
 }

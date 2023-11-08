@@ -14,7 +14,7 @@ class AppComponent: Component<EmptyComponent>, RootDependency {
     init() {
         let config = ApiDataNetworkConfig(
             baseURL: URL(string: ParticleServer.baseURL) ?? .applicationDirectory,
-            headers: ["Authorization": ""]
+            headers: ["Content-Type": "application/json"]
         )
         let networkService = DefaultNetworkService(config: config)
         let dataTransferService = DefaultDataTransferService(with: networkService)

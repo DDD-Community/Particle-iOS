@@ -28,9 +28,9 @@ struct RecordReadDTO: Decodable {
         return DateManager.shared.convert(dateString: createdAt)
     }
     
-    static func stub() -> Self {
+    static func stub(id: String = "1") -> Self {
         .init(
-            id: "1",
+            id: id,
             title: "미니멀리스트의 삶",
             url: "www.naver.com",
             items: [

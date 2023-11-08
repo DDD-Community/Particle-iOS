@@ -56,6 +56,7 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
         let request = LoginRequest(provider: provider, identifier: identifier)
         
         loginUseCase.execute(with: request)
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] isFirstLogin in
                 if isFirstLogin {
                     self?.router?.routeToSelectTag()

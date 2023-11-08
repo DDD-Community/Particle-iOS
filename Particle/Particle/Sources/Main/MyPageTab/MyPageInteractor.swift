@@ -26,7 +26,7 @@ protocol MyPagePresentable: Presentable {
 }
 
 protocol MyPageListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func myPageLogout()
 }
 
 final class MyPageInteractor: PresentableInteractor<MyPagePresentable>,
@@ -80,7 +80,6 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>,
         router?.attachSetInterestedTags()
     }
     
-    
     // MARK: - MyPageInteractable
     
     func setAccountBackButtonTapped() {
@@ -95,7 +94,13 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>,
         router?.detachSetInterestedTags()
     }
     
+    func setAccountLogoutButtonTapped() {
+        listener?.myPageLogout()
+    }
+    
 //    func setInterestedTagsOKButtonTapped() {
 //        router?.detachSetInterestedTags()
 //    }
+    
+
 }
