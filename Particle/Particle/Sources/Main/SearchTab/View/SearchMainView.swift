@@ -42,19 +42,23 @@ class SearchMainView: UIView {
         }
     }
     
-    let searchBar: UISearchBar = {
+    public let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.backgroundColor = .clear
-        searchBar.tintColor = .clear
+        searchBar.searchTextField.backgroundColor = .clear
         searchBar.placeholder = "검색어를 입력해 주세요."
         searchBar.searchTextField.font = .particleFont.generate(style: .pretendard_Regular, size: 16)
+        searchBar.clipsToBounds = true
+        searchBar.layer.cornerRadius = CGFloat(Metric.SearchBar.height / 2)
         return searchBar
     }()
     
     private let recentSearchListTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "최근 검색어"
-        label.setParticleFont(.y_headline, color: .particleColor.gray04)
+        label.setParticleFont(
+            .y_headline,
+            color: .particleColor.gray04,
+            text: "최근 검색어"
+        )
         return label
     }()
     
@@ -80,8 +84,11 @@ class SearchMainView: UIView {
     
     private let tagTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "관심 태그로 검색"
-        label.setParticleFont(.y_headline, color: .particleColor.gray04)
+        label.setParticleFont(
+            .y_headline,
+            color: .particleColor.gray04,
+            text: "관심 태그로 검색"
+        )
         return label
     }()
     
