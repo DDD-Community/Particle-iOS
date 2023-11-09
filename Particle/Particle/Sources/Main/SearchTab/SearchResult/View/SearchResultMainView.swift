@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SnapKit
 
-class SearchResultMainView: UIView {
+final class SearchResultMainView: UIView {
     let searchResultTableView: UITableView = {
         let tableView = UITableView()
         return tableView

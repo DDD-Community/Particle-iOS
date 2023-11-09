@@ -16,6 +16,7 @@ protocol SearchPresentableListener: AnyObject {
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
 
     weak var listener: SearchPresentableListener?
+    weak var searchResultView: UIView?
     
     private var tags: [(title: String, isSelected: Bool)] = {
         let tags = [
@@ -103,6 +104,21 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     private func setupInitialView() {
         mainView.backgroundColor = .particleColor.black
         navigationController?.isNavigationBarHidden = true
+    }
+    
+    func addSearchResult(_ view: UIViewController) {
+        guard searchResultView == nil else { return }
+        searchResultView = view.view
+        self.mainView.addSubview(searchResultView)
+        searchResultView.snp.makeConstraints { make in
+            make.top.equalTo(mainView.searchBar.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    func removeSearchResult() {
+        guard let searchResultView = self.searchResultView else { return }
+        self.searchResultView?.removeFromSuperview()
     }
 }
 

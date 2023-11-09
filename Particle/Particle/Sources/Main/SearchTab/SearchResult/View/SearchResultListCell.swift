@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class SearchResultListCell: UITableViewCell {
+    
     private enum Metric {
         static let verticalSpacing = 16.0
         
@@ -19,20 +20,17 @@ class SearchResultListCell: UITableViewCell {
             static let minimumInterItemSpacing: CGFloat = 10
         }
     }
+    
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.setParticleFont(.y_title02, color: .particleColor.gray05)
+        label.setParticleFont(
+            .y_title02,
+            color: .particleColor.gray05
+        )
         label.numberOfLines = 1
         return label
     }()
-    
-    let contentLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.setParticleFont(.p_body02, color: .particleColor.gray05)
-        return label
-    }()
-    
+
     let tagCollectionList: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
         layout.estimatedItemSize = CGSize(width: 1, height: 1)
@@ -67,16 +65,13 @@ class SearchResultListCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension SearchResultListCell {
-    // MARK: - Layout
-    private func layout() {
-        [
-            titleLabel,
-            contentLabel,
-            tagCollectionList
-        ]
+    
+    public func bind(title: String, subTitles: [String], tags: [String]) {
+        titleLabel.text = title
+        let labels = subTitles.map(makeLabel)
+        let allViews = [titleLabel, labels, tagCollectionList].compactMap($0)
+        
+        allViews
             .forEach {
                 baseStackView.addArrangedSubview($0)
                 $0.snp.makeConstraints { make in
@@ -84,9 +79,27 @@ extension SearchResultListCell {
                 }
             }
         
+        layoutSubviews()
+    }
+}
+
+extension SearchResultListCell {
+    // MARK: - Layout
+    private func layout() {
         self.addSubview(baseStackView)
         baseStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    private func makeLabel(_ text: String) -> UILabel {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.setParticleFont(
+            .p_body02,
+            color: .particleColor.gray05,
+            text: text
+        )
+        return label
     }
 }

@@ -13,6 +13,8 @@ protocol SearchInteractable: Interactable {
 }
 
 protocol SearchViewControllable: ViewControllable {
+    func addSearchResult(_ view: UIViewController)
+    func removeSearchResult()
 }
 
 final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControllable>, SearchRouting {
@@ -31,10 +33,17 @@ final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControlla
     }
     
     func attachSearchResult() {
-        
+        guard searchResultRouter == nil else { return }
+        let router = searchResultBuilder.build(withListener: interactor)
+        viewController.addSearchResult(router.viewControllable.uiviewController)
+        attachChild(router)
+        searchResultRouter = router
     }
     
     func detachSearchResult() {
-        
+        guard let searchResult = searchResultRouter else { return }
+        viewController.removeSearchResult()
+        detachChild(searchResult)
+        searchResultRouter = nil 
     }
 }
