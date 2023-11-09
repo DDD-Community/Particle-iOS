@@ -10,9 +10,7 @@ import RxSwift
 import UIKit
 
 protocol SearchPresentableListener: AnyObject {
-    // TODO: Declare properties and methods that the view controller can invoke to perform
-    // business logic, such as signIn(). This protocol is implemented by the corresponding
-    // interactor class.
+    func beginSearch(_ isStart: Bool)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
@@ -32,9 +30,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     var disposeBag = DisposeBag()
     
-    private var mainView: SearchMainView {
-        return self.view as! SearchMainView
-    }
+    private var mainView = SearchMainView()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -87,6 +83,19 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             }
             selectedCell.setSelected()
             self.tags[index.row].isSelected.toggle()
+        }
+        .disposed(by: disposeBag)
+        
+        Observable<Bool>.merge([
+            mainView.searchBar.rx.textDidBeginEditing
+                .map { _ in true }
+                .asObservable(),
+            mainView.searchBar.rx.textDidEndEditing
+                .map { _ in false }
+                .asObservable()
+        ])
+        .bind { isStart in
+            self.listener?.beginSearch(isStart)
         }
         .disposed(by: disposeBag)
     }

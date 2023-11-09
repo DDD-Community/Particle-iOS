@@ -18,6 +18,7 @@ struct RecordMapper: RecordMapperProtocol {
         guard let userInterestedTags = UserDefaults.standard.object(forKey: "INTERESTED_TAGS") as? [String] else {
             return []
         }
+        guard model.isEmpty == false else { return [] }
         var sectionList: [SectionOfRecordTag] = [.init(header: "My", items: model)]
         let tags = userInterestedTags.map { $0.replacingOccurrences(of: "#", with: "")}
         for tag in tags {

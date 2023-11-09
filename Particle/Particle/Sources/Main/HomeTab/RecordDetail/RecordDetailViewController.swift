@@ -281,40 +281,46 @@ final class RecordDetailViewController: UIViewController,
     }
     
     private func configureButton() {
-        closeButton.rx.tap.bind { [weak self] _ in
-            self?.listener?.recordDetailCloseButtonTapped()
-        }
-        .disposed(by: disposeBag)
-        
-        ellipsisButton.rx.tap.bind { [weak self] _ in
-
-            DispatchQueue.main.async {
-                self?.showActionSheetInMyRecord()
+        closeButton.rx.tap
+            .bind { [weak self] _ in
+                self?.listener?.recordDetailCloseButtonTapped()
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
         
-        deleteButton.rx.tap.bind { [weak self] _ in
-            guard let self = self else { return }
-            self.dismiss(animated: true)
-
-            // TODO: 삭제 로딩중
-
-            self.listener?.recordDetailDeleteButtonTapped(with: self.data.id).subscribe { [weak self] bool in
-                if bool == true {
-                    self?.listener?.recordDetailCloseButtonTapped()
-                } else {
-                    // TODO: 삭제실패얼럿
+        ellipsisButton.rx.tap
+            .bind { [weak self] _ in
+                
+                DispatchQueue.main.async {
+                    self?.showActionSheetInMyRecord()
                 }
             }
-            .disposed(by: self.disposeBag)
-        }
-        .disposed(by: self.disposeBag)
+            .disposed(by: disposeBag)
         
-        cancelButton.rx.tap.bind { [weak self] _ in
-            self?.dismiss(animated: true)
-        }
-        .disposed(by: self.disposeBag)
+        deleteButton.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
+                
+                // TODO: 삭제 로딩중
+                
+                self.listener?.recordDetailDeleteButtonTapped(with: self.data.id)
+                    .observe(on: MainScheduler.instance)
+                    .subscribe { [weak self] bool in
+                        if bool == true {
+                            self?.listener?.recordDetailCloseButtonTapped()
+                        } else {
+                            // TODO: 삭제실패얼럿
+                        }
+                    }
+                    .disposed(by: self.disposeBag)
+            }
+            .disposed(by: self.disposeBag)
+        
+        cancelButton.rx.tap
+            .bind { [weak self] _ in
+                self?.dismiss(animated: true)
+            }
+            .disposed(by: self.disposeBag)
     }
     
     private func showActionSheetInMyRecord() {

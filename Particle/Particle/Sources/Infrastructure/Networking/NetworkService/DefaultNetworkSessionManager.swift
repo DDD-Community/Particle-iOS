@@ -25,7 +25,7 @@ public class DefaultNetworkSessionManager: NetworkSessionManager {
                 }
                 // TODO: data, response 둘중 하나가 nil일 때 처리 안되어있음. 
             }
-            
+            task.resume()
             return Disposables.create {
                 Console.log("\(#function) 작업 취소")
                 task.cancel()

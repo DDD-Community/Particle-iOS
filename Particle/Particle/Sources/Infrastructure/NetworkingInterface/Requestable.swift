@@ -15,6 +15,7 @@ public protocol Requestable {
     var headerParameters: [String: String] { get }
     var queryParametersEncodable: Encodable? { get }
     var queryParameters: [String: Any] { get }
+    var queryParametersTuple: [(String, String)] { get }
     var bodyParametersEncodable: Encodable? { get }
     var bodyParameters: [String: Any] { get }
     var bodyEncoding: BodyEncoding { get }
