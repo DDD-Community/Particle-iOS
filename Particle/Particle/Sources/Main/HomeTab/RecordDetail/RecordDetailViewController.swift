@@ -12,6 +12,7 @@ import UIKit
 protocol RecordDetailPresentableListener: AnyObject {
     func recordDetailCloseButtonTapped()
     func recordDetailDeleteButtonTapped(with id: String) -> Observable<Bool>
+    func newRecordDetailDeleteButtonTapped(with id: String)
 }
 
 final class RecordDetailViewController: UIViewController,
@@ -21,6 +22,7 @@ final class RecordDetailViewController: UIViewController,
     weak var listener: RecordDetailPresentableListener?
     private var disposeBag = DisposeBag()
     private let data: RecordReadDTO
+    private var errorDescription = ""
     
     enum Metric {
         static let horizontalInset = 20
@@ -182,7 +184,7 @@ final class RecordDetailViewController: UIViewController,
     private lazy var warningAlertController: ParticleAlertController = {
         let alert = ParticleAlertController(
             title: "파티클 삭제",
-            body: "내 파티클을 정말 삭제하시겠어요?",
+            body: "내 파티클을 삭제하시면 복구할 수 없어요.\n내 파티클을 정말 삭제하시겠어요?",
             buttons: [deleteButton, cancelButton],
             buttonsAxis: .vertical
         )
@@ -219,6 +221,37 @@ final class RecordDetailViewController: UIViewController,
             $0.height.equalTo(Metric.ParticleAlert.buttonHeight)
         }
         return button
+    }()
+    
+    private lazy var deleteSuccessResultAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+            self?.listener?.recordDetailCloseButtonTapped()
+        }
+        
+        let alert = ParticleAlertController(
+            title: nil,
+            body: "파티클 삭제에 성공했습니다.\n 홈화면으로 돌아갑니다.",
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
+    }()
+    
+    private lazy var deleteFailureResultAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        let alert = ParticleAlertController(
+            title: nil,
+            body: errorDescription,
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
     }()
     
     // MARK: - Initializers
@@ -303,16 +336,19 @@ final class RecordDetailViewController: UIViewController,
                 
                 // TODO: 삭제 로딩중
                 
-                self.listener?.recordDetailDeleteButtonTapped(with: self.data.id)
-                    .observe(on: MainScheduler.instance)
-                    .subscribe { [weak self] bool in
-                        if bool == true {
-                            self?.listener?.recordDetailCloseButtonTapped()
-                        } else {
-                            // TODO: 삭제실패얼럿
-                        }
-                    }
-                    .disposed(by: self.disposeBag)
+                self.listener?.newRecordDetailDeleteButtonTapped(with: self.data.id)
+                   
+                
+//                self.listener?.recordDetailDeleteButtonTapped(with: self.data.id)
+//                    .observe(on: MainScheduler.instance)
+//                    .subscribe { [weak self] bool in
+//                        if bool == true {
+//                            self?.listener?.recordDetailCloseButtonTapped()
+//                        } else {
+//                            // TODO: 삭제실패얼럿
+//                        }
+//                    }
+//                    .disposed(by: self.disposeBag)
             }
             .disposed(by: self.disposeBag)
         
@@ -345,6 +381,33 @@ final class RecordDetailViewController: UIViewController,
         actionSheet.addAction(deleteAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    // MARK: - RecordDetailPresentable
+    
+    private func generateAlertButton(title: String, _ buttonAction: @escaping () -> Void) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        
+        button.rx.tap.bind { [weak self] _ in
+            buttonAction()
+        }
+        .disposed(by: disposeBag)
+        
+        return button
+    }
+    
+    func showErrorAlert(description: String) {
+        errorDescription = description
+        present(deleteFailureResultAlertController, animated: true)
+    }
+    
+    func showSuccessAlert() {
+        present(deleteSuccessResultAlertController, animated: true)
     }
 }
 

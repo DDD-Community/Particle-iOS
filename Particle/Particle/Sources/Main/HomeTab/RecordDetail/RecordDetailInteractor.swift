@@ -15,6 +15,8 @@ protocol RecordDetailRouting: ViewableRouting {
 protocol RecordDetailPresentable: Presentable {
     var listener: RecordDetailPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func showErrorAlert(description: String)
+    func showSuccessAlert()
 }
 
 protocol RecordDetailListener: AnyObject {
@@ -65,33 +67,22 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
         
         
         // TODO: Listener 로 보내서 MyRecordList RIB 에서도 리프레쉬 되도록 구현해야 함.
-//        return Observable.create { [weak self] emitter in
-//            guard let self = self else { return Disposables.create() }
-//            remoteRepository.deleteRecord(recordId: id)
-//                .subscribe { result in
-//                    emitter.onNext(true)
-//                } onError: { error in
-//                    Console.error(error.localizedDescription)
-//                    emitter.onNext(false)
-//                }
-//                .disposed(by: disposeBag)
+    }
+    
+    func newRecordDetailDeleteButtonTapped(with id: String) {
+        deleteRecordUseCase.newExecute(id: id)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] data in
 
-//            let repo = RecordRepository()
-//            repo.delete(recordId: id).subscribe { result in
-//                switch result.element {
-//                case .success(let response):
-//                    Console.log(response)
-//                    emitter.onNext(true)
-//                case .failure(let error):
-//                    Console.error(error.localizedDescription)
-//                    emitter.onNext(false)
-//                case .none:
-//                    return
-//                }
-//            }
-//            .disposed(by: self.disposeBag)
-            
-//            return Disposables.create()
-//        }
+                if (200..<300).contains(data.status) {
+                    self?.presenter.showSuccessAlert()
+                } else {
+                    self?.presenter.showErrorAlert(description: "status: \(data.status)\ncode:\(data.code)\nmessage: \(data.message)")
+                }
+            } onError: { [weak self] error in
+                /// 회원탈퇴 에러??
+                self?.presenter.showErrorAlert(description: error.localizedDescription)
+            }
+            .disposed(by: disposeBag)
     }
 }

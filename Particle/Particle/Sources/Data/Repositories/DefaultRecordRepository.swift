@@ -65,4 +65,8 @@ extension DefaultRecordRepository: RecordRepository {
     func deleteRecord(recordId: String) -> RxSwift.Observable<String> {
         return recordDataSource.deleteRecord(recordId: recordId)
     }
+    
+    func newDeleteRecord(recordId: String) -> Observable<DeleteRecordResponse> {
+        return recordDataSource.newDeleteRecord(recordId: recordId)
+    }
 }
