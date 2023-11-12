@@ -18,7 +18,7 @@ final class LoggedOutComponent: Component<LoggedOutDependency>, SelectTagDepende
         return dependency.loginUseCase
     }
     
-    fileprivate var setInterestedTagsUseCase: SetInterestedTagsUseCase {
+    var setInterestedTagsUseCase: SetInterestedTagsUseCase {
         return dependency.setInterestedTagsUseCase
     }
 }
@@ -40,8 +40,7 @@ final class LoggedOutBuilder: Builder<LoggedOutDependency>, LoggedOutBuildable {
         let viewController = LoggedOutViewController()
         let interactor = LoggedOutInteractor(
             presenter: viewController,
-            loginUseCase: component.loginUseCase,
-            setInterestedTagsUseCase: component.setInterestedTagsUseCase
+            loginUseCase: component.loginUseCase
         )
         interactor.listener = listener
         

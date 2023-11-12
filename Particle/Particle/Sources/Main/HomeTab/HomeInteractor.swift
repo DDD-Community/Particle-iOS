@@ -83,6 +83,7 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     
     private func fetchData() {
         fetchMyAllRecordsUseCase.execute()
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] data in
                 self?.presenter.setData(data: data)
             } onError: { error in

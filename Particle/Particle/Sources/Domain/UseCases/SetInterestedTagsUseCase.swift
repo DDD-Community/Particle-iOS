@@ -25,6 +25,6 @@ final class DefaultSetInterestedTagsUseCase: SetInterestedTagsUseCase {
                 UserDefaults.standard.set(dto.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
                 return true
             }
-            .catchAndReturn(false)
+//            .catchAndReturn(false)
     }
 }

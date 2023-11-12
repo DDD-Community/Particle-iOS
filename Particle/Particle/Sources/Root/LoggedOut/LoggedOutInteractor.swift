@@ -28,16 +28,13 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     weak var listener: LoggedOutListener?
     
     private let loginUseCase: LoginUseCase
-    private let setInterestedTagsUseCase: SetInterestedTagsUseCase
     private let disposeBag = DisposeBag()
     
     init(
         presenter: LoggedOutPresentable,
-        loginUseCase: LoginUseCase,
-        setInterestedTagsUseCase: SetInterestedTagsUseCase
+        loginUseCase: LoginUseCase
     ) {
         self.loginUseCase = loginUseCase
-        self.setInterestedTagsUseCase = setInterestedTagsUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -71,17 +68,7 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
     
     // MARK: - SelectTagListener
     
-    func selectTagStartButtonTapped(with selectedTags: [String]) {
-        
-        setInterestedTagsUseCase.execute(tags: selectedTags)
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] complete in
-                if complete {
-                    self?.listener?.login()
-                }
-            } onError: { error in
-                Console.error(error.localizedDescription)
-            }
-            .disposed(by: disposeBag)
+    func selectTagSuccess() {
+        listener?.login()
     }
 }
