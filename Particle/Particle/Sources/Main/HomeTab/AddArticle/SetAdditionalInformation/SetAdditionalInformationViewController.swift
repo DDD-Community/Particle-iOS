@@ -298,7 +298,7 @@ final class SetAdditionalInformationViewController: UIViewController,
     
     private let accordion5 = Accordion(
         title: "스타트업",
-        tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"]
+        tags: ["#조직 문화", "#트렌드", "#CX", "#리더쉽", "#인사이트"]
     )
     
     // MARK: - Initializers
