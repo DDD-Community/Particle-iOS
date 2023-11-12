@@ -9,7 +9,6 @@ import RxSwift
 
 protocol DeleteRecordUseCase {
     func execute(id: String) -> Observable<String>
-    func newExecute(id: String) -> Observable<DeleteRecordResponse>
 }
 
 final class DefaultDeleteRecordUseCase: DeleteRecordUseCase {
@@ -21,9 +20,5 @@ final class DefaultDeleteRecordUseCase: DeleteRecordUseCase {
     
     func execute(id: String) -> Observable<String> {
         recordRepository.deleteRecord(recordId: id)
-    }
-    
-    func newExecute(id: String) -> Observable<DeleteRecordResponse> {
-        recordRepository.newDeleteRecord(recordId: id)
     }
 }

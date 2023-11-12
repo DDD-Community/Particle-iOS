@@ -92,7 +92,6 @@
 		AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */; };
 		AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF473BBF2A9F6241002EE27B /* DefaultAuthService.swift */; };
 		AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */; };
-		AF48900D2AF9180400B45CF6 /* DeleteRecordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48900C2AF9180400B45CF6 /* DeleteRecordResponse.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
 		AF621F682AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */; };
@@ -282,7 +281,6 @@
 		AF46475F2AAA196F00701B83 /* DirectlySetAlarmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectlySetAlarmInteractor.swift; sourceTree = "<group>"; };
 		AF473BBF2A9F6241002EE27B /* DefaultAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthService.swift; sourceTree = "<group>"; };
 		AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleLoginButton.swift; sourceTree = "<group>"; };
-		AF48900C2AF9180400B45CF6 /* DeleteRecordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRecordResponse.swift; sourceTree = "<group>"; };
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Particle.entitlements; sourceTree = "<group>"; };
@@ -893,7 +891,6 @@
 				AF9702F12A8CFF9200877C85 /* LoginRequest.swift */,
 				AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */,
 				AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */,
-				AF48900C2AF9180400B45CF6 /* DeleteRecordResponse.swift */,
 				AF9702F02A8CFF8800877C85 /* DataMapping */,
 			);
 			path = Network;
@@ -1245,7 +1242,6 @@
 				AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */,
 				AFBB5F762A66B65D002416DA /* SelectSentenceBuilder.swift in Sources */,
 				AFBB5F602A66AAD7002416DA /* MyPageRouter.swift in Sources */,
-				AF48900D2AF9180400B45CF6 /* DeleteRecordResponse.swift in Sources */,
 				AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */,
 				AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */,
 				AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */,

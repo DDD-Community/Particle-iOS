@@ -11,8 +11,7 @@ import UIKit
 
 protocol RecordDetailPresentableListener: AnyObject {
     func recordDetailCloseButtonTapped()
-    func recordDetailDeleteButtonTapped(with id: String) -> Observable<Bool>
-    func newRecordDetailDeleteButtonTapped(with id: String)
+    func recordDetailDeleteButtonTapped(with id: String)
 }
 
 final class RecordDetailViewController: UIViewController,
@@ -223,22 +222,22 @@ final class RecordDetailViewController: UIViewController,
         return button
     }()
     
-    private lazy var deleteSuccessResultAlertController: ParticleAlertController = {
-        let okButton = generateAlertButton(title: "확인") { [weak self] in
-            self?.dismiss(animated: true)
-            self?.listener?.recordDetailCloseButtonTapped()
-        }
-        
-        let alert = ParticleAlertController(
-            title: nil,
-            body: "파티클 삭제에 성공했습니다.\n 홈화면으로 돌아갑니다.",
-            buttons: [okButton],
-            buttonsAxis: .horizontal
-        )
-        
-        return alert
-    }()
-    
+//    private lazy var deleteSuccessResultAlertController: ParticleAlertController = {
+//        let okButton = generateAlertButton(title: "확인") { [weak self] in
+//            self?.dismiss(animated: true)
+//            self?.listener?.recordDetailCloseButtonTapped()
+//        }
+//        
+//        let alert = ParticleAlertController(
+//            title: nil,
+//            body: "파티클 삭제에 성공했습니다.\n 홈화면으로 돌아갑니다.",
+//            buttons: [okButton],
+//            buttonsAxis: .horizontal
+//        )
+//        
+//        return alert
+//    }()
+//    
     private lazy var deleteFailureResultAlertController: ParticleAlertController = {
         let okButton = generateAlertButton(title: "확인") { [weak self] in
             self?.dismiss(animated: true)
@@ -323,7 +322,7 @@ final class RecordDetailViewController: UIViewController,
         ellipsisButton.rx.tap
             .bind { [weak self] _ in
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
                     self?.showActionSheetInMyRecord()
                 }
             }
@@ -331,24 +330,9 @@ final class RecordDetailViewController: UIViewController,
         
         deleteButton.rx.tap
             .bind { [weak self] _ in
-                guard let self = self else { return }
-                self.dismiss(animated: true)
-                
-                // TODO: 삭제 로딩중
-                
-                self.listener?.newRecordDetailDeleteButtonTapped(with: self.data.id)
-                   
-                
-//                self.listener?.recordDetailDeleteButtonTapped(with: self.data.id)
-//                    .observe(on: MainScheduler.instance)
-//                    .subscribe { [weak self] bool in
-//                        if bool == true {
-//                            self?.listener?.recordDetailCloseButtonTapped()
-//                        } else {
-//                            // TODO: 삭제실패얼럿
-//                        }
-//                    }
-//                    .disposed(by: self.disposeBag)
+//                guard let self = self else { return }
+                self?.dismiss(animated: true)
+                self?.listener?.recordDetailDeleteButtonTapped(with: self?.data.id ?? "")
             }
             .disposed(by: self.disposeBag)
         
@@ -369,8 +353,8 @@ final class RecordDetailViewController: UIViewController,
         })
         
         let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] action in
-            guard let self = self else { return }
-            self.present(self.warningAlertController, animated: true)
+//            guard let self = self else { return }
+            self?.present(self?.warningAlertController ?? UIViewController(), animated: true)
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
@@ -393,7 +377,7 @@ final class RecordDetailViewController: UIViewController,
             $0.height.equalTo(44)
         }
         
-        button.rx.tap.bind { [weak self] _ in
+        button.rx.tap.bind { _ in
             buttonAction()
         }
         .disposed(by: disposeBag)
@@ -407,7 +391,8 @@ final class RecordDetailViewController: UIViewController,
     }
     
     func showSuccessAlert() {
-        present(deleteSuccessResultAlertController, animated: true)
+        listener?.recordDetailCloseButtonTapped()
+//        present(deleteSuccessResultAlertController, animated: true)
     }
 }
 

@@ -65,15 +65,4 @@ final class DefaultRecordDataSource: RecordDataSource {
         )
         return dataTransferService.request(with: endpoint)
     }
-    
-    func newDeleteRecord(recordId: String) -> Observable<DeleteRecordResponse> {
-        let path = ParticleServer.Version.v1.rawValue
-        + ParticleServer.Path.deleteRecord(id: recordId).value
-        
-        let endpoint = Endpoint<DeleteRecordResponse>(
-            path: path,
-            method: .delete
-        )
-        return dataTransferService.request(with: endpoint)
-    }
 }

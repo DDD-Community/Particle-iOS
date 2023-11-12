@@ -26,12 +26,11 @@ protocol RecordDetailListener: AnyObject {
 final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentable>,
                                     RecordDetailInteractable,
                                     RecordDetailPresentableListener {
-    
-    private let deleteRecordUseCase: DeleteRecordUseCase
-    
+        
     weak var router: RecordDetailRouting?
     weak var listener: RecordDetailListener?
     private var disposeBag = DisposeBag()
+    private let deleteRecordUseCase: DeleteRecordUseCase
     
     init(
         presenter: RecordDetailPresentable,
@@ -58,30 +57,20 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
         listener?.recordDetailCloseButtonTapped()
     }
     
-    func recordDetailDeleteButtonTapped(with id: String) -> Observable<Bool> {
-        
+    func recordDetailDeleteButtonTapped(with id: String) {
         deleteRecordUseCase.execute(id: id)
-            .map { response in
-                return response == id /// 성공/실패시 나타나는 string 값 뭔지 모름.
-            }
-        
-        
-        // TODO: Listener 로 보내서 MyRecordList RIB 에서도 리프레쉬 되도록 구현해야 함.
-    }
-    
-    func newRecordDetailDeleteButtonTapped(with id: String) {
-        deleteRecordUseCase.newExecute(id: id)
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] data in
-
-                if (200..<300).contains(data.status) {
+            .subscribe { [weak self] deletedRecordId in
+                if id == deletedRecordId {
                     self?.presenter.showSuccessAlert()
-                } else {
-                    self?.presenter.showErrorAlert(description: "status: \(data.status)\ncode:\(data.code)\nmessage: \(data.message)")
+                    // TODO: Listener 로 보내서 MyRecordList RIB 에서도 리프레쉬 되도록 구현해야 함.
                 }
             } onError: { [weak self] error in
-                /// 회원탈퇴 에러??
-                self?.presenter.showErrorAlert(description: error.localizedDescription)
+                if case DataTransferError.resolvedNetworkFailure(let errorResponse as ErrorResponse) = error {
+                    self?.presenter.showErrorAlert(description: errorResponse.toDomain())
+                } else {
+                    self?.presenter.showErrorAlert(description: "알 수 없는 에러가 발생했습니다.\n다시 시도해주세요\n\(error.localizedDescription)")
+                }
             }
             .disposed(by: disposeBag)
     }
