@@ -78,8 +78,9 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
     
     private lazy var deleteAccountAlertController: ParticleAlertController = {
         let okButton = generateAlertButton(title: "확인") { [weak self] in
-            self?.dismiss(animated: true)
             self?.listener?.deleteAccountButtonTapped()
+            self?.dismiss(animated: true)
+            /// 이것때문에 누수오류가 있었어서 혹시몰라 순서 바꿈
         }
         
         let cancelButton = generateAlertButton(title: "취소") { [weak self] in

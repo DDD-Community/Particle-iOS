@@ -222,22 +222,24 @@ final class RecordDetailViewController: UIViewController,
         return button
     }()
     
-//    private lazy var deleteSuccessResultAlertController: ParticleAlertController = {
-//        let okButton = generateAlertButton(title: "확인") { [weak self] in
-//            self?.dismiss(animated: true)
-//            self?.listener?.recordDetailCloseButtonTapped()
-//        }
-//        
-//        let alert = ParticleAlertController(
-//            title: nil,
-//            body: "파티클 삭제에 성공했습니다.\n 홈화면으로 돌아갑니다.",
-//            buttons: [okButton],
-//            buttonsAxis: .horizontal
-//        )
-//        
-//        return alert
-//    }()
-//    
+    private lazy var deleteSuccessResultAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.listener?.recordDetailCloseButtonTapped()
+            self?.dismiss(animated: true)
+            ///  recordDetailCloseButtonTapped 가 완료되기 전에 객체가 해제되는 것인가..?
+            ///  위 두 메서드 실행순서를 바꿔주니 memory leak 사라짐..
+        }
+        
+        let alert = ParticleAlertController(
+            title: nil,
+            body: "파티클 삭제에 성공했습니다.\n 홈화면으로 돌아갑니다.",
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
+    }()
+    
     private lazy var deleteFailureResultAlertController: ParticleAlertController = {
         let okButton = generateAlertButton(title: "확인") { [weak self] in
             self?.dismiss(animated: true)
@@ -330,7 +332,6 @@ final class RecordDetailViewController: UIViewController,
         
         deleteButton.rx.tap
             .bind { [weak self] _ in
-//                guard let self = self else { return }
                 self?.dismiss(animated: true)
                 self?.listener?.recordDetailDeleteButtonTapped(with: self?.data.id ?? "")
             }
@@ -353,7 +354,6 @@ final class RecordDetailViewController: UIViewController,
         })
         
         let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] action in
-//            guard let self = self else { return }
             self?.present(self?.warningAlertController ?? UIViewController(), animated: true)
         }
         
@@ -391,8 +391,7 @@ final class RecordDetailViewController: UIViewController,
     }
     
     func showSuccessAlert() {
-        listener?.recordDetailCloseButtonTapped()
-//        present(deleteSuccessResultAlertController, animated: true)
+        present(deleteSuccessResultAlertController, animated: true)
     }
 }
 
