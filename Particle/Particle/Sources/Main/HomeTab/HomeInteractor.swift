@@ -21,6 +21,8 @@ protocol HomePresentable: Presentable {
     var listener: HomePresentableListener? { get set }
     
     func setData(data: [SectionOfRecordTag])
+    func startLoading()
+    func stopLoading()
 }
 
 protocol HomeListener: AnyObject {}
@@ -46,7 +48,6 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        fetchData()
     }
     
     override func willResignActive() {
@@ -67,6 +68,10 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
         router?.attachMyRecordList(tag: tag)
     }
     
+    func homeViewDidLoad() {
+        fetchData()
+    }
+    
     // MARK: - HomeInteractable
     
     func recordDetailCloseButtonTapped() {
@@ -82,11 +87,14 @@ final class HomeInteractor: PresentableInteractor<HomePresentable>,
     // MARK: - Methods
     
     private func fetchData() {
+        presenter.startLoading()
         fetchMyAllRecordsUseCase.execute()
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] data in
+                self?.presenter.stopLoading()
                 self?.presenter.setData(data: data)
-            } onError: { error in
+            } onError: { [weak self] error in
+                self?.presenter.stopLoading()
                 Console.error(error.localizedDescription)
             }
             .disposed(by: disposeBag)
