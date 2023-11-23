@@ -8,7 +8,16 @@
 import RxSwift
 
 struct DefaultSearchRepository: SearchRepository {
-    func searchArticle(_ text: String) -> Observable<[String]> {
-        return Observable.just(["fdjskafjsd"])
+    private let searchDataSource: SearchDataSource
+    
+    init(
+        searchDataSource: SearchDataSource
+    ) {
+        self.searchDataSource = searchDataSource
+    }
+    
+    func searchArticle(_ text: String) -> Observable<[SearchResult]> {
+        return searchDataSource.getSearchResult(text)
+            .map { $0.toDomain() }
     }
 }

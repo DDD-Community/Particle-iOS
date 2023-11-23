@@ -29,7 +29,8 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         return tags.map { ($0, false) }
     }()
     
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+    private let searchResult = PublishRelay<[SearchResult]>
     
     private var mainView: SearchMainView {
         return self.view as! SearchMainView
@@ -53,6 +54,10 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         super.viewDidLoad()
         setupInitialView()
         
+        bind()
+    }
+    
+    private func bind() {
         Observable.of([
         "최근 검색어어어어",
         "최근 검색어어어어",
@@ -111,6 +116,15 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
                 self?.listener?.requestSearch(text)
             })
             .disposed(by: disposeBag)
+        
+        searchResult
+            .bind(to: mainView.searchResultMainView.searchResultTableView.rx.items(
+                cellIdentifier: SearchListCell.defaultReuseIdentifier,
+                cellType: SearchListCell.self
+            )) { tableView, item, cell in
+                cell.titleLabel.text = item.title
+            }
+                .disposed(by: disposeBag)
     }
     
     private func setupInitialView() {
@@ -126,6 +140,10 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     func hiddenSearchResult() {
         mainView.recentSearchView.isHidden = false
         mainView.searchResultView.isHidden = true
+    }
+    
+    func updateSearchResult(_ result: [SearchResult]) {
+        searchResult.accept(result)
     }
 }
 

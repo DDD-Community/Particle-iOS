@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol SearchUseCase {
-    func execute(_ text: String) -> Observable<[String]>
+    func execute(_ text: String) -> Observable<[SearchResult]>
 }
 
 final class DefaultSearchResultUseCase: SearchUseCase {
@@ -19,7 +19,7 @@ final class DefaultSearchResultUseCase: SearchUseCase {
         self.searchRepository = searchRepository
     }
     
-    func execute(_ text: String) -> Observable<[String]> {
-        searchRepository.searchArticle(text)
+    func execute(_ text: String) -> Observable<[SearchResult]> {
+        return searchRepository.searchArticle(text)
     }
 }
