@@ -37,6 +37,7 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
+		353FE9892B0F12D90030B0DB /* View in Resources */ = {isa = PBXBuildFile; fileRef = 353FE9882B0F12D90030B0DB /* View */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -228,6 +229,7 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
+		353FE9882B0F12D90030B0DB /* View */ = {isa = PBXFileReference; lastKnownFileType = folder; path = View; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -983,6 +985,7 @@
 		AFBB5F522A66AAB3002416DA /* SearchTab */ = {
 			isa = PBXGroup;
 			children = (
+				353FE9882B0F12D90030B0DB /* View */,
 				AFBB5F642A66ABBF002416DA /* SearchRouter.swift */,
 				AFBB5F652A66ABBF002416DA /* SearchViewController.swift */,
 				AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */,
@@ -1161,6 +1164,7 @@
 				3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */,
 				3520EF352A74DB1C00A53B34 /* Pretendard-Bold.otf in Resources */,
 				3520EF382A74DB1C00A53B34 /* Pretendard-Black.otf in Resources */,
+				353FE9892B0F12D90030B0DB /* View in Resources */,
 				3520EF362A74DB1C00A53B34 /* Pretendard-Medium.otf in Resources */,
 				AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */,
 				3520EF332A74DB1C00A53B34 /* Pretendard-ExtraBold.otf in Resources */,
