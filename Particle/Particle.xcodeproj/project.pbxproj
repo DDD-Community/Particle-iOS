@@ -37,10 +37,6 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
-		35CE35202AEE6CE90006775E /* SearchResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE351C2AEE6CE90006775E /* SearchResultRouter.swift */; };
-		35CE35212AEE6CE90006775E /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE351D2AEE6CE90006775E /* SearchResultViewController.swift */; };
-		35CE35222AEE6CE90006775E /* SearchResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE351E2AEE6CE90006775E /* SearchResultBuilder.swift */; };
-		35CE35232AEE6CE90006775E /* SearchResultInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE351F2AEE6CE90006775E /* SearchResultInteractor.swift */; };
 		35CE35282AEE6D110006775E /* SearchResultListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE35272AEE6D110006775E /* SearchResultListCell.swift */; };
 		35CE352A2AEE6D6D0006775E /* SearchResultEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */; };
 		35D54A942AEE69DD0099BCB0 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */; };
@@ -236,10 +232,6 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
-		35CE351C2AEE6CE90006775E /* SearchResultRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRouter.swift; sourceTree = "<group>"; };
-		35CE351D2AEE6CE90006775E /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
-		35CE351E2AEE6CE90006775E /* SearchResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultBuilder.swift; sourceTree = "<group>"; };
-		35CE351F2AEE6CE90006775E /* SearchResultInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultInteractor.swift; sourceTree = "<group>"; };
 		35CE35272AEE6D110006775E /* SearchResultListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultListCell.swift; sourceTree = "<group>"; };
 		35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultEmptyView.swift; sourceTree = "<group>"; };
 		35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
@@ -500,31 +492,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		35CE351B2AEE6CCD0006775E /* SearchResult */ = {
-			isa = PBXGroup;
-			children = (
-				35CE35242AEE6CF70006775E /* View */,
-				35CE351C2AEE6CE90006775E /* SearchResultRouter.swift */,
-				35CE351D2AEE6CE90006775E /* SearchResultViewController.swift */,
-				35CE351E2AEE6CE90006775E /* SearchResultBuilder.swift */,
-				35CE351F2AEE6CE90006775E /* SearchResultInteractor.swift */,
-			);
-			path = SearchResult;
-			sourceTree = "<group>";
-		};
-		35CE35242AEE6CF70006775E /* View */ = {
+		35D54A952AEE69F90099BCB0 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				35CE35272AEE6D110006775E /* SearchResultListCell.swift */,
 				35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */,
 				35F90B852AF7C1AC003C96D7 /* SearchResultMainView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		35D54A952AEE69F90099BCB0 /* View */ = {
-			isa = PBXGroup;
-			children = (
 				35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */,
 				35D54A962AEE6A750099BCB0 /* SearchMainView.swift */,
 			);
@@ -1034,7 +1007,6 @@
 				AFBB5F652A66ABBF002416DA /* SearchViewController.swift */,
 				AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */,
 				AFBB5F672A66ABBF002416DA /* SearchInteractor.swift */,
-				35CE351B2AEE6CCD0006775E /* SearchResult */,
 			);
 			path = SearchTab;
 			sourceTree = "<group>";
@@ -1299,7 +1271,6 @@
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
 				AF88EDA22AD29C71001EB474 /* DataTransferService.swift in Sources */,
 				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
-				35CE35202AEE6CE90006775E /* SearchResultRouter.swift in Sources */,
 				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
 				AF88ED9A2AD2993B001EB474 /* Requestable.swift in Sources */,
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
@@ -1341,7 +1312,6 @@
 				AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */,
 				AFBB5F772A66B65D002416DA /* SelectSentenceInteractor.swift in Sources */,
 				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
-				35CE35232AEE6CE90006775E /* SearchResultInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
 				AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */,
 				AFDE0F432AA4C1F3008DC539 /* MyRecordListRouter.swift in Sources */,
@@ -1357,7 +1327,6 @@
 				AFC748522ADB66EF009C6819 /* RecordMapper.swift in Sources */,
 				AFBB5F7C2A66B66B002416DA /* EditSentenceRouter.swift in Sources */,
 				3520EF162A5E91A900A53B34 /* SetAdditionalInformationRouter.swift in Sources */,
-				35CE35212AEE6CE90006775E /* SearchResultViewController.swift in Sources */,
 				AF4647522AAA0D6700701B83 /* SetAlarmBuilder.swift in Sources */,
 				AF130A992AA2E9E200F2E0BD /* RecordDetailBuilder.swift in Sources */,
 				3520EF012A5E697000A53B34 /* OrganizingSentenceViewModel.swift in Sources */,
@@ -1451,7 +1420,6 @@
 				AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */,
 				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
 				AFC748502ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift in Sources */,
-				35CE35222AEE6CE90006775E /* SearchResultBuilder.swift in Sources */,
 				AF130A912AA2DE0F00F2E0BD /* UITextField+.swift in Sources */,
 				AF0D71E02A5BEF7B00157758 /* LoggedInInteractor.swift in Sources */,
 				AF88EDC32AD3D51A001EB474 /* DefaultRecordRepository.swift in Sources */,

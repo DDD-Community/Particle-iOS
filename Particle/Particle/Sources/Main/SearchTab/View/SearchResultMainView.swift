@@ -36,23 +36,14 @@ final class SearchResultMainView: UIView {
         ]
             .forEach {
                 addSubview($0)
-                $0.translatesAutoresizingMaskIntoConstraints = false
             }
         
-        NSLayoutConstraint.activate([
-            searchResultTableView.topAnchor.constraint(equalTo: self.topAnchor),
-            searchResultTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            searchResultTableView.leftAnchor.constraint(equalTo: self.leftAnchor),
-            searchResultTableView.rightAnchor.constraint(equalTo: self.rightAnchor)
-        ])
+        searchResultTableView.snp.makeConstraints { make in
+            make.edges.equalTo(self.layoutMarginsGuide)
+        }
         
-        NSLayoutConstraint.activate(
-            [
-                emptyView.topAnchor.constraint(equalTo: self.topAnchor),
-                emptyView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-                emptyView.leftAnchor.constraint(equalTo: self.leftAnchor),
-                emptyView.rightAnchor.constraint(equalTo: self.rightAnchor)
-            ]
-        )
+        emptyView.snp.makeConstraints { make in
+            make.edges.equalTo(self.layoutMarginsGuide)
+        }
     }
 }
