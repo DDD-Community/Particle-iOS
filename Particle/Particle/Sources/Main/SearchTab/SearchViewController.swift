@@ -10,13 +10,12 @@ import RxSwift
 import UIKit
 
 protocol SearchPresentableListener: AnyObject {
-    func beginSearch(_ isStart: Bool)
+    func requestSearch(_ text: String) -> 
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
 
     weak var listener: SearchPresentableListener?
-    weak var searchResultView: UIView?
     
     private var tags: [(title: String, isSelected: Bool)] = {
         let tags = [
@@ -31,7 +30,9 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     var disposeBag = DisposeBag()
     
-    private var mainView = SearchMainView()
+    private var mainView: SearchMainView {
+        return self.view as! SearchMainView
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -44,7 +45,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     }
     
     override func loadView() {
-        self.view = mainView
+        self.view = SearchMainView()
     }
     
     override func viewDidLoad() {
@@ -95,8 +96,12 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
                 .map { _ in false }
                 .asObservable()
         ])
-        .bind { isStart in
-            self.listener?.beginSearch(isStart)
+        .bind { [weak self] isStart in
+            if isStart {
+                self?.showSearchResult()
+            } else {
+                self?.hiddenSearchResult()
+            }
         }
         .disposed(by: disposeBag)
     }
@@ -106,19 +111,14 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         navigationController?.isNavigationBarHidden = true
     }
     
-    func addSearchResult(_ view: UIViewController) {
-        guard searchResultView == nil else { return }
-        searchResultView = view.view
-        self.mainView.addSubview(searchResultView)
-        searchResultView.snp.makeConstraints { make in
-            make.top.equalTo(mainView.searchBar.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
-        }
+    func showSearchResult() {
+        mainView.recentSearchView.isHidden = true
+        mainView.searchResultView.isHidden = false
     }
     
-    func removeSearchResult() {
-        guard let searchResultView = self.searchResultView else { return }
-        self.searchResultView?.removeFromSuperview()
+    func hiddenSearchResult() {
+        mainView.recentSearchView.isHidden = false
+        mainView.searchResultView.isHidden = true
     }
 }
 

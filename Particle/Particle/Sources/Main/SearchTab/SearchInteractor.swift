@@ -9,8 +9,6 @@ import RIBs
 import RxSwift
 
 protocol SearchRouting: ViewableRouting {
-    func attachSearchResult()
-    func detachSearchResult()
 }
 
 protocol SearchPresentable: Presentable {
@@ -42,13 +40,5 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
-    }
-    
-    func beginSearch(_ isStart: Bool) {
-        if isStart {
-            router?.showSearchResult()
-        } else {
-            router?.hideSearchResult()
-        }
     }
 }

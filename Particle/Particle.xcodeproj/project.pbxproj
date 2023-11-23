@@ -37,6 +37,7 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
+		353FE9862B0F0F0A0030B0DB /* RecentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353FE9852B0F0F0A0030B0DB /* RecentSearchView.swift */; };
 		35CE35282AEE6D110006775E /* SearchResultListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE35272AEE6D110006775E /* SearchResultListCell.swift */; };
 		35CE352A2AEE6D6D0006775E /* SearchResultEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */; };
 		35D54A942AEE69DD0099BCB0 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */; };
@@ -232,6 +233,7 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
+		353FE9852B0F0F0A0030B0DB /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
 		35CE35272AEE6D110006775E /* SearchResultListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultListCell.swift; sourceTree = "<group>"; };
 		35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultEmptyView.swift; sourceTree = "<group>"; };
 		35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				35F90B852AF7C1AC003C96D7 /* SearchResultMainView.swift */,
 				35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */,
 				35D54A962AEE6A750099BCB0 /* SearchMainView.swift */,
+				353FE9852B0F0F0A0030B0DB /* RecentSearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1335,6 +1338,7 @@
 				AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
 				AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */,
+				353FE9862B0F0F0A0030B0DB /* RecentSearchView.swift in Sources */,
 				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
 				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
 				AFBB5F6B2A66ABBF002416DA /* SearchInteractor.swift in Sources */,
@@ -1569,7 +1573,7 @@
 				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = SWPBG3YXG5;
+				DEVELOPMENT_TEAM = 96H5TT55S4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Particle;
@@ -1604,7 +1608,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = SWPBG3YXG5;
+				DEVELOPMENT_TEAM = 96H5TT55S4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Particle;
