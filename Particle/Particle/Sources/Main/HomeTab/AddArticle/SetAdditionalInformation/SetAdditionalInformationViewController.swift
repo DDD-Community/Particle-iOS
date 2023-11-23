@@ -134,6 +134,7 @@ final class SetAdditionalInformationViewController: UIViewController,
         textField.layer.cornerRadius = 8
         textField.snp.makeConstraints {
             $0.height.equalTo(44)
+            $0.width.equalTo(DeviceSize.width - 40)
         }
         return textField
     }()
@@ -240,67 +241,6 @@ final class SetAdditionalInformationViewController: UIViewController,
         return collectionView
     }()
     
-    private let accordionStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        return stackView
-    }()
-    
-    private let allTagOpenButton: UIButton = {
-        let button = UIButton()
-        button.setAttributedTitle(
-            NSMutableAttributedString()
-                .attributeString(
-                    string: "전체 펼치기",
-                    font: .particleFont.generate(style: .pretendard_Regular, size: 12),
-                    textColor: .particleColor.gray03
-                ),
-            for: .normal
-        )
-        button.setAttributedTitle(
-            NSMutableAttributedString()
-                .attributeString(
-                    string: "전체 접기",
-                    font: .particleFont.generate(style: .pretendard_Regular, size: 12),
-                    textColor: .particleColor.gray03
-                ),
-            for: .selected
-        )
-        return button
-    }()
-    
-    private let allTagTitleLabel: UILabel = {
-        let label = UILabel()
-        label.setParticleFont(.y_body01, color: .particleColor.gray04, text: "전체 태그")
-        return label
-    }()
-    
-    private let accordion1 = Accordion(
-        title: "디자인",
-        tags: ["#브랜딩", "#UXUI", "#그래픽 디자인", "#산업 디자인"]
-    )
-    
-    private let accordion2 = Accordion(
-        title: "마케팅",
-        tags: ["#브랜드 마케팅", "#그로스 마케팅", "#콘텐츠 마케팅"]
-    )
-    
-    private let accordion3 = Accordion(
-        title: "기획",
-        tags: ["#서비스 기획", "#전략 기획", "#시스템 기획", "#데이터 분석"]
-    )
-    
-    private let accordion4 = Accordion(
-        title: "개발",
-        tags: ["#iOS", "#Android", "#Web", "#서버", "#AI"]
-    )
-    
-    private let accordion5 = Accordion(
-        title: "스타트업",
-        tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"]
-    )
-    
     // MARK: - Initializers
     
     init() {
@@ -312,7 +252,6 @@ final class SetAdditionalInformationViewController: UIViewController,
         layout()
         configureButton()
         bind()
-        bindAccordion()
     }
     
     required init?(coder: NSCoder) {
@@ -346,30 +285,6 @@ final class SetAdditionalInformationViewController: UIViewController,
             self?.titleTextField.rightViewMode = .never
         }
         .disposed(by: disposeBag)
-    }
-    
-    private func bindAccordion() {
-        
-        let accordions: [Accordion] = [
-            accordion1,
-            accordion2,
-            accordion3,
-            accordion4,
-            accordion5
-        ]
-        
-        accordions.enumerated().forEach { (i, accordion) in
-
-            accordion.selectedTags.subscribe { [weak self] selectedTagsInAccordion in
-                guard let self = self else { return }
-                guard let selectedTagsInAccordion = selectedTagsInAccordion.element else { return }
-                var list = self.selectedTags.value
-                list[i] = selectedTagsInAccordion
-                self.selectedTags.accept(list)
-                Console.log("\(self.selectedTags)")
-            }
-            .disposed(by: disposeBag)
-        }
     }
     
     private func bind() {
@@ -447,29 +362,6 @@ final class SetAdditionalInformationViewController: UIViewController,
             self?.titleTextField.rightViewMode = .whileEditing
         }
         .disposed(by: disposeBag)
-        
-        allTagOpenButton.rx.tap.bind { [weak self] _ in
-            
-            guard let self = self else { return }
-            Console.debug("allTagOpenButton Tapped!")
-            self.allTagOpenButton.isSelected.toggle()
-            
-            [
-                self.accordion1,
-                self.accordion2,
-                self.accordion3,
-                self.accordion4,
-                self.accordion5
-            ]
-                .forEach {
-                    if self.allTagOpenButton.isSelected {
-                        $0.openAccordion()
-                    } else {
-                        $0.closeAccordion()
-                    }
-                }
-        }
-        .disposed(by: disposeBag)
     }
 }
 
@@ -497,18 +389,11 @@ private extension SetAdditionalInformationViewController {
             titleTextField,
             titleTextFieldWarningLabel,
             recommendTagTitleLabel,
-            recommendTagCollectionView,
-            allTagOpenButton,
-            allTagTitleLabel,
-            accordionStackView
+            recommendTagCollectionView
         ]
             .forEach {
                 mainScrollView.addSubview($0)
             }
-        
-        [accordion1, accordion2, accordion3, accordion4, accordion5].forEach {
-            accordionStackView.addArrangedSubview($0)
-        }
     }
     
     func layout() {
@@ -530,7 +415,7 @@ private extension SetAdditionalInformationViewController {
         mainScrollView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.width.equalToSuperview()
+            $0.width.equalTo(DeviceSize.width)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -576,23 +461,6 @@ private extension SetAdditionalInformationViewController {
         recommendTagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(recommendTagTitleLabel.snp.bottom).offset(Metric.Tags.topMagin)
             make.left.right.equalToSuperview().inset(Metric.Tags.horizontalMargin)
-        }
-        
-        allTagOpenButton.snp.makeConstraints {
-            $0.top.equalTo(recommendTagCollectionView.snp.bottom).offset(37)
-            $0.trailing.equalToSuperview().inset(20)
-        }
-        
-        allTagTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(recommendTagCollectionView.snp.bottom).offset(48)
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        accordionStackView.snp.makeConstraints {
-            $0.top.equalTo(allTagTitleLabel.snp.bottom).offset(18)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(20)
-            $0.width.equalTo(mainScrollView.frameLayoutGuide)
         }
     }
 }

@@ -7,9 +7,16 @@
 
 import RIBs
 
-protocol SelectTagDependency: Dependency {}
+protocol SelectTagDependency: Dependency {
+    var setInterestedTagsUseCase: SetInterestedTagsUseCase { get }
+}
 
-final class SelectTagComponent: Component<SelectTagDependency> {}
+final class SelectTagComponent: Component<SelectTagDependency> {
+    
+    fileprivate var setInterestedTagsUseCase: SetInterestedTagsUseCase {
+        dependency.setInterestedTagsUseCase
+    }
+}
 
 // MARK: - Builder
 
@@ -26,7 +33,10 @@ final class SelectTagBuilder: Builder<SelectTagDependency>, SelectTagBuildable {
     func build(withListener listener: SelectTagListener) -> SelectTagRouting {
         let component = SelectTagComponent(dependency: dependency)
         let viewController = SelectTagViewController()
-        let interactor = SelectTagInteractor(presenter: viewController)
+        let interactor = SelectTagInteractor(
+            presenter: viewController,
+            setInterestedTagsUseCase: component.setInterestedTagsUseCase
+        )
         interactor.listener = listener
         return SelectTagRouter(interactor: interactor, viewController: viewController)
     }

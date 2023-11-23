@@ -23,7 +23,8 @@ final class DefaultRecordDataSource: RecordDataSource {
         
         let endpoint = Endpoint<[RecordReadDTO]>(
             path: path,
-            method: .get
+            method: .get,
+            headerParameters: ["Authorization": "Bearer \(UserDefaults.standard.string(forKey: "ACCESSTOKEN") ?? "")"]
         )
         return dataTransferService.request(with: endpoint)
     }

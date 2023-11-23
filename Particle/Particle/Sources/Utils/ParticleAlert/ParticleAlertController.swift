@@ -28,6 +28,8 @@ final class ParticleAlertController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 2
+        stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(top: 19, left: 20, bottom: 0, right: 20)
         return stack
     }()
     
@@ -188,10 +190,12 @@ private extension ParticleAlertController {
     func setConstraints() {
         
         mainStack.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(52)
+            $0.centerY.equalToSuperview()
         }
         labelStack.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(19)
+            $0.top.equalToSuperview()
+//                .inset(19)
         }
     }
 }

@@ -55,6 +55,7 @@ final class MyRecordListViewController: UIViewController,
             default:
                 Console.error("dataSource - configureSupplementaryView Error")
                 assert(false, "Unexpected element kind")
+                return .init()
             }
         })
     

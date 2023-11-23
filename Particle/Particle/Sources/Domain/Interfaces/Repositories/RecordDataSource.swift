@@ -14,3 +14,4 @@ protocol RecordDataSource {
     func createRecord(record: RecordCreateDTO) -> Observable<RecordReadDTO>
     func deleteRecord(recordId: String) -> Observable<String>
 }
+

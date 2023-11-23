@@ -17,6 +17,7 @@ protocol HomePresentableListener: AnyObject {
     func homeCellTapped(with model: RecordReadDTO)
     func homePlusButtonTapped()
     func homeSectionTitleTapped(tag: String)
+    func homeViewDidLoad()
 }
 
 final class HomeViewController: UIViewController, HomePresentable, HomeViewControllable {
@@ -64,6 +65,16 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
     }
     
     // MARK: - UIComponents
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .medium
+        activityIndicator.color = .particleColor.main100
+        
+        return activityIndicator
+    }()
     
     private let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -146,6 +157,7 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         setupInitialView()
         configurePlusButton()
         bind()
+        listener?.homeViewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -284,6 +296,14 @@ final class HomeViewController: UIViewController, HomePresentable, HomeViewContr
         recordList.accept(data)
     }
     
+    func startLoading() {
+        activityIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        activityIndicator.stopAnimating()
+    }
+    
     // MARK: - HomeViewControllable
     
     func present(viewController: RIBs.ViewControllable) {
@@ -306,7 +326,8 @@ private extension HomeViewController {
             plusButton,
             toolTip,
             emptyLabel,
-            emptyImage
+            emptyImage,
+            activityIndicator
         ]
             .forEach {
                 view.addSubview($0)
@@ -321,6 +342,9 @@ private extension HomeViewController {
     }
     
     func setConstraints() {
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
         
         mainScrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)

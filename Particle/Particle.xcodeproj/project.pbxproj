@@ -37,12 +37,6 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
-		353FE9862B0F0F0A0030B0DB /* RecentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353FE9852B0F0F0A0030B0DB /* RecentSearchView.swift */; };
-		35CE35282AEE6D110006775E /* SearchResultListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE35272AEE6D110006775E /* SearchResultListCell.swift */; };
-		35CE352A2AEE6D6D0006775E /* SearchResultEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */; };
-		35D54A942AEE69DD0099BCB0 /* SearchListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */; };
-		35D54A972AEE6A750099BCB0 /* SearchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D54A962AEE6A750099BCB0 /* SearchMainView.swift */; };
-		35F90B862AF7C1AC003C96D7 /* SearchResultMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F90B852AF7C1AC003C96D7 /* SearchResultMainView.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -104,7 +98,7 @@
 		AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */; };
 		AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */; };
 		AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */; };
-		AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */; };
+		AF662CAF2AF608BC005B4FCA /* WithdrawResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */; };
 		AF6F25BB2AC962BC004DA705 /* SectionFooter_Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */; };
 		AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7B2E682AA1FC5B00806149 /* Tag.swift */; };
 		AF88ED9A2AD2993B001EB474 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88ED992AD2993B001EB474 /* Requestable.swift */; };
@@ -144,6 +138,7 @@
 		AF9E9C032AB6E1370058AB70 /* ParticleAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */; };
 		AF9E9C062AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */; };
 		AF9E9C082AB6E1760058AB70 /* ParticleAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */; };
+		AFA551CC2AF3BEA000E15AC2 /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA551CB2AF3BEA000E15AC2 /* WithdrawUseCase.swift */; };
 		AFAB32582AACB35D000EA542 /* SectionHeader_Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB32572AACB35D000EA542 /* SectionHeader_Tag.swift */; };
 		AFB4BDC52A4093DC008BA9E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */; };
 		AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4BDC62A4093DC008BA9E0 /* SceneDelegate.swift */; };
@@ -233,12 +228,6 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
-		353FE9852B0F0F0A0030B0DB /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
-		35CE35272AEE6D110006775E /* SearchResultListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultListCell.swift; sourceTree = "<group>"; };
-		35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultEmptyView.swift; sourceTree = "<group>"; };
-		35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCell.swift; sourceTree = "<group>"; };
-		35D54A962AEE6A750099BCB0 /* SearchMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMainView.swift; sourceTree = "<group>"; };
-		35F90B852AF7C1AC003C96D7 /* SearchResultMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultMainView.swift; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -299,7 +288,7 @@
 		AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsViewController.swift; sourceTree = "<group>"; };
 		AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsBuilder.swift; sourceTree = "<group>"; };
 		AF621F672AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsInteractor.swift; sourceTree = "<group>"; };
-		AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlert.swift; sourceTree = "<group>"; };
+		AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawResponse.swift; sourceTree = "<group>"; };
 		AF6F25BA2AC962BC004DA705 /* SectionFooter_Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFooter_Divider.swift; sourceTree = "<group>"; };
 		AF7B2E682AA1FC5B00806149 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		AF88ED992AD2993B001EB474 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
@@ -339,6 +328,7 @@
 		AF9E9C022AB6E1370058AB70 /* ParticleAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertController.swift; sourceTree = "<group>"; };
 		AF9E9C052AB6E1610058AB70 /* ParticleAlertTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF9E9C072AB6E1760058AB70 /* ParticleAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleAlertPresentationController.swift; sourceTree = "<group>"; };
+		AFA551CB2AF3BEA000E15AC2 /* WithdrawUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
 		AFAB32572AACB35D000EA542 /* SectionHeader_Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader_Tag.swift; sourceTree = "<group>"; };
 		AFB4BDC12A4093DC008BA9E0 /* Particle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Particle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB4BDC42A4093DC008BA9E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -470,7 +460,6 @@
 				3520EEFB2A5D5F7D00A53B34 /* ReusableCell.swift */,
 				AF18E2DE2A68EEB100C54490 /* Console.swift */,
 				AFDE0F3C2AA4AC51008DC539 /* DateManager.swift */,
-				AF621F6C2AAD9A8800DBD514 /* ParticleAlert.swift */,
 				AF9E9C042AB6E13A0058AB70 /* ParticleAlert */,
 			);
 			path = Utils;
@@ -492,19 +481,6 @@
 				3520EF432A74DDA700A53B34 /* YdestreetL.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		35D54A952AEE69F90099BCB0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				35CE35272AEE6D110006775E /* SearchResultListCell.swift */,
-				35CE35292AEE6D6D0006775E /* SearchResultEmptyView.swift */,
-				35F90B852AF7C1AC003C96D7 /* SearchResultMainView.swift */,
-				35D54A932AEE69DD0099BCB0 /* SearchListCell.swift */,
-				35D54A962AEE6A750099BCB0 /* SearchMainView.swift */,
-				353FE9852B0F0F0A0030B0DB /* RecentSearchView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		9968BF91A03407F5B3382E7B /* Pods */ = {
@@ -877,6 +853,7 @@
 			isa = PBXGroup;
 			children = (
 				AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */,
+				AFA551CB2AF3BEA000E15AC2 /* WithdrawUseCase.swift */,
 				AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */,
 				AFC748592ADB73D9009C6819 /* FetchMyProfileUseCase.swift */,
 				AFC7484D2ADAC1F3009C6819 /* FetchMyAllRecordsUseCase.swift */,
@@ -913,6 +890,7 @@
 				AFC748512ADB66EF009C6819 /* RecordMapper.swift */,
 				AF9702F12A8CFF9200877C85 /* LoginRequest.swift */,
 				AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */,
+				AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */,
 				AF9702F02A8CFF8800877C85 /* DataMapping */,
 			);
 			path = Network;
@@ -1005,7 +983,6 @@
 		AFBB5F522A66AAB3002416DA /* SearchTab */ = {
 			isa = PBXGroup;
 			children = (
-				35D54A952AEE69F90099BCB0 /* View */,
 				AFBB5F642A66ABBF002416DA /* SearchRouter.swift */,
 				AFBB5F652A66ABBF002416DA /* SearchViewController.swift */,
 				AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */,
@@ -1259,7 +1236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35D54A942AEE69DD0099BCB0 /* SearchListCell.swift in Sources */,
 				AF4647532AAA0D6700701B83 /* SetAlarmInteractor.swift in Sources */,
 				AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */,
 				AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */,
@@ -1276,6 +1252,7 @@
 				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
 				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
 				AF88ED9A2AD2993B001EB474 /* Requestable.swift in Sources */,
+				AFA551CC2AF3BEA000E15AC2 /* WithdrawUseCase.swift in Sources */,
 				AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */,
 				AF4647462AA9E94700701B83 /* SetAccountViewController.swift in Sources */,
 				AFBB5F512A66AAB0002416DA /* ExploreInteractor.swift in Sources */,
@@ -1289,15 +1266,12 @@
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
 				AF88EDCF2AD58B3E001EB474 /* DefaultUserDataSource.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
-				35F90B862AF7C1AC003C96D7 /* SearchResultMainView.swift in Sources */,
 				AFBB5F7E2A66B66B002416DA /* EditSentenceBuilder.swift in Sources */,
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
-				AF621F6D2AAD9A8800DBD514 /* ParticleAlert.swift in Sources */,
 				AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
-				35CE35282AEE6D110006775E /* SearchResultListCell.swift in Sources */,
 				AFB86FF22AC9598700CEBA0F /* SectionHeader_Date.swift in Sources */,
 				AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */,
 				AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */,
@@ -1317,6 +1291,7 @@
 				3520EF192A5E91A900A53B34 /* SetAdditionalInformationInteractor.swift in Sources */,
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
 				AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */,
+				AF662CAF2AF608BC005B4FCA /* WithdrawResponse.swift in Sources */,
 				AFDE0F432AA4C1F3008DC539 /* MyRecordListRouter.swift in Sources */,
 				AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */,
 				AF9702FA2A8D021800877C85 /* RecordReadDTO.swift in Sources */,
@@ -1338,7 +1313,6 @@
 				AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
 				AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */,
-				353FE9862B0F0F0A0030B0DB /* RecentSearchView.swift in Sources */,
 				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
 				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
 				AFBB5F6B2A66ABBF002416DA /* SearchInteractor.swift in Sources */,
@@ -1391,7 +1365,6 @@
 				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
 				AF88EDC52AD3D533001EB474 /* DefaultRecordDataSource.swift in Sources */,
 				AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */,
-				35CE352A2AEE6D6D0006775E /* SearchResultEmptyView.swift in Sources */,
 				AF4647602AAA196F00701B83 /* DirectlySetAlarmRouter.swift in Sources */,
 				AF88EDA92AD29F9D001EB474 /* DefaultNetworkSessionManager.swift in Sources */,
 				AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */,
@@ -1408,7 +1381,6 @@
 				AF6F25BB2AC962BC004DA705 /* SectionFooter_Divider.swift in Sources */,
 				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,
 				AF88EDB92AD3B546001EB474 /* RawDataResponseDecoder.swift in Sources */,
-				35D54A972AEE6A750099BCB0 /* SearchMainView.swift in Sources */,
 				AF4647582AAA0E9A00701B83 /* AlarmToggleRow.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
 				AF88EDB52AD38026001EB474 /* DefaultDataTransferService.swift in Sources */,
@@ -1572,8 +1544,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 96H5TT55S4;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = SWPBG3YXG5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Particle;
@@ -1589,7 +1561,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wonbeen.Particle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1606,9 +1578,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 96H5TT55S4;
+				DEVELOPMENT_TEAM = SWPBG3YXG5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Particle;
@@ -1624,7 +1596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wonbeen.Particle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -22,7 +22,7 @@ enum Tag: String {
     case system_plan = "#시스템 기획"
     case data_anal = "#데이터 분석"
     case company_culture = "#조직 문화"
-    case trend = "#트랜드"
+    case trend = "#트렌드"
     case cx = "#CX"
     case leadership = "#리더쉽"
     case insight = "#인사이트"
@@ -61,7 +61,7 @@ enum Tag: String {
         case .company_culture:
             return "조직 문화"
         case .trend:
-            return "트랜드"
+            return "트렌드"
         case .cx:
             return "CX"
         case .leadership:
