@@ -41,4 +41,8 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
         super.willResignActive()
         // TODO: Pause any business logic.
     }
+    
+    func requestSearch(_ text: String) {
+        
+    }
 }

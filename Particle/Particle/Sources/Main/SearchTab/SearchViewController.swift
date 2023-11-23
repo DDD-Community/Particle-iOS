@@ -7,10 +7,11 @@
 
 import RIBs
 import RxSwift
+import RxCocoa
 import UIKit
 
 protocol SearchPresentableListener: AnyObject {
-    func requestSearch(_ text: String) -> 
+    func requestSearch(_ text: String)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
@@ -104,6 +105,12 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             }
         }
         .disposed(by: disposeBag)
+        
+        mainView.searchBar.rx.searchButtonClicked
+            .subscribe(onNext: { [weak self] text in
+                self?.listener?.requestSearch(text)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setupInitialView() {
