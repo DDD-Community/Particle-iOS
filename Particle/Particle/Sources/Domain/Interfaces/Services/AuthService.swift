@@ -6,7 +6,9 @@
 //
 
 import RxSwift
+import Foundation
 
 protocol AuthService {
     func login(with body: LoginRequest) -> Observable<LoginSuccessResponse>
+    func withdraw() -> Observable<WithdrawResponse>
 }

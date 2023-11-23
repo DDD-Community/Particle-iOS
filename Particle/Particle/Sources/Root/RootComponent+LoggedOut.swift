@@ -12,6 +12,7 @@ protocol RootDependencyLoggedOut: Dependency {
 }
 
 extension RootComponent: LoggedOutDependency {
+    
     var loginUseCase: LoginUseCase {
         return DefaultLoginUseCase(authService: dependency.authService)
     }
@@ -19,5 +20,4 @@ extension RootComponent: LoggedOutDependency {
     var setInterestedTagsUseCase: SetInterestedTagsUseCase {
         return DefaultSetInterestedTagsUseCase(userRepository: dependency.userRepository)
     }
-    
 }

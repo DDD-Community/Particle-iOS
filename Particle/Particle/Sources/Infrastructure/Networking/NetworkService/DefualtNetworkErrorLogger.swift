@@ -34,8 +34,12 @@ public final class DefaultNetworkErrorLogger: NetworkErrorLogger {
     }
     
     public func log(error: Error) {
-        //
-        printIfDebug("\(error.localizedDescription)")
+        
+        if case NetworkError.error(statusCode: let code, data: _) = error {
+            Console.error("StatusCode: \(code) -- \(error.localizedDescription)")
+        } else {
+            printIfDebug("\(error.localizedDescription)")
+        }
     }
     
     public func log(responseData data: Data, response: URLResponse) {

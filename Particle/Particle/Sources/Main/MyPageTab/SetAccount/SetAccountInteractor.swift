@@ -15,6 +15,8 @@ protocol SetAccountRouting: ViewableRouting {
 protocol SetAccountPresentable: Presentable {
     var listener: SetAccountPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    func showErrorAlert(description: String)
+    func showSuccessAlert()
 }
 
 protocol SetAccountListener: AnyObject {
@@ -24,12 +26,17 @@ protocol SetAccountListener: AnyObject {
 
 final class SetAccountInteractor: PresentableInteractor<SetAccountPresentable>, SetAccountInteractable, SetAccountPresentableListener {
     
+    private var disposeBag = DisposeBag()
     weak var router: SetAccountRouting?
     weak var listener: SetAccountListener?
+    
+    private let withdrawUseCase: WithdrawUseCase
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
-    override init(presenter: SetAccountPresentable) {
+    init(
+        presenter: SetAccountPresentable,
+        withdrawUseCase: WithdrawUseCase
+    ) {
+        self.withdrawUseCase = withdrawUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -50,9 +57,28 @@ final class SetAccountInteractor: PresentableInteractor<SetAccountPresentable>, 
         listener?.setAccountBackButtonTapped()
     }
     
+    func deleteAccountButtonTapped() {
+
+        withdrawUseCase.execute()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] data in
+
+                if (200..<300).contains(data.status) {
+                    self?.presenter.showSuccessAlert()
+                } else {
+                    self?.presenter.showErrorAlert(description: "status: \(data.status)\ncode:\(data.code)\nmessage: \(data.message)")
+                }
+            } onError: { [weak self] error in
+                /// 회원탈퇴 에러??
+                self?.presenter.showErrorAlert(description: error.localizedDescription)
+            }
+            .disposed(by: disposeBag)
+    }
+    
     func logoutButtonTapped() {
         UserDefaults.standard.removeObject(forKey: "ACCESSTOKEN")
         UserDefaults.standard.removeObject(forKey: "REFRESHTOKEN")
+        UserDefaults.standard.removeObject(forKey: "INTERESTED_TAGS")
         listener?.setAccountLogoutButtonTapped()
     }
 }

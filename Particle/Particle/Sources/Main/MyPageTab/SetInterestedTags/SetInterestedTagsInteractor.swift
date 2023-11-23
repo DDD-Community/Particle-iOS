@@ -17,6 +17,7 @@ protocol SetInterestedTagsPresentable: Presentable {
     // TODO: Declare methods the interactor can invoke the presenter to present data.
     
     func showUploadSuccessAlert()
+    func showErrorAlert(description: String)
 }
 
 protocol SetInterestedTagsListener: AnyObject {
@@ -64,8 +65,12 @@ final class SetInterestedTagsInteractor: PresentableInteractor<SetInterestedTags
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] dto in
                 self?.presenter.showUploadSuccessAlert()
-            } onError: { error in
-                Console.error(error.localizedDescription)
+            } onError: { [weak self] error in
+                if case DataTransferError.resolvedNetworkFailure(let errorResponse as ErrorResponse) = error {
+                    self?.presenter.showErrorAlert(description: errorResponse.toDomain())
+                } else {
+                    self?.presenter.showErrorAlert(description: "알 수 없는 에러가 발생했습니다.\n다시 시도해주세요.\ndescription: \(error.localizedDescription)")
+                }
             }
             .disposed(by: disposeBag)
     }

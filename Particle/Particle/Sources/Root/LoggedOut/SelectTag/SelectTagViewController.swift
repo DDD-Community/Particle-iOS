@@ -50,6 +50,7 @@ final class SelectTagViewController: UIViewController,
 
     weak var listener: SelectTagPresentableListener?
     private var disposeBag: DisposeBag = .init()
+    private var errorDescription = ""
     
     private var selectedTags: BehaviorRelay<[[String]]> = .init(value: Array(repeating: [], count: 5))
     
@@ -126,7 +127,7 @@ final class SelectTagViewController: UIViewController,
     
     private let accordion5 = Accordion(
         title: "스타트업",
-        tags: ["#조직 문화", "#트랜드", "#CX", "#리더쉽", "#인사이트"]
+        tags: ["#조직 문화", "#트렌드", "#CX", "#리더쉽", "#인사이트"]
     )
     
     private let startButton: UIButton = {
@@ -139,6 +140,21 @@ final class SelectTagViewController: UIViewController,
         button.layer.cornerRadius = 8
         button.isEnabled = false
         return button
+    }()
+    
+    private lazy var failureResultAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        let alert = ParticleAlertController(
+            title: nil,
+            body: errorDescription,
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
     }()
     
     // MARK: - Initializers
@@ -226,6 +242,27 @@ final class SelectTagViewController: UIViewController,
             }
         }
         .disposed(by: disposeBag)
+    }
+    
+    private func generateAlertButton(title: String, _ buttonAction: @escaping () -> Void) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        
+        button.rx.tap.bind { [weak self] _ in
+            buttonAction()
+        }
+        .disposed(by: disposeBag)
+        
+        return button
+    }
+    
+    func showErrorAlert(description: String) {
+        errorDescription = description
+        present(failureResultAlertController, animated: true)
     }
 }
 

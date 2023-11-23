@@ -55,15 +55,15 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
     }
     
     func attachTabs() {
+        let mypage = mypage.build(withListener: interactor)
         let home = home.build(withListener: interactor)
         let explore = explore.build(withListener: interactor)
         let search = search.build(withListener: interactor)
-        let mypage = mypage.build(withListener: interactor)
         
+        attachChild(mypage) /// interestedTag 를 빨리 얻기위해
         attachChild(home)
         attachChild(explore)
         attachChild(search)
-        attachChild(mypage)
         
         let viewControllers = [
             NavigationControllerable(root: home.viewControllable),

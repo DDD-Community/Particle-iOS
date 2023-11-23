@@ -39,6 +39,7 @@ final class DefaultUserDataSource: UserDataSource {
         let endpoint = Endpoint<UserReadDTO>(
             path: path,
             method: .put,
+            headerParameters: ["Authorization": "Bearer \(UserDefaults.standard.string(forKey: "ACCESSTOKEN") ?? "")"],
             queryParametersTuple: queryParameterTuple
         )
         

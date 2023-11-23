@@ -14,14 +14,17 @@ protocol MainDependency: Dependency {
 final class MainComponent: Component<MainDependency> {
     var recordRepository: RecordRepository
     var userRepository: UserRepository
+    var authService: AuthService
     
     init(
         dependency: MainDependency,
         recordRepository: RecordRepository,
-        userRepository: UserRepository
+        userRepository: UserRepository,
+        authService: AuthService
     ) {
         self.recordRepository = recordRepository
         self.userRepository = userRepository
+        self.authService = authService
         super.init(dependency: dependency)
     }
 }
@@ -68,10 +71,13 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         let userDataSource = DefaultUserDataSource(dataTransferService: apiDataTransferService)
         let userRepository = DefaultUserRepository(userDataSource: userDataSource)
         
+        let authService = DefaultAuthService(dataTransferService: apiDataTransferService)
+        
         let component = MainComponent(
             dependency: dependency,
             recordRepository: recordRepository,
-            userRepository: userRepository
+            userRepository: userRepository, 
+            authService: authService
         )
         let viewController = MainTabBarController()
         let interactor = MainInteractor(presenter: viewController)
