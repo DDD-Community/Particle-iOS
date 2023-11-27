@@ -57,4 +57,8 @@ struct ParticleImage {
     
     let eyes = UIImage(named: "eyes")
     let tooltip1 = UIImage(named: "tooltip1")
+    
+    // MARK: - TextStyle Cell Background
+    let background_main100 = UIImage(named: "background_textstyle_main100")
+    let background_yellow = UIImage(named: "background_textstyle_yellow")
 }
