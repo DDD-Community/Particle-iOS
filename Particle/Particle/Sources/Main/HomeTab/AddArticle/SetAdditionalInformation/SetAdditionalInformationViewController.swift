@@ -26,7 +26,7 @@ final class SetAdditionalInformationViewController: UIViewController,
     
     private var tags: [(title: String, isSelected: Bool)] = {
         guard let userInterestedTags = UserDefaults.standard.object(forKey: "INTERESTED_TAGS") as? [String] else {
-            return []
+            return [("#iOS", false), ("#Android", false)]
         }
         return userInterestedTags.map { ($0, false) }
     }()
@@ -219,7 +219,12 @@ final class SetAdditionalInformationViewController: UIViewController,
     
     private let recommendTagTitleLabel: UILabel = {
         let label = UILabel()
-        label.setParticleFont(.y_body01, color: .particleColor.gray04, text: "관심 태그")
+        label.text = "추천 태그"
+        label.textColor = .particleColor.gray03
+        label.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
+        label.snp.makeConstraints {
+            $0.height.equalTo(21)
+        }
         return label
     }()
     
@@ -241,6 +246,20 @@ final class SetAdditionalInformationViewController: UIViewController,
         return collectionView
     }()
     
+    private let sentenceStyleTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "문장 스타일"
+        label.textColor = .particleColor.gray03
+        label.font = .particleFont.generate(style: .pretendard_Regular, size: 14)
+        label.snp.makeConstraints {
+            $0.height.equalTo(21)
+        }
+        return label
+    }()
+    
+    private let cardStyleRadioButton = RadioButton(title: "카드")
+    private let textStyleRadioButton = RadioButton(title: "텍스트")
+    
     // MARK: - Initializers
     
     init() {
@@ -251,6 +270,7 @@ final class SetAdditionalInformationViewController: UIViewController,
         addSubviews()
         layout()
         configureButton()
+        setInitialState()
         bind()
     }
     
@@ -267,6 +287,10 @@ final class SetAdditionalInformationViewController: UIViewController,
     }
     
     // MARK: - Methods
+    
+    private func setInitialState() {
+        cardStyleRadioButton.state.accept(true)
+    }
     
     private func configureButton() {
         
@@ -362,6 +386,19 @@ final class SetAdditionalInformationViewController: UIViewController,
             self?.titleTextField.rightViewMode = .whileEditing
         }
         .disposed(by: disposeBag)
+        
+        cardStyleRadioButton.state.bind { [weak self] isTapped in
+            guard isTapped else { return }
+            self?.textStyleRadioButton.state.accept(false)
+            
+        }
+        .disposed(by: disposeBag)
+        
+        textStyleRadioButton.state.bind { [weak self] isTapped in
+            guard isTapped else { return }
+            self?.cardStyleRadioButton.state.accept(false)
+        }
+        .disposed(by: disposeBag)
     }
 }
 
@@ -389,7 +426,10 @@ private extension SetAdditionalInformationViewController {
             titleTextField,
             titleTextFieldWarningLabel,
             recommendTagTitleLabel,
-            recommendTagCollectionView
+            recommendTagCollectionView,
+            sentenceStyleTitleLabel,
+            cardStyleRadioButton,
+            textStyleRadioButton
         ]
             .forEach {
                 mainScrollView.addSubview($0)
@@ -461,6 +501,25 @@ private extension SetAdditionalInformationViewController {
         recommendTagCollectionView.snp.makeConstraints { make in
             make.top.equalTo(recommendTagTitleLabel.snp.bottom).offset(Metric.Tags.topMagin)
             make.left.right.equalToSuperview().inset(Metric.Tags.horizontalMargin)
+        }
+        
+        sentenceStyleTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(recommendTagCollectionView.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().inset(20)
+        }
+        
+        cardStyleRadioButton.snp.makeConstraints {
+            $0.top.equalTo(sentenceStyleTitleLabel.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().inset(20)
+            $0.width.equalTo((DeviceSize.width-48)/2)
+            $0.height.equalTo(44)
+        }
+        
+        textStyleRadioButton.snp.makeConstraints {
+            $0.top.equalTo(sentenceStyleTitleLabel.snp.bottom).offset(12)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo((DeviceSize.width-48)/2)
+            $0.height.equalTo(44)
         }
     }
 }
