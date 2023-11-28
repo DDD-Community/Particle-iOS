@@ -94,6 +94,7 @@
 		AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4823722AB48ED100E90E77 /* ParticleLoginButton.swift */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
+		AF5C55492B0B8553006ADAF3 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C55482B0B8553006ADAF3 /* RadioButton.swift */; };
 		AF621F682AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */; };
 		AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */; };
 		AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */; };
@@ -284,6 +285,7 @@
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Particle.entitlements; sourceTree = "<group>"; };
+		AF5C55482B0B8553006ADAF3 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsRouter.swift; sourceTree = "<group>"; };
 		AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsViewController.swift; sourceTree = "<group>"; };
 		AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsBuilder.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 		AF19451B2A5C50F300B9FFA1 /* AddArticle */ = {
 			isa = PBXGroup;
 			children = (
+				AF5C55472B0B8544006ADAF3 /* View */,
 				AFCAB6C42A5C521800E2310D /* AddArticleRouter.swift */,
 				AFCAB6C62A5C521800E2310D /* AddArticleBuilder.swift */,
 				AFCAB6C72A5C521800E2310D /* AddArticleInteractor.swift */,
@@ -724,6 +727,14 @@
 			isa = PBXGroup;
 			children = (
 				AF4A19102A6A1E4B00932372 /* PhotoCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AF5C55472B0B8544006ADAF3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF5C55482B0B8553006ADAF3 /* RadioButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1263,6 +1274,7 @@
 				AF88EDA72AD29EE8001EB474 /* DefaultNetworkService.swift in Sources */,
 				AFDE0F462AA4C1F3008DC539 /* MyRecordListInteractor.swift in Sources */,
 				AF364C9E2AC8FFEF00C1C3F0 /* SectionOfRecordTag.swift in Sources */,
+				AF5C55492B0B8553006ADAF3 /* RadioButton.swift in Sources */,
 				3520EEFE2A5E623D00A53B34 /* PaddingLabel.swift in Sources */,
 				AF88EDCF2AD58B3E001EB474 /* DefaultUserDataSource.swift in Sources */,
 				3520EEF42A5CD3C000A53B34 /* OrganizingSentenceBuilder.swift in Sources */,
@@ -1544,7 +1556,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = SWPBG3YXG5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Particle/Resources/Info.plist;
@@ -1561,7 +1573,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wonbeen.Particle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1578,7 +1590,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Particle/Resources/Particle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = SWPBG3YXG5;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1596,7 +1608,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wonbeen.Particle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
