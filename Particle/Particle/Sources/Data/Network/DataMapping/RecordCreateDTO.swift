@@ -10,6 +10,7 @@ struct RecordCreateDTO: Codable {
     let url: String
     let items: [RecordItemCreateDTO]
     let tags: [String]
+    let style: String // TEXT or CARD
     
     struct RecordItemCreateDTO: Codable {
         let content: String

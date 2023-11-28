@@ -13,7 +13,7 @@ import RxCocoa
 
 protocol SetAdditionalInformationPresentableListener: AnyObject {
     func setAdditionalInfoBackButtonTapped()
-    func setAdditionalInfoNextButtonTapped(title: String, url: String, tags: [String])
+    func setAdditionalInfoNextButtonTapped(title: String, url: String, tags: [String], style: String)
 }
 
 final class SetAdditionalInformationViewController: UIViewController,
@@ -363,7 +363,8 @@ final class SetAdditionalInformationViewController: UIViewController,
                     self?.listener?.setAdditionalInfoNextButtonTapped(
                         title: self?.titleTextField.text ?? "",
                         url: self?.urlTextField.text ?? "",
-                        tags: selectedTags + selectedTagsInAccordion
+                        tags: selectedTags + selectedTagsInAccordion,
+                        style: (self?.cardStyleRadioButton.state.value ?? true) ? "CARD" : "TEXT"
                     )
                 }
             }

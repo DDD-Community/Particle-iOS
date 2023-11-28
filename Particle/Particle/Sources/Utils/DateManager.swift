@@ -17,7 +17,8 @@ final class DateManager {
     }
     
     func convert(previousDate: String, to format: String) -> String {
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" /// 날짜형식 변경
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         guard let date = dateFormatter.date(from: previousDate) else { return "" }
         dateFormatter.dateFormat = format
         let dateString = dateFormatter.string(from: date)
