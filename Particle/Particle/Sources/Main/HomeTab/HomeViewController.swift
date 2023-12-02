@@ -395,10 +395,10 @@ struct HomeViewController_Preview: PreviewProvider {
     static var homeVC: HomeViewController = {
         let vc = HomeViewController()
         vc.setData(data: [
-            .init(header: "My", items: [.stub(), .stub()]),
-            .init(header: "iOS", items: [.stub(), .stub()]),
+            .init(header: "My", items: [.stub(attribute: .init(color: "BLUE", style: "CARD")), .stub()]),
+            .init(header: "iOS", items: [.stub(), .stub(attribute: .init(color: "YELLOW", style: "CARD"))]),
             .init(header: "Android", items: [.stub(), .stub()]),
-            .init(header: "서버", items: [.stub(), .stub()]),
+            .init(header: "서버", items: [.stub(attribute: .init(color: "BLUE", style: "TEXT")), .stub()]),
         ])
         return vc
     }()

@@ -60,7 +60,7 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
         listener?.setAdditionalInfoBackButtonTapped()
     }
     
-    func setAdditionalInfoNextButtonTapped(title: String, url: String, tags: [String]) {
+    func setAdditionalInfoNextButtonTapped(title: String, url: String, tags: [String], style: String) {
         
         let requestModel: [RecordCreateDTO.RecordItemCreateDTO] = repository.sentenceFile2.value.map {
             .init(content: $0.sentence, isMain: $0.isRepresent)
@@ -68,7 +68,7 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
         
         let uniqueTags = Array(Set(tags))
         
-        let model = RecordCreateDTO(title: title, url: url, items: requestModel, tags: uniqueTags)
+        let model = RecordCreateDTO(title: title, url: url, items: requestModel, tags: uniqueTags, style: style)
         
         createRecordUseCase.execute(model: model)
             .observe(on: MainScheduler.instance)

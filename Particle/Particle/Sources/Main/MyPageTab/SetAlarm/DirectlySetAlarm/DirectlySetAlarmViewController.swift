@@ -84,46 +84,8 @@ final class DirectlySetAlarmViewController: UIViewController,
         return label
     }()
     
-    private let alarmActivateButton: UIView = {
-        let view = UIView()
-        view.backgroundColor = .particleColor.gray01
-        view.layer.cornerRadius = 8
-        view.layer.borderColor = .particleColor.main100.cgColor
-        return view
-    }()
-    
-    private let alarmActivateButtonLabel: UILabel = {
-        let label = UILabel()
-        label.setParticleFont(.p_body01, color: .particleColor.gray03, text: "활성화")
-        return label
-    }()
-    
-    private let alarmActivateButtonIcon: UIImageView = {
-        let icon = UIImageView()
-        icon.image = .particleImage.check
-        return icon
-    }()
-    
-    private let alarmDeactivateButton: UIView = {
-        let view = UIView()
-        view.backgroundColor = .particleColor.gray01
-        view.layer.cornerRadius = 8
-        view.layer.borderColor = .particleColor.main100.cgColor
-        view.layer.borderWidth = 1
-        return view
-    }()
-    
-    private let alarmDeactivateButtonLabel: UILabel = {
-        let label = UILabel()
-        label.setParticleFont(.p_body01, color: .particleColor.white, text: "비활성화")
-        return label
-    }()
-    
-    private let alarmDeactivateButtonIcon: UIImageView = {
-        let icon = UIImageView()
-        icon.image = .particleImage.check
-        return icon
-    }()
+    private let alarmActivateButton = RadioButton(title: "활성화")
+    private let alarmDeactivateButton = RadioButton(title: "비활성화")
     
     // MARK: - Initializers
     
@@ -144,6 +106,7 @@ final class DirectlySetAlarmViewController: UIViewController,
         setConstraints()
         configureButton()
         setInitialState()
+        bind()
     }
     
     // MARK: - Methods
@@ -154,7 +117,7 @@ final class DirectlySetAlarmViewController: UIViewController,
     }
     
     private func setInitialState() {
-        alarmActivateButtonIcon.isHidden = true
+        alarmDeactivateButton.state.accept(true)
     }
     
     private func configureButton() {
@@ -162,31 +125,21 @@ final class DirectlySetAlarmViewController: UIViewController,
             self?.listener?.directlySetAlarmCloseButtonTapped()
         }
         .disposed(by: disposeBag)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(alarmActivateButtonTapped))
-        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(alarmDeactivateButtonTapped))
-        
-        alarmActivateButton.addGestureRecognizer(tapGesture)
-        alarmDeactivateButton.addGestureRecognizer(tapGesture2)
     }
     
-    @objc private func alarmActivateButtonTapped(){
-        alarmDeactivateButton.layer.borderWidth = 0
-        alarmDeactivateButtonIcon.isHidden = true
-        alarmDeactivateButtonLabel.textColor = .particleColor.gray03
+    private func bind() {
+        alarmActivateButton.state.bind { [weak self] isTapped in
+            guard isTapped else { return }
+            self?.alarmDeactivateButton.state.accept(false)
+            
+        }
+        .disposed(by: disposeBag)
         
-        alarmActivateButton.layer.borderWidth = 1
-        alarmActivateButtonIcon.isHidden = false
-        alarmActivateButtonLabel.textColor = .particleColor.white
-    }
-    @objc private func alarmDeactivateButtonTapped(){
-        alarmDeactivateButton.layer.borderWidth = 1
-        alarmDeactivateButtonIcon.isHidden = false
-        alarmDeactivateButtonLabel.textColor = .particleColor.white
-        
-        alarmActivateButton.layer.borderWidth = 0
-        alarmActivateButtonIcon.isHidden = true
-        alarmActivateButtonLabel.textColor = .particleColor.gray03
+        alarmDeactivateButton.state.bind { [weak self] isTapped in
+            guard isTapped else { return }
+            self?.alarmActivateButton.state.accept(false)
+        }
+        .disposed(by: disposeBag)
     }
 }
 
@@ -210,14 +163,6 @@ private extension DirectlySetAlarmViewController {
             .forEach {
                 view.addSubview($0)
             }
-        
-        [alarmActivateButtonLabel, alarmActivateButtonIcon].forEach {
-            alarmActivateButton.addSubview($0)
-        }
-        
-        [alarmDeactivateButtonLabel, alarmDeactivateButtonIcon].forEach {
-            alarmDeactivateButton.addSubview($0)
-        }
     }
     
     func setConstraints() {
@@ -260,24 +205,6 @@ private extension DirectlySetAlarmViewController {
             $0.trailing.equalToSuperview().inset(20)
             $0.width.equalTo((DeviceSize.width-48)/2)
             $0.height.equalTo(44)
-        }
-        alarmActivateButtonIcon.snp.makeConstraints {
-            $0.width.height.equalTo(20)
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
-        }
-        alarmDeactivateButtonIcon.snp.makeConstraints {
-            $0.width.height.equalTo(20)
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
-        }
-        alarmActivateButtonLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(16)
-        }
-        alarmDeactivateButtonLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(16)
         }
     }
 }

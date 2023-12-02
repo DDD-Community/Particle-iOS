@@ -13,11 +13,20 @@ struct RecordReadDTO: Decodable {
     let url: String
     let items: [RecordItemReadDTO]
     let tags: [String]
+    let attribute: Attribute
     let createdAt: String
     let createdBy: String
     
     func toDomain() -> RecordCellModel {
-        .init(id: id, createdAt: createdAt, items: items.map { $0.toDomain() }, title: title, url: url)
+        .init(
+            id: id,
+            createdAt: createdAt,
+            items: items.map { $0.toDomain() },
+            title: title,
+            url: url,
+            color: attribute.color,
+            style: attribute.style
+        )
     }
     
     func fetchDateSectionHeaderString() -> String {
@@ -28,7 +37,7 @@ struct RecordReadDTO: Decodable {
         return DateManager.shared.convert(dateString: createdAt)
     }
     
-    static func stub(id: String = "1") -> Self {
+    static func stub(id: String = "1", attribute: Attribute = .stub()) -> Self {
         .init(
             id: id,
             title: "미니멀리스트의 삶",
@@ -39,6 +48,7 @@ struct RecordReadDTO: Decodable {
                 .stub(content: "이런 습관들이 지금의 나를 만들어 줄 수 있었다.")
             ],
             tags: ["iOS"],
+            attribute: attribute,
             createdAt: "2023-09-30T01:59:05.230Z",
             createdBy: "노란 삼각형"
         )
@@ -54,6 +64,15 @@ struct RecordReadDTO: Decodable {
         
         static func stub(content: String = "contentcontentcontent", isMain: Bool = false) -> Self {
             .init(content: content, isMain: isMain)
+        }
+    }
+    
+    struct Attribute: Decodable {
+        let color: String // YELLOW or BLUE
+        let style: String // TEXT or CARD
+        
+        static func stub(color: String = "YELLOW", style: String = "TEXT") -> Self {
+            .init(color: color, style: style)
         }
     }
 }

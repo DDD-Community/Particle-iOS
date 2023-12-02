@@ -13,6 +13,7 @@ enum Particle_Font {
     case p_title02
     case p_title03
     case p_body01
+    case p_body01_bold
     case p_body02
     case p_headline
     case p_callout
@@ -36,6 +37,8 @@ enum Particle_Font {
             return .particleFont.generate(style: .pretendard_Regular, size: 17)
         case .p_body01:
             return .particleFont.generate(style: .pretendard_Regular, size: 16)
+        case .p_body01_bold:
+            return .particleFont.generate(style: .pretendard_Bold, size: 16)
         case .p_body02:
             return .particleFont.generate(style: .pretendard_Regular, size: 14)
         case .p_headline:
@@ -70,6 +73,8 @@ enum Particle_Font {
         case .p_title03:
             return 20.4
         case .p_body01:
+            return 24
+        case .p_body01_bold:
             return 24
         case .p_body02:
             return 21

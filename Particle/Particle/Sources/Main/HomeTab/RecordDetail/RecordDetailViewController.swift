@@ -490,6 +490,7 @@ struct RecordDetailViewController_Preview: PreviewProvider {
             .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false)
         ],
         tags: ["#UXUI", "#브랜딩"],
+        attribute: .init(color: "YELLOW", style: "TEXT"),
         createdAt: "2023-09-18T11:49:52.955Z",
         createdBy: "노란 동그라미"
     )
