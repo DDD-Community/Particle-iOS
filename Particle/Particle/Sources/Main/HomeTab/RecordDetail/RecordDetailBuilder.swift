@@ -16,6 +16,10 @@ final class RecordDetailComponent: Component<RecordDetailDependency> {
     fileprivate var deleteRecordUseCase: DeleteRecordUseCase {
         return DefaultDeleteRecordUseCase(recordRepository: dependency.recordRepository)
     }
+    
+    fileprivate var reportRecordUseCase: ReportRecordUseCase {
+        return DefaultReportRecordUseCase(recordRepository: dependency.recordRepository)
+    }
 }
 
 // MARK: - Builder
@@ -39,7 +43,8 @@ final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBu
         let viewController = RecordDetailViewController(data: data)
         let interactor = RecordDetailInteractor(
             presenter: viewController,
-            deleteRecordUseCase: component.deleteRecordUseCase
+            deleteRecordUseCase: component.deleteRecordUseCase,
+            reportRecordUseCase: component.reportRecordUseCase
         )
         interactor.listener = listener
         return RecordDetailRouter(interactor: interactor, viewController: viewController)

@@ -15,6 +15,7 @@ enum ParticleServer {
     enum Path {
         case createRecord
         case deleteRecord(id: String)
+        case reportRecord(id: String)
         case readMyRecords
         case searchByTag(tag: String)
         case readMyProfile
@@ -28,6 +29,8 @@ enum ParticleServer {
                 return "/record"
             case .deleteRecord(let id):
                 return "/record/\(id)"
+            case .reportRecord(let id):
+                return "/report/\(id)"
             case .readMyRecords:
                 return "/record/my"
             case .searchByTag(let tag):

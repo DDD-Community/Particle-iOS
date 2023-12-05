@@ -12,6 +12,7 @@ import UIKit
 protocol RecordDetailPresentableListener: AnyObject {
     func recordDetailCloseButtonTapped()
     func recordDetailDeleteButtonTapped(with id: String)
+    func recordDetailReportButtonTapped(with id: String)
 }
 
 final class RecordDetailViewController: UIViewController,
@@ -21,6 +22,7 @@ final class RecordDetailViewController: UIViewController,
     weak var listener: RecordDetailPresentableListener?
     private var disposeBag = DisposeBag()
     private let data: RecordReadDTO
+    private let isMyRecord: Bool
     private var errorDescription = ""
     
     enum Metric {
@@ -182,20 +184,20 @@ final class RecordDetailViewController: UIViewController,
     
     private lazy var warningAlertController: ParticleAlertController = {
         let alert = ParticleAlertController(
-            title: "파티클 삭제",
-            body: "내 파티클을 삭제하시면 복구할 수 없어요.\n내 파티클을 정말 삭제하시겠어요?",
+            title: isMyRecord ? "파티클 삭제" : "파티클 차단",
+            body: isMyRecord ? "내 파티클을 삭제하시면 복구할 수 없어요.\n내 파티클을 정말 삭제하시겠어요?" : "이 파티클을 신고하시겠어요?",
             buttons: [deleteButton, cancelButton],
             buttonsAxis: .vertical
         )
         return alert
     }()
     
-    private let deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setAttributedTitle(
             NSMutableAttributedString()
                 .attributeString(
-                    string: "삭제",
+                    string: isMyRecord ? "삭제하기" : "신고하기",
                     font: .particleFont.generate(style: .pretendard_SemiBold, size: 17),
                     textColor: .init(hex: 0xFF453A)),
             for: .normal
@@ -230,9 +232,11 @@ final class RecordDetailViewController: UIViewController,
             ///  위 두 메서드 실행순서를 바꿔주니 memory leak 사라짐..
         }
         
+        let subject = isMyRecord ? "삭제" : "신고"
+        
         let alert = ParticleAlertController(
             title: nil,
-            body: "파티클 삭제에 성공했습니다.\n 홈화면으로 돌아갑니다.",
+            body: "파티클 \(subject)에 성공했습니다.\n 홈화면으로 돌아갑니다.",
             buttons: [okButton],
             buttonsAxis: .horizontal
         )
@@ -259,6 +263,7 @@ final class RecordDetailViewController: UIViewController,
     
     init(data: RecordReadDTO) {
         self.data = data
+        self.isMyRecord = data.createdBy == UserDefaults.standard.string(forKey: "NICKNAME")
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .particleColor.black
     }
@@ -333,7 +338,12 @@ final class RecordDetailViewController: UIViewController,
         deleteButton.rx.tap
             .bind { [weak self] _ in
                 self?.dismiss(animated: true)
-                self?.listener?.recordDetailDeleteButtonTapped(with: self?.data.id ?? "")
+                
+                if let isMyRecord = self?.isMyRecord, isMyRecord == true {
+                    self?.listener?.recordDetailDeleteButtonTapped(with: self?.data.id ?? "")
+                } else {
+                    self?.listener?.recordDetailReportButtonTapped(with: self?.data.id ?? "")
+                }
             }
             .disposed(by: self.disposeBag)
         
@@ -349,12 +359,13 @@ final class RecordDetailViewController: UIViewController,
             // TODO: 공유하기 액션
         })
         
-        let modifyAction = UIAlertAction(title: "수정하기", style: .default, handler: { action in
-            // TODO: 글 수정 화면으로 이동
+        let modifyAction = UIAlertAction(title: isMyRecord ? "수정하기" : "저장하기", style: .default, handler: { action in
+            // TODO: 글 수정 화면으로 이동, 내글이 아닐 시, 저장하기
         })
         
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] action in
+        let deleteAction = UIAlertAction(title: isMyRecord ? "삭제하기" : "신고하기", style: .destructive) { [weak self] action in
             self?.present(self?.warningAlertController ?? UIViewController(), animated: true)
+            // TODO: 내 글이 아닐 시, 신고하기
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
@@ -492,7 +503,7 @@ struct RecordDetailViewController_Preview: PreviewProvider {
         tags: ["#UXUI", "#브랜딩"],
         attribute: .init(color: "YELLOW", style: "TEXT"),
         createdAt: "2023-09-18T11:49:52.955Z",
-        createdBy: "노란 동그라미"
+        createdBy: "노랑 직사각형"
     )
     
     static var previews: some View {

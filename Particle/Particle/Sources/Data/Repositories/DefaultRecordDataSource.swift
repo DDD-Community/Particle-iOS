@@ -66,4 +66,16 @@ final class DefaultRecordDataSource: RecordDataSource {
         )
         return dataTransferService.request(with: endpoint)
     }
+    
+    func reportRecord(recordId: String) -> RxSwift.Observable<Bool> {
+        let path = ParticleServer.Version.v1.rawValue
+        + ParticleServer.Path.reportRecord(id: recordId).value
+        
+        let endpoint = Endpoint<Bool>(
+            path: path,
+            method: .post,
+            responseDecoder: EmptyResponseDecoder()
+        )
+        return dataTransferService.request(with: endpoint)
+    }
 }

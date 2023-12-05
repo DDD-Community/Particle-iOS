@@ -55,6 +55,7 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>,
             .subscribe { [weak self] dto in
                 self?.presenter.setData(data: dto)
                 UserDefaults.standard.set(dto.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
+                UserDefaults.standard.set(dto.nickname, forKey: "NICKNAME")
             } onError: { error in
                 Console.error(error.localizedDescription)
             }

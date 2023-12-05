@@ -13,5 +13,6 @@ protocol RecordDataSource {
     func getRecordsBy(tag: String) -> Observable<[RecordReadDTO]>
     func createRecord(record: RecordCreateDTO) -> Observable<RecordReadDTO>
     func deleteRecord(recordId: String) -> Observable<String>
+    func reportRecord(recordId: String) -> Observable<Bool>
 }
 

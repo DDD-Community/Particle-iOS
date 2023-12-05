@@ -18,6 +18,7 @@ protocol RecordRepository {
     func getRecordsBy(tag: String) -> Observable<[RecordReadDTO]> /// will deprecated
     func createRecord(record: RecordCreateDTO) -> Observable<RecordReadDTO>
     func deleteRecord(recordId: String) -> Observable<String> 
+    func reportRecord(recordId: String) -> Observable<Bool>
 }
 
 /// 원래 여기서는 DTO 모델이 아닌 도메인 모델을 반환해주어야됨.
