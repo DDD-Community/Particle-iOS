@@ -12,8 +12,12 @@ protocol SetAccountDependency: Dependency {
 }
 
 final class SetAccountComponent: Component<SetAccountDependency> {
+    
     fileprivate var withdrawUseCase: WithdrawUseCase {
         DefaultWithdrawUseCase(authService: dependency.authService)
+    }
+    fileprivate var logoutUseCase: LogoutUseCase {
+        DefaultLogoutUseCase(authService: dependency.authService)
     }
 }
 
@@ -34,7 +38,8 @@ final class SetAccountBuilder: Builder<SetAccountDependency>, SetAccountBuildabl
         let viewController = SetAccountViewController()
         let interactor = SetAccountInteractor(
             presenter: viewController,
-            withdrawUseCase: component.withdrawUseCase
+            withdrawUseCase: component.withdrawUseCase,
+            logoutUseCase: component.logoutUseCase
         )
         interactor.listener = listener
         return SetAccountRouter(interactor: interactor, viewController: viewController)

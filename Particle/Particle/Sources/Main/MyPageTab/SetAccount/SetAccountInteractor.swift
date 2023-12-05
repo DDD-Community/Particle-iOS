@@ -31,12 +31,15 @@ final class SetAccountInteractor: PresentableInteractor<SetAccountPresentable>, 
     weak var listener: SetAccountListener?
     
     private let withdrawUseCase: WithdrawUseCase
+    private let logoutUseCase: LogoutUseCase
 
     init(
         presenter: SetAccountPresentable,
-        withdrawUseCase: WithdrawUseCase
+        withdrawUseCase: WithdrawUseCase,
+        logoutUseCase: LogoutUseCase
     ) {
         self.withdrawUseCase = withdrawUseCase
+        self.logoutUseCase = logoutUseCase
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -76,10 +79,24 @@ final class SetAccountInteractor: PresentableInteractor<SetAccountPresentable>, 
     }
     
     func logoutButtonTapped() {
+        logoutUseCase.execute()
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isSuccess in
+                if isSuccess {
+                    self?.removeAllUserDefaultData()
+                    self?.listener?.setAccountLogoutButtonTapped()
+                }
+            } onError: { [weak self] error in
+                self?.presenter.showErrorAlert(description: error.localizedDescription)
+                /// 원래는 data에 담겨온 message 값을 보여줘야함.
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func removeAllUserDefaultData() {
         UserDefaults.standard.removeObject(forKey: "ACCESSTOKEN")
         UserDefaults.standard.removeObject(forKey: "REFRESHTOKEN")
         UserDefaults.standard.removeObject(forKey: "INTERESTED_TAGS")
         UserDefaults.standard.removeObject(forKey: "NICKNAME")
-        listener?.setAccountLogoutButtonTapped()
     }
 }

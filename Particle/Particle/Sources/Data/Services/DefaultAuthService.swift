@@ -9,6 +9,7 @@ import Alamofire
 import RxSwift
 
 final class DefaultAuthService: AuthService {
+    
     private let dataTransferService: DataTransferService
     
     init(dataTransferService: DataTransferService) {
@@ -28,6 +29,18 @@ final class DefaultAuthService: AuthService {
         return dataTransferService.request(with: endpoint)
     }
     
+    func logout() -> Observable<LogoutSuccessResponse> {
+        let path = ParticleServer.Version.v1.rawValue
+        + ParticleServer.Path.logout.value
+        
+        let endpoint = Endpoint<LogoutSuccessResponse>(
+            path: path,
+            method: .post
+        )
+        
+        return dataTransferService.request(with: endpoint)
+    }
+
     func withdraw() -> Observable<WithdrawResponse> {
         let path = ParticleServer.Version.v1.rawValue
         + ParticleServer.Path.withdraw.value

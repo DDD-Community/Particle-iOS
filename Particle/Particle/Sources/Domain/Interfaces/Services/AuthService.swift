@@ -10,5 +10,6 @@ import Foundation
 
 protocol AuthService {
     func login(with body: LoginRequest) -> Observable<LoginSuccessResponse>
+    func logout() -> Observable<LogoutSuccessResponse>
     func withdraw() -> Observable<WithdrawResponse>
 }

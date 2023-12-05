@@ -21,6 +21,7 @@ enum ParticleServer {
         case readMyProfile
         case setInterestedTags
         case login
+        case logout
         case withdraw
         
         var value: String {
@@ -41,6 +42,8 @@ enum ParticleServer {
                 return "/user/interested/tags"
             case .login:
                 return "/auth/login"
+            case .logout:
+                return "/auth/logout"
             case .withdraw:
                 return "/auth/withdrawal"
             }
