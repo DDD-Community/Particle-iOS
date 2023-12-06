@@ -31,6 +31,10 @@ final class SetAdditionalInformationViewController: UIViewController,
         return userInterestedTags.map { ($0, false) }
     }()
     
+    enum Constant {
+        static let titleTextViewPlaceHolder = "제목을 입력해 주세요"
+    }
+    
     enum Metric {
         enum Title {
             static let topMargin = 12
@@ -174,23 +178,19 @@ final class SetAdditionalInformationViewController: UIViewController,
         return label
     }()
     
-    private let titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSMutableAttributedString()
-            .attributeString(
-                string: "제목을 입력해 주세요",
-                font: .particleFont.generate(style: .pretendard_Medium, size: 16),
-                textColor: .particleColor.gray03
-            )
-        textField.font = .systemFont(ofSize: 14)
-        textField.addLeftPadding(16)
-        textField.textColor = .white
-        textField.backgroundColor = .particleColor.gray01
-        textField.layer.cornerRadius = 8
-        textField.snp.makeConstraints {
-            $0.height.equalTo(44)
+    private let titleTextView: UITextView = {
+        let textView = UITextView()
+        textView.font = .systemFont(ofSize: 14)
+        textView.textColor = .particleColor.gray03
+        textView.text = Constant.titleTextViewPlaceHolder
+        textView.textContainerInset = .init(top: 12, left: 14, bottom: 10, right: 40)
+        textView.isScrollEnabled = false
+        textView.backgroundColor = .particleColor.gray01
+        textView.layer.cornerRadius = 8
+        textView.snp.makeConstraints {
+            $0.height.greaterThanOrEqualTo(44)
         }
-        return textField
+        return textView
     }()
     
     private let titleTextFieldClearButton: UIButton = {
@@ -260,6 +260,29 @@ final class SetAdditionalInformationViewController: UIViewController,
     private let cardStyleRadioButton = RadioButton(title: "카드")
     private let textStyleRadioButton = RadioButton(title: "텍스트")
     
+    // TODO: 컴포넌트화 예정
+    private let accessoryView: UIView = {
+        let uiview = UIView(
+            frame: CGRect(
+                x: 0.0,
+                y: 0.0,
+                width: UIScreen.main.bounds.width,
+                height: 50
+            )
+        )
+        uiview.layer.backgroundColor = UIColor.darkGray.cgColor
+        return uiview
+    }()
+    
+    private let keyboardDownButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(.particleImage.keyboardDownButton, for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.tintColor = .white
+        return button
+    }()
+    
     // MARK: - Initializers
     
     init() {
@@ -284,6 +307,7 @@ final class SetAdditionalInformationViewController: UIViewController,
         super.viewDidLoad()
         urlTextFieldWarningLabel.isHidden = true
         titleTextFieldWarningLabel.isHidden = true
+        titleTextFieldClearButton.isHidden = true
     }
     
     // MARK: - Methods
@@ -302,16 +326,21 @@ final class SetAdditionalInformationViewController: UIViewController,
         }
         .disposed(by: disposeBag)
         
-        titleTextField.rightView = titleTextFieldClearButton
-        titleTextField.rightViewMode = .whileEditing
         titleTextFieldClearButton.rx.tap.bind { [weak self] _ in
-            self?.titleTextField.text = ""
-            self?.titleTextField.rightViewMode = .never
+            self?.titleTextView.text = nil
+            self?.titleTextFieldClearButton.isHidden = true
         }
         .disposed(by: disposeBag)
+        
+        keyboardDownButton.rx.tap
+            .bind { [weak self] in
+                self?.view.endEditing(true)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bind() {
+        
         Observable.of(tags)
             .bind(to: recommendTagCollectionView.rx.items(
                 cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
@@ -340,7 +369,7 @@ final class SetAdditionalInformationViewController: UIViewController,
         
         nextButton.rx.tap
             .bind { [weak self] in
-                let isEmpty = self?.urlTextField.text?.isEmpty ?? true || self?.titleTextField.text?.isEmpty ?? true
+                let isEmpty = self?.urlTextField.text?.isEmpty ?? true || self?.titleTextView.text?.isEmpty ?? true || self?.titleTextView.text == Constant.titleTextViewPlaceHolder
                 if isEmpty {
                     if self?.urlTextField.text?.isEmpty ?? true {
                         self?.urlTextField.layer.borderWidth = 1
@@ -348,9 +377,9 @@ final class SetAdditionalInformationViewController: UIViewController,
                         self?.urlTextFieldWarningLabel.isHidden = false
                     }
                     
-                    if self?.titleTextField.text?.isEmpty ?? true {
-                        self?.titleTextField.layer.borderWidth = 1
-                        self?.titleTextField.layer.borderColor = .particleColor.warning.cgColor
+                    if self?.titleTextView.text?.isEmpty ?? true || self?.titleTextView.text == Constant.titleTextViewPlaceHolder {
+                        self?.titleTextView.layer.borderWidth = 1
+                        self?.titleTextView.layer.borderColor = .particleColor.warning.cgColor
                         self?.titleTextFieldWarningLabel.isHidden = false
                     }
                 } else {
@@ -361,7 +390,7 @@ final class SetAdditionalInformationViewController: UIViewController,
                         .map { Tag(rawValue: $0)?.value ?? "UXUI" } ?? []
                     
                     self?.listener?.setAdditionalInfoNextButtonTapped(
-                        title: self?.titleTextField.text ?? "",
+                        title: self?.titleTextView.text ?? "",
                         url: self?.urlTextField.text ?? "",
                         tags: selectedTags + selectedTagsInAccordion,
                         style: (self?.cardStyleRadioButton.state.value ?? true) ? "CARD" : "TEXT"
@@ -379,12 +408,34 @@ final class SetAdditionalInformationViewController: UIViewController,
         }
         .disposed(by: disposeBag)
         
-        titleTextField.rx.text.subscribe { [weak self] inputText in
-            if inputText.element != nil {
-                self?.titleTextField.layer.borderWidth = 0
+        titleTextView.rx.text.subscribe { [weak self] inputText in
+            if inputText.element != nil,
+               self?.titleTextView.text != Constant.titleTextViewPlaceHolder,
+               self?.titleTextView.text != nil {
+                self?.titleTextView.layer.borderWidth = 0
                 self?.titleTextFieldWarningLabel.isHidden = true
+                self?.titleTextFieldClearButton.isHidden = false
             }
-            self?.titleTextField.rightViewMode = .whileEditing
+        }
+        .disposed(by: disposeBag)
+        
+        titleTextView.rx.didBeginEditing.bind { [weak self] _ in
+            if self?.titleTextView.text == Constant.titleTextViewPlaceHolder {
+                self?.titleTextView.text = nil
+                self?.titleTextView.textColor = .white
+            } else {
+                self?.titleTextFieldClearButton.isHidden = false
+            }
+        }
+        .disposed(by: disposeBag)
+        
+        titleTextView.rx.didEndEditing.bind { [weak self] _ in
+            guard let self = self else { return }
+            if self.titleTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                self.titleTextView.text = Constant.titleTextViewPlaceHolder
+                self.titleTextView.textColor = .particleColor.gray03
+            }
+            self.titleTextFieldClearButton.isHidden = true
         }
         .disposed(by: disposeBag)
         
@@ -424,7 +475,8 @@ private extension SetAdditionalInformationViewController {
             urlTextField,
             urlTextFieldWarningLabel,
             titleTextFieldSectionTitle,
-            titleTextField,
+            titleTextView,
+            titleTextFieldClearButton,
             titleTextFieldWarningLabel,
             recommendTagTitleLabel,
             recommendTagCollectionView,
@@ -435,6 +487,8 @@ private extension SetAdditionalInformationViewController {
             .forEach {
                 mainScrollView.addSubview($0)
             }
+        
+        accessoryView.addSubview(keyboardDownButton)
     }
     
     func layout() {
@@ -484,18 +538,23 @@ private extension SetAdditionalInformationViewController {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        titleTextField.snp.makeConstraints { make in
+        titleTextView.snp.makeConstraints { make in
             make.top.equalTo(titleTextFieldSectionTitle.snp.bottom).offset(12)
             make.left.right.equalToSuperview().inset(Metric.URLTextField.horizontalMargin)
         }
         
+        titleTextFieldClearButton.snp.makeConstraints {
+            $0.top.equalTo(titleTextView.snp.top).offset(6)
+            $0.trailing.equalTo(titleTextView.snp.trailing)
+        }
+        
         titleTextFieldWarningLabel.snp.makeConstraints {
-            $0.top.equalTo(titleTextField.snp.bottom).offset(10)
+            $0.top.equalTo(titleTextView.snp.bottom).offset(10)
             $0.leading.equalToSuperview().inset(20)
         }
         
         recommendTagTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleTextField.snp.bottom).offset(Metric.RecommendTagTitle.topMargin)
+            make.top.equalTo(titleTextView.snp.bottom).offset(Metric.RecommendTagTitle.topMargin)
             make.left.equalToSuperview().inset(Metric.RecommendTagTitle.leftMargin)
         }
         
@@ -513,7 +572,7 @@ private extension SetAdditionalInformationViewController {
             $0.top.equalTo(sentenceStyleTitleLabel.snp.bottom).offset(12)
             $0.leading.equalToSuperview().inset(20)
             $0.width.equalTo((DeviceSize.width-48)/2)
-            $0.height.equalTo(44)
+            $0.height.greaterThanOrEqualTo(44)
         }
         
         textStyleRadioButton.snp.makeConstraints {
@@ -522,6 +581,14 @@ private extension SetAdditionalInformationViewController {
             $0.width.equalTo((DeviceSize.width-48)/2)
             $0.height.equalTo(44)
         }
+        
+        keyboardDownButton.snp.makeConstraints {
+            $0.centerY.equalTo(accessoryView.snp.centerY)
+            $0.trailing.equalTo(accessoryView).offset(-10)
+        }
+        
+        urlTextField.inputAccessoryView = accessoryView
+        titleTextView.inputAccessoryView = accessoryView
     }
 }
 
