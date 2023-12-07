@@ -8,13 +8,14 @@
 import RIBs
 
 protocol SearchDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var searchRepository: SearchRepository { get }
 }
 
 final class SearchComponent: Component<SearchDependency> {
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    fileprivate var searchUseCase: SearchUseCase {
+        return DefaultSearchResultUseCase(searchRepository: dependency.searchRepository)
+    }
 }
 
 // MARK: - Builder
@@ -30,9 +31,13 @@ final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
     }
 
     func build(withListener listener: SearchListener) -> SearchRouting {
-        let _ = SearchComponent(dependency: dependency)
+        let component = SearchComponent(dependency: dependency)
+        
         let viewController = SearchViewController()
-        let interactor = SearchInteractor(presenter: viewController)
+        let interactor = SearchInteractor(
+            presenter: viewController,
+            searchUseCase: component.searchUseCase
+        )
         interactor.listener = listener
         return SearchRouter(interactor: interactor, viewController: viewController)
     }

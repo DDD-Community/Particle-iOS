@@ -37,6 +37,14 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
+		353FE9892B0F12D90030B0DB /* View in Resources */ = {isa = PBXBuildFile; fileRef = 353FE9882B0F12D90030B0DB /* View */; };
+		3593C24A2B0F1EBB006B7C31 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */; };
+		3593C24C2B0F1F4E006B7C31 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C24B2B0F1F4E006B7C31 /* SearchRepository.swift */; };
+		3593C24E2B0F1FA7006B7C31 /* DefaultSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */; };
+		3593C2502B0F2334006B7C31 /* SearchResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C24F2B0F2334006B7C31 /* SearchResultDTO.swift */; };
+		3593C2522B0F2397006B7C31 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2512B0F2397006B7C31 /* SearchResult.swift */; };
+		3593C2542B0F273A006B7C31 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2532B0F273A006B7C31 /* SearchDataSource.swift */; };
+		3593C2562B0F2786006B7C31 /* DefaultSearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2552B0F2786006B7C31 /* DefaultSearchDataSource.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -229,6 +237,14 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
+		353FE9882B0F12D90030B0DB /* View */ = {isa = PBXFileReference; lastKnownFileType = folder; path = View; sourceTree = "<group>"; };
+		3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
+		3593C24B2B0F1F4E006B7C31 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchRepository.swift; sourceTree = "<group>"; };
+		3593C24F2B0F2334006B7C31 /* SearchResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDTO.swift; sourceTree = "<group>"; };
+		3593C2512B0F2397006B7C31 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		3593C2532B0F273A006B7C31 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
+		3593C2552B0F2786006B7C31 /* DefaultSearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchDataSource.swift; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -703,6 +719,8 @@
 				AF88EDCC2AD58B35001EB474 /* DefaultUserRepository.swift */,
 				AF88EDC42AD3D533001EB474 /* DefaultRecordDataSource.swift */,
 				AF88EDC22AD3D51A001EB474 /* DefaultRecordRepository.swift */,
+				3593C2552B0F2786006B7C31 /* DefaultSearchDataSource.swift */,
+				3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -781,6 +799,7 @@
 			children = (
 				AF7B2E682AA1FC5B00806149 /* Tag.swift */,
 				AF88EDC62AD588F7001EB474 /* ParticleServer.swift */,
+				3593C2512B0F2397006B7C31 /* SearchResult.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -872,6 +891,7 @@
 				AFC7484F2ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift */,
 				AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */,
 				AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */,
+				3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -883,6 +903,8 @@
 				AF88EDCA2AD58AA0001EB474 /* UserRepository.swift */,
 				AF88EDBC2AD3D40E001EB474 /* RecordDataSource.swift */,
 				AF88EDBE2AD3D484001EB474 /* RecordRepository.swift */,
+				3593C2532B0F273A006B7C31 /* SearchDataSource.swift */,
+				3593C24B2B0F1F4E006B7C31 /* SearchRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -914,6 +936,7 @@
 				AF9702F92A8D021800877C85 /* RecordReadDTO.swift */,
 				AF9702FB2A8D02C300877C85 /* RecordUpdateDTO.swift */,
 				AF9702FD2A8D031000877C85 /* UserReadDTO.swift */,
+				3593C24F2B0F2334006B7C31 /* SearchResultDTO.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -994,6 +1017,7 @@
 		AFBB5F522A66AAB3002416DA /* SearchTab */ = {
 			isa = PBXGroup;
 			children = (
+				353FE9882B0F12D90030B0DB /* View */,
 				AFBB5F642A66ABBF002416DA /* SearchRouter.swift */,
 				AFBB5F652A66ABBF002416DA /* SearchViewController.swift */,
 				AFBB5F662A66ABBF002416DA /* SearchBuilder.swift */,
@@ -1172,6 +1196,7 @@
 				3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */,
 				3520EF352A74DB1C00A53B34 /* Pretendard-Bold.otf in Resources */,
 				3520EF382A74DB1C00A53B34 /* Pretendard-Black.otf in Resources */,
+				353FE9892B0F12D90030B0DB /* View in Resources */,
 				3520EF362A74DB1C00A53B34 /* Pretendard-Medium.otf in Resources */,
 				AFB4BDCE2A4093DD008BA9E0 /* Assets.xcassets in Resources */,
 				3520EF332A74DB1C00A53B34 /* Pretendard-ExtraBold.otf in Resources */,
@@ -1250,6 +1275,7 @@
 				AF4647532AAA0D6700701B83 /* SetAlarmInteractor.swift in Sources */,
 				AF0D71DF2A5BEF7B00157758 /* LoggedInBuilder.swift in Sources */,
 				AF3122782A977BEA00262088 /* SelectTagViewController.swift in Sources */,
+				3593C24E2B0F1FA7006B7C31 /* DefaultSearchRepository.swift in Sources */,
 				AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */,
 				AFBB5F762A66B65D002416DA /* SelectSentenceBuilder.swift in Sources */,
 				AFBB5F602A66AAD7002416DA /* MyPageRouter.swift in Sources */,
@@ -1325,6 +1351,7 @@
 				AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
 				AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */,
+				3593C2562B0F2786006B7C31 /* DefaultSearchDataSource.swift in Sources */,
 				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
 				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
 				AFBB5F6B2A66ABBF002416DA /* SearchInteractor.swift in Sources */,
@@ -1336,6 +1363,7 @@
 				AF0D71D52A5BEA8A00157758 /* LoggedOutRouter.swift in Sources */,
 				3520EF1E2A5FA83600A53B34 /* DynamicHeightCollectionView.swift in Sources */,
 				AF621F682AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift in Sources */,
+				3593C24C2B0F1F4E006B7C31 /* SearchRepository.swift in Sources */,
 				AFBB5F632A66AAD7002416DA /* MyPageInteractor.swift in Sources */,
 				AFBB5F612A66AAD7002416DA /* MyPageViewController.swift in Sources */,
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
@@ -1357,6 +1385,7 @@
 				AF88ED9C2AD29A7D001EB474 /* NetworkService.swift in Sources */,
 				AF88EDC92AD58A99001EB474 /* UserDataSource.swift in Sources */,
 				3520EF042A5E6F9C00A53B34 /* OrganizingSentenceRepository.swift in Sources */,
+				3593C2542B0F273A006B7C31 /* SearchDataSource.swift in Sources */,
 				AF4647482AA9E94700701B83 /* SetAccountInteractor.swift in Sources */,
 				AF130A8D2AA225F000F2E0BD /* SelectedPhotoCell.swift in Sources */,
 				AF0D71CE2A5BE9B600157758 /* RootInteractor.swift in Sources */,
@@ -1379,8 +1408,10 @@
 				AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */,
 				AF4647602AAA196F00701B83 /* DirectlySetAlarmRouter.swift in Sources */,
 				AF88EDA92AD29F9D001EB474 /* DefaultNetworkSessionManager.swift in Sources */,
+				3593C2502B0F2334006B7C31 /* SearchResultDTO.swift in Sources */,
 				AF4647452AA9E94700701B83 /* SetAccountRouter.swift in Sources */,
 				AF88EDBD2AD3D40E001EB474 /* RecordDataSource.swift in Sources */,
+				3593C2522B0F2397006B7C31 /* SearchResult.swift in Sources */,
 				AFBB5F622A66AAD7002416DA /* MyPageBuilder.swift in Sources */,
 				AF88EDA02AD29C0C001EB474 /* NetworkConfigurable.swift in Sources */,
 				AFDE0F3B2AA4588C008DC539 /* RecordCell.swift in Sources */,
@@ -1413,6 +1444,7 @@
 				AF88EDC32AD3D51A001EB474 /* DefaultRecordRepository.swift in Sources */,
 				AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */,
 				AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */,
+				3593C24A2B0F1EBB006B7C31 /* SearchUseCase.swift in Sources */,
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
 				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
 				AF88EDBF2AD3D484001EB474 /* RecordRepository.swift in Sources */,
