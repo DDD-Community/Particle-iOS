@@ -9,5 +9,6 @@ import Foundation
 import RxSwift
 
 protocol SearchDataSource {
-    func getSearchResult(_ text: String) -> Observable<[SearchResultDTO]>
+    func getSearchResultBy(text: String) -> Observable<[SearchResultDTO]>
+    func getSearchResultBy(tag: String) -> Observable<[SearchResultDTO]>
 }

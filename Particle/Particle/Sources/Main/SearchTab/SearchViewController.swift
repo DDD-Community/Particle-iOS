@@ -11,7 +11,8 @@ import RxCocoa
 import UIKit
 
 protocol SearchPresentableListener: AnyObject {
-    func requestSearch(_ text: String)
+    func requestSearchBy(text: String)
+    func requestSearchBy(tag: String)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
@@ -72,16 +73,22 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         }
         .disposed(by: disposeBag)
         
-        Driver.merge([
-            mainView.recentSearchView.recentSearchList.rx.modelSelected(String.self).asDriver(),
-            mainView.recentSearchView.tagCollectionView.rx.modelSelected(String.self).asDriver()
-        ])
-        .drive { [weak self] recentData in
-            self?.mainView.searchBar.searchTextField.text = recentData
-            self?.mainView.searchBar.searchTextField.becomeFirstResponder()
-            self?.listener?.requestSearch(recentData)
-        }
-        .disposed(by: disposeBag)
+        mainView.recentSearchView
+            .recentSearchList.rx.modelSelected(String.self).asDriver()
+            .drive(onNext: { [weak self] recentData in
+                self?.mainView.searchBar.searchTextField.text = recentData
+                self?.mainView.searchBar.searchTextField.becomeFirstResponder()
+                self?.listener?.requestSearchBy(text: recentData)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.recentSearchView.tagCollectionView.rx.modelSelected(String.self).asDriver()
+            .drive { [weak self] tag in
+                self?.mainView.searchBar.searchTextField.text = tag
+                self?.mainView.searchBar.searchTextField.becomeFirstResponder()
+                self?.listener?.requestSearchBy(tag: tag)
+            }
+            .disposed(by: disposeBag)
         
         Observable.of(tags)
             .bind(to: mainView.recentSearchView.tagCollectionView.rx.items(
@@ -117,7 +124,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
                 self?.mainView.searchBar.text
             }
             .subscribe(onNext: { [weak self] text in
-                self?.listener?.requestSearch(text)
+                self?.listener?.requestSearchBy(text: text)
             })
             .disposed(by: disposeBag)
         

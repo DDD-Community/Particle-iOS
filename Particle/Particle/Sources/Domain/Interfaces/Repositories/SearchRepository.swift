@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 
 protocol SearchRepository {
-    func searchArticle(_ text: String) -> Observable<[SearchResult]>
+    func searchArticleBy(_ text: String) -> Observable<[SearchResult]>
+    func searchArticleByTag(_ tag: String) -> Observable<[SearchResult]>
 }
 
