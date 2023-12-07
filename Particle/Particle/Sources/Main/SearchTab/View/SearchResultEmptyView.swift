@@ -16,6 +16,7 @@ final class SearchResultEmptyView: UIView {
             color: .particleColor.gray03,
             text: "앗! 검색 결과가 없어요"
         )
+        label.textAlignment = .center
         return label
     }()
     
@@ -26,6 +27,7 @@ final class SearchResultEmptyView: UIView {
             color: .particleColor.gray03,
             text: "다른 키워드로 검색해주세요"
         )
+        label.textAlignment = .center
         return label
     }()
     
