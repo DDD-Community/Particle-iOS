@@ -30,7 +30,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     }()
     
     private var disposeBag = DisposeBag()
-    private let searchResult = PublishRelay<[SearchResult]>
+    private let searchResult = PublishRelay<[SearchResult]>()
     
     private var mainView: SearchMainView {
         return self.view as! SearchMainView
@@ -65,7 +65,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         "최근 검색어어어어",
         "최근 검색어어어어"
         ])
-        .bind(to: mainView.recentSearchList.rx.items(
+        .bind(to: mainView.recentSearchView.recentSearchList.rx.items(
             cellIdentifier: SearchListCell.defaultReuseIdentifier,
             cellType: SearchListCell.self)
         ) { tableView, item, cell in
@@ -74,7 +74,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         .disposed(by: disposeBag)
         
         Observable.of(tags)
-            .bind(to: mainView.tagCollectionView.rx.items(
+            .bind(to: mainView.recentSearchView.tagCollectionView.rx.items(
             cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
             cellType: LeftAlignedCollectionViewCell.self
         )) { collectionView, item, cell in
@@ -82,11 +82,11 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         }
             .disposed(by: disposeBag)
         
-        mainView.tagCollectionView.rx.itemSelected
+        mainView.recentSearchView.tagCollectionView.rx.itemSelected
             .subscribe { [weak self] indexPath in
             guard let self = self else { return }
             guard let index = indexPath.element else { return }
-                guard let selectedCell = self.mainView.tagCollectionView.cellForItem(at: index) as? LeftAlignedCollectionViewCell else {
+                guard let selectedCell = self.mainView.recentSearchView.tagCollectionView.cellForItem(at: index) as? LeftAlignedCollectionViewCell else {
                 return
             }
             selectedCell.setSelected()
@@ -112,19 +112,20 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         .disposed(by: disposeBag)
         
         mainView.searchBar.rx.searchButtonClicked
+            .withLatestFrom(mainView.searchBar.rx.text.orEmpty)
             .subscribe(onNext: { [weak self] text in
                 self?.listener?.requestSearch(text)
             })
             .disposed(by: disposeBag)
         
         searchResult
-            .bind(to: mainView.searchResultMainView.searchResultTableView.rx.items(
+            .bind(to: mainView.searchResultView.searchResultTableView.rx.items(
                 cellIdentifier: SearchListCell.defaultReuseIdentifier,
                 cellType: SearchListCell.self
             )) { tableView, item, cell in
-                cell.titleLabel.text = item.title
+                cell.bind(item.title)
             }
-                .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func setupInitialView() {

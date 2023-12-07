@@ -100,6 +100,10 @@ final class RecentSearchView: UIView {
         layout()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Add Subviews
     private func addSubviews() {
         [
@@ -115,14 +119,12 @@ final class RecentSearchView: UIView {
             .forEach {
                 self.addSubview($0)
             }
-       }
-
     }
     
     // MARK: - Layout
     private func layout() {
         recentSearchListTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(Metric.ListTitle.topMargin)
+            make.top.equalToSuperview()
             make.left.equalToSuperview().inset(Metric.ListTitle.leftMargin)
         }
         

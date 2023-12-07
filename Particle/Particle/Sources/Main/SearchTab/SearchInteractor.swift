@@ -26,7 +26,7 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     weak var router: SearchRouting?
     weak var listener: SearchListener?
     
-    private let search: PublishSubject<String>()
+    private let search = PublishSubject<String>()
     private var disposeBag = DisposeBag()
     
     private let searchUseCase: SearchUseCase

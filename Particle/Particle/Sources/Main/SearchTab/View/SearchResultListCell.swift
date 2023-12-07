@@ -49,6 +49,13 @@ class SearchResultListCell: UITableViewCell {
         return collectionView
     }()
     
+    private let labelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        return stackView
+    }()
+    
     private let baseStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -69,7 +76,18 @@ class SearchResultListCell: UITableViewCell {
     public func bind(title: String, subTitles: [String], tags: [String]) {
         titleLabel.text = title
         let labels = subTitles.map(makeLabel)
-        let allViews = [titleLabel, labels, tagCollectionList].compactMap($0)
+        labels.forEach {
+            labelStackView.addArrangedSubview($0)
+        }
+        
+        layoutSubviews()
+    }
+}
+
+extension SearchResultListCell {
+    // MARK: - Layout
+    private func layout() {
+        let allViews = [titleLabel, labelStackView, tagCollectionList]
         
         allViews
             .forEach {
@@ -79,13 +97,6 @@ class SearchResultListCell: UITableViewCell {
                 }
             }
         
-        layoutSubviews()
-    }
-}
-
-extension SearchResultListCell {
-    // MARK: - Layout
-    private func layout() {
         self.addSubview(baseStackView)
         baseStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

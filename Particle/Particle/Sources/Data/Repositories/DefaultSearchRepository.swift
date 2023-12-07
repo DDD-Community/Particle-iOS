@@ -18,6 +18,6 @@ struct DefaultSearchRepository: SearchRepository {
     
     func searchArticle(_ text: String) -> Observable<[SearchResult]> {
         return searchDataSource.getSearchResult(text)
-            .map { $0.toDomain() }
+            .map { $0.map { $0.toDomain() } }
     }
 }

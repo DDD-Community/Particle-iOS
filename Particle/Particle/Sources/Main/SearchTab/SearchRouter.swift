@@ -19,7 +19,7 @@ protocol SearchViewControllable: ViewControllable {
 
 final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControllable>, SearchRouting {
     
-    init(
+    override init(
         interactor: SearchInteractable,
         viewController: SearchViewControllable
     ) {
