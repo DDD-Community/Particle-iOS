@@ -64,6 +64,8 @@
 		AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2DE2A68EEB100C54490 /* Console.swift */; };
 		AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */; };
 		AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */; };
+		AF190BA02B1E082B00F7F91C /* ReportRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF190B9F2B1E082B00F7F91C /* ReportRecordUseCase.swift */; };
+		AF190BA22B1E09C600F7F91C /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF190BA12B1E09C600F7F91C /* LogoutUseCase.swift */; };
 		AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1945162A5C407500B9FFA1 /* Constant.swift */; };
 		AF1D32AD2A680CC700980F14 /* PhotoPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */; };
 		AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */; };
@@ -129,6 +131,7 @@
 		AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDD02AD81882001EB474 /* AuthService.swift */; };
 		AF88EDD52AD823E3001EB474 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */; };
 		AF88EDD72AD83223001EB474 /* SetInterestedTagsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */; };
+		AF8F121E2B1F58820098DDE2 /* LogoutSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8F121D2B1F58820098DDE2 /* LogoutSuccessResponse.swift */; };
 		AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F12A8CFF9200877C85 /* LoginRequest.swift */; };
 		AF9702F42A8D005F00877C85 /* LoginSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */; };
 		AF9702F82A8D01C700877C85 /* RecordCreateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9702F72A8D01C700877C85 /* RecordCreateDTO.swift */; };
@@ -256,6 +259,8 @@
 		AF18E2DE2A68EEB100C54490 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentencePresentationController.swift; sourceTree = "<group>"; };
+		AF190B9F2B1E082B00F7F91C /* ReportRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRecordUseCase.swift; sourceTree = "<group>"; };
+		AF190BA12B1E09C600F7F91C /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		AF1945162A5C407500B9FFA1 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		AF1D32A92A680CC700980F14 /* PhotoPickerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerRouter.swift; sourceTree = "<group>"; };
 		AF1D32AA2A680CC700980F14 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +325,7 @@
 		AF88EDD02AD81882001EB474 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsUseCase.swift; sourceTree = "<group>"; };
+		AF8F121D2B1F58820098DDE2 /* LogoutSuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutSuccessResponse.swift; sourceTree = "<group>"; };
 		AF9702F12A8CFF9200877C85 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSuccessResponse.swift; sourceTree = "<group>"; };
 		AF9702F72A8D01C700877C85 /* RecordCreateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateDTO.swift; sourceTree = "<group>"; };
@@ -864,6 +870,7 @@
 			isa = PBXGroup;
 			children = (
 				AF88EDD42AD823E3001EB474 /* LoginUseCase.swift */,
+				AF190BA12B1E09C600F7F91C /* LogoutUseCase.swift */,
 				AFA551CB2AF3BEA000E15AC2 /* WithdrawUseCase.swift */,
 				AF88EDD62AD83223001EB474 /* SetInterestedTagsUseCase.swift */,
 				AFC748592ADB73D9009C6819 /* FetchMyProfileUseCase.swift */,
@@ -872,6 +879,7 @@
 				AFC7484F2ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift */,
 				AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */,
 				AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */,
+				AF190B9F2B1E082B00F7F91C /* ReportRecordUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -901,6 +909,7 @@
 				AFC748512ADB66EF009C6819 /* RecordMapper.swift */,
 				AF9702F12A8CFF9200877C85 /* LoginRequest.swift */,
 				AF9702F32A8D005F00877C85 /* LoginSuccessResponse.swift */,
+				AF8F121D2B1F58820098DDE2 /* LogoutSuccessResponse.swift */,
 				AF662CAE2AF608BC005B4FCA /* WithdrawResponse.swift */,
 				AF9702F02A8CFF8800877C85 /* DataMapping */,
 			);
@@ -1270,6 +1279,7 @@
 				AF130A8F2AA226CF00F2E0BD /* UIView+.swift in Sources */,
 				AFBB5F4E2A66AAB0002416DA /* ExploreRouter.swift in Sources */,
 				AF4647502AAA0D6700701B83 /* SetAlarmRouter.swift in Sources */,
+				AF8F121E2B1F58820098DDE2 /* LogoutSuccessResponse.swift in Sources */,
 				AF3122772A977BEA00262088 /* SelectTagRouter.swift in Sources */,
 				AF88EDA72AD29EE8001EB474 /* DefaultNetworkService.swift in Sources */,
 				AFDE0F462AA4C1F3008DC539 /* MyRecordListInteractor.swift in Sources */,
@@ -1376,6 +1386,7 @@
 				AF0D71DE2A5BEF7B00157758 /* LoggedInRouter.swift in Sources */,
 				AF0D71E82A5BEFB800157758 /* MainBuilder.swift in Sources */,
 				AF88EDC52AD3D533001EB474 /* DefaultRecordDataSource.swift in Sources */,
+				AF190BA22B1E09C600F7F91C /* LogoutUseCase.swift in Sources */,
 				AFBB5F742A66B65D002416DA /* SelectSentenceRouter.swift in Sources */,
 				AF4647602AAA196F00701B83 /* DirectlySetAlarmRouter.swift in Sources */,
 				AF88EDA92AD29F9D001EB474 /* DefaultNetworkSessionManager.swift in Sources */,
@@ -1416,6 +1427,7 @@
 				AFB4BDC72A4093DC008BA9E0 /* SceneDelegate.swift in Sources */,
 				3520EF172A5E91A900A53B34 /* SetAdditionalInformationViewController.swift in Sources */,
 				AF88EDBF2AD3D484001EB474 /* RecordRepository.swift in Sources */,
+				AF190BA02B1E082B00F7F91C /* ReportRecordUseCase.swift in Sources */,
 				AFC748542ADB6C54009C6819 /* FetchMyRecordsByDateUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
