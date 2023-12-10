@@ -9,7 +9,13 @@ import RIBs
 import RxSwift
 
 protocol RecordDetailRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func attachOrganizingSentence()
+    func detachOrganizingSentence()
+    func attachSetAdditionalInformation(data: RecordReadDTO)
+    func detachSetAdditionalInformation()
+    
+    func attachRecordDetail(with data: RecordReadDTO)
+    func cleanupViews(with updatedData: RecordReadDTO)
 }
 
 protocol RecordDetailPresentable: Presentable {
@@ -29,17 +35,21 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
     
     weak var router: RecordDetailRouting?
     weak var listener: RecordDetailListener?
+    
     private var disposeBag = DisposeBag()
+    private let recordData: RecordReadDTO
     private let deleteRecordUseCase: DeleteRecordUseCase
     private let reportRecordUseCase: ReportRecordUseCase
     
     init(
         presenter: RecordDetailPresentable,
         deleteRecordUseCase: DeleteRecordUseCase,
-        reportRecordUseCase: ReportRecordUseCase
+        reportRecordUseCase: ReportRecordUseCase,
+        data: RecordReadDTO
     ) {
         self.deleteRecordUseCase = deleteRecordUseCase
         self.reportRecordUseCase = reportRecordUseCase
+        self.recordData = data
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -94,4 +104,35 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
             }
             .disposed(by: disposeBag)
     }
+    
+    func recordDetailSaveButtonTapped(with id: String) {
+        // TODO: 아티클 저장액션
+        // 코어데이터에 저장? 서버에 저장?
+    }
+    
+    func recordDetailEditButtonTapped(with id: String) {
+        router?.attachOrganizingSentence()
+    }
+    
+    // MARK: - OrganizingSentenceListener
+    
+    func organizingSentenceNextButtonTapped() {
+        router?.attachSetAdditionalInformation(data: recordData)
+    }
+    
+    func organizingSentenceBackButtonTapped() {
+        router?.detachOrganizingSentence()
+    }
+    
+    // MARK: - SetAdditionalInformationListener
+    
+    func setAdditionalInfoBackButtonTapped() {
+        router?.detachSetAdditionalInformation()
+    }
+        
+    func setAdditionalInfoSuccessEdit(data: RecordReadDTO) {
+        router?.cleanupViews(with: data)
+    }
+    
+    func setAdditionalInfoSuccessPost(data: RecordReadDTO) { }
 }

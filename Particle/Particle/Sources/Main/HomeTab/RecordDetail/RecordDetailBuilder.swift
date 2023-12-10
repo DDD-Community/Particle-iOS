@@ -11,8 +11,15 @@ protocol RecordDetailDependency: Dependency {
     var recordRepository: RecordRepository { get }
 }
 
-final class RecordDetailComponent: Component<RecordDetailDependency> {
-
+final class RecordDetailComponent: Component<RecordDetailDependency>,
+                                   OrganizingSentenceDependency,
+                                   SetAdditionalInformationDependency {
+    
+    var organizingSentenceRepository: OrganizingSentenceRepository = OrganizingSentenceRepositoryImp()
+    var recordRepository: RecordRepository {
+        return dependency.recordRepository
+    }
+    
     fileprivate var deleteRecordUseCase: DeleteRecordUseCase {
         return DefaultDeleteRecordUseCase(recordRepository: dependency.recordRepository)
     }
@@ -44,9 +51,23 @@ final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBu
         let interactor = RecordDetailInteractor(
             presenter: viewController,
             deleteRecordUseCase: component.deleteRecordUseCase,
-            reportRecordUseCase: component.reportRecordUseCase
+            reportRecordUseCase: component.reportRecordUseCase,
+            data: data
         )
         interactor.listener = listener
-        return RecordDetailRouter(interactor: interactor, viewController: viewController)
+        
+        component.organizingSentenceRepository.sentenceFile2.accept(data.items.map {
+            .init(sentence: $0.content, isRepresent: $0.isMain)
+        })
+        
+        let organizingSentenceBuilder = OrganizingSentenceBuilder(dependency: component)
+        let setAdditionalInformationBuilder = SetAdditionalInformationBuilder(dependency: component)
+        
+        return RecordDetailRouter(
+            interactor: interactor,
+            viewController: viewController,
+            organizingSentenceBuildable: organizingSentenceBuilder,
+            setAdditionalInformationBuildable: setAdditionalInformationBuilder
+        )
     }
 }

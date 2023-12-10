@@ -22,14 +22,7 @@ final class SetAdditionalInformationViewController: UIViewController,
     
     weak var listener: SetAdditionalInformationPresentableListener?
     private var disposeBag = DisposeBag()
-    private var selectedTags: BehaviorRelay<[[String]]> = .init(value: Array(repeating: [], count: 5))
-    
-    private var tags: [(title: String, isSelected: Bool)] = {
-        guard let userInterestedTags = UserDefaults.standard.object(forKey: "INTERESTED_TAGS") as? [String] else {
-            return [("#iOS", false), ("#Android", false)]
-        }
-        return userInterestedTags.map { ($0, false) }
-    }()
+    private var tags: BehaviorRelay<[(title: String, isSelected: Bool)]> = .init(value: [])
     
     enum Constant {
         static let titleTextViewPlaceHolder = "제목을 입력해 주세요"
@@ -295,6 +288,8 @@ final class SetAdditionalInformationViewController: UIViewController,
         configureButton()
         setInitialState()
         bind()
+        
+        fetchInterestedTags()
     }
     
     required init?(coder: NSCoder) {
@@ -339,25 +334,36 @@ final class SetAdditionalInformationViewController: UIViewController,
             .disposed(by: disposeBag)
     }
     
+    private func fetchInterestedTags() {
+        guard let userInterestedTags = UserDefaults.standard.object(forKey: "INTERESTED_TAGS") as? [String] else { return }
+        let fetchedTags = userInterestedTags.map { ($0, false) }
+        tags.accept(fetchedTags)
+    }
+    
     private func bind() {
         
-        Observable.of(tags)
+        tags
             .bind(to: recommendTagCollectionView.rx.items(
                 cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
                 cellType: LeftAlignedCollectionViewCell.self)
             ) { index, item, cell in
                 cell.titleLabel.text = item.title
+                
+                if item.isSelected {
+                    cell.setSelected(true)
+                } else {
+                    cell.setSelected(false)
+                }
             }
             .disposed(by: disposeBag)
         
         recommendTagCollectionView.rx.itemSelected.subscribe { [weak self] indexPath in
             guard let self = self else { return }
             guard let index = indexPath.element else { return }
-            guard let selectedCell = self.recommendTagCollectionView.cellForItem(at: index) as? LeftAlignedCollectionViewCell else {
-                return
-            }
-            selectedCell.setSelected()
-            self.tags[index.row].isSelected.toggle()
+
+            var oldValue = tags.value
+            oldValue[index.row].isSelected.toggle()
+            tags.accept(oldValue)
         }
         .disposed(by: disposeBag)
         
@@ -383,16 +389,12 @@ final class SetAdditionalInformationViewController: UIViewController,
                         self?.titleTextFieldWarningLabel.isHidden = false
                     }
                 } else {
-                    let selectedTags = self?.tags.filter { $0.isSelected == true }.map { Tag(rawValue: $0.title)?.value ?? "UXUI" } ?? []
-                    
-                    let selectedTagsInAccordion: [String] = self?.selectedTags.value
-                        .flatMap { $0 }
-                        .map { Tag(rawValue: $0)?.value ?? "UXUI" } ?? []
+                    let selectedTags = self?.tags.value.filter { $0.isSelected == true }.map { Tag(rawValue: $0.title)?.value ?? "UXUI" } ?? []
                     
                     self?.listener?.setAdditionalInfoNextButtonTapped(
                         title: self?.titleTextView.text ?? "",
                         url: self?.urlTextField.text ?? "",
-                        tags: selectedTags + selectedTagsInAccordion,
+                        tags: selectedTags,
                         style: (self?.cardStyleRadioButton.state.value ?? true) ? "CARD" : "TEXT"
                     )
                 }
@@ -451,6 +453,37 @@ final class SetAdditionalInformationViewController: UIViewController,
             self?.cardStyleRadioButton.state.accept(false)
         }
         .disposed(by: disposeBag)
+    }
+    
+    // MARK: - SetAdditionalInformationPresentable
+    
+    func setData(data: RecordReadDTO) {
+        urlTextField.text = data.url
+        titleTextView.text = data.title
+        titleTextView.textColor = .white
+        
+        var indexList = [Int]()
+        
+        for tag1 in data.tags {
+            let id = "#" + tag1
+            for (i, tag2) in tags.value.enumerated() {
+                if tag2.title == id {
+                    indexList.append(i)
+                    break
+                }
+            }
+        }
+        var oldValue = tags.value
+        indexList.forEach { index in
+            oldValue[index].isSelected = true
+        }
+        tags.accept(oldValue)
+        
+        if data.attribute.style == "TEXT" {
+            textStyleRadioButton.state.accept(true)
+        } else {
+            cardStyleRadioButton.state.accept(true)
+        }
     }
 }
 

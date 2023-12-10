@@ -20,12 +20,16 @@ final class SetAdditionalInformationComponent: Component<SetAdditionalInformatio
     fileprivate var createRecordUseCase: CreateRecordUseCase {
         return DefaultCreateRecordUseCase(recordRepository: dependency.recordRepository)
     }
+    
+    fileprivate var editRecordUseCase: EditRecordUseCase {
+        return DefaultEditRecordUseCase(recordRepository: dependency.recordRepository)
+    }
 }
 
 // MARK: - Builder
 
 protocol SetAdditionalInformationBuildable: Buildable {
-    func build(withListener listener: SetAdditionalInformationListener) -> SetAdditionalInformationRouting
+    func build(withListener listener: SetAdditionalInformationListener, data: RecordReadDTO?) -> SetAdditionalInformationRouting
 }
 
 final class SetAdditionalInformationBuilder: Builder<SetAdditionalInformationDependency>, SetAdditionalInformationBuildable {
@@ -34,13 +38,15 @@ final class SetAdditionalInformationBuilder: Builder<SetAdditionalInformationDep
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: SetAdditionalInformationListener) -> SetAdditionalInformationRouting {
+    func build(withListener listener: SetAdditionalInformationListener, data: RecordReadDTO? = nil) -> SetAdditionalInformationRouting {
         let component = SetAdditionalInformationComponent(dependency: dependency)
         let viewController = SetAdditionalInformationViewController()
         let interactor = SetAdditionalInformationInteractor(
             presenter: viewController,
             repository: component.organizingSentenceRepository,
-            createRecordUseCase: component.createRecordUseCase
+            createRecordUseCase: component.createRecordUseCase,
+            editRecordUseCase: component.editRecordUseCase,
+            data: data
         )
         interactor.listener = listener
         return SetAdditionalInformationRouter(interactor: interactor, viewController: viewController)

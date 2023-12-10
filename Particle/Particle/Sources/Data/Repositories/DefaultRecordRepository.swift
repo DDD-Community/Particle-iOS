@@ -34,6 +34,10 @@ extension DefaultRecordRepository: RecordRepository {
         return recordDataSource.getRecordBy(id: id)
     }
     
+    func editRecord(id: String, to updatedModel: RecordCreateDTO) -> RxSwift.Observable<RecordReadDTO> {
+        return recordDataSource.editRecord(id: id, to: updatedModel)
+    }
+    
     func getMyRecordsSeparatedByTag() -> RxSwift.Observable<[SectionOfRecordTag]> {
         return recordDataSource.getMyRecords()
             .map { [weak self] data in

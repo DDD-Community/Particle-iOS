@@ -138,7 +138,7 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
         if setAdditionalInformationRouting != nil {
             return
         }
-        let router = setAdditionalInformationBuildable.build(withListener: interactor)
+        let router = setAdditionalInformationBuildable.build(withListener: interactor, data: nil)
         navigationControllable?.pushViewController(router.viewControllable, animated: true)
         setAdditionalInformationRouting = router
         attachChild(router)
