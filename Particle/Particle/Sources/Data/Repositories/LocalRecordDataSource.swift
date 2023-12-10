@@ -52,6 +52,38 @@ extension LocalRecordDataSource: RecordDataSource {
         }
     }
     
+    func getRecordBy(id: String) -> Observable<RecordReadDTO> {
+        return Observable.create { [weak self] emitter in
+            do {
+                guard let arr = try self?.coreData
+                    .persistentContainer
+                    .viewContext
+                    .fetch(CDRecord.fetchRequest()) else {
+                    emitter.onNext(.stub())
+                    return Disposables.create()
+                }
+                let filteredArr = arr.filter { $0.id == id }
+                let filteredRecord = filteredArr.first! // id 없으면 런타임에러 위험
+                let targetRecord = RecordReadDTO(
+                    id: filteredRecord.id ?? "",
+                    title: filteredRecord.title ?? "",
+                    url: filteredRecord.url ?? "",
+                    items: [RecordReadDTO.RecordItemReadDTO].decode(from: filteredRecord.items ?? ""),
+                    tags: (filteredRecord.tags ?? "").components(separatedBy: "&"),
+                    attribute: RecordReadDTO.Attribute.decode(from: filteredRecord.attribute ?? ""),
+                    createdAt: filteredRecord.createdAt ?? "",
+                    createdBy: filteredRecord.createdBy ?? ""
+                )
+                
+                emitter.onNext(targetRecord)
+            } catch {
+                emitter.onError(error)
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
     func getRecordsBy(tag: String) -> RxSwift.Observable<[RecordReadDTO]> {
         return Observable.create { [weak self] emitter in
             do {

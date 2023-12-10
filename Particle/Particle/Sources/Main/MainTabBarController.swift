@@ -66,11 +66,28 @@ final class MainTabBarController: UITabBarController, MainPresentable, MainViewC
         }
     }
     
+    // MARK: - MainViewControllable
+    
     func present(viewController: RIBs.ViewControllable) {
         present(viewController.uiviewController, animated: true)
     }
     
+    func dismiss(viewController: RIBs.ViewControllable) { /// RibsUtil에 이미 구현되어있는 것과 비교후 제거
+        if presentedViewController === viewController.uiviewController {
+            dismiss(animated: true)
+        }
+    }
+    
     func setViewControllers(_ viewControllers: [ViewControllable]) {
       super.setViewControllers(viewControllers.map(\.uiviewController), animated: false)
+    }
+    
+    // MARK: - MainPresentable
+    
+    func alert(title: String, body: String) {
+        let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
+        let button = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(button)
+        present(alert, animated: true)
     }
 }

@@ -10,6 +10,7 @@ import RxSwift
 
 protocol RecordDataSource {
     func getMyRecords() -> Observable<[RecordReadDTO]>
+    func getRecordBy(id: String) -> Observable<RecordReadDTO>
     func getRecordsBy(tag: String) -> Observable<[RecordReadDTO]>
     func createRecord(record: RecordCreateDTO) -> Observable<RecordReadDTO>
     func deleteRecord(recordId: String) -> Observable<String>

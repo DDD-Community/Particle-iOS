@@ -17,6 +17,10 @@ final class MainComponent: Component<MainDependency> {
     var searchRepository: SearchRepository
     var authService: AuthService
     
+    var fetchRecordByIdUseCase: FetchRecordByIdUseCase {
+        return DefaultFetchRecordByIdUseCase(recordRepository: recordRepository)
+    }
+    
     init(
         dependency: MainDependency,
         recordRepository: RecordRepository,
@@ -88,13 +92,17 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
             authService: authService
         )
         let viewController = MainTabBarController()
-        let interactor = MainInteractor(presenter: viewController)
+        let interactor = MainInteractor(
+            presenter: viewController,
+            fetchRecordByIdUseCase: component.fetchRecordByIdUseCase
+        )
         interactor.listener = listener
         
         let home = HomeBuilder(dependency: component)
 //        let explore = ExploreBuilder(dependency: component)
 //        let search = SearchBuilder(dependency: component)
         let mypage = MyPageBuilder(dependency: component)
+        let recordDetail = RecordDetailBuilder(dependency: component)
         
         return MainRouter(
             interactor: interactor,
@@ -102,11 +110,14 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
             home: home,
 //            explore: explore,
 //            search: search,
-            mypage: mypage)
+            mypage: mypage, 
+            recordDetail: recordDetail
+        )
     }
 }
 
 extension MainComponent: HomeDependency,
                          ExploreDependency,
                          SearchDependency,
-                         MyPageDependency {}
+                         MyPageDependency,
+                         RecordDetailDependency {}

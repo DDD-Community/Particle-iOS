@@ -30,7 +30,7 @@ struct DefaultSearchDataSource: SearchDataSource {
     }
     
     func getSearchResultBy(tag: String) -> Observable<[SearchResultDTO]> {
-        let path = ParticleServer.Version.v1.rawValue + ParticleServer.Path.searchByTag.value
+        let path = ParticleServer.Version.v1.rawValue + ParticleServer.Path.searchByTag(tag: tag).value
         
         let endpoint = Endpoint<[SearchResultDTO]>(
             path: path,
