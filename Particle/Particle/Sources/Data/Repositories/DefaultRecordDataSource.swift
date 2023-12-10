@@ -55,7 +55,7 @@ final class DefaultRecordDataSource: RecordDataSource {
     func getRecordsBy(tag: String) -> RxSwift.Observable<[RecordReadDTO]> {
         
         let path = ParticleServer.Version.v1.rawValue
-        + ParticleServer.Path.searchByTag(tag: tag).value
+        + ParticleServer.Path.searchByTag.value
         
         let endpoint = Endpoint<[RecordReadDTO]>(
             path: path,

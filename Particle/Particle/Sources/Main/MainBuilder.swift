@@ -14,6 +14,7 @@ protocol MainDependency: Dependency {
 final class MainComponent: Component<MainDependency> {
     var recordRepository: RecordRepository
     var userRepository: UserRepository
+    var searchRepository: SearchRepository
     var authService: AuthService
     
     var fetchRecordByIdUseCase: FetchRecordByIdUseCase {
@@ -24,10 +25,12 @@ final class MainComponent: Component<MainDependency> {
         dependency: MainDependency,
         recordRepository: RecordRepository,
         userRepository: UserRepository,
+        searchRepository: SearchRepository,
         authService: AuthService
     ) {
         self.recordRepository = recordRepository
         self.userRepository = userRepository
+        self.searchRepository = searchRepository
         self.authService = authService
         super.init(dependency: dependency)
     }
@@ -75,12 +78,16 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         let userDataSource = DefaultUserDataSource(dataTransferService: apiDataTransferService)
         let userRepository = DefaultUserRepository(userDataSource: userDataSource)
         
+        let searchDataSource = DefaultSearchDataSource(dataTransferService: apiDataTransferService)
+        let searchRepository = DefaultSearchRepository(searchDataSource: searchDataSource)
+        
         let authService = DefaultAuthService(dataTransferService: apiDataTransferService)
         
         let component = MainComponent(
             dependency: dependency,
             recordRepository: recordRepository,
             userRepository: userRepository, 
+            searchRepository: searchRepository,
             authService: authService
         )
         let viewController = MainTabBarController()

@@ -13,13 +13,16 @@ protocol SearchInteractable: Interactable {
 }
 
 protocol SearchViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+    func showSearchResult()
+    func hiddenSearchResult()
 }
 
 final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControllable>, SearchRouting {
-
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: SearchInteractable, viewController: SearchViewControllable) {
+    
+    override init(
+        interactor: SearchInteractable,
+        viewController: SearchViewControllable
+    ) {
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
