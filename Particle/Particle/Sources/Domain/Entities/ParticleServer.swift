@@ -15,6 +15,7 @@ enum ParticleServer {
     enum Path {
         case createRecord
         case deleteRecord(id: String)
+        case reportRecord(id: String)
         case readMyRecords
         case readRecord(id: String)
         case searchByTitle

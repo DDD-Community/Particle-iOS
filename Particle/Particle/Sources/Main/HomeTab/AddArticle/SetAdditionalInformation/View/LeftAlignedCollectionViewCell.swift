@@ -24,7 +24,7 @@ class LeftAlignedCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private var isTapped = false
+    private(set) var isTapped = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,8 +69,8 @@ class LeftAlignedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setSelected() {
-        isTapped.toggle()
+    func setSelected(_ bool: Bool) {
+        isTapped = bool
         
         if isTapped {
             self.titleLabel.textColor = .particleColor.main100

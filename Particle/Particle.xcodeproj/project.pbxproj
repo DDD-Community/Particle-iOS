@@ -76,6 +76,7 @@
 		AF130A982AA2E9E200F2E0BD /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A942AA2E9E200F2E0BD /* RecordDetailViewController.swift */; };
 		AF130A992AA2E9E200F2E0BD /* RecordDetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A952AA2E9E200F2E0BD /* RecordDetailBuilder.swift */; };
 		AF130A9A2AA2E9E200F2E0BD /* RecordDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF130A962AA2E9E200F2E0BD /* RecordDetailInteractor.swift */; };
+		AF16CEFE2B25E88D00F272DB /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF16CEFD2B25E88D00F272DB /* UIStackView+.swift */; };
 		AF18E2DF2A68EEB100C54490 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2DE2A68EEB100C54490 /* Console.swift */; };
 		AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */; };
 		AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */; };
@@ -109,6 +110,7 @@
 		AF48C5412B2404FB00506E32 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AF48C5402B2404FB00506E32 /* FirebaseMessaging */; };
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
+		AF5211F92B25A59A009C3A50 /* EditRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5211F82B25A59A009C3A50 /* EditRecordUseCase.swift */; };
 		AF5C55492B0B8553006ADAF3 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C55482B0B8553006ADAF3 /* RadioButton.swift */; };
 		AF5F64C02B514408009DFDF7 /* LocalUserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64BF2B514408009DFDF7 /* LocalUserDataSource.swift */; };
 		AF5F64C42B514524009DFDF7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64C22B514524009DFDF7 /* Model.xcdatamodeld */; };
@@ -310,6 +312,7 @@
 		AF130A942AA2E9E200F2E0BD /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		AF130A952AA2E9E200F2E0BD /* RecordDetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailBuilder.swift; sourceTree = "<group>"; };
 		AF130A962AA2E9E200F2E0BD /* RecordDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailInteractor.swift; sourceTree = "<group>"; };
+		AF16CEFD2B25E88D00F272DB /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		AF18E2DE2A68EEB100C54490 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		AF18E2E12A69012D00C54490 /* EditSentenceTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentenceTransitioningDelegate.swift; sourceTree = "<group>"; };
 		AF18E2E32A69015300C54490 /* EditSentencePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSentencePresentationController.swift; sourceTree = "<group>"; };
@@ -342,6 +345,7 @@
 		AF4A19102A6A1E4B00932372 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AF4DCBC22B240DB5008B72B4 /* ParticleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ParticleRelease.entitlements; sourceTree = "<group>"; };
+		AF5211F82B25A59A009C3A50 /* EditRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecordUseCase.swift; sourceTree = "<group>"; };
 		AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Particle.entitlements; sourceTree = "<group>"; };
 		AF5C55482B0B8553006ADAF3 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		AF5F64BF2B514408009DFDF7 /* LocalUserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserDataSource.swift; sourceTree = "<group>"; };
@@ -992,6 +996,8 @@
 				AFC7484F2ADACE66009C6819 /* FetchMyRecordsByTagUseCase.swift */,
 				AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */,
 				AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */,
+				AF5211F82B25A59A009C3A50 /* EditRecordUseCase.swift */,
+				AF190B9F2B1E082B00F7F91C /* ReportRecordUseCase.swift */,
 				3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */,
 				35E4D6BF2B28023000A265CD /* FetchUserInterestTagsUseCase.swift */,
 				35E4D6C12B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift */,
@@ -1198,6 +1204,7 @@
 				3520EF252A5FC40800A53B34 /* NSMutableAttributedString+.swift */,
 				AFBB5F6C2A66B5C1002416DA /* UIViewController+.swift */,
 				AF130A8E2AA226CF00F2E0BD /* UIView+.swift */,
+				AF16CEFD2B25E88D00F272DB /* UIStackView+.swift */,
 				AF130A902AA2DE0F00F2E0BD /* UITextField+.swift */,
 				AF4A19122A6A59BA00932372 /* UIImageView+.swift */,
 			);
@@ -1432,6 +1439,7 @@
 				AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */,
 				AF4823732AB48ED100E90E77 /* ParticleLoginButton.swift in Sources */,
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
+				AF16CEFE2B25E88D00F272DB /* UIStackView+.swift in Sources */,
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				35E4D6C22B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift in Sources */,
@@ -1498,6 +1506,7 @@
 				AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */,
 				3520EF182A5E91A900A53B34 /* SetAdditionalInformationBuilder.swift in Sources */,
 				AF130A9A2AA2E9E200F2E0BD /* RecordDetailInteractor.swift in Sources */,
+				AF5211F92B25A59A009C3A50 /* EditRecordUseCase.swift in Sources */,
 				AF31227D2A9780E900262088 /* Accordion.swift in Sources */,
 				AFCAB6CA2A5C521800E2310D /* AddArticleBuilder.swift in Sources */,
 				AF88EDB72AD3B4EA001EB474 /* JSONResponseDecoder.swift in Sources */,

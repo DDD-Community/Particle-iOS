@@ -49,7 +49,7 @@ final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBu
         let interactor = RecordDetailInteractor(
             presenter: viewController,
             deleteRecordUseCase: component.deleteRecordUseCase,
-            reportRecordUseCase: component.reportRecordUseCase,
+//            reportRecordUseCase: component.reportRecordUseCase,
             data: data
         )
         interactor.listener = listener

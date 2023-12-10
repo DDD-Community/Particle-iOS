@@ -71,6 +71,7 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
             listener?.login()
         } else {
             UserDefaults.standard.set(true, forKey: "FIRST_LOGIN_EVENT")
+            UserDefaults.standard.set("사용자", forKey: "USER_NAME")
             router?.routeToSelectTag()
         }
     }

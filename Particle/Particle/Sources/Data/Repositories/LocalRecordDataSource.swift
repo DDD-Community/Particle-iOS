@@ -63,19 +63,23 @@ extension LocalRecordDataSource: RecordDataSource {
                     return Disposables.create()
                 }
                 let filteredArr = arr.filter { $0.id == id }
-                let filteredRecord = filteredArr.first! // id 없으면 런타임에러 위험
-                let targetRecord = RecordReadDTO(
-                    id: filteredRecord.id ?? "",
-                    title: filteredRecord.title ?? "",
-                    url: filteredRecord.url ?? "",
-                    items: [RecordReadDTO.RecordItemReadDTO].decode(from: filteredRecord.items ?? ""),
-                    tags: (filteredRecord.tags ?? "").components(separatedBy: "&"),
-                    attribute: RecordReadDTO.Attribute.decode(from: filteredRecord.attribute ?? ""),
-                    createdAt: filteredRecord.createdAt ?? "",
-                    createdBy: filteredRecord.createdBy ?? ""
-                )
+                if let filteredRecord = filteredArr.first { // id 없으면 런타임에러 위험
+                    let targetRecord = RecordReadDTO(
+                        id: filteredRecord.id ?? "",
+                        title: filteredRecord.title ?? "",
+                        url: filteredRecord.url ?? "",
+                        items: [RecordReadDTO.RecordItemReadDTO].decode(from: filteredRecord.items ?? ""),
+                        tags: (filteredRecord.tags ?? "").components(separatedBy: "&"),
+                        attribute: RecordReadDTO.Attribute.decode(from: filteredRecord.attribute ?? ""),
+                        createdAt: filteredRecord.createdAt ?? "",
+                        createdBy: filteredRecord.createdBy ?? ""
+                    )
+                    
+                    emitter.onNext(targetRecord)
+                } else {
+                    emitter.onNext(.stub())
+                }
                 
-                emitter.onNext(targetRecord)
             } catch {
                 emitter.onError(error)
             }
@@ -134,7 +138,7 @@ extension LocalRecordDataSource: RecordDataSource {
             cdrecord.title = record.title
             cdrecord.url = record.url
             cdrecord.createdAt = DateManager.shared.todayString()
-            cdrecord.createdBy = "사용자"
+            cdrecord.createdBy = UserDefaults.standard.string(forKey: "USER_NAME")
             cdrecord.attribute = "\(colors.randomElement() ?? "BLUE")&\(record.style)"
             cdrecord.tags = record.tags.joined(separator: "&") // 모든 태그를 &로 이어주기
             cdrecord.items = record.items.map { $0.encodeForCoreData() }.joined(separator: "&")
@@ -157,6 +161,46 @@ extension LocalRecordDataSource: RecordDataSource {
             return Disposables.create()
         }
     }
+    
+    func editRecord(id: String, to updatedModel: RecordCreateDTO) -> RxSwift.Observable<RecordReadDTO> {
+        return Observable.create { [weak self] emitter in
+            guard let self = self else { return Disposables.create() }
+            do {
+                let arr = try self.coreData
+                    .persistentContainer
+                    .viewContext
+                    .fetch(CDRecord.fetchRequest())
+                let colors = ["YELLOW", "BLUE"]
+                var targetRecord = arr.filter { $0.id == id }.last!
+                targetRecord.title = updatedModel.title
+                targetRecord.url = updatedModel.url
+                targetRecord.items = updatedModel.items.map { $0.encodeForCoreData() }.joined(separator: "&")
+                targetRecord.tags = updatedModel.tags.joined(separator: "&")
+                targetRecord.attribute = "\(colors.randomElement() ?? "BLUE")&\(updatedModel.style)"
+                
+                let context = targetRecord.managedObjectContext
+                try context?.save()
+                
+                let resultRecord = RecordReadDTO(
+                    id: targetRecord.id ?? "",
+                    title: targetRecord.title ?? "",
+                    url: targetRecord.url ?? "",
+                    items: [RecordReadDTO.RecordItemReadDTO].decode(from: targetRecord.items ?? ""),
+                    tags: targetRecord.tags!.components(separatedBy: "&"),
+                    attribute: RecordReadDTO.Attribute.decode(from: targetRecord.attribute ?? ""),
+                    createdAt: targetRecord.createdAt ?? "",
+                    createdBy: targetRecord.createdBy ?? ""
+                )
+                emitter.onNext(resultRecord)
+            } catch {
+                emitter.onError(error)
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    
     
     func deleteRecord(recordId: String) -> RxSwift.Observable<String> {
         return Observable.create { [weak self] emitter in

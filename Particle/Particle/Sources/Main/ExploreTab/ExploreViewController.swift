@@ -103,7 +103,7 @@ final class ExploreViewController: UIViewController, ExplorePresentable, Explore
             guard let selectedCell = self.interestedTagCollectionView.cellForItem(at: index) as? LeftAlignedCollectionViewCell else {
                 return
             }
-            selectedCell.setSelected()
+//            selectedCell.setSelected(<#Bool#>)
 //            self.tags[index.row].isSelected.toggle()
         }
         .disposed(by: disposeBag)
