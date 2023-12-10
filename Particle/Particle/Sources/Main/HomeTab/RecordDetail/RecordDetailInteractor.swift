@@ -9,7 +9,13 @@ import RIBs
 import RxSwift
 
 protocol RecordDetailRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func attachOrganizingSentence()
+    func detachOrganizingSentence()
+    func attachSetAdditionalInformation(data: RecordReadDTO)
+    func detachSetAdditionalInformation()
+    
+    func attachRecordDetail(with data: RecordReadDTO)
+    func cleanupViews(with updatedData: RecordReadDTO)
 }
 
 protocol RecordDetailPresentable: Presentable {
@@ -29,14 +35,20 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
         
     weak var router: RecordDetailRouting?
     weak var listener: RecordDetailListener?
+    
     private var disposeBag = DisposeBag()
+    private let recordData: RecordReadDTO
     private let deleteRecordUseCase: DeleteRecordUseCase
     
     init(
         presenter: RecordDetailPresentable,
-        deleteRecordUseCase: DeleteRecordUseCase
+        deleteRecordUseCase: DeleteRecordUseCase,
+        reportRecordUseCase: ReportRecordUseCase,
+        data: RecordReadDTO
     ) {
         self.deleteRecordUseCase = deleteRecordUseCase
+        self.reportRecordUseCase = reportRecordUseCase
+        self.recordData = data
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -74,4 +86,52 @@ final class RecordDetailInteractor: PresentableInteractor<RecordDetailPresentabl
             }
             .disposed(by: disposeBag)
     }
+    
+    func recordDetailReportButtonTapped(with id: String) {
+        reportRecordUseCase.execute(id: id)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] isSuccessReport in
+                if isSuccessReport {
+                    self?.presenter.showSuccessAlert()
+                }
+            } onError: { [weak self] error in
+                if case DataTransferError.resolvedNetworkFailure(let errorResponse as ErrorResponse) = error {
+                    self?.presenter.showErrorAlert(description: errorResponse.toDomain())
+                } else {
+                    self?.presenter.showErrorAlert(description: "알 수 없는 에러가 발생했습니다.\n다시 시도해주세요\n\(error.localizedDescription)")
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func recordDetailSaveButtonTapped(with id: String) {
+        // TODO: 아티클 저장액션
+        // 코어데이터에 저장? 서버에 저장?
+    }
+    
+    func recordDetailEditButtonTapped(with id: String) {
+        router?.attachOrganizingSentence()
+    }
+    
+    // MARK: - OrganizingSentenceListener
+    
+    func organizingSentenceNextButtonTapped() {
+        router?.attachSetAdditionalInformation(data: recordData)
+    }
+    
+    func organizingSentenceBackButtonTapped() {
+        router?.detachOrganizingSentence()
+    }
+    
+    // MARK: - SetAdditionalInformationListener
+    
+    func setAdditionalInfoBackButtonTapped() {
+        router?.detachSetAdditionalInformation()
+    }
+        
+    func setAdditionalInfoSuccessEdit(data: RecordReadDTO) {
+        router?.cleanupViews(with: data)
+    }
+    
+    func setAdditionalInfoSuccessPost(data: RecordReadDTO) { }
 }

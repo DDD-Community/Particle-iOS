@@ -33,6 +33,7 @@ protocol AddArticleListener: AnyObject {
 
 final class AddArticleInteractor: Interactor, AddArticleInteractable {
     
+    
     weak var router: AddArticleRouting?
     weak var listener: AddArticleListener?
 
@@ -88,6 +89,8 @@ final class AddArticleInteractor: Interactor, AddArticleInteractable {
     func setAdditionalInfoSuccessPost(data: RecordReadDTO) {
         router?.attachRecordDetail(with: data)
     }
+    
+    func setAdditionalInfoSuccessEdit(data: RecordReadDTO) {}
     
     // MARK: - RecordDetailListener
     

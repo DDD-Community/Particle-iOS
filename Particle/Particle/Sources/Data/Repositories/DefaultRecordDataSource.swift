@@ -40,6 +40,18 @@ final class DefaultRecordDataSource: RecordDataSource {
         return dataTransferService.request(with: endpoint)
     }
     
+    func editRecord(id: String, to updatedModel: RecordCreateDTO) -> Observable<RecordReadDTO> {
+        let path = ParticleServer.Version.v1.rawValue
+        + ParticleServer.Path.editRecord(id: id).value
+        
+        let endpoint = Endpoint<RecordReadDTO>(
+            path: path,
+            method: .put,
+            bodyParametersEncodable: updatedModel
+        )
+        return dataTransferService.request(with: endpoint)
+    }
+    
     func getRecordsBy(tag: String) -> RxSwift.Observable<[RecordReadDTO]> {
         
         let path = ParticleServer.Version.v1.rawValue

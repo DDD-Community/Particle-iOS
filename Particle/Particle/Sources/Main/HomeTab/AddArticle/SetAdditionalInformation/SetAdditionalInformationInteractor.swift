@@ -14,11 +14,15 @@ protocol SetAdditionalInformationRouting: ViewableRouting {
 
 protocol SetAdditionalInformationPresentable: Presentable {
     var listener: SetAdditionalInformationPresentableListener? { get set }
+    
+    // 수정하기 모드에서 동작
+    func setData(data: RecordReadDTO)
 }
 
 protocol SetAdditionalInformationListener: AnyObject {
     func setAdditionalInfoBackButtonTapped()
     func setAdditionalInfoSuccessPost(data: RecordReadDTO)
+    func setAdditionalInfoSuccessEdit(data: RecordReadDTO) // 수정모드
 }
 
 final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditionalInformationPresentable>,
@@ -29,24 +33,32 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
     weak var listener: SetAdditionalInformationListener?
 
     private var disposeBag = DisposeBag()
+    private var recordData: RecordReadDTO?
     private let repository: OrganizingSentenceRepository
     private let createRecordUseCase: CreateRecordUseCase
+    private let editRecordUseCase: EditRecordUseCase
 
     init(
         presenter: SetAdditionalInformationPresentable,
         repository: OrganizingSentenceRepository,
-        createRecordUseCase: CreateRecordUseCase
+        createRecordUseCase: CreateRecordUseCase,
+        editRecordUseCase: EditRecordUseCase,
+        data: RecordReadDTO? = nil
     ) {
         self.repository = repository
         self.createRecordUseCase = createRecordUseCase
+        self.editRecordUseCase = editRecordUseCase
+        self.recordData = data
         super.init(presenter: presenter)
         presenter.listener = self
     }
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
-        
+        /// 수정모드
+        if let data = recordData {
+            presenter.setData(data: data)
+        }
     }
 
     override func willResignActive() {
@@ -70,13 +82,26 @@ final class SetAdditionalInformationInteractor: PresentableInteractor<SetAdditio
         
         let model = RecordCreateDTO(title: title, url: url, items: requestModel, tags: uniqueTags, style: style)
         
-        createRecordUseCase.execute(model: model)
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self]  result in
-                self?.listener?.setAdditionalInfoSuccessPost(data: result)
-            } onError: { error in
-                Console.error(error.localizedDescription)
-            }
-            .disposed(by: disposeBag)
+        if let recordData = recordData { // 수정모드
+            editRecordUseCase.execute(id: recordData.id, updatedModel: model)
+                .observe(on: MainScheduler.instance)
+                .subscribe { [weak self] result in
+                    self?.listener?.setAdditionalInfoSuccessEdit(data: result)
+                } onError: { error in
+                    Console.error(error.localizedDescription)
+                }
+                .disposed(by: disposeBag)
+
+        } else {
+            
+            createRecordUseCase.execute(model: model)
+                .observe(on: MainScheduler.instance)
+                .subscribe { [weak self]  result in
+                    self?.listener?.setAdditionalInfoSuccessPost(data: result)
+                } onError: { error in
+                    Console.error(error.localizedDescription)
+                }
+                .disposed(by: disposeBag)
+        }
     }
 }

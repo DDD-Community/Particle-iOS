@@ -7,11 +7,15 @@
 
 import RIBs
 import RxSwift
+import RxRelay
 import UIKit
 
 protocol RecordDetailPresentableListener: AnyObject {
     func recordDetailCloseButtonTapped()
     func recordDetailDeleteButtonTapped(with id: String)
+    func recordDetailReportButtonTapped(with id: String)
+    func recordDetailSaveButtonTapped(with id: String)
+    func recordDetailEditButtonTapped(with id: String)
 }
 
 final class RecordDetailViewController: UIViewController,
@@ -20,7 +24,8 @@ final class RecordDetailViewController: UIViewController,
     
     weak var listener: RecordDetailPresentableListener?
     private var disposeBag = DisposeBag()
-    private let data: RecordReadDTO
+    private let data: BehaviorRelay<RecordReadDTO> = .init(value: .stub())
+    private let isMyRecord: Bool
     private let editable: Bool
     private var errorDescription = ""
     
@@ -257,9 +262,10 @@ final class RecordDetailViewController: UIViewController,
     }()
     
     // MARK: - Initializers
-    
+
     init(data: RecordReadDTO, editable: Bool = true) {
-        self.data = data
+		self.data.accept(data)
+        self.isMyRecord = data.createdBy == UserDefaults.standard.string(forKey: "NICKNAME")
         self.editable = editable
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .particleColor.black
@@ -286,22 +292,29 @@ final class RecordDetailViewController: UIViewController,
     // MARK: - Methods
     
     private func setSentences() {
-        setRecordTitle(data.title)
-        urlLabel.text = data.url
-        dateLabel.text = DateManager.shared.convert(previousDate: data.createdAt, to: "yyyy.MM.dd E요일")
-        directorLabel.text = "particle by _ \(data.createdBy)"
-        data.items
-            .enumerated()
-            .forEach { (i, text) in
-                let label = UILabel()
-                label.setParticleFont(
-                    text.isMain ? .y_headline : .p_body02,
-                    color: text.isMain ? .particleColor.gray05 : .particleColor.gray04,
-                    text: text.content
-                )
-                label.numberOfLines = 0
-                sentenceStack.addArrangedSubview(label)
-            }
+        
+        data.bind { [weak self] record in
+            guard let self = self else { return }
+            setRecordTitle(record.title)
+            urlLabel.text = record.url
+            dateLabel.text = DateManager.shared.convert(previousDate: record.createdAt, to: "yyyy.MM.dd E요일")
+            directorLabel.text = "particle by _ \(record.createdBy)"
+            
+            sentenceStack.removeAllArrangedSubviews()
+            record.items
+                .enumerated()
+                .forEach { (i, text) in
+                    let label = UILabel()
+                    label.setParticleFont(
+                        text.isMain ? .y_headline : .p_body02,
+                        color: text.isMain ? .particleColor.gray05 : .particleColor.gray04,
+                        text: text.content
+                    )
+                    label.numberOfLines = 0
+                    self.sentenceStack.addArrangedSubview(label)
+                }
+        }
+        .disposed(by: disposeBag)
     }
     
     private func setRecordTitle(_ text: String) {
@@ -309,7 +322,7 @@ final class RecordDetailViewController: UIViewController,
     }
     
     private func bind() {
-        Observable.of(data.tags)
+        Observable.of(data.value.tags)
             .bind(to: recommendTagCollectionView.rx.items(
                 cellIdentifier: LeftAlignedCollectionViewCell2.defaultReuseIdentifier,
                 cellType: LeftAlignedCollectionViewCell2.self)
@@ -338,7 +351,12 @@ final class RecordDetailViewController: UIViewController,
         deleteButton.rx.tap
             .bind { [weak self] _ in
                 self?.dismiss(animated: true)
-                self?.listener?.recordDetailDeleteButtonTapped(with: self?.data.id ?? "")
+                
+                if let isMyRecord = self?.isMyRecord, isMyRecord == true {
+                    self?.listener?.recordDetailDeleteButtonTapped(with: self?.data.value.id ?? "")
+                } else {
+                    self?.listener?.recordDetailReportButtonTapped(with: self?.data.value.id ?? "")
+                }
             }
             .disposed(by: self.disposeBag)
         
@@ -354,16 +372,28 @@ final class RecordDetailViewController: UIViewController,
     }
     
     private func showActionSheetInMyRecord() {
-        let shareAction = UIAlertAction(title: "공유하기", style: .default, handler: { [weak self] action in
-            // TODO: 공유하기 액션
+        let shareAction = UIAlertAction(title: "공유하기", style: .default) { [weak self] action in
             self?.shareParticle()
-        })
+        }
         
-        let modifyAction = UIAlertAction(title: "수정하기", style: .default, handler: { action in
-            // TODO: 글 수정 화면으로 이동
-        })
+        let modifyAction = UIAlertAction(
+            title: isMyRecord ? "수정하기" : "저장하기",
+            style: .default
+        ) { [weak self] action in
+            
+            guard let self = self else { return }
+            if isMyRecord {
+                // 수정하기
+                self.listener?.recordDetailEditButtonTapped(with: data.value.id)
+            } else {
+                self.listener?.recordDetailSaveButtonTapped(with: data.value.id)
+            }
+        }
         
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { [weak self] action in
+        let deleteAction = UIAlertAction(
+            title: isMyRecord ? "삭제하기" : "신고하기",
+            style: .destructive
+        ) { [weak self] action in
             self?.present(self?.warningAlertController ?? UIViewController(), animated: true)
         }
         
@@ -378,7 +408,7 @@ final class RecordDetailViewController: UIViewController,
     }
     
     private func shareParticle() {
-        DynamicLinkMaker.execute(particleId: data.id)
+        DynamicLinkMaker.execute(particleId: data.value.id)
             .subscribe { [weak self] url in
                 let activityController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
                 activityController.completionWithItemsHandler = { (activity, success, items, error) in
@@ -420,6 +450,12 @@ final class RecordDetailViewController: UIViewController,
     
     func showSuccessAlert() {
         present(deleteSuccessResultAlertController, animated: true)
+    }
+    
+    // MARK: - RecordDetailViewControllable
+    
+    func update(data: RecordReadDTO) {
+        self.data.accept(data)
     }
 }
 
@@ -528,4 +564,3 @@ struct RecordDetailViewController_Preview: PreviewProvider {
     }
 }
 #endif
-
