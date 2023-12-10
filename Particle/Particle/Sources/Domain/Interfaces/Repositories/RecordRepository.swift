@@ -16,6 +16,7 @@ protocol RecordRepository {
     func getMyRecordsSeparatedByDate(byTag: String) -> RxSwift.Observable<[SectionOfRecordDate]>
     
     func getRecordsBy(tag: String) -> Observable<[RecordReadDTO]> /// will deprecated
+    func getRecordBy(id: String) -> Observable<RecordReadDTO>
     func createRecord(record: RecordCreateDTO) -> Observable<RecordReadDTO>
     func deleteRecord(recordId: String) -> Observable<String> 
     func reportRecord(recordId: String) -> Observable<Bool>

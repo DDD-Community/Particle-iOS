@@ -266,6 +266,8 @@ final class RecordDetailViewController: UIViewController,
         self.isMyRecord = data.createdBy == UserDefaults.standard.string(forKey: "NICKNAME")
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .particleColor.black
+        self.modalPresentationStyle = .fullScreen
+        self.modalTransitionStyle = .coverVertical
     }
     
     required init?(coder: NSCoder) {
@@ -355,8 +357,9 @@ final class RecordDetailViewController: UIViewController,
     }
     
     private func showActionSheetInMyRecord() {
-        let shareAction = UIAlertAction(title: "공유하기", style: .default, handler: { action in
+        let shareAction = UIAlertAction(title: "공유하기", style: .default, handler: { [weak self] action in
             // TODO: 공유하기 액션
+            self?.shareParticle()
         })
         
         let modifyAction = UIAlertAction(title: isMyRecord ? "수정하기" : "저장하기", style: .default, handler: { action in
@@ -376,6 +379,24 @@ final class RecordDetailViewController: UIViewController,
         actionSheet.addAction(deleteAction)
         actionSheet.addAction(cancelAction)
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func shareParticle() {
+        DynamicLinkMaker.execute(particleId: data.id)
+            .subscribe { [weak self] url in
+                let activityController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                activityController.completionWithItemsHandler = { (activity, success, items, error) in
+                    if success {
+                        
+                    } else {
+                        
+                    }
+                }
+                self?.present(activityController, animated: true, completion: nil)
+            } onError: { error in
+                Console.error(error.localizedDescription)
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: - RecordDetailPresentable

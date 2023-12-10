@@ -8,6 +8,7 @@
 import RIBs
 import RxSwift
 import KakaoSDKAuth
+import FirebaseDynamicLinks
 
 import UIKit
 
@@ -36,12 +37,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.launchRouter = launchRouter
         launchRouter.launch(from: window)
         
+        self.scene(scene, openURLContexts: connectionOptions.urlContexts)
     }
     
+    // 딥링크 받아지는 곳
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
                 _ = AuthController.handleOpenUrl(url: url)
+            } else if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+                DynamicLinkParser.shared.handleDynamicLink(dynamicLink)
             }
         }
     }

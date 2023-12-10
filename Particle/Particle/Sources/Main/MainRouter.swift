@@ -11,13 +11,15 @@ protocol MainInteractable: Interactable,
                            HomeListener,
                            ExploreListener,
                            SearchListener,
-                           MyPageListener {
+                           MyPageListener,
+                           RecordDetailListener {
     var router: MainRouting? { get set }
     var listener: MainListener? { get set }
 }
 
 protocol MainViewControllable: ViewControllable {
     func present(viewController: ViewControllable)
+    func dismiss(viewController: ViewControllable)
     func setViewControllers(_ viewControllers: [ViewControllable])
 }
 
@@ -36,19 +38,24 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
     private var searchRouting: ViewableRouting?
     private var mypageRouting: ViewableRouting?
     
+    // deeplink
+    private let recordDetail: RecordDetailBuildable
+    private var recordDetailRouting: RecordDetailRouting?
+    
     init(
         interactor: MainInteractable,
         viewController: MainViewControllable,
         home: HomeBuildable,
         explore: ExploreBuildable,
         search: SearchBuildable,
-        mypage: MyPageBuildable
-        
+        mypage: MyPageBuildable,
+        recordDetail: RecordDetailBuildable
     ) {
         self.home = home
         self.explore = explore
         self.search = search
         self.mypage = mypage
+        self.recordDetail = recordDetail
         
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
@@ -75,4 +82,23 @@ final class MainRouter: ViewableRouter<MainInteractable, MainViewControllable>, 
         viewController.setViewControllers(viewControllers)
     }
     
+    // MARK: - RecordDetail RIB
+    
+    func attachRecordDetail(data: RecordReadDTO) {
+        if recordDetailRouting != nil {
+            return
+        }
+        let router = recordDetail.build(withListener: interactor, data: data)
+        viewController.present(router.viewControllable, animated: true, completion: nil)
+        attachChild(router)
+        recordDetailRouting = router
+    }
+    
+    func detachRecordDetail() {
+        if let recordDetail = recordDetailRouting {
+            viewController.dismiss(viewController: recordDetail.viewControllable)
+            detachChild(recordDetail)
+            recordDetailRouting = nil
+        }
+    }
 }
