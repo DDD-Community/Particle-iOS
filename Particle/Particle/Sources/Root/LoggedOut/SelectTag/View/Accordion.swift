@@ -196,7 +196,7 @@ final class Accordion: UIView {
                 guard let self = self else { return }
                 cell.titleLabel.text = item
                 if interestedTags.contains(item) {
-                    cell.setSelected()
+                    cell.setSelected(true)
                     self.accept(tag: item)
                 }
         }
@@ -208,7 +208,7 @@ final class Accordion: UIView {
             guard let selectedCell = self.recommendTagCollectionView.cellForItem(at: index) as? LeftAlignedCollectionViewCell else {
                 return
             }
-            selectedCell.setSelected()
+            selectedCell.setSelected(!selectedCell.isTapped)
             
             let item = self.tags[index.row]
             self.accept(tag: item)
