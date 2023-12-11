@@ -16,8 +16,29 @@ struct DefaultSearchDataSource: SearchDataSource {
         self.dataTransferService = dataTransferService
     }
     
-    func getSearchResult(_ text: String) -> Observable<[SearchResultDTO]> {
+    func getSearchResultBy(text: String) -> Observable<[SearchResultDTO]> {
+        let path = ParticleServer.Version.v1.rawValue + ParticleServer.Path.searchByTitle.value
         
-        return Observable.just([])
+        let endpoint = Endpoint<[SearchResultDTO]>(
+            path: path,
+            method: .get,
+            headerParameters: ["Authorization": "Bearer \(UserDefaults.standard.string(forKey: "ACCESSTOKEN") ?? "")"],
+            queryParameters: ["target": text]
+        )
+        
+        return dataTransferService.request(with: endpoint)
+    }
+    
+    func getSearchResultBy(tag: String) -> Observable<[SearchResultDTO]> {
+        let path = ParticleServer.Version.v1.rawValue + ParticleServer.Path.searchByTag.value
+        
+        let endpoint = Endpoint<[SearchResultDTO]>(
+            path: path,
+            method: .get,
+            headerParameters: ["Authorization": "Bearer \(UserDefaults.standard.string(forKey: "ACCESSTOKEN") ?? "")"],
+            queryParameters: ["tag": tag]
+        )
+        
+        return dataTransferService.request(with: endpoint)
     }
 }

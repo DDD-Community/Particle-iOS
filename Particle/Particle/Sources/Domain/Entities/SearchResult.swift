@@ -5,6 +5,8 @@
 //  Created by 홍석현 on 11/23/23.
 //
 
+import Foundation
+
 struct SearchResult {
     let id: String
     let title: String

@@ -26,7 +26,8 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     weak var router: SearchRouting?
     weak var listener: SearchListener?
     
-    private let search: PublishSubject<String>()
+    private let search = PublishSubject<String>()
+    private let searchByTag = PublishSubject<String>()
     private var disposeBag = DisposeBag()
     
     private let searchUseCase: SearchUseCase
@@ -44,7 +45,14 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
         super.didBecomeActive()
         
         search
-            .flatMap(searchUseCase.execute)
+            .flatMap(searchUseCase.executeBy(text:))
+            .bind { [weak self] result in
+                self?.presenter.updateSearchResult(result)
+            }
+            .disposed(by: disposeBag)
+        
+        searchByTag
+            .flatMap(searchUseCase.executeBy(tag:))
             .bind { [weak self] result in
                 self?.presenter.updateSearchResult(result)
             }
@@ -55,7 +63,11 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
         super.willResignActive()
     }
     
-    func requestSearch(_ text: String) {
+    func requestSearchBy(tag: String) {
+        searchByTag.onNext(tag)
+    }
+    
+    func requestSearchBy(text: String) {
         search.onNext(text)
     }
 }
