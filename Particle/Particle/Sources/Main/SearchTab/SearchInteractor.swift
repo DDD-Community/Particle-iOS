@@ -9,6 +9,8 @@ import RIBs
 import RxSwift
 
 protocol SearchRouting: ViewableRouting {
+    func attachMyRecordList(tag: String)
+    func detachMyRecordList()
 }
 
 protocol SearchPresentable: Presentable {
@@ -64,10 +66,14 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     }
     
     func requestSearchBy(tag: String) {
-        searchByTag.onNext(tag)
+        router?.attachMyRecordList(tag: tag)
     }
     
     func requestSearchBy(text: String) {
         search.onNext(text)
+    }
+    
+    func myRecordListBackButtonTapped() {
+        router?.detachMyRecordList()
     }
 }

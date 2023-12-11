@@ -43,6 +43,7 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
+		355A757E2B274E4D00C03282 /* SearchByTagUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A757D2B274E4D00C03282 /* SearchByTagUseCase.swift */; };
 		3593C24A2B0F1EBB006B7C31 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */; };
 		3593C24C2B0F1F4E006B7C31 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C24B2B0F1F4E006B7C31 /* SearchRepository.swift */; };
 		3593C24E2B0F1FA7006B7C31 /* DefaultSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */; };
@@ -248,6 +249,7 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
+		355A757D2B274E4D00C03282 /* SearchByTagUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByTagUseCase.swift; sourceTree = "<group>"; };
 		3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		3593C24B2B0F1F4E006B7C31 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchRepository.swift; sourceTree = "<group>"; };
@@ -915,6 +917,7 @@
 				AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */,
 				AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */,
 				3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */,
+				355A757D2B274E4D00C03282 /* SearchByTagUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1375,6 +1378,7 @@
 				AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
 				AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */,
+				355A757E2B274E4D00C03282 /* SearchByTagUseCase.swift in Sources */,
 				3593C2562B0F2786006B7C31 /* DefaultSearchDataSource.swift in Sources */,
 				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
 				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
