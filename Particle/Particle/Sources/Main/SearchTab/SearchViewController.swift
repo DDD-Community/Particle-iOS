@@ -15,6 +15,7 @@ protocol SearchPresentableListener: AnyObject {
     func requestSearchBy(tag: String)
     
     func fetchRecentSearchList()
+    func clearRecentSearches()
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
@@ -123,6 +124,12 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             }
         }
         .disposed(by: disposeBag)
+        
+        mainView.recentSearchView.recentSearchListRemoveButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.clearRecentSearches()
+            }
+            .disposed(by: disposeBag)
         
         searchResult
             .bind(to: mainView.searchResultView.searchResultTableView.rx.items(

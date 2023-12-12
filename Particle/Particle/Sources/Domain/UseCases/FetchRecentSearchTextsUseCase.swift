@@ -11,6 +11,7 @@ import RxSwift
 protocol FetchRecentSearchTextsUseCase {
     func execute() -> Observable<[String]>
     func updateRecentSearchText(_ text: String)
+    func clearRecentSearches()
 }
 
 struct DefaultFetchRecentSearchTextsUseCase: FetchRecentSearchTextsUseCase {
@@ -28,5 +29,9 @@ struct DefaultFetchRecentSearchTextsUseCase: FetchRecentSearchTextsUseCase {
         var currentSearchList: [String] = UserDefaults.standard.stringArray(forKey: "RECENT_SEARCH_TEXT") ?? []
         currentSearchList.append(text)
         UserDefaults.standard.set(currentSearchList, forKey: "RECENT_SEARCH_TEXT")
+    }
+    
+    func clearRecentSearches() {
+        UserDefaults.standard.removeObject(forKey: "RECENT_SEARCH_TEXT")
     }
 }

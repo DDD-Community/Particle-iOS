@@ -45,7 +45,7 @@ final class RecentSearchView: UIView {
         return label
     }()
     
-    private let recentSearchListRemoveButton: UIButton = {
+    let recentSearchListRemoveButton: UIButton = {
         let button = UIButton()
         var configuration = UIButton.Configuration.plain()
         configuration.contentInsets = .init(top: 10, leading: 12, bottom: 10, trailing: 12)
