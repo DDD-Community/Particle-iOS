@@ -10,6 +10,7 @@ import RIBs
 protocol SearchDependency: Dependency {
     var searchRepository: SearchRepository { get }
     var recordRepository: RecordRepository { get }
+    var userRepository: UserRepository { get }
 }
 
 final class SearchComponent: Component<SearchDependency> {
@@ -18,8 +19,12 @@ final class SearchComponent: Component<SearchDependency> {
         return DefaultSearchResultUseCase(searchRepository: dependency.searchRepository)
     }
     
-    fileprivate var searchByTagUseCase: SearchByTagUseCase {
-        return DefaultSearchByTagUseCase(recordRepository: dependency.recordRepository)
+    fileprivate var userInterestedTagsUseCase: FetchUserInterestTagsUseCase {
+        return DefaultFetchUserInterestTagsUseCase(userRepository: dependency.userRepository)
+    }
+    
+    fileprivate var fetchRecentSearchTextsUseCase: FetchRecentSearchTextsUseCase {
+        return DefaultFetchRecentSearchTextsUseCase(searchRepository: dependency.searchRepository)
     }
 }
 
@@ -41,7 +46,9 @@ final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
         let viewController = SearchViewController()
         let interactor = SearchInteractor(
             presenter: viewController,
-            searchUseCase: component.searchUseCase
+            searchUseCase: component.searchUseCase,
+            userInterestedTagsUseCase: component.userInterestedTagsUseCase, 
+            fetchRecentSearchTextsUseCase: component.fetchRecentSearchTextsUseCase
         )
         interactor.listener = listener
         

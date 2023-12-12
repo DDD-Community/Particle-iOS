@@ -10,5 +10,6 @@ import RxSwift
 
 protocol SearchRepository {
     func searchArticleBy(_ text: String) -> Observable<[SearchResult]>
+    func getRecentSearchTexts() -> Observable<[String]>
 }
 

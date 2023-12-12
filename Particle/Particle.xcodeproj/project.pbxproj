@@ -43,7 +43,6 @@
 		3520EF392A74DB1C00A53B34 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */; };
 		3520EF442A74DDA700A53B34 /* YdestreetB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF422A74DDA700A53B34 /* YdestreetB.otf */; };
 		3520EF452A74DDA700A53B34 /* YdestreetL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3520EF432A74DDA700A53B34 /* YdestreetL.otf */; };
-		355A757E2B274E4D00C03282 /* SearchByTagUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355A757D2B274E4D00C03282 /* SearchByTagUseCase.swift */; };
 		3593C24A2B0F1EBB006B7C31 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */; };
 		3593C24C2B0F1F4E006B7C31 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C24B2B0F1F4E006B7C31 /* SearchRepository.swift */; };
 		3593C24E2B0F1FA7006B7C31 /* DefaultSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */; };
@@ -51,6 +50,8 @@
 		3593C2522B0F2397006B7C31 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2512B0F2397006B7C31 /* SearchResult.swift */; };
 		3593C2542B0F273A006B7C31 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2532B0F273A006B7C31 /* SearchDataSource.swift */; };
 		3593C2562B0F2786006B7C31 /* DefaultSearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3593C2552B0F2786006B7C31 /* DefaultSearchDataSource.swift */; };
+		35E4D6C02B28023000A265CD /* FetchUserInterestTagsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4D6BF2B28023000A265CD /* FetchUserInterestTagsUseCase.swift */; };
+		35E4D6C22B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4D6C12B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift */; };
 		AF0D71C52A5BE6A200157758 /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C42A5BE6A200157758 /* AppComponent.swift */; };
 		AF0D71CB2A5BE9B600157758 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C72A5BE9B600157758 /* RootRouter.swift */; };
 		AF0D71CC2A5BE9B600157758 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0D71C82A5BE9B600157758 /* RootViewController.swift */; };
@@ -249,7 +250,6 @@
 		3520EF302A74DB1C00A53B34 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		3520EF422A74DDA700A53B34 /* YdestreetB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetB.otf; sourceTree = "<group>"; };
 		3520EF432A74DDA700A53B34 /* YdestreetL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YdestreetL.otf; sourceTree = "<group>"; };
-		355A757D2B274E4D00C03282 /* SearchByTagUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByTagUseCase.swift; sourceTree = "<group>"; };
 		3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		3593C24B2B0F1F4E006B7C31 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
 		3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchRepository.swift; sourceTree = "<group>"; };
@@ -257,6 +257,8 @@
 		3593C2512B0F2397006B7C31 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		3593C2532B0F273A006B7C31 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		3593C2552B0F2786006B7C31 /* DefaultSearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchDataSource.swift; sourceTree = "<group>"; };
+		35E4D6BF2B28023000A265CD /* FetchUserInterestTagsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserInterestTagsUseCase.swift; sourceTree = "<group>"; };
+		35E4D6C12B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentSearchTextsUseCase.swift; sourceTree = "<group>"; };
 		AF0D71C42A5BE6A200157758 /* AppComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppComponent.swift; sourceTree = "<group>"; };
 		AF0D71C72A5BE9B600157758 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		AF0D71C82A5BE9B600157758 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -917,7 +919,8 @@
 				AFC748572ADB71CC009C6819 /* CreateRecordUseCase.swift */,
 				AFC748552ADB7045009C6819 /* DeleteRecordUseCase.swift */,
 				3593C2492B0F1EBB006B7C31 /* SearchUseCase.swift */,
-				355A757D2B274E4D00C03282 /* SearchByTagUseCase.swift */,
+				35E4D6BF2B28023000A265CD /* FetchUserInterestTagsUseCase.swift */,
+				35E4D6C12B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1337,6 +1340,7 @@
 				AFCAB6CB2A5C521800E2310D /* AddArticleInteractor.swift in Sources */,
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
+				35E4D6C22B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift in Sources */,
 				AFB86FF22AC9598700CEBA0F /* SectionHeader_Date.swift in Sources */,
 				AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */,
 				AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */,
@@ -1378,7 +1382,6 @@
 				AF88EDD12AD81882001EB474 /* AuthService.swift in Sources */,
 				3520EF232A5FB18A00A53B34 /* RibsUtil.swift in Sources */,
 				AF473BC02A9F6241002EE27B /* DefaultAuthService.swift in Sources */,
-				355A757E2B274E4D00C03282 /* SearchByTagUseCase.swift in Sources */,
 				3593C2562B0F2786006B7C31 /* DefaultSearchDataSource.swift in Sources */,
 				AF1D32B02A680CC700980F14 /* PhotoPickerInteractor.swift in Sources */,
 				AFBB5F6D2A66B5C1002416DA /* UIViewController+.swift in Sources */,
@@ -1422,6 +1425,7 @@
 				AF130A982AA2E9E200F2E0BD /* RecordDetailViewController.swift in Sources */,
 				3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */,
 				AF130A972AA2E9E200F2E0BD /* RecordDetailRouter.swift in Sources */,
+				35E4D6C02B28023000A265CD /* FetchUserInterestTagsUseCase.swift in Sources */,
 				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
 				AFBB5F4F2A66AAB0002416DA /* ExploreViewController.swift in Sources */,
 				AFBB5F472A66AA99002416DA /* HomeBuilder.swift in Sources */,
