@@ -62,6 +62,7 @@ final class RecentSearchView: UIView {
         let tableView = UITableView()
         tableView.register(SearchListCell.self)
         tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     

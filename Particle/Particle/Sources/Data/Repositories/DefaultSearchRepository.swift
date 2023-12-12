@@ -24,7 +24,8 @@ struct DefaultSearchRepository: SearchRepository {
     }
     
     func getRecentSearchTexts() -> Observable<[String]> {
-        guard let recentSearchList = UserDefaults.standard.stringArray(forKey: "RECENT_SEARCH_TEXT") else { return Observable.just([]) }
+        guard var recentSearchList = UserDefaults.standard.stringArray(forKey: "RECENT_SEARCH_TEXT") else { return Observable.just([]) }
+        recentSearchList.reverse()
         return Observable.just(recentSearchList)
     }
 }

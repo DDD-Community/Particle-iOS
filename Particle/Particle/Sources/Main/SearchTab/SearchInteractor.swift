@@ -60,9 +60,7 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
                 self?.presenter.updateSearchResult(result)
             }
             .disposed(by: disposeBag)
-                
-        fetchRecentSearchTextList.onNext(())
-        
+                        
         fetchRecentSearchTextList
             .flatMap(fetchRecentSearchTextsUseCase.execute)
             .bind { [weak self] result in
@@ -88,6 +86,7 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     func requestSearchBy(text: String) {
         search.onNext(text)
         fetchRecentSearchTextsUseCase.updateRecentSearchText(text)
+        fetchRecentSearchTextList.onNext(())
     }
     
     func myRecordListBackButtonTapped() {

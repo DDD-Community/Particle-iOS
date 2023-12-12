@@ -52,6 +52,12 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        listener?.fetchRecentSearchList()
+    }
+    
     private func bind() {
         // MARK: - 최근 검색어 바인딩
         recentSearchList
@@ -77,8 +83,8 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         mainView.recentSearchView
             .recentSearchList.rx.modelSelected(String.self).asDriver()
             .drive(onNext: { [weak self] recentData in
-                self?.mainView.searchBar.searchTextField.text = recentData
-                self?.mainView.searchBar.searchTextField.becomeFirstResponder()
+                self?.mainView.searchBar.searchTextField.rx.text.onNext(recentData)
+//                self?.mainView.searchBar.searchTextField.becomeFirstResponder()
                 self?.listener?.requestSearchBy(text: recentData)
             })
             .disposed(by: disposeBag)
@@ -101,10 +107,9 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             .disposed(by: disposeBag)
         
         Observable<Bool>.merge([
-            mainView.searchBar.rx.textDidBeginEditing
-                .map { _ in true }
-                .asObservable(),
-            mainView.searchBar.rx.text.orEmpty.map { $0.isEmpty == false }.distinctUntilChanged(),
+            mainView.searchBar.rx.text.orEmpty.filter { $0.isEmpty == true }.map { _ in false },
+            mainView.searchBar.rx.searchButtonClicked.map { _ in true },
+            mainView.searchBar.rx.cancelButtonClicked.map { _ in false },
             mainView.recentSearchView.recentSearchList.rx.itemSelected.map { _ in true },
             mainView.searchBar.rx.textDidEndEditing
                 .map { _ in false }
@@ -146,8 +151,6 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         mainView.recentSearchView.isHidden = true
         mainView.searchResultView.isHidden = false
         mainView.searchResultEmptyView.isHidden = true
-        
-        listener?.fetchRecentSearchList()
     }
     
     func hiddenSearchResult() {
