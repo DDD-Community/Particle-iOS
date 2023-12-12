@@ -25,8 +25,8 @@ struct DefaultFetchRecentSearchTextsUseCase: FetchRecentSearchTextsUseCase {
     }
     
     func updateRecentSearchText(_ text: String) {
-        var currentSearchList = UserDefaults.standard.stringArray(forKey: "RECENT_SEARCH_TEXT")
-        currentSearchList?.append(text)
+        var currentSearchList: [String] = UserDefaults.standard.stringArray(forKey: "RECENT_SEARCH_TEXT") ?? []
+        currentSearchList.append(text)
         UserDefaults.standard.set(currentSearchList, forKey: "RECENT_SEARCH_TEXT")
     }
 }
