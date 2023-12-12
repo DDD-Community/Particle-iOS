@@ -52,13 +52,6 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
                 self?.presenter.updateSearchResult(result)
             }
             .disposed(by: disposeBag)
-        
-        searchByTag
-            .flatMap(searchUseCase.executeBy(tag:))
-            .bind { [weak self] result in
-                self?.presenter.updateSearchResult(result)
-            }
-            .disposed(by: disposeBag)
     }
 
     override func willResignActive() {
