@@ -15,6 +15,7 @@ protocol SearchPresentableListener: AnyObject {
     func requestSearchBy(tag: String)
     
     func fetchRecentSearchList()
+    func removeRecentSearch(_ text: String)
     func clearRecentSearches()
 }
 
@@ -67,6 +68,7 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
                 cellType: SearchListCell.self)
             ) { tableView, item, cell in
                 cell.bind(item)
+                cell.listener = self
             }
             .disposed(by: disposeBag)
         
@@ -85,7 +87,6 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             .recentSearchList.rx.modelSelected(String.self).asDriver()
             .drive(onNext: { [weak self] recentData in
                 self?.mainView.searchBar.searchTextField.rx.text.onNext(recentData)
-//                self?.mainView.searchBar.searchTextField.becomeFirstResponder()
                 self?.listener?.requestSearchBy(text: recentData)
             })
             .disposed(by: disposeBag)
@@ -176,6 +177,13 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     func fetchRecentSearchTexts(_ texts: [String]) {
         self.recentSearchList.accept(texts)
+    }
+}
+
+extension SearchViewController: SearchListCellListener {
+    func deleteButtonTapped(_ text: String?) {
+        guard let text = text else { return }
+        self.listener?.removeRecentSearch(text)
     }
 }
 

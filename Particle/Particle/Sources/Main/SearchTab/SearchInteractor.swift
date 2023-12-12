@@ -97,6 +97,11 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
         fetchRecentSearchTextList.onNext(())
     }
     
+    func removeRecentSearch(_ text: String) {
+        fetchRecentSearchTextsUseCase.removeRecentSearch(text)
+        fetchRecentSearchTextList.onNext(())
+    }
+    
     func clearRecentSearches() {
         fetchRecentSearchTextsUseCase.clearRecentSearches()
         fetchRecentSearchTextList.onNext(())
