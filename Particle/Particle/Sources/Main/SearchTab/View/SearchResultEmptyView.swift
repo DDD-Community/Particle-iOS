@@ -56,8 +56,8 @@ final class SearchResultEmptyView: UIView {
     
     // MARK: - Layout
     private func layout() {
+        baseStackView.addArrangedSubview(emptyImage)
         [
-            emptyImage,
             emptyLabel,
             emptySubLabel
         ]
@@ -67,6 +67,11 @@ final class SearchResultEmptyView: UIView {
                     make.left.right.equalToSuperview()
                 }
             }
+        
+        emptyImage.snp.makeConstraints { make in
+            make.width.equalTo(88)
+            make.height.equalTo(60)
+        }
         
         addSubview(baseStackView)
         baseStackView.snp.makeConstraints { make in
