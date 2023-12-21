@@ -7,7 +7,7 @@
 
 import RIBs
 
-protocol SearchInteractable: Interactable, MyRecordListListener{
+protocol SearchInteractable: Interactable, MyRecordListListener, RecordDetailListener {
     var router: SearchRouting? { get set }
     var listener: SearchListener? { get set }
 }
@@ -22,9 +22,11 @@ final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControlla
     init(
         interactor: SearchInteractable,
         viewController: SearchViewControllable,
-        myRecordListBuildable: MyRecordListBuilder
+        myRecordListBuildable: MyRecordListBuilder,
+        recordDetailBuildable: RecordDetailBuildable
     ) {
         self.myRecordListBuildable = myRecordListBuildable
+        self.recordDetailBuildable = recordDetailBuildable
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
     }
@@ -47,7 +49,47 @@ final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControlla
         }
     }
     
+    func attachRecordDetail(data: SearchResult) {
+        if recordDetailRouting != nil {
+            return
+        }
+        
+        let items = data.items.map { item -> RecordReadDTO.RecordItemReadDTO in
+            return RecordReadDTO.RecordItemReadDTO(
+                content: item.content,
+                isMain: item.isMain
+            )
+        }
+        
+        let recordItem = RecordReadDTO(
+            id: data.id,
+            title: data.title,
+            url: data.url,
+            items: items,
+            tags: data.tags,
+            attribute: RecordReadDTO.Attribute.stub(),
+            createdAt: data.createdAt.toString(),
+            createdBy: data.createdBy
+        )
+        
+        let router = recordDetailBuildable.build(withListener: interactor, data: recordItem)
+        viewController.pushViewController(router.viewControllable, animated: true)
+        attachChild(router)
+        recordDetailRouting = router
+    }
+    
+    func detachRecordDetail() {
+        if let recordDetail = recordDetailRouting {
+            viewController.popViewController(animated: true)
+            detachChild(recordDetail)
+            recordDetailRouting = nil
+        }
+    }
+    
     // MARK: - Private
     private let myRecordListBuildable: MyRecordListBuildable
     private var myRecordListRouting: MyRecordListRouting?
+    
+    private let recordDetailBuildable: RecordDetailBuildable
+    private var recordDetailRouting: RecordDetailRouting?
 }

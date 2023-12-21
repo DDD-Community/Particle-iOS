@@ -53,15 +53,18 @@ final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
         interactor.listener = listener
         
         let myRecordListBuilder = MyRecordListBuilder(dependency: component)
+        let recordDetailBuilder = RecordDetailBuilder(dependency: component)
         
         return SearchRouter(
             interactor: interactor,
             viewController: viewController,
-            myRecordListBuildable: myRecordListBuilder)
+            myRecordListBuildable: myRecordListBuilder, 
+            recordDetailBuildable: recordDetailBuilder
+        )
     }
 }
 
-extension SearchComponent: MyRecordListDependency {
+extension SearchComponent: MyRecordListDependency, RecordDetailDependency {
     var recordRepository: RecordRepository {
         return dependency.recordRepository
     }

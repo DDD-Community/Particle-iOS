@@ -17,6 +17,7 @@ protocol SearchPresentableListener: AnyObject {
     func fetchRecentSearchList()
     func removeRecentSearch(_ text: String)
     func clearRecentSearches()
+    func searchResultSelected(_ result: SearchResult)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
@@ -142,6 +143,12 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
                     subTitles: item.items.map { $0.content },
                     tags: item.tags
                 )
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.searchResultView.searchResultTableView.rx.modelSelected(SearchResult.self)
+            .bind { [weak self] result in
+                self?.listener?.searchResultSelected(result)
             }
             .disposed(by: disposeBag)
         

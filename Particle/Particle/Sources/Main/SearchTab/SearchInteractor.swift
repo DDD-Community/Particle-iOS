@@ -7,10 +7,14 @@
 
 import RIBs
 import RxSwift
+import SceneKit
 
 protocol SearchRouting: ViewableRouting {
     func attachMyRecordList(tag: String)
     func detachMyRecordList()
+    
+    func attachRecordDetail(data: SearchResult)
+    func detachRecordDetail()
 }
 
 protocol SearchPresentable: Presentable {
@@ -26,7 +30,6 @@ protocol SearchListener: AnyObject {
 }
 
 final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchInteractable, SearchPresentableListener {
-
     weak var router: SearchRouting?
     weak var listener: SearchListener?
     
@@ -105,5 +108,13 @@ final class SearchInteractor: PresentableInteractor<SearchPresentable>, SearchIn
     func clearRecentSearches() {
         fetchRecentSearchTextsUseCase.clearRecentSearches()
         fetchRecentSearchTextList.onNext(())
+    }
+    
+    func searchResultSelected(_ result: SearchResult) {
+        router?.attachRecordDetail(data: result)
+    }
+    
+    func recordDetailCloseButtonTapped() {
+        router?.detachRecordDetail()
     }
 }
