@@ -11,7 +11,7 @@ import SnapKit
 final class SearchResultMainView: UIView {
     let searchResultTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(SearchListCell.self)
+        tableView.register(SearchResultListCell.self)
         return tableView
     }()
     

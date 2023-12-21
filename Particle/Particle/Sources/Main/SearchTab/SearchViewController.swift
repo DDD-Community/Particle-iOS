@@ -134,10 +134,10 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         
         searchResult
             .bind(to: mainView.searchResultView.searchResultTableView.rx.items(
-                cellIdentifier: SearchListCell.defaultReuseIdentifier,
-                cellType: SearchListCell.self
+                cellIdentifier: SearchResultListCell.defaultReuseIdentifier,
+                cellType: SearchResultListCell.self
             )) { tableView, item, cell in
-                cell.bind(item.title)
+                cell.bind(title: item.title, subTitles: item.items, tags: item.tags)
             }
             .disposed(by: disposeBag)
         
