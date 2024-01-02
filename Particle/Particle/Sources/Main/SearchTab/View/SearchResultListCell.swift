@@ -27,6 +27,7 @@ class SearchResultListCell: UITableViewCell {
             .y_title02,
             color: .particleColor.gray05
         )
+        label.textAlignment = .left
         label.numberOfLines = 1
         return label
     }()
@@ -52,7 +53,7 @@ class SearchResultListCell: UITableViewCell {
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = 12 
         return stackView
     }()
     
@@ -111,6 +112,7 @@ extension SearchResultListCell {
             color: .particleColor.gray05,
             text: text
         )
+        label.textAlignment = .left
         return label
     }
 }

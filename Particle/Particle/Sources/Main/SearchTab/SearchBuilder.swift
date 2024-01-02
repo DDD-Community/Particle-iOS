@@ -9,12 +9,22 @@ import RIBs
 
 protocol SearchDependency: Dependency {
     var searchRepository: SearchRepository { get }
+    var recordRepository: RecordRepository { get }
+    var userRepository: UserRepository { get }
 }
 
 final class SearchComponent: Component<SearchDependency> {
 
     fileprivate var searchUseCase: SearchUseCase {
         return DefaultSearchResultUseCase(searchRepository: dependency.searchRepository)
+    }
+    
+    fileprivate var userInterestedTagsUseCase: FetchUserInterestTagsUseCase {
+        return DefaultFetchUserInterestTagsUseCase(userRepository: dependency.userRepository)
+    }
+    
+    fileprivate var fetchRecentSearchTextsUseCase: FetchRecentSearchTextsUseCase {
+        return DefaultFetchRecentSearchTextsUseCase(searchRepository: dependency.searchRepository)
     }
 }
 
@@ -36,9 +46,26 @@ final class SearchBuilder: Builder<SearchDependency>, SearchBuildable {
         let viewController = SearchViewController()
         let interactor = SearchInteractor(
             presenter: viewController,
-            searchUseCase: component.searchUseCase
+            searchUseCase: component.searchUseCase,
+            userInterestedTagsUseCase: component.userInterestedTagsUseCase, 
+            fetchRecentSearchTextsUseCase: component.fetchRecentSearchTextsUseCase
         )
         interactor.listener = listener
-        return SearchRouter(interactor: interactor, viewController: viewController)
+        
+        let myRecordListBuilder = MyRecordListBuilder(dependency: component)
+        let recordDetailBuilder = RecordDetailBuilder(dependency: component)
+        
+        return SearchRouter(
+            interactor: interactor,
+            viewController: viewController,
+            myRecordListBuildable: myRecordListBuilder, 
+            recordDetailBuildable: recordDetailBuilder
+        )
+    }
+}
+
+extension SearchComponent: MyRecordListDependency, RecordDetailDependency {
+    var recordRepository: RecordRepository {
+        return dependency.recordRepository
     }
 }

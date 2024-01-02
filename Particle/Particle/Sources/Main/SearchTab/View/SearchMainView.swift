@@ -59,12 +59,8 @@ class SearchMainView: UIView {
 
 private extension SearchMainView {
     func addSubviews() {
-        [searchBar]
-            .forEach {
-                self.addSubview($0)
-            }
-        
         [
+            searchBar,
             recentSearchView,
             searchResultView,
             searchResultEmptyView

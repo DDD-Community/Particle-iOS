@@ -10,4 +10,5 @@ import RxSwift
 protocol UserRepository {
     func getMyProfile() -> Observable<UserReadDTO>
     func setInterestedTags(tags: [String]) -> Observable<UserReadDTO>
+    func getInterestedTags() -> Observable<[String]>
 }

@@ -13,24 +13,22 @@ import UIKit
 protocol SearchPresentableListener: AnyObject {
     func requestSearchBy(text: String)
     func requestSearchBy(tag: String)
+    
+    func fetchRecentSearchList()
+    func removeRecentSearch(_ text: String)
+    func clearRecentSearches()
+    func searchResultSelected(_ result: SearchResult)
 }
 
 final class SearchViewController: UIViewController, SearchPresentable, SearchViewControllable {
     
     weak var listener: SearchPresentableListener?
     
-    private var tags: [String] = {
-        return [
-            "UX/UI",
-            "브랜드",
-            "트렌드",
-            "서비스기획",
-            "그로스마케팅"
-        ]
-    }()
     
     private var disposeBag = DisposeBag()
     private let searchResult = PublishRelay<[SearchResult]>()
+    private var tags = BehaviorRelay<[String]>(value: [])
+    private var recentSearchList = BehaviorRelay<[String]>(value: [])
     
     private var mainView: SearchMainView {
         return self.view as! SearchMainView
@@ -57,40 +55,26 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        listener?.fetchRecentSearchList()
+    }
+    
     private func bind() {
-        Observable.of([
-            "최근 검색어어어어",
-            "최근 검색어어어어",
-            "최근 검색어어어어",
-            "최근 검색어어어어",
-            "최근 검색어어어어"
-        ])
-        .bind(to: mainView.recentSearchView.recentSearchList.rx.items(
-            cellIdentifier: SearchListCell.defaultReuseIdentifier,
-            cellType: SearchListCell.self)
-        ) { tableView, item, cell in
-            cell.bind(item)
-        }
-        .disposed(by: disposeBag)
-        
-        mainView.recentSearchView
-            .recentSearchList.rx.modelSelected(String.self).asDriver()
-            .drive(onNext: { [weak self] recentData in
-                self?.mainView.searchBar.searchTextField.text = recentData
-                self?.mainView.searchBar.searchTextField.becomeFirstResponder()
-                self?.listener?.requestSearchBy(text: recentData)
-            })
-            .disposed(by: disposeBag)
-        
-        mainView.recentSearchView.tagCollectionView.rx.modelSelected(String.self).asDriver()
-            .drive { [weak self] tag in
-                self?.mainView.searchBar.searchTextField.text = tag
-                self?.mainView.searchBar.searchTextField.becomeFirstResponder()
-                self?.listener?.requestSearchBy(tag: tag)
+        // MARK: - 최근 검색어 바인딩
+        recentSearchList
+            .bind(to: mainView.recentSearchView.recentSearchList.rx.items(
+                cellIdentifier: SearchListCell.defaultReuseIdentifier,
+                cellType: SearchListCell.self)
+            ) { tableView, item, cell in
+                cell.bind(item)
+                cell.listener = self
             }
             .disposed(by: disposeBag)
         
-        Observable.of(tags)
+        // MARK: - 관심 태그 바인딩
+        tags
             .bind(to: mainView.recentSearchView.tagCollectionView.rx.items(
                 cellIdentifier: LeftAlignedCollectionViewCell.defaultReuseIdentifier,
                 cellType: LeftAlignedCollectionViewCell.self
@@ -99,13 +83,37 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
             }
             .disposed(by: disposeBag)
         
+        // MARK: - 최근 검색어 선택으로 검색
+        mainView.recentSearchView
+            .recentSearchList.rx.modelSelected(String.self).asDriver()
+            .drive(onNext: { [weak self] recentData in
+                self?.mainView.searchBar.searchTextField.rx.text.onNext(recentData)
+                self?.listener?.requestSearchBy(text: recentData)
+            })
+            .disposed(by: disposeBag)
+        
+        // MARK: - 관심 태그 선택으로 검색
+        mainView.recentSearchView.tagCollectionView.rx.modelSelected(String.self).asDriver()
+            .drive { [weak self] tag in
+                self?.listener?.requestSearchBy(tag: tag)
+            }
+            .disposed(by: disposeBag)
+
+        // MARK: - 검색 결과 보여주는 로직
+        mainView.searchBar.rx.searchButtonClicked
+            .compactMap { [weak self] in
+                self?.mainView.searchBar.text
+            }
+            .subscribe(onNext: { [weak self] text in
+                self?.listener?.requestSearchBy(text: text)
+            })
+            .disposed(by: disposeBag)
+        
         Observable<Bool>.merge([
-            mainView.searchBar.rx.textDidBeginEditing
-                .map { _ in true }
-                .asObservable(),
-            mainView.searchBar.rx.text.orEmpty.map { $0.isEmpty == false },
+            mainView.searchBar.rx.text.orEmpty.filter { $0.isEmpty == true }.map { _ in false },
+            mainView.searchBar.rx.searchButtonClicked.map { _ in true },
+            mainView.searchBar.rx.cancelButtonClicked.map { _ in false },
             mainView.recentSearchView.recentSearchList.rx.itemSelected.map { _ in true },
-            mainView.recentSearchView.tagCollectionView.rx.itemSelected.map { _ in true },
             mainView.searchBar.rx.textDidEndEditing
                 .map { _ in false }
                 .asObservable()
@@ -119,21 +127,28 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
         }
         .disposed(by: disposeBag)
         
-        mainView.searchBar.rx.searchButtonClicked
-            .compactMap { [weak self] in
-                self?.mainView.searchBar.text
+        mainView.recentSearchView.recentSearchListRemoveButton.rx.tap
+            .bind { [weak self] in
+                self?.listener?.clearRecentSearches()
             }
-            .subscribe(onNext: { [weak self] text in
-                self?.listener?.requestSearchBy(text: text)
-            })
             .disposed(by: disposeBag)
         
         searchResult
             .bind(to: mainView.searchResultView.searchResultTableView.rx.items(
-                cellIdentifier: SearchListCell.defaultReuseIdentifier,
-                cellType: SearchListCell.self
+                cellIdentifier: SearchResultListCell.defaultReuseIdentifier,
+                cellType: SearchResultListCell.self
             )) { tableView, item, cell in
-                cell.bind(item.title)
+                cell.bind(
+                    title: item.title,
+                    subTitles: item.items.map { $0.content },
+                    tags: item.tags
+                )
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.searchResultView.searchResultTableView.rx.modelSelected(SearchResult.self)
+            .bind { [weak self] result in
+                self?.listener?.searchResultSelected(result)
             }
             .disposed(by: disposeBag)
         
@@ -165,6 +180,21 @@ final class SearchViewController: UIViewController, SearchPresentable, SearchVie
     
     func updateSearchResult(_ result: [SearchResult]) {
         searchResult.accept(result)
+    }
+    
+    func fetchUserInterestTags(_ tags: [String]) {
+        self.tags.accept(tags)
+    }
+    
+    func fetchRecentSearchTexts(_ texts: [String]) {
+        self.recentSearchList.accept(texts)
+    }
+}
+
+extension SearchViewController: SearchListCellListener {
+    func deleteButtonTapped(_ text: String?) {
+        guard let text = text else { return }
+        self.listener?.removeRecentSearch(text)
     }
 }
 

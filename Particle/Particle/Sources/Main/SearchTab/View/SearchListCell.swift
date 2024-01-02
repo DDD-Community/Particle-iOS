@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol SearchListCellListener: AnyObject {
+    func deleteButtonTapped(_ text: String?)
+}
+
 final class SearchListCell: UITableViewCell {
+    weak var listener: SearchListCellListener?
+    
     private enum Metric {
         static let verticalMargin = 12
     }
@@ -30,6 +36,11 @@ final class SearchListCell: UITableViewCell {
         self.backgroundColor = .clear
         self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout()
+        
+        
+        removeButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.listener?.deleteButtonTapped(self?.titleLabel.text)
+        }), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {

@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import Foundation
 
 struct DefaultSearchRepository: SearchRepository {
     private let searchDataSource: SearchDataSource
@@ -19,10 +20,12 @@ struct DefaultSearchRepository: SearchRepository {
     func searchArticleBy(_ text: String) -> Observable<[SearchResult]> {
         return searchDataSource.getSearchResultBy(text: text)
             .map { $0.map { $0.toDomain() } }
+            .catchAndReturn([])
     }
     
-    func searchArticleByTag(_ tag: String) -> Observable<[SearchResult]> {
-        return searchDataSource.getSearchResultBy(tag: tag)
-            .map { $0.map { $0.toDomain() } }
+    func getRecentSearchTexts() -> Observable<[String]> {
+        guard var recentSearchList = UserDefaults.standard.stringArray(forKey: "RECENT_SEARCH_TEXT") else { return Observable.just([]) }
+        recentSearchList.reverse()
+        return Observable.just(recentSearchList)
     }
 }
