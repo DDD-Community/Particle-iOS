@@ -149,7 +149,7 @@ final class SetAccountViewController: UIViewController, SetAccountPresentable, S
             addRows(icon: .particleImage.arrowRight, title: "앱 버전", selector: nil, appVersion: "v "+appVersion)
         }
         addRows(icon: .particleImage.arrowRight, title: "로그아웃", selector: #selector(logoutButtonTapped))
-        addRows(icon: .particleImage.arrowRight, title: "탈퇴하기", selector: #selector(deleteAccountButtonTapped))
+//        addRows(icon: .particleImage.arrowRight, title: "탈퇴하기", selector: #selector(deleteAccountButtonTapped))
         bind()
     }
     

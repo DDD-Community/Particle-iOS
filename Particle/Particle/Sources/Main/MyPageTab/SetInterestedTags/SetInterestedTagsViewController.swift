@@ -14,6 +14,7 @@ import SnapKit
 protocol SetInterestedTagsPresentableListener: AnyObject {
     func setInterestedTagsBackButtonTapped()
     func setInterestedTagsOKButtonTapped(with tags: [String])
+    func setInterestedTagsOKButtonTapped_Serverless(with tags: [String])
 }
 
 final class SetInterestedTagsViewController: UIViewController,
@@ -115,6 +116,22 @@ final class SetInterestedTagsViewController: UIViewController,
         tags: ["#조직 문화", "#트렌드", "#CX", "#리더쉽", "#인사이트"]
     )
     
+    private lazy var successResultAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.listener?.setInterestedTagsBackButtonTapped()
+            self?.dismiss(animated: true)
+        }
+        
+        let alert = ParticleAlertController(
+            title: "알림",
+            body: "관심 태그 설정이 완료되었습니다.",
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
+    }()
+    
     private lazy var failureResultAlertController: ParticleAlertController = {
         let okButton = generateAlertButton(title: "확인") { [weak self] in
             self?.dismiss(animated: true)
@@ -187,7 +204,11 @@ final class SetInterestedTagsViewController: UIViewController,
         .disposed(by: disposeBag)
         
         okButton.rx.tap.bind { [weak self] _ in
-            self?.listener?.setInterestedTagsOKButtonTapped(with: self?.selectedTags.value.flatMap { $0 }.map { Tag.init(rawValue: $0)?.value ?? "UXUI" } ?? [])
+            self?.listener?.setInterestedTagsOKButtonTapped_Serverless(
+                with: self?.selectedTags.value
+                    .flatMap { $0 }
+                    .map { Tag.init(rawValue: $0)?.value ?? "UXUI" } ?? []
+            )
             self?.activityIndicator.startAnimating()
         }
         .disposed(by: disposeBag)
@@ -195,8 +216,7 @@ final class SetInterestedTagsViewController: UIViewController,
     
     func showUploadSuccessAlert() {
         activityIndicator.stopAnimating()
-        Console.debug("업로드 성공 얼럿 띄우기 !")
-        listener?.setInterestedTagsBackButtonTapped()
+        present(successResultAlertController, animated: true)
     }
     
     func showUploadFailAlert() {

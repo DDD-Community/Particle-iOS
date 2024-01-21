@@ -74,4 +74,9 @@ final class SetInterestedTagsInteractor: PresentableInteractor<SetInterestedTags
             }
             .disposed(by: disposeBag)
     }
+    
+    func setInterestedTagsOKButtonTapped_Serverless(with tags: [String]) {
+        UserDefaults.standard.set(tags.map { "#\($0)" }, forKey: "INTERESTED_TAGS") // # 붙이는게 맞나 ?
+        presenter.showUploadSuccessAlert()
+    }
 }

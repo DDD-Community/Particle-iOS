@@ -51,14 +51,14 @@ final class MyPageInteractor: PresentableInteractor<MyPagePresentable>,
     override func didBecomeActive() {
         super.didBecomeActive()
         
-        fetchMyProfileUseCase.execute()
-            .subscribe { [weak self] dto in
-                self?.presenter.setData(data: dto)
-                UserDefaults.standard.set(dto.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
-            } onError: { error in
-                Console.error(error.localizedDescription)
-            }
-            .disposed(by: disposeBag)
+//        fetchMyProfileUseCase.execute()
+//            .subscribe { [weak self] dto in
+//                self?.presenter.setData(data: dto)
+//                UserDefaults.standard.set(dto.interestedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
+//            } onError: { error in
+//                Console.error(error.localizedDescription)
+//            }
+//            .disposed(by: disposeBag)
     }
     
     override func willResignActive() {

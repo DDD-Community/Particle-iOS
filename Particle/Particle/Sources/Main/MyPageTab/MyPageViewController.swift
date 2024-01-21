@@ -28,19 +28,22 @@ final class MyPageViewController: UIViewController, MyPagePresentable, MyPageVie
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profileImage")
+//        imageView.image = UIImage(named: "profileImage")
+        imageView.image = UIImage(systemName: "person.crop.circle")?
+            .withTintColor(.white)
+            .withRenderingMode(.alwaysOriginal)
         return imageView
     }()
     
     private let nickNameLabel: UILabel = {
         let label = UILabel()
-        label.setParticleFont(.y_title02, color: .particleColor.gray05, text: "초록 마름모")
+        label.setParticleFont(.y_title02, color: .particleColor.gray05, text: "사용자")
         return label
     }()
     
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.setParticleFont(.p_body02, color: .particleColor.gray03, text: "@kakao123456")
+        label.setParticleFont(.p_body02, color: .particleColor.gray03, text: "@OfflineUser")
         return label
     }()
     
@@ -139,7 +142,7 @@ final class MyPageViewController: UIViewController, MyPagePresentable, MyPageVie
             selector: #selector(setAccountButtonTapped)
         )
         
-        bind()
+//        bind()
     }
     
     private func bind() {

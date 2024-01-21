@@ -76,9 +76,9 @@ final class SetAccountInteractor: PresentableInteractor<SetAccountPresentable>, 
     }
     
     func logoutButtonTapped() {
-        UserDefaults.standard.removeObject(forKey: "ACCESSTOKEN")
-        UserDefaults.standard.removeObject(forKey: "REFRESHTOKEN")
-        UserDefaults.standard.removeObject(forKey: "INTERESTED_TAGS")
+//        UserDefaults.standard.removeObject(forKey: "ACCESSTOKEN")
+//        UserDefaults.standard.removeObject(forKey: "REFRESHTOKEN")
+//        UserDefaults.standard.removeObject(forKey: "INTERESTED_TAGS")
         listener?.setAccountLogoutButtonTapped()
     }
 }
