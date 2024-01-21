@@ -16,9 +16,15 @@ final class DateManager {
         self.dateFormatter.locale = Locale(identifier: "ko")
     }
     
+    func todayString() -> String {
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return dateFormatter.string(from: Date())
+    }
+    
     func convert(previousDate: String, to format: String) -> String {
 //        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" /// 날짜형식 변경
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ssSSSSS" // coreData에서 적용한 날짜형식
         guard let date = dateFormatter.date(from: previousDate) else { return "" }
         dateFormatter.dateFormat = format
         let dateString = dateFormatter.string(from: date)
