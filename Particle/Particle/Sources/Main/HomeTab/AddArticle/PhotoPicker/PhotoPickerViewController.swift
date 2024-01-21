@@ -15,6 +15,8 @@ protocol PhotoPickerPresentableListener: AnyObject {
     
     func cancelButtonTapped()
     func nextButtonTapped(with indexes: [Int])
+    func fetchAllPhotos() -> PHFetchResult<PHAsset>
+    func fetchAllPhotosCount() -> Int
 }
 
 final class PhotoPickerViewController: UIViewController,
@@ -128,7 +130,7 @@ final class PhotoPickerViewController: UIViewController,
                 cellType: PhotoCell.self)
             ) { [weak self] index, item, cell in
                 
-                guard let self = self, let allPhotos = allPhotos else {
+                guard let self = self, let allPhotos = listener?.fetchAllPhotos() else {
                     Console.error("\(#function) allPhotos 값이 존재하지 않습니다.")
                     return
                 }
@@ -221,7 +223,8 @@ final class PhotoPickerViewController: UIViewController,
     }
     
     private func fetchMorePhotos() {
-        if (photoCount / Constant.fetchingAmount) <= page {
+        if let photoCount = listener?.fetchAllPhotosCount(),
+           (photoCount / Constant.fetchingAmount) <= page {
             if photoCount % Constant.fetchingAmount == 0 {
                 return
             } else {

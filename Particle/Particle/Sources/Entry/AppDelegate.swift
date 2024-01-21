@@ -11,8 +11,8 @@ import KakaoSDKCommon
 import FirebaseCore
 import FirebaseMessaging
 
-var allPhotos: PHFetchResult<PHAsset>? = nil
-var photoCount = Int()
+//var allPhotos: PHFetchResult<PHAsset>? = nil
+//var photoCount = Int()
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
                 
-        setupPhotoLibrary()
+//        setupPhotoLibrary()
         setupKakaoSDK()
         setupSwipeGuide()
         setupFirebase(to: application)
@@ -51,11 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             switch status {
             case .authorized:
-                let fetchOptions = PHFetchOptions()
-                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false, selector: nil)]
-
-                allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-                photoCount = allPhotos?.count ?? 0
+//                let fetchOptions = PHFetchOptions()
+//                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false, selector: nil)]
+//
+//                allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+//                photoCount = allPhotos?.count ?? 0
                 Console.log("PHPhotoLibrary Success Authrization")
             case .denied, .limited:
                 Console.error("PHPhotoLibrary not allowed")

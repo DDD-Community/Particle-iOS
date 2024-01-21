@@ -31,6 +31,9 @@ final class PhotoPickerInteractor: PresentableInteractor<PhotoPickerPresentable>
     weak var router: PhotoPickerRouting?
     weak var listener: PhotoPickerListener?
     
+    private(set) var allPhotos: PHFetchResult<PHAsset>? = nil // 앨범에서 사진을 가져오는 Repository 따로 구현 필요 ,
+    private(set) var photoCount = Int()
+    
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
     override init(presenter: PhotoPickerPresentable) {
@@ -40,7 +43,13 @@ final class PhotoPickerInteractor: PresentableInteractor<PhotoPickerPresentable>
     
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
+        
+        // TODO: allPhotos 불러오기
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false, selector: nil)]
+
+        self.allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        photoCount = self.allPhotos?.count ?? 0
     }
     
     override func willResignActive() {
@@ -69,4 +78,13 @@ final class PhotoPickerInteractor: PresentableInteractor<PhotoPickerPresentable>
         
         return selectedPhotos
     }
+    
+    func fetchAllPhotos() -> PHFetchResult<PHAsset> {
+        return allPhotos ?? .init()
+    }
+    
+    func fetchAllPhotosCount() -> Int {
+        return photoCount
+    }
+    
 }

@@ -13,11 +13,15 @@ import Photos
 class CacheManager {
     static let shared = CacheManager()
     private let imageCache = NSCache<NSString, UIImage>()
+    private let totalCostLimit = 1024*1024*400
 
-    private init() {}
+    private init() {
+        imageCache.totalCostLimit = totalCostLimit
+    }
 
     func cacheImage(_ image: UIImage, forKey key: String) {
-        imageCache.setObject(image, forKey: key as NSString)
+//        imageCache.setObject(image, forKey: key as NSString)
+        imageCache.setObject(image, forKey: key as NSString, cost: totalCostLimit)
     }
 
     func image(forKey key: String) -> UIImage? {
