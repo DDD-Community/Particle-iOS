@@ -15,5 +15,9 @@ struct RecordCreateDTO: Codable {
     struct RecordItemCreateDTO: Codable {
         let content: String
         let isMain: Bool
+        
+        func encodeForCoreData() -> String {
+            "\(content)%\(isMain ? "T" : "F")"
+        }
     }
 }

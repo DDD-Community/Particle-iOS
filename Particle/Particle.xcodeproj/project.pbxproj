@@ -110,6 +110,15 @@
 		AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19102A6A1E4B00932372 /* PhotoCell.swift */; };
 		AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A19122A6A59BA00932372 /* UIImageView+.swift */; };
 		AF5C55492B0B8553006ADAF3 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C55482B0B8553006ADAF3 /* RadioButton.swift */; };
+		AF5F64C02B514408009DFDF7 /* LocalUserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64BF2B514408009DFDF7 /* LocalUserDataSource.swift */; };
+		AF5F64C42B514524009DFDF7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64C22B514524009DFDF7 /* Model.xcdatamodeld */; };
+		AF5F64CC2B514D9B009DFDF7 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64CB2B514D9B009DFDF7 /* CoreDataStorage.swift */; };
+		AF5F64CE2B514E2E009DFDF7 /* LocalDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64CD2B514E2E009DFDF7 /* LocalDataSources.swift */; };
+		AF5F64D02B5153F0009DFDF7 /* LocalRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64CF2B5153F0009DFDF7 /* LocalRecordDataSource.swift */; };
+		AF5F64D52B5267D6009DFDF7 /* CDRecord+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64D12B5267D6009DFDF7 /* CDRecord+CoreDataProperties.swift */; };
+		AF5F64D62B5267D6009DFDF7 /* CDRecord+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64D42B5267D6009DFDF7 /* CDRecord+CoreDataClass.swift */; };
+		AF5F64D72B5267D6009DFDF7 /* CDUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64D22B5267D6009DFDF7 /* CDUser+CoreDataProperties.swift */; };
+		AF5F64D82B5267D6009DFDF7 /* CDUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F64D32B5267D6009DFDF7 /* CDUser+CoreDataClass.swift */; };
 		AF621F682AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */; };
 		AF621F692AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */; };
 		AF621F6A2AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */; };
@@ -316,6 +325,15 @@
 		AF4A19122A6A59BA00932372 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		AF59F9B22A9CD39B00C4ABFD /* Particle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Particle.entitlements; sourceTree = "<group>"; };
 		AF5C55482B0B8553006ADAF3 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		AF5F64BF2B514408009DFDF7 /* LocalUserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserDataSource.swift; sourceTree = "<group>"; };
+		AF5F64C32B514524009DFDF7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		AF5F64CB2B514D9B009DFDF7 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		AF5F64CD2B514E2E009DFDF7 /* LocalDataSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSources.swift; sourceTree = "<group>"; };
+		AF5F64CF2B5153F0009DFDF7 /* LocalRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRecordDataSource.swift; sourceTree = "<group>"; };
+		AF5F64D12B5267D6009DFDF7 /* CDRecord+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDRecord+CoreDataProperties.swift"; path = "/Users/leewonbeen/Desktop/Home/개인프로젝트/Particle-iOS/Particle/Particle/Sources/Data/Persistence/CDRecord+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		AF5F64D22B5267D6009DFDF7 /* CDUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDUser+CoreDataProperties.swift"; path = "/Users/leewonbeen/Desktop/Home/개인프로젝트/Particle-iOS/Particle/Particle/Sources/Data/Persistence/CDUser+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		AF5F64D32B5267D6009DFDF7 /* CDUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDUser+CoreDataClass.swift"; path = "/Users/leewonbeen/Desktop/Home/개인프로젝트/Particle-iOS/Particle/Particle/Sources/Data/Persistence/CDUser+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		AF5F64D42B5267D6009DFDF7 /* CDRecord+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDRecord+CoreDataClass.swift"; path = "/Users/leewonbeen/Desktop/Home/개인프로젝트/Particle-iOS/Particle/Particle/Sources/Data/Persistence/CDRecord+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		AF621F642AAD8C4E00DBD514 /* SetInterestedTagsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsRouter.swift; sourceTree = "<group>"; };
 		AF621F652AAD8C4E00DBD514 /* SetInterestedTagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsViewController.swift; sourceTree = "<group>"; };
 		AF621F662AAD8C4E00DBD514 /* SetInterestedTagsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInterestedTagsBuilder.swift; sourceTree = "<group>"; };
@@ -732,6 +750,7 @@
 		AF473BBA2A9F6063002EE27B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				AF5F64C12B5144ED009DFDF7 /* Persistence */,
 				AF473BBC2A9F609F002EE27B /* Services */,
 				AF473BBB2A9F6094002EE27B /* Repositories */,
 				AF9702EF2A8CFF8100877C85 /* Network */,
@@ -743,8 +762,10 @@
 			isa = PBXGroup;
 			children = (
 				AF88EDCE2AD58B3E001EB474 /* DefaultUserDataSource.swift */,
+				AF5F64BF2B514408009DFDF7 /* LocalUserDataSource.swift */,
 				AF88EDCC2AD58B35001EB474 /* DefaultUserRepository.swift */,
 				AF88EDC42AD3D533001EB474 /* DefaultRecordDataSource.swift */,
+				AF5F64CF2B5153F0009DFDF7 /* LocalRecordDataSource.swift */,
 				AF88EDC22AD3D51A001EB474 /* DefaultRecordRepository.swift */,
 				3593C2552B0F2786006B7C31 /* DefaultSearchDataSource.swift */,
 				3593C24D2B0F1FA7006B7C31 /* DefaultSearchRepository.swift */,
@@ -784,6 +805,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AF5F64C12B5144ED009DFDF7 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				AF5F64D42B5267D6009DFDF7 /* CDRecord+CoreDataClass.swift */,
+				AF5F64D12B5267D6009DFDF7 /* CDRecord+CoreDataProperties.swift */,
+				AF5F64D32B5267D6009DFDF7 /* CDUser+CoreDataClass.swift */,
+				AF5F64D22B5267D6009DFDF7 /* CDUser+CoreDataProperties.swift */,
+				AF5F64C22B514524009DFDF7 /* Model.xcdatamodeld */,
+				AF5F64CB2B514D9B009DFDF7 /* CoreDataStorage.swift */,
+				AF5F64CD2B514E2E009DFDF7 /* LocalDataSources.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		AF621F5B2AAD835700DBD514 /* SetInterestedTags */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,10 +836,10 @@
 				AFF00A722AD0E79A00B219D9 /* Infrastructure */,
 				AFE885F62A5C29E5001EF2C0 /* Extension */,
 				AF1945152A5C406B00B9FFA1 /* DesignSystem */,
+				AF86D82C2A4E6030009F1E9D /* Entry */,
 				AF7B2E662AA1FC3000806149 /* Domain */,
 				AF473BBA2A9F6063002EE27B /* Data */,
 				3520EF212A5FB17800A53B34 /* Utils */,
-				AF86D82C2A4E6030009F1E9D /* Entry */,
 				AF0D71C62A5BE9AC00157758 /* Root */,
 				AF0D71E12A5BEF8900157758 /* Main */,
 			);
@@ -1307,6 +1342,7 @@
 				AF3122792A977BEA00262088 /* SelectTagBuilder.swift in Sources */,
 				AFBB5F762A66B65D002416DA /* SelectSentenceBuilder.swift in Sources */,
 				AFBB5F602A66AAD7002416DA /* MyPageRouter.swift in Sources */,
+				AF5F64CE2B514E2E009DFDF7 /* LocalDataSources.swift in Sources */,
 				AFBB5F7F2A66B66B002416DA /* EditSentenceInteractor.swift in Sources */,
 				AF0D71E62A5BEFB800157758 /* MainRouter.swift in Sources */,
 				AFE885F52A5C26EC001EF2C0 /* MainTabBarController.swift in Sources */,
@@ -1315,6 +1351,7 @@
 				AF18E2E42A69015300C54490 /* EditSentencePresentationController.swift in Sources */,
 				AF0D71D82A5BEA8A00157758 /* LoggedOutInteractor.swift in Sources */,
 				351A472D2B21E18A00CE5479 /* SearchMainView.swift in Sources */,
+				AF5F64C02B514408009DFDF7 /* LocalUserDataSource.swift in Sources */,
 				AF88EDA22AD29C71001EB474 /* DataTransferService.swift in Sources */,
 				AF18E2E22A69012D00C54490 /* EditSentenceTransitioningDelegate.swift in Sources */,
 				AF4A19132A6A59BB00932372 /* UIImageView+.swift in Sources */,
@@ -1341,9 +1378,11 @@
 				AFBB5F6A2A66ABBF002416DA /* SearchBuilder.swift in Sources */,
 				3520EF1C2A5FA80F00A53B34 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				35E4D6C22B2804EB00A265CD /* FetchRecentSearchTextsUseCase.swift in Sources */,
+				AF5F64C42B514524009DFDF7 /* Model.xcdatamodeld in Sources */,
 				AFB86FF22AC9598700CEBA0F /* SectionHeader_Date.swift in Sources */,
 				AF1D32AE2A680CC700980F14 /* PhotoPickerViewController.swift in Sources */,
 				AF4647632AAA196F00701B83 /* DirectlySetAlarmInteractor.swift in Sources */,
+				AF5F64CC2B514D9B009DFDF7 /* CoreDataStorage.swift in Sources */,
 				AFBB5F7D2A66B66B002416DA /* EditSentenceViewController.swift in Sources */,
 				AF621F6B2AAD8C4E00DBD514 /* SetInterestedTagsInteractor.swift in Sources */,
 				AFAB32582AACB35D000EA542 /* SectionHeader_Tag.swift in Sources */,
@@ -1361,6 +1400,7 @@
 				AF1945172A5C407500B9FFA1 /* Constant.swift in Sources */,
 				AF9702F22A8CFF9200877C85 /* LoginRequest.swift in Sources */,
 				AF662CAF2AF608BC005B4FCA /* WithdrawResponse.swift in Sources */,
+				AF5F64D62B5267D6009DFDF7 /* CDRecord+CoreDataClass.swift in Sources */,
 				AFDE0F432AA4C1F3008DC539 /* MyRecordListRouter.swift in Sources */,
 				AF4A19112A6A1E4B00932372 /* PhotoCell.swift in Sources */,
 				AF9702FA2A8D021800877C85 /* RecordReadDTO.swift in Sources */,
@@ -1425,6 +1465,7 @@
 				AF130A982AA2E9E200F2E0BD /* RecordDetailViewController.swift in Sources */,
 				3520EEF52A5CD3C000A53B34 /* OrganizingSentenceInteractor.swift in Sources */,
 				AF130A972AA2E9E200F2E0BD /* RecordDetailRouter.swift in Sources */,
+				AF5F64D52B5267D6009DFDF7 /* CDRecord+CoreDataProperties.swift in Sources */,
 				35E4D6C02B28023000A265CD /* FetchUserInterestTagsUseCase.swift in Sources */,
 				AF0D71EB2A5BF02700157758 /* RootComponent+LoggedIn.swift in Sources */,
 				AFBB5F4F2A66AAB0002416DA /* ExploreViewController.swift in Sources */,
@@ -1461,16 +1502,19 @@
 				AF31227A2A977BEA00262088 /* SelectTagInteractor.swift in Sources */,
 				AF88EDB92AD3B546001EB474 /* RawDataResponseDecoder.swift in Sources */,
 				AF4647582AAA0E9A00701B83 /* AlarmToggleRow.swift in Sources */,
+				AF5F64D72B5267D6009DFDF7 /* CDUser+CoreDataProperties.swift in Sources */,
 				AF0D71D62A5BEA8A00157758 /* LoggedOutViewController.swift in Sources */,
 				AF88EDB52AD38026001EB474 /* DefaultDataTransferService.swift in Sources */,
 				AFBB5F692A66ABBF002416DA /* SearchViewController.swift in Sources */,
 				AF88EDB12AD37FB1001EB474 /* DefaultDataTransferErrorLogger.swift in Sources */,
+				AF5F64D02B5153F0009DFDF7 /* LocalRecordDataSource.swift in Sources */,
 				AF7B2E692AA1FC5B00806149 /* Tag.swift in Sources */,
 				AF88EDCB2AD58AA0001EB474 /* UserRepository.swift in Sources */,
 				AF4647612AAA196F00701B83 /* DirectlySetAlarmViewController.swift in Sources */,
 				AFC7485A2ADB73D9009C6819 /* FetchMyProfileUseCase.swift in Sources */,
 				AFC748582ADB71CC009C6819 /* CreateRecordUseCase.swift in Sources */,
 				AFE885F82A5C29F7001EF2C0 /* Color+.swift in Sources */,
+				AF5F64D82B5267D6009DFDF7 /* CDUser+CoreDataClass.swift in Sources */,
 				AF88EDA52AD29DA2001EB474 /* DefualtNetworkErrorLogger.swift in Sources */,
 				AF9702FC2A8D02C300877C85 /* RecordUpdateDTO.swift in Sources */,
 				AF1D32AF2A680CC700980F14 /* PhotoPickerBuilder.swift in Sources */,
@@ -1739,6 +1783,19 @@
 			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		AF5F64C22B514524009DFDF7 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AF5F64C32B514524009DFDF7 /* Model.xcdatamodel */,
+			);
+			currentVersion = AF5F64C32B514524009DFDF7 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AFB4BDB92A4093DC008BA9E0 /* Project object */;
 }

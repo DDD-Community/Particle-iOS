@@ -76,3 +76,38 @@ struct RecordReadDTO: Decodable {
         }
     }
 }
+
+// MARK: - CoreData로 부터 읽어오는 String 값을 DTO 모델로 변경해주는 과정
+/// coredata에 커스텀타입을 지정할 수 없으므로 string 안에서 태그값으로 구분
+
+extension RecordReadDTO.Attribute {
+    static func decode(from string: String) -> Self {
+        let codeList = string.components(separatedBy: "&") // & 로 구분해서 값을 저장 할 것이다.
+        if codeList.count == 2 {
+            let colorInfo = codeList[0]
+            let styleInfo = codeList[1]
+            return .init(color: colorInfo, style: styleInfo)
+        } else {
+            return .init(color: "empty", style: "empty") // 오류상황
+        }
+    }
+}
+
+extension [RecordReadDTO.RecordItemReadDTO] {
+    static func decode(from string: String) -> Self {
+        let sentenceList = string.components(separatedBy: "&") // 각각의 문장을 &로 구분
+        let dtoList = sentenceList.map { RecordReadDTO.RecordItemReadDTO.decode(from: $0) }
+        return dtoList
+    }
+}
+
+extension RecordReadDTO.RecordItemReadDTO {
+    static func decode(from string: String) -> Self {
+        let codeList = string.components(separatedBy: "%") // string , bool(T,F)
+        if codeList.count == 2 {
+            return .init(content: codeList[0], isMain: codeList[1] == "T")
+        } else {
+            return .init(content: "empty", isMain: false) // 오류상황
+        }
+    }
+}
