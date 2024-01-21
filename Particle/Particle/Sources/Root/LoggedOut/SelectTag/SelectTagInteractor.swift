@@ -69,4 +69,9 @@ final class SelectTagInteractor: PresentableInteractor<SelectTagPresentable>,
             }
             .disposed(by: disposeBag)
     }
+    
+    func startButtonTapped_Serverless(with selectedTags: [String]) {
+        UserDefaults.standard.set(selectedTags.map { "#\($0)" }, forKey: "INTERESTED_TAGS")
+        listener?.selectTagSuccess()
+    }
 }

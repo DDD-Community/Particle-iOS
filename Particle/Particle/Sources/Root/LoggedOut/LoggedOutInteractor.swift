@@ -66,6 +66,15 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>,
             .disposed(by: disposeBag)
     }
     
+    func successLogin_Serverless() {
+        if UserDefaults.standard.bool(forKey: "FIRST_LOGIN_EVENT") {
+            listener?.login()
+        } else {
+            UserDefaults.standard.set(true, forKey: "FIRST_LOGIN_EVENT")
+            router?.routeToSelectTag()
+        }
+    }
+    
     // MARK: - SelectTagListener
     
     func selectTagSuccess() {

@@ -15,11 +15,13 @@ import UIKit
 
 protocol LoggedOutPresentableListener: AnyObject {
     func successLogin(with provider: String, identifier: String)
+    func successLogin_Serverless()
 }
 
 final class LoggedOutViewController: UIViewController, LoggedOutPresentable, LoggedOutViewControllable{
     
     weak var listener: LoggedOutPresentableListener?
+    private var disposeBag = DisposeBag()
     
     private enum Metric {
         static let backgroundImageTopInset: CGFloat = 136
@@ -58,7 +60,7 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
     
     private let subTitle: UILabel = {
         let label = UILabel()
-        label.text = "3초 가입으로 바로 시작해 보세요"
+        label.text = "바로 시작해 보세요"
         label.font = .particleFont.generate(style: .pretendard_Medium, size: 16)
         label.textColor = .particleColor.white
         return label
@@ -70,6 +72,13 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
         stackView.spacing = Metric.ButtonStack.spacing
         return stackView
     }()
+    
+    private let normalLoginButton = ParticleLoginButton(
+        backgroundColor: .particleColor.main100,
+        iconImage: UIImage(systemName: "power")?.withTintColor(.white, renderingMode: .alwaysOriginal),
+        title: " 오프라인으로 이용하기",
+        titleColor: .init(hex:0xFFFFFF)
+    )
     
     private let kakaoLoginButton = ParticleLoginButton(
         backgroundColor: .init(hex: 0xFEE500),
@@ -90,6 +99,21 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
         imageView.image = .particleImage.loginBackground
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }()
+    
+    private lazy var notReadyAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        let alert = ParticleAlertController(
+            title: "알림",
+            body: "기능이 준비중입니다. 조금만 기다려주세요 🥹",
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
     }()
     
     // MARK: - Initializers
@@ -135,30 +159,50 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
             action: #selector(appleLoginButtonTapped)
         )
         appleLoginButton.addGestureRecognizer(appleLoginButtonTapGesture)
+        
+        let normalLoginButtonTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(normalLoginButtonTapped)
+        )
+        
+        normalLoginButton.addGestureRecognizer(normalLoginButtonTapGesture)
     }
     
     @objc
     private func appleLoginButtonTapped() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        let request = appleIDProvider.createRequest()
+//        request.requestedScopes = [.fullName, .email]
+//        
+//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//        authorizationController.delegate = self
+//        authorizationController.presentationContextProvider = self
+//        authorizationController.performRequests()
         
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
+        // TODO: 준비중입니다 얼럿
+        present(notReadyAlertController, animated: true)
     }
     
     @objc
     private func kakaoLoginButtonTapped() {
-        Console.debug(#function)
+//        Console.debug(#function)
+//        
+//        if (UserApi.isKakaoTalkLoginAvailable()) {
+//            loginWithKakaoTalkApp()
+//        } else {
+//            Console.error("카카오톡이 설치되어있지 않습니다.")
+//            loginWithKakaoAccount()
+//        }
         
-        if (UserApi.isKakaoTalkLoginAvailable()) {
-            loginWithKakaoTalkApp()
-        } else {
-            Console.error("카카오톡이 설치되어있지 않습니다.")
-            loginWithKakaoAccount()
-        }
+        // TODO: 준비중입니다 얼럿
+        present(notReadyAlertController, animated: true)
+    }
+    
+    @objc
+    private func normalLoginButtonTapped() {
+        // TODO: 로그인 했다고 치고 홈화면으로 이동
+        listener?.successLogin_Serverless()
+        
     }
     
     private func loginWithKakaoTalkApp() {
@@ -197,6 +241,22 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
                 }
             }
         }
+    }
+    
+    private func generateAlertButton(title: String, _ buttonAction: @escaping () -> Void) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+        
+        button.rx.tap.bind { [weak self] _ in
+            buttonAction()
+        }
+        .disposed(by: disposeBag)
+        
+        return button
     }
 }
 
@@ -251,9 +311,10 @@ private extension LoggedOutViewController {
             titleStackView.addArrangedSubview($0)
         }
         
-        [kakaoLoginButton, appleLoginButton].forEach {
+        [kakaoLoginButton, appleLoginButton, normalLoginButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
+//        buttonStackView.addArrangedSubview(normalLoginButton)
     }
     
     func setConstraints() {

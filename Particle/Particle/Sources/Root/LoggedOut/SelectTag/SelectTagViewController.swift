@@ -14,6 +14,7 @@ import SnapKit
 protocol SelectTagPresentableListener: AnyObject {
     func backButtonTapped()
     func startButtonTapped(with selectedTags: [String])
+    func startButtonTapped_Serverless(with selectedTags: [String])
 }
 
 final class SelectTagViewController: UIViewController,
@@ -201,7 +202,7 @@ final class SelectTagViewController: UIViewController,
                 guard let self = self else { return }
                 let tags = self.selectedTags.value.flatMap { $0 }
                 let mappedTags = tags.map { Tag(rawValue: $0)?.value ?? "UXUI" }
-                self.listener?.startButtonTapped(with: mappedTags)
+                self.listener?.startButtonTapped_Serverless(with: mappedTags)
             }
             .disposed(by: disposeBag)
     }
