@@ -68,7 +68,8 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
     func build(withListener listener: MainListener) -> MainRouting {
         
         
-        let recordDataSource = DefaultRecordDataSource(dataTransferService: apiDataTransferService)
+//        let recordDataSource = DefaultRecordDataSource(dataTransferService: apiDataTransferService)
+        let recordDataSource = LocalRecordDataSource(coreData: .shared) // coreData로 데이터소스 변경
         let recordRepository = DefaultRecordRepository(recordDataSource: recordDataSource, recordMapper: RecordMapper())
         
         let userDataSource = DefaultUserDataSource(dataTransferService: apiDataTransferService)
@@ -91,16 +92,16 @@ final class MainBuilder: Builder<MainDependency>, MainBuildable {
         interactor.listener = listener
         
         let home = HomeBuilder(dependency: component)
-        let explore = ExploreBuilder(dependency: component)
-        let search = SearchBuilder(dependency: component)
+//        let explore = ExploreBuilder(dependency: component)
+//        let search = SearchBuilder(dependency: component)
         let mypage = MyPageBuilder(dependency: component)
         
         return MainRouter(
             interactor: interactor,
             viewController: viewController,
             home: home,
-            explore: explore,
-            search: search,
+//            explore: explore,
+//            search: search,
             mypage: mypage)
     }
 }
