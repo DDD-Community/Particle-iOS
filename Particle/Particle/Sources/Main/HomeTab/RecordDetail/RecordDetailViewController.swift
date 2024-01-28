@@ -21,6 +21,7 @@ final class RecordDetailViewController: UIViewController,
     weak var listener: RecordDetailPresentableListener?
     private var disposeBag = DisposeBag()
     private let data: RecordReadDTO
+    private let editable: Bool
     private var errorDescription = ""
     
     enum Metric {
@@ -257,8 +258,9 @@ final class RecordDetailViewController: UIViewController,
     
     // MARK: - Initializers
     
-    init(data: RecordReadDTO) {
+    init(data: RecordReadDTO, editable: Bool = true) {
         self.data = data
+        self.editable = editable
         super.init(nibName: nil, bundle: nil)
         view.backgroundColor = .particleColor.black
     }
@@ -273,6 +275,7 @@ final class RecordDetailViewController: UIViewController,
         super.viewDidLoad()
         addSubviews()
         setConstraints()
+        setupInitialSetting()
         setSentences()
         configureButton()
         bind()
@@ -342,6 +345,10 @@ final class RecordDetailViewController: UIViewController,
                 self?.dismiss(animated: true)
             }
             .disposed(by: self.disposeBag)
+    }
+    
+    private func setupInitialSetting() {
+        ellipsisButton.isHidden = !editable
     }
     
     private func showActionSheetInMyRecord() {

@@ -23,7 +23,8 @@ final class RecordDetailComponent: Component<RecordDetailDependency> {
 protocol RecordDetailBuildable: Buildable {
     func build(
         withListener listener: RecordDetailListener,
-        data: RecordReadDTO) -> RecordDetailRouting
+        data: RecordReadDTO,
+        editable: Bool) -> RecordDetailRouting
 }
 
 final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBuildable {
@@ -33,10 +34,11 @@ final class RecordDetailBuilder: Builder<RecordDetailDependency>, RecordDetailBu
     }
 
     func build(withListener listener: RecordDetailListener,
-               data: RecordReadDTO) -> RecordDetailRouting {
+               data: RecordReadDTO,
+               editable: Bool) -> RecordDetailRouting {
         
         let component = RecordDetailComponent(dependency: dependency)
-        let viewController = RecordDetailViewController(data: data)
+        let viewController = RecordDetailViewController(data: data, editable: editable)
         let interactor = RecordDetailInteractor(
             presenter: viewController,
             deleteRecordUseCase: component.deleteRecordUseCase

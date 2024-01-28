@@ -36,7 +36,7 @@ final class MyRecordListRouter: ViewableRouter<MyRecordListInteractable, MyRecor
             if recordDetailRouting != nil {
                 return
             }
-            let router = recordDetailBuildable.build(withListener: interactor, data: data)
+            let router = recordDetailBuildable.build(withListener: interactor, data: data, editable: true)
             viewController.pushViewController(router.viewControllable, animated: true)
             attachChild(router)
             recordDetailRouting = router

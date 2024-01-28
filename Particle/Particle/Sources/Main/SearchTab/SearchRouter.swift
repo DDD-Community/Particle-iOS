@@ -72,7 +72,7 @@ final class SearchRouter: ViewableRouter<SearchInteractable, SearchViewControlla
             createdBy: data.createdBy
         )
         
-        let router = recordDetailBuildable.build(withListener: interactor, data: recordItem)
+        let router = recordDetailBuildable.build(withListener: interactor, data: recordItem, editable: true)
         viewController.pushViewController(router.viewControllable, animated: true)
         attachChild(router)
         recordDetailRouting = router

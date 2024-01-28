@@ -159,7 +159,7 @@ final class AddArticleRouter: Router<AddArticleInteractable>, AddArticleRouting 
         if recordDetailRouting != nil {
             return
         }
-        let router = recordDetailBuildable.build(withListener: interactor, data: data)
+        let router = recordDetailBuildable.build(withListener: interactor, data: data, editable: false)
         navigationControllable?.pushViewController(router.viewControllable, animated: true)
         recordDetailRouting = router
         attachChild(router)
