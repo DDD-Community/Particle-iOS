@@ -34,6 +34,7 @@ final class SelectSentenceViewController: UIViewController,
             static let height: CGFloat = 44
             static let backButtonLeftMargin: CGFloat = 8
             static let nextButtonRightMargin: CGFloat = 8
+            static let selectedCountRightMargin: CGFloat = 60
         }
         
         enum InfoBox {
@@ -62,6 +63,22 @@ final class SelectSentenceViewController: UIViewController,
         return button
     }()
     
+    private let selectedCountBox: UIView = {
+        let view = UIView()
+        view.backgroundColor = .particleColor.main100
+        view.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
+    private let selectedCount: UILabel = {
+        let label = UILabel()
+        label.setParticleFont(.p_callout, color: .particleColor.white, text: "0")
+        return label
+    }()
+    
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
@@ -86,7 +103,7 @@ final class SelectSentenceViewController: UIViewController,
     
     private let infoLabel: UILabel = {
         let label = UILabel()
-        label.text = "시작 단어와 끝 단어를 터치해 주세요."
+        label.text = "사진 위 글자를 드래그 후 복사(Copy) 해주세요."
         label.textColor = .particleColor.gray03
         return label
     }()
@@ -140,6 +157,7 @@ final class SelectSentenceViewController: UIViewController,
     
     private func setupInitialView() {
         view.backgroundColor = .particleColor.black
+        selectedCountBox.isHidden = true
         addSubviews()
         setConstraints()
         setupNavigationBar()
@@ -223,6 +241,15 @@ final class SelectSentenceViewController: UIViewController,
             dismiss(animated: true)
         }
     }
+    
+    // MARK: - SelectSentencePresentable
+    
+    func updateSelectedCount(_ number: Int) {
+        if selectedCountBox.isHidden {
+            selectedCountBox.isHidden.toggle()
+        }
+        selectedCount.setParticleFont(.p_callout, color: .particleColor.white, text: "\(number)")
+    }
 }
 
 extension SelectSentenceViewController: SelectedPhotoCellListener {
@@ -237,7 +264,9 @@ extension SelectSentenceViewController: SelectedPhotoCellListener {
 private extension SelectSentenceViewController {
     
     func addSubviews() {
-        [backButton, navigationTitle, nextButton].forEach {
+        selectedCountBox.addSubview(selectedCount)
+        
+        [backButton, navigationTitle, selectedCountBox, nextButton].forEach {
             navigationBar.addSubview($0)
         }
         
@@ -262,6 +291,15 @@ private extension SelectSentenceViewController {
         nextButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.right.equalToSuperview().inset(Metric.NavigationBar.nextButtonRightMargin)
+        }
+        
+        selectedCountBox.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.right.equalToSuperview().inset(Metric.NavigationBar.selectedCountRightMargin)
+        }
+        
+        selectedCount.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
         navigationTitle.snp.makeConstraints {

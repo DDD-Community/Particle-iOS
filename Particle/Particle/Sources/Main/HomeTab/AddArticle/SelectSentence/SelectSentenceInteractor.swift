@@ -15,6 +15,8 @@ protocol SelectSentenceRouting: ViewableRouting {
 
 protocol SelectSentencePresentable: Presentable {
     var listener: SelectSentencePresentableListener? { get set }
+    
+    func updateSelectedCount(_ number: Int)
 }
 
 protocol SelectSentenceListener: AnyObject {
@@ -70,6 +72,7 @@ final class SelectSentenceInteractor: PresentableInteractor<SelectSentencePresen
             var list = organizingSentenceRepository.sentenceFile2.value
             list.append(.init(sentence: inputText, isRepresent: false))
             organizingSentenceRepository.sentenceFile2.accept(list)
+            presenter.updateSelectedCount(organizingSentenceRepository.sentenceFile2.value.count)
         }
 
         router?.detachEditSentence()
