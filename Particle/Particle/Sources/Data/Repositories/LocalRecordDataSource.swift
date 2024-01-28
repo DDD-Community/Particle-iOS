@@ -140,7 +140,7 @@ extension LocalRecordDataSource: RecordDataSource {
                 context?.delete(targetRecord)
                 
                 try context?.save()
-                emitter.onNext("success deleteRecord!!")
+                emitter.onNext(recordId)
             } catch {
                 emitter.onError(error)
             }
