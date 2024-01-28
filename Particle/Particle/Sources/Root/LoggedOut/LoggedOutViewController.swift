@@ -170,32 +170,25 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
     
     @objc
     private func appleLoginButtonTapped() {
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//        let request = appleIDProvider.createRequest()
-//        request.requestedScopes = [.fullName, .email]
-//        
-//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//        authorizationController.delegate = self
-//        authorizationController.presentationContextProvider = self
-//        authorizationController.performRequests()
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
         
-        // TODO: 준비중입니다 얼럿
-        present(notReadyAlertController, animated: true)
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
     }
     
     @objc
     private func kakaoLoginButtonTapped() {
-//        Console.debug(#function)
-//        
-//        if (UserApi.isKakaoTalkLoginAvailable()) {
-//            loginWithKakaoTalkApp()
-//        } else {
-//            Console.error("카카오톡이 설치되어있지 않습니다.")
-//            loginWithKakaoAccount()
-//        }
-        
-        // TODO: 준비중입니다 얼럿
-        present(notReadyAlertController, animated: true)
+
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            loginWithKakaoTalkApp()
+        } else {
+            Console.error("카카오톡이 설치되어있지 않습니다.")
+            loginWithKakaoAccount()
+        }
     }
     
     @objc
@@ -311,7 +304,7 @@ private extension LoggedOutViewController {
             titleStackView.addArrangedSubview($0)
         }
         
-        [kakaoLoginButton, appleLoginButton, normalLoginButton].forEach {
+        [/*kakaoLoginButton, appleLoginButton, */normalLoginButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
 //        buttonStackView.addArrangedSubview(normalLoginButton)

@@ -118,24 +118,24 @@ final class MyPageViewController: UIViewController, MyPagePresentable, MyPageVie
         addSubviews()
         setConstraints()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showMyArticleButtonTapped))
-        showMyArticleButton.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showMyArticleButtonTapped))
+//        showMyArticleButton.addGestureRecognizer(tapGesture)
         
-        addRows(
-            icon: .particleImage.bell,
-            title: "알림 설정",
-            selector: #selector(setAlarmButtonTapped)
-        )
+//        addRows(
+//            icon: .particleImage.bell,
+//            title: "알림 설정",
+//            selector: #selector(setAlarmButtonTapped)
+//        )
         addRows(
             icon: .particleImage.tag,
             title: "관심 태그 설정",
             selector: #selector(setInterestedTagButtonTapped)
         )
-        addRows(
-            icon: .particleImage.grid,
-            title: "위젯 설정",
-            selector: #selector(setWidgetButtonTapped)
-        )
+//        addRows(
+//            icon: .particleImage.grid,
+//            title: "위젯 설정",
+//            selector: #selector(setWidgetButtonTapped)
+//        )
         addRows(
             icon: .particleImage.user2,
             title: "계정 설정",
@@ -229,7 +229,7 @@ private extension MyPageViewController {
             profileImageView,
             nickNameLabel,
             idLabel,
-            showMyArticleButton,
+//            showMyArticleButton,
             sectionTitle,
             stackView
         ]
@@ -255,14 +255,14 @@ private extension MyPageViewController {
             $0.top.equalTo(nickNameLabel.snp.bottom).offset(4)
         }
         
-        showMyArticleButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(59)
-            $0.top.equalTo(profileImageView.snp.bottom).offset(24)
-        }
+//        showMyArticleButton.snp.makeConstraints {
+//            $0.leading.trailing.equalToSuperview().inset(20)
+//            $0.height.equalTo(59)
+//            $0.top.equalTo(profileImageView.snp.bottom).offset(24)
+//        }
         
         sectionTitle.snp.makeConstraints {
-            $0.top.equalTo(showMyArticleButton.snp.bottom).offset(30)
+            $0.top.equalTo(idLabel.snp.bottom).offset(30)
             $0.leading.equalToSuperview().inset(20)
         }
         
