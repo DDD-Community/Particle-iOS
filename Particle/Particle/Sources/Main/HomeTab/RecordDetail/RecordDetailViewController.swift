@@ -110,6 +110,11 @@ final class RecordDetailViewController: UIViewController,
         return button
     }()
     
+    private var mainScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
     private let recordTitle: UILabel = {
         let label = UILabel()
         label.setParticleFont(
@@ -469,14 +474,21 @@ private extension RecordDetailViewController {
             }
         
         [
-            navigationBar,
             recordTitle,
             sentenceStack,
             recommendTagCollectionView,
             urlLabel,
             dateLabel,
             directorLabel,
-            heartButton,
+            heartButton
+        ]
+            .forEach {
+                mainScrollView.addSubview($0)
+            }
+        
+        [
+            navigationBar,
+            mainScrollView
         ]
             .forEach {
                 self.view.addSubview($0)
@@ -499,19 +511,24 @@ private extension RecordDetailViewController {
             make.right.equalToSuperview().inset(Metric.NavigationBar.nextButtonRightMargin)
         }
         
+        mainScrollView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
         recordTitle.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
-            $0.top.equalTo(navigationBar.snp.bottom).offset(Metric.RecordTitle.topOffset)
+            $0.top.equalTo(mainScrollView.snp.top).offset(Metric.RecordTitle.topOffset)
         }
         
         sentenceStack.snp.makeConstraints {
             $0.top.equalTo(recordTitle.snp.bottom).offset(Metric.SentenceStack.topOffset)
-            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
+            $0.leading.trailing.equalTo(mainScrollView.frameLayoutGuide).inset(Metric.horizontalInset)
         }
         
         recommendTagCollectionView.snp.makeConstraints {
             $0.top.equalTo(sentenceStack.snp.bottom).offset(Metric.RecommendTagCollectionView.topOffset)
-            $0.leading.trailing.equalToSuperview().inset(Metric.horizontalInset)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.horizontalInset)
         }
         
         urlLabel.snp.makeConstraints {
@@ -532,6 +549,7 @@ private extension RecordDetailViewController {
         heartButton.snp.makeConstraints {
             $0.top.equalTo(directorLabel.snp.bottom).offset(Metric.HeartButton.topOffset)
             $0.leading.equalToSuperview().inset(Metric.horizontalInset)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
 }
@@ -551,11 +569,20 @@ struct RecordDetailViewController_Preview: PreviewProvider {
             .init(content: "그렇게 쓴 글은 매일 사회관계망서비스(SNS)에 남기기도 하고, 모아서 책으로 내기도 한다.", isMain: false),
             .init(content: "개인적으로 나는 매일 글쓰는 일을 습관처럼 하고 있다.", isMain: true),
             .init(content: "그러나 처음부터 글을 습관처럼 매일 쓸 수 있었던 건 아니다.", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
+            .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false),
             .init(content: "하지만 당시에는 작가가 되고 싶다는 열망 하나를 갖고 있었고, 그 젊은 열망에 따라 어떻게", isMain: false)
         ],
-        tags: ["#UXUI", "#브랜딩"],
+        tags: ["#UXUI", "#브랜딩", "#브랜akzpzld딩", "#브랜딩", "#브랜딩"],
         attribute: .init(color: "YELLOW", style: "TEXT"),
-        createdAt: "2023-09-18T11:49:52.955Z",
+        createdAt: "2023-09-18T11:49:52",
         createdBy: "노란 동그라미"
     )
     
