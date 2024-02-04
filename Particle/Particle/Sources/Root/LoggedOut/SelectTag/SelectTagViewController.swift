@@ -143,6 +143,21 @@ final class SelectTagViewController: UIViewController,
         return button
     }()
     
+    private lazy var restrictCountAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        let alert = ParticleAlertController(
+            title: "오류",
+            body: "최대 5개까지 설정할 수 있어요",
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
+    }()
+    
     private lazy var failureResultAlertController: ParticleAlertController = {
         let okButton = generateAlertButton(title: "확인") { [weak self] in
             self?.dismiss(animated: true)
@@ -226,23 +241,31 @@ final class SelectTagViewController: UIViewController,
                 }
                 var list = self.selectedTags.value
                 list[i] = selectedTagsInAccordion
-                self.selectedTags.accept(list)
-                Console.log("\(self.selectedTags)")
+                if list.flatMap({ $0 }).count > 5 {
+                    self.showWarningAlert()
+                    accordion.manager.undo()
+                } else {
+                    self.selectedTags.accept(list)
+                    Console.log("\(self.selectedTags.value)")
+                }
             }
             .disposed(by: disposeBag)
         }
         
-        selectedTags.subscribe { [weak self] tags in
-            let flattenList = tags.flatMap { $0 }
-            if flattenList.isEmpty {
-                self?.startButton.isEnabled = false
-                self?.startButton.backgroundColor = .particleColor.main30
-            } else {
-                self?.startButton.isEnabled = true
-                self?.startButton.backgroundColor = .particleColor.main100
+        selectedTags
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] tags in
+                let flattenList = tags.flatMap { $0 }
+
+                if flattenList.isEmpty {
+                    self?.startButton.isEnabled = false
+                    self?.startButton.backgroundColor = .particleColor.main30
+                } else {
+                    self?.startButton.isEnabled = true
+                    self?.startButton.backgroundColor = .particleColor.main100
+                }
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func generateAlertButton(title: String, _ buttonAction: @escaping () -> Void) -> UIButton {
@@ -264,6 +287,10 @@ final class SelectTagViewController: UIViewController,
     func showErrorAlert(description: String) {
         errorDescription = description
         present(failureResultAlertController, animated: true)
+    }
+    
+    private func showWarningAlert() {
+        present(restrictCountAlertController, animated: true)
     }
 }
 

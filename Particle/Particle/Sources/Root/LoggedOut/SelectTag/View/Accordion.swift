@@ -48,6 +48,7 @@ final class Accordion: UIView {
     }
     private let tags: [String]
     private(set) var selectedTags: BehaviorRelay<[String]> = .init(value: [])
+    private(set) var manager = UndoManager()
     
     // MARK: - UI Components
     
@@ -208,8 +209,12 @@ final class Accordion: UIView {
             guard let selectedCell = self.recommendTagCollectionView.cellForItem(at: index) as? LeftAlignedCollectionViewCell else {
                 return
             }
+            manager.registerUndo(withTarget: selectedCell) { cell in
+                cell.setSelected(!selectedCell.isTapped)
+                let item = self.tags[index.row]
+                self.accept(tag: item)
+            }
             selectedCell.setSelected(!selectedCell.isTapped)
-            
             let item = self.tags[index.row]
             self.accept(tag: item)
         }

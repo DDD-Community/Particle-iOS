@@ -116,6 +116,21 @@ final class SetInterestedTagsViewController: UIViewController,
         tags: ["#조직 문화", "#트렌드", "#CX", "#리더쉽", "#인사이트"]
     )
     
+    private lazy var restrictCountAlertController: ParticleAlertController = {
+        let okButton = generateAlertButton(title: "확인") { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        let alert = ParticleAlertController(
+            title: "오류",
+            body: "최대 5개까지 설정할 수 있어요",
+            buttons: [okButton],
+            buttonsAxis: .horizontal
+        )
+        
+        return alert
+    }()
+    
     private lazy var successResultAlertController: ParticleAlertController = {
         let okButton = generateAlertButton(title: "확인") { [weak self] in
             self?.listener?.setInterestedTagsBackButtonTapped()
@@ -171,7 +186,13 @@ final class SetInterestedTagsViewController: UIViewController,
     
     private func bindAccordion() {
         
-        let accordions: [Accordion] = [accordion1, accordion2, accordion3, accordion4, accordion5]
+        let accordions: [Accordion] = [
+            accordion1,
+            accordion2,
+            accordion3,
+            accordion4,
+            accordion5
+        ]
         
         accordions.enumerated().forEach { (i, accordion) in
             
@@ -180,6 +201,13 @@ final class SetInterestedTagsViewController: UIViewController,
                 guard let selectedTagsInAccordion = selectedTagsInAccordion.element else { return }
                 var list = self.selectedTags.value
                 list[i] = selectedTagsInAccordion
+                if list.flatMap({ $0 }).count > 5 {
+                    self.showWarningAlert()
+                    accordion.manager.undo()
+                } else {
+                    self.selectedTags.accept(list)
+                    Console.log("\(self.selectedTags.value)")
+                }
                 self.selectedTags.accept(list)
                 Console.log("\(self.selectedTags)")
             }
@@ -227,6 +255,10 @@ final class SetInterestedTagsViewController: UIViewController,
         activityIndicator.stopAnimating()
         errorDescription = description
         present(failureResultAlertController, animated: true)
+    }
+    
+    private func showWarningAlert() {
+        present(restrictCountAlertController, animated: true)
     }
     
     private func generateAlertButton(title: String, _ buttonAction: @escaping () -> Void) -> UIButton {
