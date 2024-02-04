@@ -32,7 +32,8 @@ final class DateManager {
     }
     
     func convert(dateString: String) -> Date {
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         guard let date = dateFormatter.date(from: dateString) else { return Date() }
         return date
     }
