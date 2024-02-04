@@ -405,7 +405,7 @@ final class RecordDetailViewController: UIViewController,
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(shareAction)
+//        actionSheet.addAction(shareAction)
         actionSheet.addAction(modifyAction)
         actionSheet.addAction(deleteAction)
         actionSheet.addAction(cancelAction)
