@@ -82,8 +82,9 @@ final class SelectSentenceViewController: UIViewController,
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
-        button.setTitleColor(.systemGray, for: .disabled)
+        button.setTitleColor(.particleColor.main30, for: .disabled)
         button.setTitleColor(.particleColor.main100, for: .normal)
+        button.isEnabled = false
         return button
     }()
     
@@ -177,10 +178,6 @@ final class SelectSentenceViewController: UIViewController,
                 self?.listener?.nextButtonTapped()
             }
             .disposed(by: disposeBag)
-        
-        // TODO: 각 사진에서 문장추출이 모두 완료되었을 때 nextButton 활성화
-        // FIXME: nextButton 활성화 정책 필요.
-//        nextButton.isEnabled = false
     }
     
     private func bind() {
@@ -249,6 +246,9 @@ final class SelectSentenceViewController: UIViewController,
             selectedCountBox.isHidden.toggle()
         }
         selectedCount.setParticleFont(.p_callout, color: .particleColor.white, text: "\(number)")
+        if nextButton.isEnabled == false {
+            nextButton.isEnabled = true
+        }
     }
 }
 

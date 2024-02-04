@@ -69,7 +69,9 @@ final class PhotoPickerViewController: UIViewController,
     private let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
+        button.setTitleColor(.particleColor.main30, for: .disabled)
         button.setTitleColor(.particleColor.main100, for: .normal)
+        button.isEnabled = false
         return button
     }()
     
@@ -191,6 +193,7 @@ final class PhotoPickerViewController: UIViewController,
                 }
                 self.selectedIndexPaths.accept(list)
                 Console.debug("selectedIndex: \(self.selectedIndexPaths.value)")
+                nextButton.isEnabled = list.count > 0
             }
             .disposed(by: disposeBag)
     }
