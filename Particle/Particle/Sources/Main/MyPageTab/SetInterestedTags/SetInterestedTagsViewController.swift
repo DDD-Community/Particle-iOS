@@ -208,8 +208,6 @@ final class SetInterestedTagsViewController: UIViewController,
                     self.selectedTags.accept(list)
                     Console.log("\(self.selectedTags.value)")
                 }
-                self.selectedTags.accept(list)
-                Console.log("\(self.selectedTags)")
             }
             .disposed(by: disposeBag)
         }
